@@ -1,0 +1,7 @@
+@lcflib.a:2018, lcf_start
+  timer_test_read_config(timer, field)
+> timer_test_read_config(0, timer_status_field::all)
+  @lab2.c:35, timer_test_read_config
+    printf("%s is not yet implemented!\n", __func__)
+    "timer_test_read_config is not yet implemented!"
+< timer_test_read_config(0, timer_status_field::all) -> (ret: 1)
