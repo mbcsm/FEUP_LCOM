@@ -5,9 +5,41 @@
 
 #include "i8254.h"
 
-int(timer_set_frequency)(uint8_t UNUSED(timer), uint32_t UNUSED(freq)) {
-  /* To be completed by the students */
-  printf("%s is not yet implemented!\n", __func__);
+int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
+  /* To be completed by the students 
+  printf("%s is not yet implemented!\n", __func__);*/
+ 
+  uint8_t byte = TIMER_RB_CMD | TIMER_RB_STATUS_ | TIMER_RB_SEL(timer);
+
+  uint32_t controlWord;
+  
+  if (sys_outb(TIMER_CTRL, byte) != OK)
+    return 1;
+  
+  if (sys_inb(TIMER_0, &controlWord) != OK)
+    return 1;
+
+  //controlWord = controlWord & 0x0F;
+
+  //uint32_t timerSel;
+
+  //if (timer == 0)
+    //timerSel = TIMER_SEL0 | TIMER_LSB_MSB;
+
+  /*if (timer == 1)
+    timer = TIMER_SEL1 | TIMER_LSB_MSB;
+
+  if (timer == 2)
+    timer = TIMER_SEL2 | TIMER_LSB_MSB;  */
+    
+  //timer = timer << 4;
+  //controlWord = timer | controlWord;
+  
+  if (sys_outb(TIMER_CTRL, controlWord) != OK)
+    return 1;
+
+  if (sys_outl(TIMER_0, freq) != OK)
+    return 1;
 
   return 1;
 }
@@ -34,9 +66,7 @@ void(timer_int_handler)() {
 /* creator: Manuel Monteiro*/
 int(timer_get_conf)(uint8_t timer, uint8_t *st) {
 
-  uint8_t byte = TIMER_RB_CMD |
-                 TIMER_RB_COUNT_ |
-                 TIMER_RB_SEL(timer);
+  uint8_t byte = TIMER_RB_CMD | TIMER_RB_STATUS_ | TIMER_RB_SEL(timer);
 
   uint32_t st32Temp;
 
@@ -58,11 +88,10 @@ int(timer_get_conf)(uint8_t timer, uint8_t *st) {
 }
 
 /* creator: Manuel Monteiro*/
-int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field UNUSED(field)) {
-  printf("\n\n\n_______TIMER CONFIG_________\n", st);
+int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field field) {
+  /*printf("\n\n\n_______TIMER CONFIG_________\n", st);
   printf("Status Byte: %x\n", st);
   printf("Selected Counter: %d\n", timer);
-  
 
   if(TIMER_LSB_MSB & st)
     printf("Type of Access: LSB followed by MSB\n");
@@ -83,8 +112,35 @@ int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field UNUSE
     else if(TIMER_BIN & st)
       printf("Counting Mode: Binary\n");
     else
-      printf("Counting Mode: ERROR 404 MODE NOT FOUND\n");
+      printf("Counting Mode: ERROR 404 MODE NOT FOUND\n");*/
 
+  union timer_status_field_val val;
+
+
+if (field == all)
+  val.byte = st;
+
+else if (field == initial)
+{
+  if(TIMER_LSB_MSB & st)
+    val.in_mode = MSB_after_LSB;
+  else if(TIMER_MSB & st)
+    val.in_mode = MSB_only;
+  else if(TIMER_LSB & st)
+    val.in_mode = LSB_only;
+  else val.in_mode = INVAL_val;
+}
+/*
+if (field == mode)
+  val.count_mode = */
+else if (field == base)
+{
+  if(TIMER_BCD & st)
+    val.bcd = true;
+  else if(TIMER_BIN & st)
+    val.bcd = false;
+}
+timer_print_config(timer, field, val);
 
   return 1;
 }
