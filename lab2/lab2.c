@@ -42,13 +42,13 @@ int(timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
 }
 
 int(timer_test_time_base)(uint8_t timer, uint32_t freq) {
-  /* To be completed by the students */
-  printf("%s is not yet implemented!\n", __func__);
+  /* To be completed by the students 
+  printf("%s is not yet implemented!\n", __func__);*/
 
   timer_set_frequency(timer, freq);
 
 
-  return 1;
+  return 0;
 }
 
 int(timer_test_int)(uint8_t UNUSED(time)) {

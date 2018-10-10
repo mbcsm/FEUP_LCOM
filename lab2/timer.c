@@ -6,36 +6,48 @@
 #include "i8254.h"
 
 int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
-  /* To be completed by the students 
-  printf("%s is not yet implemented!\n", __func__);*/
- 
-  uint8_t byte = TIMER_RB_CMD | TIMER_RB_COUNT_ | TIMER_RB_SEL(timer);
-
-  uint32_t controlWord;
+   
+  uint8_t controlWord;
   
-  if (sys_outb(TIMER_CTRL, byte) != OK)
-    return 1;
-  
-  if (sys_inb(TIMER_0, &controlWord) != OK)
-    return 1;
+  timer_get_conf(timer, &controlWord); 
 
-  controlWord = controlWord & 0x3F; // 
+  controlWord = controlWord & 0x0F; // Mask to keep 4LSBs and remove 4MSBs
+  freq = TIMER_FREQ / freq;
 
-  if (timer == 0)
-    controlWord = TIMER_SEL0 | TIMER_LSB_MSB ;
+  if (timer == 0){
+    controlWord = TIMER_SEL0 | TIMER_LSB_MSB | controlWord;   //Assemble the control word  
 
-  else if (timer == 1)
-    controlWord = TIMER_SEL1 | TIMER_LSB_MSB;
+    if (sys_outb(TIMER_CTRL, controlWord) != OK)            //Write control word in the control register
+      return 1;
 
-  else if (timer == 2)
-    controlWord = TIMER_SEL2 | TIMER_LSB_MSB;
-    
-  
-  if (sys_outb(TIMER_CTRL, controlWord) != OK)
-    return 1;
+    if (sys_outb(TIMER_0, (uint8_t) freq) != OK)            //
+      return 1;                                             // Load the frequency value to the counter register
+    if (sys_outb(TIMER_0, (uint8_t) (freq >> 8)) != OK)     //
+      return 1;
+  }
+  else if (timer == 1){
+    controlWord = TIMER_SEL1 | TIMER_LSB_MSB | controlWord;   //Assemble the control word
 
-  if (sys_outl(TIMER_0, freq) != OK)
-    return 1;
+    if (sys_outb(TIMER_CTRL, controlWord) != OK)            //Write control word in the control register
+      return 1;
+
+    if (sys_outb(TIMER_1, (uint8_t) freq) != OK)            //
+      return 1;                                             // Load the frequency value to the counter register
+    if (sys_outb(TIMER_1, (uint8_t) (freq >> 8)) != OK)     //
+      return 1;
+  }
+  else if (timer == 2){
+    controlWord = TIMER_SEL2 | TIMER_LSB_MSB | controlWord;   //Assemble the control word
+
+    if (sys_outb(TIMER_CTRL, controlWord) != OK)            //Write control word in the control register
+      return 1;
+
+    if (sys_outb(TIMER_0, (uint8_t) freq) != OK)            //
+      return 1;                                             // Load the frequency value to the counter register
+    if (sys_outb(TIMER_0, (uint8_t) (freq >> 8)) != OK)     //
+      return 1;    
+  }
+  else return 1;
 
   return 0;
 }
@@ -66,38 +78,42 @@ int(timer_get_conf)(uint8_t timer, uint8_t *st) {
   uint32_t st32Temp = 0;
 
   if (sys_outb(TIMER_CTRL, byte) != OK) {
-    printf("timer config = Error");
+    //printf("timer config = Error");
     return 1;
   }
 
-if (timer == 0)
-  if (sys_inb(TIMER_0, &st32Temp) != OK) {
-      printf("timer config = Error");
-      return 1;}
-else {if (timer == 1)
-  if (sys_inb(TIMER_1, &st32Temp) != OK) {
-    printf("timer config = Error");
-    return 1;
-  }}
-else {if (timer == 2)
-  if (sys_inb(TIMER_2, &st32Temp) != OK) {
-    printf("timer config = Error");
-    return 1;
-  }}
-
+  if (timer == 0)
+    if (sys_inb(TIMER_0, &st32Temp) != OK) {
+      //printf("timer config = Error");
+      return 1;
+    }
+  else {if (timer == 1)
+    if (sys_inb(TIMER_1, &st32Temp) != OK) {
+      //printf("timer config = Error");
+      return 1;
+    }
+  }
+  else {if (timer == 2)
+    if (sys_inb(TIMER_2, &st32Temp) != OK) {
+      //printf("timer config = Error");
+      return 1;
+    }
+  }
+  
+  
   *st = (uint8_t)st32Temp;
-  printf("Timer Get Conf: DONE\n");
+  //printf("Timer Get Conf: DONE\n");
 
   return 0;
 
-}
+} 
 
 int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field field) {
+  
   union timer_status_field_val val;
 
   if (field == all)  // FIELD == ALL
     val.byte = st;
-
   else if (field == initial)   // FIELD == INIT
   {
     if(TIMER_LSB_MSB & st)
@@ -108,8 +124,10 @@ int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field field
      val.in_mode = LSB_only;
    else val.in_mode = INVAL_val;
   }
-  /*else if (field == mode)  // FIELD == MODE
-    val.count_mode =*/
+  else if (field == mode){ // FIELD == MODE
+    st = (st >> 1) & 0x07;
+    val.count_mode = st;
+  }
   else if (field == base)    // FIELD == BASE
   {
     if(TIMER_BCD & st)
@@ -117,8 +135,10 @@ int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field field
     else if(TIMER_BIN & st)
       val.bcd = false;
   }
+  else return 1;
+  
+  if (timer_print_config(timer, field, val)!= OK)
+    return 1;
 
-  timer_print_config(timer, field, val);
-
-  return 1;
+  return 0;
 }
