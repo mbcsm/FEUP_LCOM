@@ -55,7 +55,6 @@
 
 
 
-#define IRQ0  0x08
 /**@}*/
 
 #endif /* _LCOM_I8254_H */

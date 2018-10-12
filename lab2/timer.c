@@ -55,14 +55,16 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
 
 int hook = 0;
 int(timer_subscribe_int)(uint8_t *bit_no) {
+  *bit_no = hook;
 
-  if (sys_irqsetpolicy(IRQ0, IRQ_REENABLE, &hook) != OK) {
+  if (sys_irqsetpolicy(TIMER0_IRQ, IRQ_REENABLE, &hook) != OK) {
     return -1;
   }
 
-  *bit_no = hook;
 
-  return 1;
+  printf("subscibe successfull\n");
+
+  return 0;
 }
 
 int(timer_unsubscribe_int)() {
@@ -70,40 +72,18 @@ int(timer_unsubscribe_int)() {
     return -1;
   }
 
-  return 1;
+  printf("unsubscibe successfull\n");
+  return 0;
 }
 
+int timer_increment = 0;
+
 void(timer_int_handler)() {
-
-  int ipc_status;
-  message msg;
-  int r;
-  uint8_t bit_no = 0;
-
-  timer_subscribe_int(&bit_no);
-  printf("subscibe successfull");
-  uint64_t irq_set = BIT(bit_no);
-
-  while (1) {
-    if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
-      printf("driver_receive failed with: %d", r);
-      continue;
-    }
-    if (is_ipc_notify(ipc_status)) { /* received notification */
-      switch (_ENDPOINT_P(msg.m_source)) {
-        case HARDWARE:                             /* hardware interrupt notification */
-          if (msg.m_notify.interrupts & irq_set) { /* subscribed interrupt */
-            timer_print_elapsed_time();            /* process it */
-          }
-          break;
-        default:
-          break; /* no other notifications expected: do nothing */
-      }
-    }
-  }
-
-  timer_unsubscribe_int();
-  printf("unsubscibe successfull");
+	timer_increment++;
+	if(timer_increment % sys_hz() == 0){
+		int second = timer_increment / 60;
+		printf("%d time has passed\n", second);
+	}
 }
 
 int(timer_get_conf)(uint8_t timer, uint8_t *st) {
@@ -177,4 +157,3 @@ int(timer_display_conf)(uint8_t timer, uint8_t st, enum timer_status_field field
 
   return 0;
 }
-
