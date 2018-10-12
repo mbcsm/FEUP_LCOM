@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <i8254.h>
 
-extern int counterSeconds;
+extern int counterSeconds, counter;
 int main(int argc, char *argv[]) {
 	// sets the language of LCF messages (can be either EN-US or PT-PT)
 	lcf_set_language("EN-US");
@@ -57,7 +57,6 @@ int(timer_test_int)(uint8_t time) {
 	int ipc_status;
 	message msg;
 	uint8_t bit_no = 0;
-	int stop_flag = 0;
 	int r;
 
 	if(timer_subscribe_int(&bit_no) != OK)
@@ -65,7 +64,8 @@ int(timer_test_int)(uint8_t time) {
 	
 	uint64_t irq_set = BIT(bit_no);
 	
-	while (stop_flag == 0) {
+
+	while ((unsigned int)counter  < sys_hz()*time) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -75,8 +75,9 @@ int(timer_test_int)(uint8_t time) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set) {
 						timer_int_handler();
-						if(counterSeconds >= time)
-							stop_flag = 1;
+						if(counter % sys_hz() == 0){
+							timer_print_elapsed_time();
+						}
 					}
 					break;
 				default:

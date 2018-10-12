@@ -82,7 +82,6 @@ void(timer_int_handler)() {
 	if(counter % sys_hz() == 0){
 		int second = counter / 60;
 		counterSeconds = second;
-		printf("%d seconds have passed\n", second);
 	}
 }
 
