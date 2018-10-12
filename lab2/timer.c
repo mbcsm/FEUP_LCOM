@@ -5,6 +5,7 @@
 
 #include "i8254.h"
 
+
 int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
 
   uint8_t controlWord;
@@ -61,7 +62,6 @@ int(timer_subscribe_int)(uint8_t *bit_no) {
     return -1;
   }
 
-
   printf("subscibe successfull\n");
 
   return 0;
@@ -76,15 +76,16 @@ int(timer_unsubscribe_int)() {
   return 0;
 }
 
-int timer_increment = 0;
-
+int counterSeconds, counter;
 void(timer_int_handler)() {
-	timer_increment++;
-	if(timer_increment % sys_hz() == 0){
-		int second = timer_increment / 60;
-		printf("%d time has passed\n", second);
+	counter++;
+	if(counter % sys_hz() == 0){
+		int second = counter / 60;
+		counterSeconds = second;
+		printf("%d seconds have passed\n", second);
 	}
 }
+
 
 int(timer_get_conf)(uint8_t timer, uint8_t *st) {
 

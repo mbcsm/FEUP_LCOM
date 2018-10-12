@@ -6,9 +6,10 @@
  * Functions for using the i8254 timers
  */
 
+
 /**
  * @brief Enumerated type for identifying the timer status fields
- */
+ */	
 enum timer_status_field {
 	all,		/*!< configuration/status */
 	initial,	/*!< timer initialization mode */

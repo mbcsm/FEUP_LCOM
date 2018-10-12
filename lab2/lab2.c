@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <i8254.h>
 
+extern int counterSeconds;
 int main(int argc, char *argv[]) {
 	// sets the language of LCF messages (can be either EN-US or PT-PT)
 	lcf_set_language("EN-US");
@@ -52,14 +53,15 @@ int(timer_test_time_base)(uint8_t timer, uint32_t freq) {
 	return 0;
 }
 
-int(timer_test_int)(uint8_t UNUSED(time)) {
+int(timer_test_int)(uint8_t time) {
 	int ipc_status;
 	message msg;
 	uint8_t bit_no = 0;
 	int stop_flag = 0;
 	int r;
-	
-	timer_subscribe_int(&bit_no);
+
+	if(timer_subscribe_int(&bit_no) != OK)
+		return -1;
 	
 	uint64_t irq_set = BIT(bit_no);
 	
@@ -73,6 +75,8 @@ int(timer_test_int)(uint8_t UNUSED(time)) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set) {
 						timer_int_handler();
+						if(counterSeconds >= time)
+							stop_flag = 1;
 					}
 					break;
 				default:
@@ -81,8 +85,10 @@ int(timer_test_int)(uint8_t UNUSED(time)) {
 		}
 	}
 	
-	timer_unsubscribe_int();
-	return 1;
+	if(timer_unsubscribe_int() != OK)
+		return -1;
+
+	return 0;
 }
 
 int(util_get_LSB)(uint16_t val, uint8_t *lsb) {
