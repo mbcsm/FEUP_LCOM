@@ -1,43 +1,19 @@
 @lcflib.a:2018, lcf_start
-  timer_test_read_config(timer, field)
-> timer_test_read_config(0, timer_status_field::base)
-  @lab2.c:38, timer_test_read_config
-    timer_get_conf(timer, &st)
-  > timer_get_conf(0, addr: 0xeffff7e7)
-    @timer.c:52, timer_get_conf
-      sys_outb(TIMER_CTRL, byte)
-    > sys_outb(0x43, 0xe2 = 0b11100010)
-    @timer.c:56, timer_get_conf
-      sys_inb(TIMER_CTRL, &st32Temp)
-    > sys_inb(0x43, addr: 0xeffff730)
-    < sys_inb(0x43, addr: 0xeffff730 [0xff = 0b11111111])
-    @timer.c:62, timer_get_conf
-      printf("Timer Get Conf: DONE\n")
-      "Timer Get Conf: DONE"
-  < timer_get_conf(0, addr: 0xeffff7e7 [0xff = 0b11111111]) -> (ret: 0)
-  @lab2.c:39, timer_test_read_config
-    timer_display_conf(timer, st, field)
-  > timer_display_conf(0, 0xff = 0b11111111, timer_status_field::base)
-    @timer.c:74, timer_display_conf
-      printf("\n\n\n_______TIMER CONFIG_________\n", st)
-      "
-
-
-_______TIMER CONFIG_________"
-    @timer.c:75, timer_display_conf
-      printf("Status Byte: %x\n", st)
-      "Status Byte: ff"
-    @timer.c:76, timer_display_conf
-      printf("Selected Counter: %d\n", timer)
-      "Selected Counter: 0"
-    @timer.c:80, timer_display_conf
-      printf("Type of Access: LSB followed by MSB\n")
-      "Type of Access: LSB followed by MSB"
-    @timer.c:87, timer_display_conf
-      printf("Operating Mode: Mode 3 (square wave generator)\n")
-      "Operating Mode: Mode 3 (square wave generator)"
-    @timer.c:94, timer_display_conf
-      printf("Counting Mode: BCD\n")
-      "Counting Mode: BCD"
-  < timer_display_conf(0, 0xff = 0b11111111, timer_status_field::base) -> (ret: 1)
-< timer_test_read_config(0, timer_status_field::base) -> (ret: 1)
+  timer_test_int(time)
+> timer_test_int(60)
+  @lab2.c:54, timer_test_int
+    timer_int_handler()
+    @timer.c:83, timer_int_handler
+      timer_subscribe_int(&bit_no)
+    > timer_subscribe_int(addr: 0xeffff72f [0])
+      @timer.c:59, timer_subscribe_int
+        sys_irqsetpolicy(IRQ0, IRQ_REENABLE, &hook)
+      > sys_irqsetpolicy(8, 1, addr: 0x813f4e8 [0])
+      < sys_irqsetpolicy(8, 1, addr: 0x813f4e8 [10]) -> (ret: 0)
+    < timer_subscribe_int(addr: 0xeffff72f [10]) -> (ret: 1)
+    @timer.c:84, timer_int_handler
+      printf("subscibe successfull")
+      "subscibe successfull"
+    @timer.c:88, timer_int_handler
+      driver_receive(ANY, &msg, &ipc_status)
+    > driver_receive(ANY, addr: 0xeffff730, addr: 0xeffff778)

@@ -47,22 +47,19 @@ int(timer_test_time_base)(uint8_t timer, uint32_t freq) {
 
   timer_set_frequency(timer, freq);
 
-
   return 0;
 }
 
 int(timer_test_int)(uint8_t UNUSED(time)) {
-  /* To be completed by the students */
-  printf("%s is not yet implemented!\n", __func__);
-
+  timer_int_handler();
   return 1;
 }
 
 int(util_get_LSB)(uint16_t val, uint8_t *lsb) {
   /* To be completed by the students 
   printf("%s is not yet implemented!\n", __func__);*/
-  
-  *lsb = (uint8_t)val;
+
+  *lsb = (uint8_t) val;
 
   return 1;
 }
@@ -71,8 +68,8 @@ int(util_get_MSB)(uint16_t val, uint8_t *msb) {
   /* To be completed by the students 
   printf("%s is not yet implemented!\n", __func__);*/
 
-  val =  val >> 8;
-  *msb =  val;
+  val = val >> 8;
+  *msb = val;
 
   return 1;
 }

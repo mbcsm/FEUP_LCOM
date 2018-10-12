@@ -1,10 +1,1 @@
-Timer Get Conf: DONE
-
-
-
-_______TIMER CONFIG_________
-Status Byte: ff
-Selected Counter: 0
-Type of Access: LSB followed by MSB
-Operating Mode: Mode 3 (square wave generator)
-Counting Mode: BCD
+subscibe successfull

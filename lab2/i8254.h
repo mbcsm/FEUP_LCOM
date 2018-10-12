@@ -54,6 +54,8 @@
 #define TIMER_RB_SEL(n)         BIT((n)+1)
 
 
+
+#define IRQ0  0x08
 /**@}*/
 
 #endif /* _LCOM_I8254_H */
