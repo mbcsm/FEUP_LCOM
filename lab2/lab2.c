@@ -38,10 +38,12 @@ int(timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
 	uint8_t st;
 	
 	//printf("status: %s\n", field);
-	timer_get_conf(timer, &st);
-	timer_display_conf(timer, st, field);
+	if (timer_get_conf(timer, &st) != OK)
+		return 1;
+	if (timer_display_conf(timer, st, field) != OK)
+		return 1;
 	
-	return 1;
+	return 0;
 }
 
 int(timer_test_time_base)(uint8_t timer, uint32_t freq) {
@@ -98,7 +100,7 @@ int(util_get_LSB)(uint16_t val, uint8_t *lsb) {
 	
 	*lsb = (uint8_t) val;
 	
-	return 1;
+	return 0;
 }
 
 int(util_get_MSB)(uint16_t val, uint8_t *msb) {
@@ -108,6 +110,6 @@ int(util_get_MSB)(uint16_t val, uint8_t *msb) {
 	val = val >> 8;
 	*msb = val;
 	
-	return 1;
+	return 0;
 }
 

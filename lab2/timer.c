@@ -62,7 +62,7 @@ int(timer_subscribe_int)(uint8_t *bit_no) {
     return -1;
   }
 
-  printf("subscibe successfull\n");
+  //printf("subscibe successfull\n");
 
   return 0;
 }
@@ -72,7 +72,7 @@ int(timer_unsubscribe_int)() {
     return -1;
   }
 
-  printf("unsubscibe successfull\n");
+  //printf("unsubscibe successfull\n");
   return 0;
 }
 
@@ -96,25 +96,28 @@ int(timer_get_conf)(uint8_t timer, uint8_t *st) {
     return 1;
   }
 
-  if (timer == 0)
-    if (sys_inb(TIMER_0, &st32Temp) != OK) {
+switch (timer){
+case 0:
+if (sys_inb(TIMER_0, &st32Temp) != OK) {
       //printf("timer config = Error");
       return 1;
     }
-    else {
-      if (timer == 1)
-        if (sys_inb(TIMER_1, &st32Temp) != OK) {
+break;
+case 1:
+if (sys_inb(TIMER_1, &st32Temp) != OK) {
           //printf("timer config = Error");
-          return 1;
-        }
-    }
-  else {
-    if (timer == 2)
-      if (sys_inb(TIMER_2, &st32Temp) != OK) {
+        return 1;
+      }
+break;
+case 2:
+if (sys_inb(TIMER_2, &st32Temp) != OK) {
         //printf("timer config = Error");
         return 1;
       }
-  }
+break;
+default:
+return 1;
+}
 
   *st = (uint8_t) st32Temp;
   //printf("Timer Get Conf: DONE\n");
