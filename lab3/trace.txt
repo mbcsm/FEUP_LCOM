@@ -1,0 +1,3 @@
+@lcflib.a:2018, lcf_start
+  kbd_test_poll()
+< kbd_test_poll() -> (ret: 0)
