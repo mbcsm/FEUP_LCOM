@@ -6,6 +6,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+
 #include <i8254.h>
 #include <i8042.h>
 // Any header files below this line should have been created by you
@@ -40,10 +41,25 @@ int(kbd_test_scan)(bool UNUSED(assembly)) {
 	return 0;
 }
 int(kbd_test_poll)() {
-	while(1){
-		kbd_write();
-		kbd_read();
-	}
+	uint8_t data = 0;
+	do{
+		bool make;
+		uint8_t size = 0;
+		data = kbd_read();
+
+		if(data == BYTE2)
+			size = 2;
+		else
+			size = 1;
+
+		if(data & BIT(7))
+			make = false;
+		else
+			make = true;
+
+		kbd_print_scancode(make, size, &data);
+	}while(data != ESC);
+	kbd_write();
 	return 0;
 }
 int(kbd_test_timed_scan)(uint8_t UNUSED(n)) {

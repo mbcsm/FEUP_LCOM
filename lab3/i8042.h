@@ -12,6 +12,16 @@
 #define PAR_ERR         BIT(7)
 #define TO_ERR          BIT(6)
 
-#define WAIT_KBC 		100
+
+#define DIS2            BIT(5)
+#define DIS             BIT(4)
+#define INT2            BIT(1)
+#define INT             BIT(0)
+
+#define WAIT_KBC 		20000
+
+#define BYTE2           0xe0
+
+#define ESC             0x81
 
 #endif /* _LCOM_I8042_H_ */
