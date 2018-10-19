@@ -29,14 +29,11 @@ int main(int argc, char *argv[]) {
 int (kbd_test_scan)(bool UNUSED(assembly)) {
 	/* To be completed */
 	/* When you use argument assembly for the first time, delete the UNUSED macro */
-  return 0;
 }
 int (kbd_test_poll)() {
     /* To be completed */
-  return 0;
 }
 int (kbd_test_timed_scan)(uint8_t UNUSED(n)) {
     /* To be completed */
     /* When you use argument n for the first time, delete the UNUSED macro */
-  return 0;
 }

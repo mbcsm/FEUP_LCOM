@@ -1,8 +1,8 @@
 PROG=lab3
 
-SRCS = lab3.c timer.c
+SRCS = lab3.c
 
-CPPFLAGS += -pedantic
+CPPFLAGS += -pedantic -DLAB3
 
 DPADD += ${LIBLCF}
 LDADD += -llcf
