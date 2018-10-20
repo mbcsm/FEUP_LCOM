@@ -1,4 +1,4 @@
-timer.o: timer.c /usr/include/lcom/lcf.h /usr/include/stdbool.h \
+lab3.o: lab3.c /usr/include/lcom/lcf.h /usr/include/stdbool.h \
   /usr/include/stdio.h /usr/include/sys/cdefs.h \
   /usr/include/machine/cdefs.h /usr/include/sys/cdefs_elf.h \
   /usr/include/sys/featuretest.h /usr/include/sys/ansi.h \
@@ -42,4 +42,4 @@ timer.o: timer.c /usr/include/lcom/lcf.h /usr/include/stdbool.h \
   /usr/include/lcom/lab2.h /usr/include/lcom/timer.h \
   /usr/include/lcom/util.h /usr/include/lcom/lab3.h \
   /usr/include/lcom/lab4.h /usr/include/lcom/lab5.h \
-  /usr/include/lcom/types.h i8254.h
+  /usr/include/lcom/types.h keyboard.h i8254.h i8042.h

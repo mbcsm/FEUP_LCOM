@@ -7,6 +7,36 @@
 #include "i8254.h"
 #include "i8042.h"
 
+int hookid = 1;
+uint32_t OBF_content;
+
+int (kbd_subscribe_int)(uint8_t *bit_no){
+	*bit_no = hookid;
+	if (sys_irqsetpolicy(KBD_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &hookid) != OK)
+		return 1;
+		
+
+	//*bit_no = hookid;
+	printf("subscribe successful\n");
+	return 0;
+}
+
+void (kbd_ih)(){	
+	OBF_content = kbd_read();
+}
+
+void (kbd_asm_ih)(){
+	
+}
+
+int(kbd_unsubscribe_int)(){
+  if (sys_irqrmpolicy(&hookid) != OK) {
+    return -1;
+  }
+  printf("unsubscibe successfull\n");
+  return 0;
+}
+
 int(kbd_write)() {
 	uint32_t stat = 0;
     while( 1 ) {
