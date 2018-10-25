@@ -1,8 +1,8 @@
 // IMPORTANT: you must include the following line in all your C files
 #include <lcom/lcf.h>
 #include <lcom/lab3.h>
-#include <lcom/timer.h>
 #include "keyboard.h"
+#include <lcom/timer.h>
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -10,6 +10,8 @@
 #include <i8254.h>
 #include <i8042.h>
 // Any header files below this line should have been created by you
+
+extern int counterSeconds, counter;
 
 int main(int argc, char *argv[]) {
 	// sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -136,8 +138,78 @@ int(kbd_test_poll)() {
 	kbd_write();
 	return 0;
 }
-int(kbd_test_timed_scan)(uint8_t UNUSED(n)) {
-	/* To be completed */
-	/* When you use argument n for the first time, delete the UNUSED macro */
+int(kbd_test_timed_scan)(uint8_t n) {
+	extern uint32_t OBF_content;
+	bool assembly = false;
+	bool make = true;
+	uint8_t size;
+	uint8_t bytes[2];
+
+	int ipc_status;
+	message msg;
+	uint8_t bit_no;
+	int r;
+
+	if(timer_subscribe_int(&bit_no) != OK)
+		return -1;
+	
+	uint64_t irq_set_timer = BIT(bit_no);
+
+	kbd_subscribe_int(&bit_no);
+
+	uint64_t irq_set_kbd = BIT(bit_no);
+
+	while (OBF_content != ESC && (unsigned int)counter  < sys_hz()*n) {
+		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
+			printf("driver_receive failed with: %d", r);
+			continue;
+		}
+		if (is_ipc_notify(ipc_status)) { /* received notification */
+			switch (_ENDPOINT_P(msg.m_source)) {
+				case HARDWARE: /* hardware interrupt notification */
+					if (msg.m_notify.interrupts & irq_set_kbd) {
+						if(!assembly)
+							kbd_ih();
+						else
+							kbd_asm_ih();
+
+						if((uint8_t)OBF_content == BYTE2){
+							size = 2;
+							bytes[0] = (uint8_t) OBF_content;
+							bytes[1] = (uint8_t) (OBF_content >> 8);
+			
+							if(OBF_content & BIT(7))
+								make = false;
+							else
+								make = true;
+						}
+						else{
+						size = 1;
+						bytes[0] = (uint8_t)OBF_content;
+						if(OBF_content & BIT(7))
+							make = false;
+						else
+							make = true;
+						}
+
+						kbd_print_scancode(make, size, bytes);
+					}
+					else if (msg.m_notify.interrupts & irq_set_timer) {
+						timer_int_handler();
+						if(counter % sys_hz() == 0){
+							timer_print_elapsed_time();
+						}
+					}
+					break;
+				default:
+					break; /* no other notifications expected: do nothing */
+			}
+		}
+	}
+
+	kbd_unsubscribe_int();
+	if(timer_unsubscribe_int() != OK)
+		return -1;
+
 	return 0;
 }

@@ -77,7 +77,7 @@ int(timer_unsubscribe_int)() {
 }
 
 int counterSeconds, counter;
-void(kbd_readtimer_int_handler)() {
+void(timer_int_handler)() {
 	counter++;
 	if(counter % sys_hz() == 0){
 		int second = counter / 60;
