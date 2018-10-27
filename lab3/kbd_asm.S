@@ -5,27 +5,28 @@
 
 .global _C_LABEL(kbd_asm_ih)
 
+.global _C_LABEL(data_obf)
+
 .data
-_C_LABEL(OBF_DATA):
-.long 0
+_C_LABEL(data_obf):
+.short
 
 .text
 _C_LABEL(kbd_asm_ih):
-in al, STAT_REG
-mov dl, OBF
-mov cl, al
-and cl, dl
-cmp cl, 1
-jne return
-mov cl, al
-in al, OUT_BUF
-mov dl, (PAR_ERR | TO_ERR)
-and cl, dl
-cmp cl, 0
-jne return
-mov _C_LABEL(OBF_DATA), al
-jmp end
-return: mov al, 0x11
-mov _C_LABEL(OBF_DATA), al
-end: ret
-
+    xor eax, eax
+    in  al, STAT_REG
+    mov cl, al
+    test cl, OBF
+    jz return
+    in al, OUT_BUF
+    test cl, PAR_ERR
+    jnz return
+    test cl, TO_ERR
+    jnz return
+    mov _C_LABEL(data_obf), al
+    jmp end
+return: 
+    mov al, 0x11
+    mov _C_LABEL(data_obf), al
+end:
+    ret

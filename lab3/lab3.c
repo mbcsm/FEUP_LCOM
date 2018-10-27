@@ -44,7 +44,7 @@ int(kbd_test_scan)(bool assembly) {
 	bool make;
 	uint8_t size;
 	uint8_t bytes[2];
-
+	extern uint32_t data_obf;
 	int ipc_status;
 	message msg;
 	uint8_t bit_no;
@@ -64,8 +64,10 @@ int(kbd_test_scan)(bool assembly) {
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set) {
-						if(assembly)
+						if(assembly){
 							kbd_asm_ih();
+							OBF_DATA = data_obf;
+						}
 						else
 							kbd_ih();
 
