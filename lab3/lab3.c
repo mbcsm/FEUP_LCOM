@@ -166,6 +166,7 @@ int(kbd_test_timed_scan)(uint8_t n) {
 	uint64_t irq_set_kbd = BIT(bit_no);
 
 	while (OBF_DATA != ESC && (unsigned int)counter  < sys_hz()*n) {
+		//printf("%d\n", (unsigned int)counter);
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -174,7 +175,6 @@ int(kbd_test_timed_scan)(uint8_t n) {
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set_kbd) {
-						counter = 0;
 						kbd_ih();
 
 						if((uint8_t)OBF_DATA == BYTE2){

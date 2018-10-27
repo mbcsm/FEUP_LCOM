@@ -1,0 +1,20 @@
+timer_test_int:timer_print_elapsed_time 1 s
+Makecode: 0x25
+Makecode: 0x31
+Breakcode: 0xa5
+Breakcode: 0xb1
+Makecode: 0x1e
+Makecode: 0x1f
+timer_test_int:timer_print_elapsed_time 2 s
+Makecode: 0x31
+Makecode: 0x20
+Makecode: 0x25
+Breakcode: 0xb1
+Breakcode: 0x9e
+Breakcode: 0x9f
+Breakcode: 0xa5
+Makecode: 0x31
+Breakcode: 0xa0
+Breakcode: 0xb1
+Makecode: 0x01
+Breakcode: 0x81
