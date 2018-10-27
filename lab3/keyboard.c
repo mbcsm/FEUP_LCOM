@@ -52,11 +52,11 @@ int(kbd_unsubscribe_int)(){
   return 0;
 }
 
-int cnt = 0;
+int cnt_sys_inb = 0;
 int (sys_inb_cnt)(port_t port, uint32_t *byte){
 	if (sys_inb(port, byte) != OK)
 		return 1;
-	cnt++;
+	cnt_sys_inb++;
 	return 0; 
 }
 

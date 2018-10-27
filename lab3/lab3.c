@@ -11,8 +11,8 @@
 #include <i8042.h>
 // Any header files below this line should have been created by you
 
-extern int counterSeconds, counter;
-extern int cnt;
+extern int counter; // COUNTER OF SECONDS
+extern int cnt_sys_inb;
 
 int main(int argc, char *argv[]) {
 	// sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -39,10 +39,9 @@ int main(int argc, char *argv[]) {
 }
 
 int(kbd_test_scan)(bool assembly) {
-	/* To be completed */
-	/* When you use argument assembly for the first time, delete the UNUSED macro */
-	extern uint32_t OBF_DATA;
-	bool make = true;
+	
+	extern uint32_t OBF_DATA;  
+	bool make;
 	uint8_t size;
 	uint8_t bytes[2];
 
@@ -98,8 +97,8 @@ int(kbd_test_scan)(bool assembly) {
 		}
 	}
 	if (!assembly)
-		kbd_print_no_sysinb(cnt);
-	cnt = 0;
+		kbd_print_no_sysinb(cnt_sys_inb);
+	cnt_sys_inb = 0;
 	kbd_unsubscribe_int();
 	
 	return 0;
@@ -137,8 +136,8 @@ int(kbd_test_poll)() {
 
 		kbd_print_scancode(make, size, bytes);
 	}while((uint8_t)data != ESC);
-	kbd_print_no_sysinb(cnt);
-	cnt = 0;
+	kbd_print_no_sysinb(cnt_sys_inb);
+	cnt_sys_inb = 0;
 
 	kbd_write();
 	return 0;
@@ -160,7 +159,8 @@ int(kbd_test_timed_scan)(uint8_t n) {
 	
 	uint64_t irq_set_timer = BIT(bit_no);
 
-	kbd_subscribe_int(&bit_no);
+	if (kbd_subscribe_int(&bit_no) != OK)
+		return -1;
 
 	uint64_t irq_set_kbd = BIT(bit_no);
 
@@ -207,8 +207,9 @@ int(kbd_test_timed_scan)(uint8_t n) {
 		}
 	}
 
-	kbd_unsubscribe_int();
-	if(timer_unsubscribe_int() != OK)
+	if (kbd_unsubscribe_int() != OK)
+		return -1;
+	if (timer_unsubscribe_int() != OK)
 		return -1;
 
 	return 0;

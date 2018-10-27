@@ -6,12 +6,8 @@
 .global _C_LABEL(kbd_asm_ih)
 
 .data
-
-_C_LABEL(st):
-.long 0
-
 _C_LABEL(OBF_DATA):
-.long 0 
+.long 0
 
 .text
 _C_LABEL(kbd_asm_ih):
@@ -29,7 +25,7 @@ cmp cl, 0
 jne return
 mov _C_LABEL(OBF_DATA), al
 jmp end
-return: mov al, 0
+return: mov al, 0x11
 mov _C_LABEL(OBF_DATA), al
 end: ret
 
