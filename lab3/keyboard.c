@@ -7,8 +7,14 @@
 #include "i8254.h"
 #include "i8042.h"
 
+#ifdef LAB3
+int sys_inb_cnt(port_t port, uint32_t *byte);
+#else
+#define sys_inb_cnt(p,q) sys_inb(p,q)
+#endif
+
 int hookid = 1;
-uint32_t OBF_content;
+uint32_t OBF_DATA = 0;
 
 int (kbd_subscribe_int)(uint8_t *bit_no){
 	*bit_no = hookid;
@@ -17,24 +23,41 @@ int (kbd_subscribe_int)(uint8_t *bit_no){
 		
 
 	//*bit_no = hookid;
-	printf("subscribe successful\n");
+	//printf("subscribe successful\n");
 	return 0;
 }
 
-void (kbd_ih)(){	
-	OBF_content = kbd_read();
-}
+void (kbd_ih)(){
+	uint32_t stat = 0;
+	uint32_t data = 0;
+	OBF_DATA = 0;
 
-void (kbd_asm_ih)(){
-	
+	sys_inb_cnt(STAT_REG, &stat); /* assuming it returns OK */
+		/* loop while 8042 output buffer is empty */
+	if( stat & OBF ) {
+		sys_inb_cnt(OUT_BUF, &data); /* assuming it returns OK */
+		if ((stat & (PAR_ERR | TO_ERR)) == 0 ){
+			OBF_DATA = data;
+        }
+		else
+			OBF_DATA = -1;
+	}
 }
 
 int(kbd_unsubscribe_int)(){
   if (sys_irqrmpolicy(&hookid) != OK) {
     return -1;
   }
-  printf("unsubscibe successfull\n");
+  //printf("unsubscibe successfull\n");
   return 0;
+}
+
+int cnt = 0;
+int (sys_inb_cnt)(port_t port, uint32_t *byte){
+	if (sys_inb(port, byte) != OK)
+		return 1;
+	cnt++;
+	return 0; 
 }
 
 int(kbd_write)() {
@@ -56,10 +79,10 @@ int(kbd_read)() {
 	uint32_t data = 0;
 
     while( 1 ) {
-		sys_inb(STAT_REG, &stat); /* assuming it returns OK */
+		sys_inb_cnt(STAT_REG, &stat); /* assuming it returns OK */
 		/* loop while 8042 output buffer is empty */
 		if( stat & OBF ) {
-			sys_inb(OUT_BUF, &data); /* assuming it returns OK */
+			sys_inb_cnt(OUT_BUF, &data); /* assuming it returns OK */
 			if ( (stat &(PAR_ERR | TO_ERR)) == 0 ){
 				return data;
             }

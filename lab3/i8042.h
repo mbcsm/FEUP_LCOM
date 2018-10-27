@@ -1,6 +1,8 @@
 #ifndef _LCOM_I8042_H_
 #define _LCOM_I8042_H_
 
+#define BIT(n) (0x01<<(n))
+
 #define KBD_IRQ         1
 
 #define STAT_REG        0x64

@@ -4,6 +4,7 @@
 #include "keyboard.h"
 #include <lcom/timer.h>
 
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -12,6 +13,7 @@
 // Any header files below this line should have been created by you
 
 extern int counterSeconds, counter;
+extern int cnt;
 
 int main(int argc, char *argv[]) {
 	// sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -40,7 +42,7 @@ int main(int argc, char *argv[]) {
 int(kbd_test_scan)(bool assembly) {
 	/* To be completed */
 	/* When you use argument assembly for the first time, delete the UNUSED macro */
-	extern uint32_t OBF_content;
+	extern uint32_t OBF_DATA;
 	bool make = true;
 	uint8_t size;
 	uint8_t bytes[2];
@@ -54,12 +56,12 @@ int(kbd_test_scan)(bool assembly) {
 
 	uint64_t irq_set = BIT(bit_no);
 
-	while (OBF_content != ESC) {
+	while (OBF_DATA != ESC) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
 		}
-		printf("successful\n");
+		//printf("successful\n");
 		if (is_ipc_notify(ipc_status)) { /* received notification */
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
@@ -69,20 +71,20 @@ int(kbd_test_scan)(bool assembly) {
 						else
 							kbd_asm_ih();
 
-						if((uint8_t)OBF_content == BYTE2){
+						if((uint8_t)OBF_DATA == BYTE2){
 							size = 2;
-							bytes[0] = (uint8_t) OBF_content;
-							bytes[1] = (uint8_t) (OBF_content >> 8);
+							bytes[0] = (uint8_t) OBF_DATA;
+							bytes[1] = (uint8_t) (OBF_DATA >> 8);
 			
-							if(OBF_content & BIT(7))
+							if(OBF_DATA & BIT(7))
 								make = false;
 							else
 								make = true;
 						}
 						else{
 						size = 1;
-						bytes[0] = (uint8_t)OBF_content;
-						if(OBF_content & BIT(7))
+						bytes[0] = (uint8_t)OBF_DATA;
+						if(OBF_DATA & BIT(7))
 							make = false;
 						else
 							make = true;
@@ -96,10 +98,11 @@ int(kbd_test_scan)(bool assembly) {
 			}
 		}
 	}
-
+	if (!assembly)
+		kbd_print_no_sysinb(cnt);
+	cnt = 0;
 	kbd_unsubscribe_int();
 	
-
 	return 0;
 }
 
@@ -135,12 +138,15 @@ int(kbd_test_poll)() {
 
 		kbd_print_scancode(make, size, bytes);
 	}while((uint8_t)data != ESC);
+	kbd_print_no_sysinb(cnt);
+	cnt = 0;
+
 	kbd_write();
 	return 0;
 }
+
 int(kbd_test_timed_scan)(uint8_t n) {
-	extern uint32_t OBF_content;
-	bool assembly = false;
+	extern uint32_t OBF_DATA;
 	bool make = true;
 	uint8_t size;
 	uint8_t bytes[2];
@@ -159,7 +165,7 @@ int(kbd_test_timed_scan)(uint8_t n) {
 
 	uint64_t irq_set_kbd = BIT(bit_no);
 
-	while (OBF_content != ESC && (unsigned int)counter  < sys_hz()*n) {
+	while (OBF_DATA != ESC && (unsigned int)counter  < sys_hz()*n) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -168,25 +174,23 @@ int(kbd_test_timed_scan)(uint8_t n) {
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set_kbd) {
-						if(!assembly)
-							kbd_ih();
-						else
-							kbd_asm_ih();
+						counter = 0;
+						kbd_ih();
 
-						if((uint8_t)OBF_content == BYTE2){
+						if((uint8_t)OBF_DATA == BYTE2){
 							size = 2;
-							bytes[0] = (uint8_t) OBF_content;
-							bytes[1] = (uint8_t) (OBF_content >> 8);
+							bytes[0] = (uint8_t) OBF_DATA;
+							bytes[1] = (uint8_t) (OBF_DATA >> 8);
 			
-							if(OBF_content & BIT(7))
+							if(OBF_DATA & BIT(7))
 								make = false;
 							else
 								make = true;
 						}
 						else{
 						size = 1;
-						bytes[0] = (uint8_t)OBF_content;
-						if(OBF_content & BIT(7))
+						bytes[0] = (uint8_t)OBF_DATA;
+						if(OBF_DATA & BIT(7))
 							make = false;
 						else
 							make = true;
