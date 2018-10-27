@@ -4,7 +4,6 @@
 #include "keyboard.h"
 #include <lcom/timer.h>
 
-
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -66,10 +65,10 @@ int(kbd_test_scan)(bool assembly) {
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set) {
-						if(!assembly)
-							kbd_ih();
-						else
+						if(assembly)
 							kbd_asm_ih();
+						else
+							kbd_ih();
 
 						if((uint8_t)OBF_DATA == BYTE2){
 							size = 2;
@@ -200,9 +199,6 @@ int(kbd_test_timed_scan)(uint8_t n) {
 					}
 					else if (msg.m_notify.interrupts & irq_set_timer) {
 						timer_int_handler();
-						if(counter % sys_hz() == 0){
-							timer_print_elapsed_time();
-						}
 					}
 					break;
 				default:

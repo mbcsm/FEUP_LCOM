@@ -76,13 +76,13 @@ int(timer_unsubscribe_int)() {
   return 0;
 }
 
-int counterSeconds, counter;
+int counter;
 void(timer_int_handler)() {
 	counter++;
 	/*if(counter % sys_hz() == 0){
 		int second = counter / 60;
-		counterSeconds = second;
-	}*/
+		counterSeconds = second;*/
+	}
 }
 
 
