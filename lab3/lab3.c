@@ -175,6 +175,7 @@ int(kbd_test_timed_scan)(uint8_t n) {
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
 					if (msg.m_notify.interrupts & irq_set_kbd) {
+						counter = 0;
 						kbd_ih();
 
 						if((uint8_t)OBF_DATA == BYTE2){
