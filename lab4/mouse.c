@@ -26,6 +26,6 @@ int(mouse_unsubscribe_int)(){
 
 uint32_t mouseData;
 void (mouse_ih)(){
-    
+    sys_inb(OUT_BUF, &mouseData);
 }
 

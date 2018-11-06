@@ -43,6 +43,8 @@
 #define X_OVF           BIT(6)
 #define Y_OVF           BIT(7)
 
+#define NEG16           0xff00
+
 
 
 
