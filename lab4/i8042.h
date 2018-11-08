@@ -8,18 +8,21 @@
 
 #define STAT_REG        0x64
 #define KBC_CMD_REG     0x64
-#define ARG_REG         0x60
+#define IN_BUF          0x60
 #define OUT_BUF         0x60
 
 #define KBC_READ_CMD    0x20
 #define KBC_WRITE_CMD   0x60
 
 
+
+
 #define OBF             BIT(0)
 #define IBF             BIT(1)
-
-#define PAR_ERR         BIT(7)
+#define AUX             BIT(5)
 #define TO_ERR          BIT(6)
+#define PAR_ERR         BIT(7)
+
 
 
 #define DIS2            BIT(5)
@@ -27,11 +30,27 @@
 #define INT2            BIT(1)
 #define INT             BIT(0)
 
-#define WAIT_KBC 		20000
+#define WAIT_KBC 		60000
 
 #define BYTE2           0xe0
 
 #define ESC             0x81
+
+// Mouse Command
+
+#define MOUSE_WRITE_CMD 0xD4
+
+// ------- Commands
+#define EN_DATA_REPORT  0xF4
+#define DIS_DATA_REPORT 0xF5
+#define RESET           0xFF
+#define SET_STREAM      0xEA
+#define READ_DATA       0xEB
+
+// ------- Responses
+#define ACK             0xFA
+#define NACK            0xFE
+#define ERROR           0xFC
 
 // Mouse data parsing
 
@@ -42,10 +61,6 @@
 #define Y_SIGN          BIT(5)
 #define X_OVF           BIT(6)
 #define Y_OVF           BIT(7)
-
-#define NEG16           0xff00
-
-
 
 
 #endif /* _LCOM_I8042_H_ */

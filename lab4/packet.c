@@ -10,15 +10,17 @@ void (resetPacket)(struct packet *pp){
     pp->delta_y = 0x0000;    
 }
 
-void (parseToPacket)(int byte, uint32_t data, struct packet *pp){
+void (parseToPacket)(int byteCounter, uint32_t data, struct packet *pp){
+    int byte = byteCounter % 3;
     uint16_t sign;
+
     if (byte == 1){
         pp->bytes[0] = data;
-        pp->lb = (data & LB);
-        pp->rb = (data & RB);
-        pp->mb = (data & MB);
-        pp->x_ov = (data & X_OVF);
-        pp->y_ov = (data & Y_OVF);
+        pp->lb = data & LB;
+        pp->rb = data & RB;
+        pp->mb = data & MB;
+        pp->x_ov = data & X_OVF;
+        pp->y_ov = data & Y_OVF;
         if (data & X_SIGN)
             pp->delta_x = 1; // IF 1 THEN delta-x is negative
         else pp->delta_x = 0;
@@ -29,11 +31,10 @@ void (parseToPacket)(int byte, uint32_t data, struct packet *pp){
     else if (byte == 2){
         sign = pp->delta_x;
         pp->bytes[1] = data;
-        pp->delta_x = data ;
+        pp->delta_x = data;
 
         if (sign){ // delta-x is negative
-            pp->delta_x = ~(pp->delta_x);
-            pp->delta_x++; 
+            pp->delta_x = pp->delta_x | 0xff00; // sign extention
         }
     }
     else if (byte == 0){
@@ -42,8 +43,7 @@ void (parseToPacket)(int byte, uint32_t data, struct packet *pp){
         pp->delta_y = data;
 
         if (sign){ // delta-y is negative
-            pp->delta_y = ~(pp->delta_y);
-            pp->delta_y++; 
+            pp->delta_y = pp->delta_y | 0xff00; // sign extention
         }
 
     }
