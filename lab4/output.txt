@@ -1,0 +1,20 @@
+mouse_test_gesture: under construction
+rb is down -> start drawing the inverted V
+current line lenght: 596
+current line lenght: 1081
+current line lenght: 1331
+current line lenght: 1552
+current line lenght: 1652
+current line lenght: 1672
+rb-release: line long enough. Press lb to coninue
+lb is down -> start drawing the inverted V
+current line lenght: 146
+current line lenght: 390
+current line lenght: 883
+current line lenght: 1203
+current line lenght: 1613
+current line lenght: 1815
+current line lenght: 1865
+current line lenght: 2018
+FAILED: Wrong Direction
+unsubscribed
