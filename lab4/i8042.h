@@ -30,7 +30,7 @@
 #define INT2            BIT(1)
 #define INT             BIT(0)
 
-#define WAIT_KBC 		60000
+#define WAIT_KBC 		20000
 
 #define BYTE2           0xe0
 
@@ -45,6 +45,7 @@
 #define DIS_DATA_REPORT 0xF5
 #define RESET           0xFF
 #define SET_STREAM      0xEA
+#define SET_REMOTE      0xF0
 #define READ_DATA       0xEB
 
 // ------- Responses

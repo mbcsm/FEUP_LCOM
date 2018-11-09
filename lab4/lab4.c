@@ -48,14 +48,28 @@ int (mouse_test_packet)(uint32_t cnt) {
 	uint8_t bit_no;
 	int r;
 
-    mouse_enable_data_reporting();
-    //enable_data_report();
+    mouse_subscribe_int(&bit_no);
 
-	mouse_subscribe_int(&bit_no);
+
+   // mouse_enable_data_reporting(); // GIVEN
+
+
+
+    mouse_dis_int();
+
+   if (enable_data_report() != 0)
+        printf("Error issuing command \n");
+
+    //mouse_enable_data_reporting(); // GIVEN
+
+    mouse_en_int();
+	
+    
 
 	uint64_t irq_set = BIT(bit_no);
 
 	while (byteCounter / 3 < cnt) {
+        //printf("successful000\n");
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -83,14 +97,21 @@ int (mouse_test_packet)(uint32_t cnt) {
 			}
 		}
 	}
-    //disable_data_report();
-	mouse_unsubscribe_int();
+    mouse_dis_int();
+
+    disable_data_report();
+
+
+
+
+    mouse_unsubscribe_int();
+    
     printf("unsubscribed\n");
 
     return 0;
 }
 
-int milis_to_micros(uint16_t n){
+int miliseconds_to_micros(uint16_t n){
     return n * 10 * 10 * 10;
 }
 
@@ -100,44 +121,43 @@ int (mouse_test_remote)(uint16_t period, uint8_t cnt) {
 
     uint8_t count = cnt;
     struct packet pp;
-    uint32_t data;
-    uint32_t byteOne, byteTwo, byteThree;
+    uint32_t packet[3];
+    //uint32_t byteOne, byteTwo, byteThree;
 
     do {
-        read_data();
-        data = read_kbc();
+            read_mouse_data(packet); // returns the 3byte packet
         
-        byteOne = (uint8_t)(data & 0x1100);
-        byteTwo = (uint8_t)(data & 0x110000);
-        byteThree = (uint8_t)(data & 0x11000000);
+            parseToPacket(1, packet[0], &pp);
+            parseToPacket(2, packet[1], &pp);
+            parseToPacket(3, packet[2], &pp);
+        
+            tickdelay(micros_to_ticks(miliseconds_to_micros(period)));
+            mouse_print_packet(&pp);
+            resetPacket(&pp);
+            count--;
+        
 
-        parseToPacket(1, byteOne, &pp);
-        parseToPacket(2, byteTwo, &pp);
-        parseToPacket(3, byteThree, &pp);
-        
-        tickdelay(micros_to_ticks(milis_to_micros(period)));
-        mouse_print_packet(&pp);
-        resetPacket(&pp);
-        
-        count--;
     }while (count > 0);
 
-
     set_stream_mode();
+    printf("error1 \n");
+
     disable_data_report();
-
-    
-    write_kbc_cmd_byte( minix_get_dflt_kbc_cmd_byte() );    
-
+    printf("error2 \n");
+    uint32_t cmd_byte = minix_get_dflt_kbc_cmd_byte(); 
+    printf("error3 \n");
+    write_kbc_cmd_byte(cmd_byte);
+    printf("error4 \n");
     return 0;
 }
 
-//extern int counter;
+
 int (mouse_test_async)(uint8_t idle_time) {
     /* To be completed */
     printf("%s(%u): under construction\n", __func__, idle_time);
 
     extern uint32_t mouseData;
+    extern int counter;
 
     int byteCounter = 0;
     struct packet pp;
@@ -157,6 +177,14 @@ int (mouse_test_async)(uint8_t idle_time) {
 
 	uint64_t irq_set_mouse = BIT(bit_no);
 
+    
+    mouse_dis_int();
+
+    if (enable_data_report() != 0)
+        printf("Error issuing command \n");
+
+    mouse_en_int();
+
 	while ((unsigned int)counter  < sys_hz() * idle_time) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
@@ -175,6 +203,7 @@ int (mouse_test_async)(uint8_t idle_time) {
 
                         if (byteCounter % 3 == 0){
 						    mouse_print_packet(&pp);
+                            counter = 0;
                             resetPacket(&pp);
                         }
 					}
@@ -186,7 +215,11 @@ int (mouse_test_async)(uint8_t idle_time) {
 					break; /* no other notifications expected: do nothing */
 			}
 		}
-	}
+    }
+        
+    mouse_dis_int();
+
+    disable_data_report();
 
 	if (mouse_unsubscribe_int() != OK)
 		return -1;
