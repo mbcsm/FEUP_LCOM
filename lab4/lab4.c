@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <math.h>
 
 // Any header files included below this line should have been created by you
 #include "mouse.h"
@@ -199,7 +200,6 @@ int (mouse_test_async)(uint8_t idle_time) {
 
 int (mouse_test_gesture)(uint8_t x, uint8_t t) {
     /* To be completed */
-    x = t;
     printf("%s: under construction\n", __func__);
     
     extern uint32_t mouseData;
@@ -218,9 +218,10 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 
 	uint64_t irq_set = BIT(bit_no);
 
-    int state = 0, length_of_line = 0;
+    int state = 0;
+    double length_of_line = 0.0, xMove = 0.0, yMove = 0.0;
 
-	while (stop == 0) {
+	do {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -238,57 +239,100 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
                         parseToPacket(byteCounter % 3, mouseData, &pp);
 
                         if (byteCounter % 3 == 0){
+
+                            printf("%d", state);
+						    mouse_print_packet(&pp);
                             switch(state){
                                 case 0:
                                     if(pp.rb == 1 && pp.lb == 0){
-                                        printf("rb is down -> start drawing the inverted V\n");
+                                        //printf("rb is down -> start drawing the inverted V\n");
                                         state = 1;
                                     }
                                     break;
                                 case 1:
-                                    if(pp.rb == 1 && pp.delta_y > 0 && pp.delta_x > 0){
-                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
-                                        printf("current line lenght: %d\n", length_of_line);
-                                    }else if(pp.rb == 1 && (pp.delta_y <= 0 || pp.delta_x <= 0)){
-                                        printf("FAILED: Wrong Direction\n");
+                                   if(pp.rb == 0 && length_of_line < x){
+                                        //printf("FAILED: line not long enough\n");
                                         stop = 1;
-                                    }else if(pp.rb == 0 && length_of_line < x){
-                                        printf("FAILED: line not long enough\n");
-                                        stop = 1;
+                                        break;
                                     }else if(pp.rb == 0 && length_of_line >= x){
-                                        printf("rb-release: line long enough. Press lb to coninue\n");
+                                        //printf("rb-release: line long enough. Press lb to coninue\n");
+                                        double slope = yMove / xMove;
+                                        if(slope <= 1){
+                                            printf("FAILED: Slope not inclined enough\n");
+                                            stop = 1;
+                                            break;
+                                        }
                                         length_of_line = 0;
+                                        xMove = 0.0;
+                                        yMove = 0.0;
                                         state = 2;
+                                        break;
+                                    }else if(pp.rb == 1 && ((abs(pp.delta_x) > t && pp.delta_x < 0) || (abs(pp.delta_y) > t && pp.delta_y < 0))){
+                                        printf("FAILED: Wrong Direction. You passed the tolerance given\n");
+                                        stop = 1;
+                                        break;
+                                    }
+                                    else if(pp.rb == 1){
+                                        length_of_line += sqrt(pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y);
+                                        xMove += pp.delta_x;
+                                        yMove += pp.delta_y;
+                                        //printf("current line lenght: %f\n", length_of_line);
                                     }
                                     break;
                                 case 2:
+                                    if((abs(pp.delta_x) > t && pp.delta_x != 0) || (abs(pp.delta_y) > t && pp.delta_y != 0)){
+                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
+
+                                    }else if(pp.lb == 1 && length_of_line > t){
+                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
+                                        
+                                       //printf("FAILED: Move Mouse Too Much. You passed the tolerance given\n");
+
+                                        stop = 1;
+                                        break;
+                                    }
                                     if(pp.rb == 0 && pp.lb == 1){
-                                        printf("lb is down -> start drawing the inverted V\n");
+                                        //printf("lb is down -> start drawing the inverted V\n");
+                                        length_of_line = 0;
                                         state = 3;
+                                        break;
                                     }else if(pp.rb == 1){
-                                        printf("FAILED: rb pressed. should have been the lb\n");
+                                        //printf("FAILED: rb pressed. should have been the lb\n");
                                         stop = 1;
                                     }
                                     break;
                                 case 3:
-                                    if(pp.lb == 1 && pp.delta_y < 0 && pp.delta_x > 0){
-                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
-                                        printf("current line lenght: %d\n", length_of_line);
-                                    }else if(pp.lb == 1 && (pp.delta_y >= 0 || pp.delta_x <= 0)){
-                                        printf("FAILED: Wrong Direction\n");
+
+                                    if(pp.lb == 0 && length_of_line < x){
+                                        //printf("FAILED: line not long enough\n");
                                         stop = 1;
-                                    }else if(pp.lb == 0 && length_of_line < x){
-                                        printf("FAILED: line not long enough\n");
-                                        stop = 1;
+                                        break;
                                     }else if(pp.lb == 0 && length_of_line >= x){
-                                        printf("lb-release: line long enough.\nSUCCESS INVERTED V COMPLETED!\n");
+                                        //printf("current line lenght: %d %d\n", length_of_line, x);
+                                        //printf("lb-release: line long enough.\nSUCCESS INVERTED V COMPLETED!\n");
+                                        double slope = yMove / xMove;
+                                        if(slope <= 1){
+                                            printf("FAILED: Slope not inclined enough\n");
+                                            stop = 1;
+                                            break;
+                                        }
                                         stop = 1;
+                                        break;
+                                    }else if(pp.lb == 1 && ((abs(pp.delta_x) > t && pp.delta_x < 0) || (abs(pp.delta_y) > t && pp.delta_y > 0))){
+                                        //printf("FAILED: Wrong Direction. You passed the tolerance given\n");
+                                        stop = 1;
+                                        break;
+                                    }
+                                    else if(pp.lb == 1){
+                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
+                                        xMove += pp.delta_x;
+                                        yMove += pp.delta_y;
+                                        //printf("current line lenght: %f\n", length_of_line);
                                     }
                                     break;
-
                             }
-						    //mouse_print_packet(&pp);
                             resetPacket(&pp);
+                            printf("%d", state);
                         }
 					}
 					break;
@@ -296,7 +340,7 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 					break; /* no other notifications expected: do nothing */
 			}
 		}
-	}
+	}while(stop == 0);
     //disable_data_report();
 	mouse_unsubscribe_int();
     printf("unsubscribed\n");

@@ -7,5 +7,6 @@ CPPFLAGS += -D LAB4
 
 DPADD += ${LIBLCF}
 LDADD += -llcf
+LDADD += -lm
 
 .include <minix.lcom.mk>
