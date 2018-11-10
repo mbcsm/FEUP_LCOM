@@ -270,6 +270,55 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
                         parseToPacket(byteCounter % 3, mouseData, &pp);
 
                         if (byteCounter % 3 == 0){
+                            /*switch(state){
+                                case 0:
+                                    if(pp.rb == 1 && pp.lb == 0){
+                                        printf("rb is down -> start drawing the inverted V\n");
+                                        state = 1;
+                                    }
+                                    break;
+                                case 1:
+                                    if(pp.rb == 1 && pp.delta_y > 0 && pp.delta_x > 0){
+                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
+                                        printf("current line lenght: %d\n", length_of_line);
+                                    }else if(pp.rb == 1 && (pp.delta_y <= 0 || pp.delta_x <= 0)){
+                                        printf("FAILED: Wrong Direction\n");
+                                        stop = 1;
+                                    }else if(pp.rb == 0 && length_of_line < x){
+                                        printf("FAILED: line not long enough\n");
+                                        stop = 1;
+                                    }else if(pp.rb == 0 && length_of_line >= x){
+                                        printf("rb-release: line long enough. Press lb to coninue\n");
+                                        length_of_line = 0;
+                                        state = 2;
+                                    }
+                                    break;
+                                case 2:
+                                    if(pp.rb == 0 && pp.lb == 1){
+                                        printf("lb is down -> start drawing the inverted V\n");
+                                        state = 3;
+                                    }else if(pp.rb == 1){
+                                        printf("FAILED: rb pressed. should have been the lb\n");
+                                        stop = 1;
+                                    }
+                                    break;
+                                case 3:
+                                    if(pp.lb == 1 && pp.delta_y < 0 && pp.delta_x > 0){
+                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
+                                        printf("current line lenght: %d\n", length_of_line);
+                                    }else if(pp.lb == 1 && (pp.delta_y >= 0 || pp.delta_x <= 0)){
+                                        printf("FAILED: Wrong Direction\n");
+                                        stop = 1;
+                                    }else if(pp.lb == 0 && length_of_line < x){
+                                        printf("FAILED: line not long enough\n");
+                                        stop = 1;
+                                    }else if(pp.lb == 0 && length_of_line >= x){
+                                        printf("lb-release: line long enough.\nSUCCESS INVERTED V COMPLETED!\n");
+                                        stop = 1;
+                                    }
+                                    break;
+
+                            }*/
 						    mouse_print_packet(&pp);
 
                             resetPacket(&pp);
