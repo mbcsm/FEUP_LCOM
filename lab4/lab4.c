@@ -319,7 +319,8 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 
                             }*/
 						    mouse_print_packet(&pp);
-                            EndState = event(&pp, x);
+                            tickdelay(micros_to_ticks(miliseconds_to_micros(500)));
+                            EndState = event(&pp, x, t);
                             resetPacket(&pp);
                         }
 					}

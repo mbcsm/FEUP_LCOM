@@ -232,25 +232,29 @@ int (read_mouse_data)(uint32_t *packet){
 
 
 static enum state st = INIT;
+static uint8_t x_len = 0;
+
 void updateState(enum event_type ev){
 		
 	switch (st)
 	{
 		case INIT:
 			/* code */
+			printf("init\n");
 			if (ev == LBDOWN)
-				st = IDRAWU;
+				st = DRAWINGUP;
 			break;
 
-		case IDRAWU:
-			/* code */
+		/*case IDRAWU: // NOT NEEDED WITH X_LEN
+			// code
 			if (ev == MOVEUP)
 				st = DRAWINGUP;
 			else st = INIT;
-			break;	
+			break;	*/
 
 		case DRAWINGUP:
 			/* code */
+			printf("drawup\n");
 			if (ev == MOVEUP)
 				st = DRAWINGUP;
 			else if (ev == LBUP)
@@ -260,27 +264,30 @@ void updateState(enum event_type ev){
 
 		case VERTEX:
 			/* code */
+			printf("vertex\n");
 			if (ev == RESIDUAL)
 				st = VERTEX;
 			else if (ev == RBDOWN)
-				st = IDRAWD;
+				st = DRAWINGDOWN;
+			else if (ev == LBDOWN)
+				st = DRAWINGUP;
 			else st = INIT;
 			break;
-
-		case IDRAWD:
-			/* code */
+		
+		/*case IDRAWD:   // NOT NEEDEED WITH X_LEN
+			// code
 			if (ev == MOVEDOWN)
 				st = DRAWINGDOWN;
 			else st = INIT;
-			break;
+			break;*/
 
 		case DRAWINGDOWN:
 			/* code */
+			printf("drawdown\n");
 			if (ev == MOVEDOWN)
 				st = DRAWINGDOWN;
 			else if (ev == RBUP){
 				st = FINAL;
-				//final = true;
 			}
 			else st = INIT;
 
@@ -296,30 +303,35 @@ void updateState(enum event_type ev){
 	}
 }
 
-bool event (struct packet *pp , uint8_t x_len){
+bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 	enum event_type evt = OTHER;
 
-	if (pp->lb == 1 && pp->mb * pp->rb ==0)   //////// LBDOWN ////////
+	if (pp->lb == 1 && pp->mb * pp->rb == 0)   //////// LBDOWN ////////
 		if(pp->delta_x * pp->delta_y == 0){
 			evt = LBDOWN;
 			updateState(evt);
+			printf("lbdown\n");
 			return false;
 		}
 
 	if (pp->lb == 1 && pp->mb * pp->rb ==0)    /////// MOVEUP /////// 
 		if (pp->delta_x > 0 && pp->delta_y > 0)
 			if ((float)pp->delta_y / pp->delta_x > 1)
-				if (pp->delta_x < x_len) {
+				if (pp->delta_x < tolerance && pp->delta_y < tolerance) {
 					evt = MOVEUP;
+					x_len += pp->delta_x;
 					updateState(evt);
+					printf("moveup\n");
 					return false;
 				}
 
 	if (st != MOVEDOWN)
 		if (pp->lb == 0 && pp->mb * pp->rb ==0)   /////// LBUP ///////
-			if(pp->delta_x * pp->delta_y == 0){
+			if(pp->delta_x * pp->delta_y == 0 && x_len > x){
+				x_len = 0;
 				evt = LBUP;
 				updateState(evt);
+				printf("lbup\n");
 				return false;
 			}
 
@@ -330,23 +342,31 @@ bool event (struct packet *pp , uint8_t x_len){
 		if(pp->delta_x * pp->delta_y == 0){
 			evt = RBDOWN;
 			updateState(evt);
+			printf("rbdown\n");
 			return false;
 		}
 
 	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// MOVEDOWN ////////
 		if(pp->delta_x > 0 && pp->delta_y < 0)
 			if (abs((float)pp->delta_y / pp->delta_x) > 1)
-				if (pp->delta_x < x_len){
+				if (pp->delta_x < tolerance && pp->delta_y < tolerance){
+					x_len += pp->delta_x;
 					evt = MOVEDOWN;
 					updateState(evt);
+					printf("movedown\n");
 					return false;
 				}
 
 	if (pp->rb == 0 && pp->mb * pp->lb ==0)   /////// RBUP ///////
-		if(pp->delta_x * pp->delta_y == 0)
-			evt = RBUP;				
+		if(pp->delta_x * pp->delta_y == 0 && x_len > x){
+			evt = RBUP;
+			printf("rbup\n");
+		}
 
+	x_len = 0;
 	updateState(evt); // Updates in case the state is RBUP OR OTHER
+	if (evt == OTHER)
+		printf("other\n");
 	if (st == FINAL)
 		return true;
 

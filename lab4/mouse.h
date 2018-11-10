@@ -58,5 +58,5 @@ enum event_type {
 
 void updateState(enum event_type evt);
 
-bool event(struct packet *pp, uint8_t x_len);
+bool event(struct packet *pp, uint8_t x, uint8_t tolerance);
 
