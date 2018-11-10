@@ -8,7 +8,7 @@
 #include "mouse.h"
 #include "packet.h"
 #include "i8042.h"
-#include "i8254.h"
+//#include "i8254.h"
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -35,10 +35,12 @@ int main(int argc, char *argv[]) {
 }
 
 
+//////////////////////////////////////
+///////  MOUSE TEST PACKET  //////////
+//////////////////////////////////////
+
 int (mouse_test_packet)(uint32_t cnt) {
-    /* To be completed */
-    printf("%s(%u): under construction\n", __func__, cnt);
-    
+        
     extern uint32_t mouseData;
     uint32_t byteCounter = 0;
     struct packet pp;
@@ -49,27 +51,28 @@ int (mouse_test_packet)(uint32_t cnt) {
 	int r;
 
 
-    mouse_subscribe_int(&bit_no);
+    if (mouse_subscribe_int(&bit_no) != 0)
+        return -1;
 
 
-    mouse_dis_int();
+    if (mouse_disable_int() != 0)
+        return -1;
 
-   if (enable_data_report() != 0)
-        printf("Error issuing command \n");
+    if (enable_data_report() != 0)
+        return -1;
 
-    mouse_en_int();
+    if (mouse_enable_int() != 0)
+        return -1;
 	
     
 
 	uint64_t irq_set = BIT(bit_no);
 
 	while (byteCounter / 3 < cnt) {
-        //printf("successful000\n");
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
 		}
-		//printf("successful\n");
 		if (is_ipc_notify(ipc_status)) { /* received notification */
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
@@ -92,14 +95,15 @@ int (mouse_test_packet)(uint32_t cnt) {
 			}
 		}
 	}
-    mouse_dis_int();
+    if (mouse_disable_int() != 0)
+        return -1;
 
-    disable_data_report();
+    if (disable_data_report() != 0)
+        return -1;
 
-    mouse_unsubscribe_int();
+    if (mouse_unsubscribe_int() != 0)
+        return -1;
     
-    printf("unsubscribed\n");
-
     return 0;
 }
 
@@ -107,17 +111,19 @@ int miliseconds_to_micros(uint16_t n){
     return n * 10 * 10 * 10;
 }
 
+
+//////////////////////////////////////
+///////  MOUSE TEST REMOTE  //////////
+//////////////////////////////////////
+
 int (mouse_test_remote)(uint16_t period, uint8_t cnt) {
-    /* To be completed */
-    printf("%s(%u, %u): under construction\n", __func__, period, cnt);
 
     uint8_t count = cnt;
     struct packet pp;
     uint32_t packet[3];
-    //uint32_t byteOne, byteTwo, byteThree;
-
+    
     do {
-            read_mouse_data(packet); // returns the 3byte packet
+            read_mouse_data(packet);  
         
             parseToPacket(1, packet[0], &pp);
             parseToPacket(2, packet[1], &pp);
@@ -131,23 +137,27 @@ int (mouse_test_remote)(uint16_t period, uint8_t cnt) {
 
     }while (count > 0);
 
-    set_stream_mode();
-    printf("error1 \n");
-
-    disable_data_report();
-    printf("error2 \n");
+    if (set_stream_mode() != 0)
+        return -1;
+   
+    if (disable_data_report() != 0)
+        return -1;
+    
     uint32_t cmd_byte = minix_get_dflt_kbc_cmd_byte(); 
-    printf("error3 \n");
-    write_kbc_cmd_byte(cmd_byte);
-    printf("error4 \n");
+    
+    if (write_kbc_cmd_byte(cmd_byte) != 0)
+        return -1;
+    
     return 0;
 }
 
 
-int (mouse_test_async)(uint8_t idle_time) {
-    /* To be completed */
-    printf("%s(%u): under construction\n", __func__, idle_time);
+//////////////////////////////////////
+///////  MOUSE TEST ASYNC  ///////////
+//////////////////////////////////////
 
+int (mouse_test_async)(uint8_t idle_time) {
+    
     extern uint32_t mouseData;
     extern int counter;
 
@@ -169,18 +179,21 @@ int (mouse_test_async)(uint8_t idle_time) {
 	uint64_t irq_set_mouse = BIT(bit_no);
 
     
-    mouse_dis_int();
+    if (mouse_disable_int() != 0)
+        return -1;
 
     if (enable_data_report() != 0)
-        printf("Error issuing command \n");
+        return -1;
 
-    mouse_en_int();
+    if (mouse_enable_int() != 0)
+        return -1;
 
 	while ((unsigned int)counter  < sys_hz() * idle_time) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
 		}
+
 		if (is_ipc_notify(ipc_status)) { /* received notification */
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
@@ -208,9 +221,11 @@ int (mouse_test_async)(uint8_t idle_time) {
 		}
     }
         
-    mouse_dis_int();
+    if (mouse_disable_int() != 0)
+        return -1;
 
-    disable_data_report();
+    if (disable_data_report() != 0)
+        return -1;
 
 	if (mouse_unsubscribe_int() != OK)
 		return -1;
@@ -218,15 +233,15 @@ int (mouse_test_async)(uint8_t idle_time) {
 		return -1;
 
 	return 0;
-
-    return 1;
 }
 
-int (mouse_test_gesture)(uint8_t x, uint8_t t) {
-    /* To be completed */
-    //x = t;
-    printf("%s: under construction\n", __func__);
 
+//////////////////////////////////////
+///////  MOUSE TEST GESTURE  /////////
+//////////////////////////////////////
+
+int (mouse_test_gesture)(uint8_t x, uint8_t t) {
+    
     extern uint32_t mouseData;
     uint32_t byteCounter = 0;
     struct packet pp;
@@ -237,18 +252,20 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 	int r;
 
 
-	mouse_subscribe_int(&bit_no);
+	if (mouse_subscribe_int(&bit_no) != 0)
+        return -1;
 
-    mouse_dis_int();
+    if (mouse_disable_int() != 0)
+        return -1;
 
-   if (enable_data_report() != 0)
-        printf("Error issuing command \n");
+    if (enable_data_report() != 0)
+        return -1;
 
-    mouse_en_int();
+    if (mouse_enable_int() != 0)
+        return -1;
 
 	uint64_t irq_set = BIT(bit_no);   
 
-    // int state = 0, length_of_line = 0;
     bool EndState = false;
 
 	while (!EndState) {
@@ -256,7 +273,7 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 			printf("driver_receive failed with: %d", r);
 			continue;
 		}
-		//printf("successful\n");
+		
 		if (is_ipc_notify(ipc_status)) { /* received notification */
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
@@ -269,58 +286,10 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
                         parseToPacket(byteCounter % 3, mouseData, &pp);
 
                         if (byteCounter % 3 == 0){
-                            /*switch(state){
-                                case 0:
-                                    if(pp.rb == 1 && pp.lb == 0){
-                                        printf("rb is down -> start drawing the inverted V\n");
-                                        state = 1;
-                                    }
-                                    break;
-                                case 1:
-                                    if(pp.rb == 1 && pp.delta_y > 0 && pp.delta_x > 0){
-                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
-                                        printf("current line lenght: %d\n", length_of_line);
-                                    }else if(pp.rb == 1 && (pp.delta_y <= 0 || pp.delta_x <= 0)){
-                                        printf("FAILED: Wrong Direction\n");
-                                        stop = 1;
-                                    }else if(pp.rb == 0 && length_of_line < x){
-                                        printf("FAILED: line not long enough\n");
-                                        stop = 1;
-                                    }else if(pp.rb == 0 && length_of_line >= x){
-                                        printf("rb-release: line long enough. Press lb to coninue\n");
-                                        length_of_line = 0;
-                                        state = 2;
-                                    }
-                                    break;
-                                case 2:
-                                    if(pp.rb == 0 && pp.lb == 1){
-                                        printf("lb is down -> start drawing the inverted V\n");
-                                        state = 3;
-                                    }else if(pp.rb == 1){
-                                        printf("FAILED: rb pressed. should have been the lb\n");
-                                        stop = 1;
-                                    }
-                                    break;
-                                case 3:
-                                    if(pp.lb == 1 && pp.delta_y < 0 && pp.delta_x > 0){
-                                        length_of_line += pp.delta_x * pp.delta_x + pp.delta_y * pp.delta_y;
-                                        printf("current line lenght: %d\n", length_of_line);
-                                    }else if(pp.lb == 1 && (pp.delta_y >= 0 || pp.delta_x <= 0)){
-                                        printf("FAILED: Wrong Direction\n");
-                                        stop = 1;
-                                    }else if(pp.lb == 0 && length_of_line < x){
-                                        printf("FAILED: line not long enough\n");
-                                        stop = 1;
-                                    }else if(pp.lb == 0 && length_of_line >= x){
-                                        printf("lb-release: line long enough.\nSUCCESS INVERTED V COMPLETED!\n");
-                                        stop = 1;
-                                    }
-                                    break;
-
-                            }*/
 						    mouse_print_packet(&pp);
-                            tickdelay(micros_to_ticks(miliseconds_to_micros(500)));
-                            EndState = event(&pp, x, t);
+                            //tickdelay(micros_to_ticks(miliseconds_to_micros(500)));   //  DEBUGGING PURPOSES
+
+                            EndState = event(&pp, x, t); // event(packet pp, uint8_t x, uint8_t t)  return true when the state machine reaches the final state
                             resetPacket(&pp);
                         }
 					}
@@ -330,13 +299,15 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 			}
 		}
 	}
-    mouse_dis_int();
+    if (mouse_disable_int() != 0)
+        return -1;
 
-    disable_data_report();
+    if (disable_data_report() != 0)
+        return -1;
 
-    mouse_unsubscribe_int();
-    printf("unsubscribed\n");
-
+    if (mouse_unsubscribe_int() != 0)
+        return -1;
+    
     return 0;
 }
 

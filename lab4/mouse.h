@@ -17,13 +17,9 @@ int write_kbc_cmd_byte(uint32_t cmd_byte);
 
 int write_mouse_command(uint32_t command);
 
-int mouse_enable_interrupts();
+int mouse_disable_int();
 
-int mouse_dis_int();
-
-int mouse_en_int();
-
-int mouse_disable_interrupts();
+int mouse_enable_int();
 
 int enable_data_report();
 
