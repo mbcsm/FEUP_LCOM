@@ -306,7 +306,7 @@ void updateState(enum event_type ev){
 bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 	enum event_type evt = OTHER;
 
-	if (pp->lb == 1 && pp->mb * pp->rb == 0)   //////// LBDOWN ////////
+	if (pp->lb == 1 && pp->mb + pp->rb == 0)   //////// LBDOWN ////////
 		if(pp->delta_x * pp->delta_y == 0){
 			evt = LBDOWN;
 			updateState(evt);
@@ -314,7 +314,7 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 			return false;
 		}
 
-	if (pp->lb == 1 && pp->mb * pp->rb ==0)    /////// MOVEUP /////// 
+	if (pp->lb == 1 && pp->mb + pp->rb ==0)    /////// MOVEUP /////// 
 		if (pp->delta_x > 0 && pp->delta_y > 0)
 			if ((float)pp->delta_y / pp->delta_x > 1)
 				if (pp->delta_x < tolerance && pp->delta_y < tolerance) {
@@ -325,20 +325,21 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 					return false;
 				}
 
-	if (st != MOVEDOWN)
-		if (pp->lb == 0 && pp->mb * pp->rb ==0)   /////// LBUP ///////
-			if(pp->delta_x * pp->delta_y == 0 && x_len > x){
+	if (st != DRAWINGDOWN)
+		if (pp->lb == 0 && pp->mb + pp->rb ==0)   /////// LBUP ///////
+			if(pp->delta_x * pp->delta_y == 0 && x_len >= x){
 				x_len = 0;
 				evt = LBUP;
 				updateState(evt);
 				printf("lbup\n");
+				printf("%d", x_len);
 				return false;
 			}
 
-	if (st == VERTEX)
+	//if (st == VERTEX)
 
 
-	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// RBDOWN ////////
+	if (pp->rb == 1 && pp->mb + pp->lb == 0)   //////// RBDOWN ////////
 		if(pp->delta_x * pp->delta_y == 0){
 			evt = RBDOWN;
 			updateState(evt);
@@ -346,7 +347,7 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 			return false;
 		}
 
-	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// MOVEDOWN ////////
+	if (pp->rb == 1 && pp->mb + pp->lb == 0)   //////// MOVEDOWN ////////
 		if(pp->delta_x > 0 && pp->delta_y < 0)
 			if (abs((float)pp->delta_y / pp->delta_x) > 1)
 				if (pp->delta_x < tolerance && pp->delta_y < tolerance){
@@ -357,8 +358,8 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 					return false;
 				}
 
-	if (pp->rb == 0 && pp->mb * pp->lb ==0)   /////// RBUP ///////
-		if(pp->delta_x * pp->delta_y == 0 && x_len > x){
+	if (pp->rb == 0 && pp->mb + pp->lb ==0)   /////// RBUP ///////
+		if(pp->delta_x * pp->delta_y == 0 && x_len >= x){
 			evt = RBUP;
 			printf("rbup\n");
 		}
