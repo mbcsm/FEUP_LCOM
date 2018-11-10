@@ -48,19 +48,14 @@ int (mouse_test_packet)(uint32_t cnt) {
 	uint8_t bit_no;
 	int r;
 
+
     mouse_subscribe_int(&bit_no);
-
-
-   // mouse_enable_data_reporting(); // GIVEN
-
 
 
     mouse_dis_int();
 
    if (enable_data_report() != 0)
         printf("Error issuing command \n");
-
-    //mouse_enable_data_reporting(); // GIVEN
 
     mouse_en_int();
 	
@@ -100,9 +95,6 @@ int (mouse_test_packet)(uint32_t cnt) {
     mouse_dis_int();
 
     disable_data_report();
-
-
-
 
     mouse_unsubscribe_int();
     
@@ -165,8 +157,7 @@ int (mouse_test_async)(uint8_t idle_time) {
 	int ipc_status;
 	message msg;
 	uint8_t bit_no;
-	int r;
-
+	int r ;
 	if(timer_subscribe_int(&bit_no) != OK)
 		return -1;
 	
@@ -235,6 +226,68 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
     /* To be completed */
     x = t;
     printf("%s: under construction\n", __func__);
-    return 1;
+    
+    extern uint32_t mouseData;
+    uint32_t byteCounter = 0;
+    struct packet pp;
+
+	int ipc_status;
+	message msg;
+	uint8_t bit_no;
+	int r;
+
+    bool end;
+
+
+	mouse_subscribe_int(&bit_no);
+
+    mouse_dis_int();
+
+   if (enable_data_report() != 0)
+        printf("Error issuing command \n");
+
+    mouse_en_int();
+
+	uint64_t irq_set = BIT(bit_no);   
+
+    int state = 0, length_of_line = 0;
+
+	while (stop == 0) {
+		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
+			printf("driver_receive failed with: %d", r);
+			continue;
+		}
+		//printf("successful\n");
+		if (is_ipc_notify(ipc_status)) { /* received notification */
+			switch (_ENDPOINT_P(msg.m_source)) {
+				case HARDWARE: /* hardware interrupt notification */
+					if (msg.m_notify.interrupts & irq_set) {
+						mouseData = 0;   
+
+                        mouse_ih();                        
+                        byteCounter++;
+						
+                        parseToPacket(byteCounter % 3, mouseData, &pp);
+
+                        if (byteCounter % 3 == 0){
+						    mouse_print_packet(&pp);
+
+                            resetPacket(&pp);
+                        }
+					}
+					break;
+				default:
+					break; /* no other notifications expected: do nothing */
+			}
+		}
+	}
+    mouse_dis_int();
+
+    disable_data_report();
+
+    mouse_unsubscribe_int();
+    printf("unsubscribed\n");
+
+    return 0;
 }
 

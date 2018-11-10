@@ -12,7 +12,7 @@ int (mouse_subscribe_int)(uint8_t *bit_no){
 
     *bit_no = hookid;
 	if (sys_irqsetpolicy(MOUSE_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &hookid) != OK)
-		return 1;  
+		return -1;  
     
     return 0;  
 }
@@ -25,13 +25,17 @@ int(mouse_unsubscribe_int)(){
 }
 
 int (mouse_en_int)(){
-	sys_irqenable(&hookid);
+	if (sys_irqenable(&hookid) != OK)
+		return -1;
+
 	return 0;
 }
 
 int (mouse_dis_int)(){
 
-	sys_irqdisable(&hookid);
+	if (sys_irqdisable(&hookid) != OK)
+		return -1;
+
 	return 0;
 }
 
@@ -224,4 +228,100 @@ int (read_mouse_data)(uint32_t *packet){
 	packet[2] = read_kbc();
 
 	return 0;
+}
+
+
+typedef enum state {
+    INIT,
+	IDRAWU,
+    DRAWINGUP,
+	VERTEX,
+	IDRAWD,
+	DRAWINGDOWN,
+    FINAL
+}
+
+typedef enum event {
+	LBDOWN,
+	LBUP,
+	MOVEUP,
+	RESIDUAL,
+	RBDOWN,
+	RBUP,
+	MOVEDOWN
+}
+void event (struct packet *pp){
+	
+
+
+
+
+	if (st == FINAL)
+		return true;
+	return false;
+}
+
+static state st = INIT;
+void updateState(enum event ev){
+		
+	switch (st)
+	{
+		case INIT:
+			/* code */
+			if (ev == LBDOWN)
+				st = IDRAWU;
+			break;
+
+		case IDRAWU:
+			/* code */
+			if (ev == MOVEUP)
+				st = DRAWINGUP;
+			else st = INIT;
+			break;	
+
+		case DRAWINGUP:
+			/* code */
+			if (ev == MOVEUP)
+				st = DRAWINGUP;
+			else if (ev == LBUP)
+				st = VERTEX;
+			else st = INIT;
+			break;
+
+		case VERTEX:
+			/* code */
+			if (ev == RESIDUAL)
+				st = VERTEX;
+			else if (ev == RBDOWN)
+				st = IDRAWD;
+			else st = INIT;
+			break;
+
+		case IDRAWD:
+			/* code */
+			if (ev == MOVEDOWN)
+				st = DRAWINGDOWN;
+			else st = INIT;
+			break;
+
+		case DRAWINGDOWN:
+			/* code */
+			if (ev == MOVEDOWN)
+				st = DRAWINGDOWN;
+			else if (ev = RBUP){
+				st = FINAL;
+				//final = true;
+			}
+			else st = INIT;
+
+			break;
+
+		case FINAL:
+			/* code */
+	
+			break;
+
+		default:
+			break;
+	}
 }
