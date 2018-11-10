@@ -35,3 +35,28 @@ int set_remote_mode();
 
 int read_mouse_data(uint32_t *packet);
 
+enum state {
+    INIT,
+	IDRAWU,
+    DRAWINGUP,
+	VERTEX,
+	IDRAWD,
+	DRAWINGDOWN,
+    FINAL
+};
+
+enum event_type {
+	LBDOWN,
+	LBUP,
+	MOVEUP,
+	RESIDUAL,
+	RBDOWN,
+	RBUP,
+	MOVEDOWN,
+	OTHER
+};
+
+void updateState(enum event_type evt);
+
+void event(struct packet *pp, uint8_t x_len);
+

@@ -226,7 +226,8 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
     /* To be completed */
     x = t;
     printf("%s: under construction\n", __func__);
-    
+    extern enum state st;
+
     extern uint32_t mouseData;
     uint32_t byteCounter = 0;
     struct packet pp;
@@ -235,8 +236,6 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 	message msg;
 	uint8_t bit_no;
 	int r;
-
-    bool end;
 
 
 	mouse_subscribe_int(&bit_no);
@@ -250,9 +249,9 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 
 	uint64_t irq_set = BIT(bit_no);   
 
-    int state = 0, length_of_line = 0;
+    // int state = 0, length_of_line = 0;
 
-	while (stop == 0) {
+	while (st != FINAL) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -320,7 +319,7 @@ int (mouse_test_gesture)(uint8_t x, uint8_t t) {
 
                             }*/
 						    mouse_print_packet(&pp);
-
+                            event(&pp, x);
                             resetPacket(&pp);
                         }
 					}

@@ -231,29 +231,8 @@ int (read_mouse_data)(uint32_t *packet){
 }
 
 
-typedef enum state {
-    INIT,
-	IDRAWU,
-    DRAWINGUP,
-	VERTEX,
-	IDRAWD,
-	DRAWINGDOWN,
-    FINAL
-}
-
-typedef enum event {
-	LBDOWN,
-	LBUP,
-	MOVEUP,
-	RESIDUAL,
-	RBDOWN,
-	RBUP,
-	MOVEDOWN,
-	OTHER
-}
-
-static state st = INIT;
-void updateState(enum event ev){
+static enum state st = INIT;
+void updateState(enum event_type ev){
 		
 	switch (st)
 	{
@@ -299,7 +278,7 @@ void updateState(enum event ev){
 			/* code */
 			if (ev == MOVEDOWN)
 				st = DRAWINGDOWN;
-			else if (ev = RBUP){
+			else if (ev == RBUP){
 				st = FINAL;
 				//final = true;
 			}
@@ -317,8 +296,8 @@ void updateState(enum event ev){
 	}
 }
 
-void event (struct packet *pp){
-	event evt = OTHER;
+void event (struct packet *pp , uint8_t x_len){
+	enum event_type evt = OTHER;
 
 	if (pp->lb == 1 && pp->mb * pp->rb ==0)   //////// LBDOWN ////////
 		if(pp->delta_x * pp->delta_y == 0){
@@ -327,12 +306,12 @@ void event (struct packet *pp){
 			return;
 		}
 
-	if (pp->lb == 1 && pp->mb * pp-> ==0)    /////// MOVEUP /////// 
+	if (pp->lb == 1 && pp->mb * pp->rb ==0)    /////// MOVEUP /////// 
 		if (pp->delta_x > 0 && pp->delta_y > 0)
 			if ((float)pp->delta_y / pp->delta_x > 1)
-				if (x < x_len) {
+				if (pp->delta_x < x_len) {
 					evt = MOVEUP;
-					updateState(evt)
+					updateState(evt);
 					return;
 				}
 
@@ -357,7 +336,7 @@ void event (struct packet *pp){
 	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// MOVEDOWN ////////
 		if(pp->delta_x > 0 && pp->delta_y < 0)
 			if (abs((float)pp->delta_y / pp->delta_x) > 1)
-				if (x < x_len){
+				if (pp->delta_x < x_len){
 					evt = MOVEDOWN;
 					updateState(evt);
 					return;
@@ -368,6 +347,6 @@ void event (struct packet *pp){
 			evt = RBUP;				
 
 	updateState(evt); // Updates in case the state is RBUP OR OTHER
-	return
+	return;
 }
 
