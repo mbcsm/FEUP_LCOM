@@ -307,7 +307,7 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 	enum event_type evt = OTHER;
 
 	if (pp->lb == 1 && pp->mb + pp->rb == 0)   //////// LBDOWN ////////
-		if(pp->delta_x * pp->delta_y == 0){
+		if(pp->delta_x + pp->delta_y == 0){
 			evt = LBDOWN;
 			updateState(evt);
 			printf("lbdown\n");
@@ -327,7 +327,7 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 
 	if (st != DRAWINGDOWN)
 		if (pp->lb == 0 && pp->mb + pp->rb ==0)   /////// LBUP ///////
-			if(pp->delta_x * pp->delta_y == 0 && x_len >= x){
+			if(pp->delta_x + pp->delta_y == 0 && x_len >= x){
 				x_len = 0;
 				evt = LBUP;
 				updateState(evt);
@@ -336,11 +336,15 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 				return false;
 			}
 
-	//if (st == VERTEX)
+	if (st == VERTEX)
+		if (pp->lb + pp->mb + pp->rb == 0)
+			if (pp->delta_x != 0 || pp->delta_y != 0)
+				if (pp->delta_x <= tolerance && pp->delta_y <= tolerance)
+					evt = RESIDUAL;
 
 
 	if (pp->rb == 1 && pp->mb + pp->lb == 0)   //////// RBDOWN ////////
-		if(pp->delta_x * pp->delta_y == 0){
+		if(pp->delta_x + pp->delta_y == 0){
 			evt = RBDOWN;
 			updateState(evt);
 			printf("rbdown\n");
@@ -359,7 +363,7 @@ bool event (struct packet *pp , uint8_t x, uint8_t tolerance){
 				}
 
 	if (pp->rb == 0 && pp->mb + pp->lb ==0)   /////// RBUP ///////
-		if(pp->delta_x * pp->delta_y == 0 && x_len >= x){
+		if(pp->delta_x + pp->delta_y == 0 && x_len >= x){
 			evt = RBUP;
 			printf("rbup\n");
 		}

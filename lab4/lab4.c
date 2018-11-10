@@ -224,7 +224,7 @@ int (mouse_test_async)(uint8_t idle_time) {
 
 int (mouse_test_gesture)(uint8_t x, uint8_t t) {
     /* To be completed */
-    x = t;
+    //x = t;
     printf("%s: under construction\n", __func__);
 
     extern uint32_t mouseData;
