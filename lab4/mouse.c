@@ -248,17 +248,8 @@ typedef enum event {
 	RESIDUAL,
 	RBDOWN,
 	RBUP,
-	MOVEDOWN
-}
-void event (struct packet *pp){
-	
-
-
-
-
-	if (st == FINAL)
-		return true;
-	return false;
+	MOVEDOWN,
+	OTHER
 }
 
 static state st = INIT;
@@ -325,3 +316,58 @@ void updateState(enum event ev){
 			break;
 	}
 }
+
+void event (struct packet *pp){
+	event evt = OTHER;
+
+	if (pp->lb == 1 && pp->mb * pp->rb ==0)   //////// LBDOWN ////////
+		if(pp->delta_x * pp->delta_y == 0){
+			evt = LBDOWN;
+			updateState(evt);
+			return;
+		}
+
+	if (pp->lb == 1 && pp->mb * pp-> ==0)    /////// MOVEUP /////// 
+		if (pp->delta_x > 0 && pp->delta_y > 0)
+			if ((float)pp->delta_y / pp->delta_x > 1)
+				if (x < x_len) {
+					evt = MOVEUP;
+					updateState(evt)
+					return;
+				}
+
+	if (st != MOVEDOWN)
+		if (pp->lb == 0 && pp->mb * pp->rb ==0)   /////// LBUP ///////
+			if(pp->delta_x * pp->delta_y == 0){
+				evt = LBUP;
+				updateState(evt);
+				return;
+			}
+
+	if (st == VERTEX)
+
+
+	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// RBDOWN ////////
+		if(pp->delta_x * pp->delta_y == 0){
+			evt = RBDOWN;
+			updateState(evt);
+			return;
+		}
+
+	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// MOVEDOWN ////////
+		if(pp->delta_x > 0 && pp->delta_y < 0)
+			if (abs((float)pp->delta_y / pp->delta_x) > 1)
+				if (x < x_len){
+					evt = MOVEDOWN;
+					updateState(evt);
+					return;
+				}
+
+	if (pp->rb == 0 && pp->mb * pp->lb ==0)   /////// RBUP ///////
+		if(pp->delta_x * pp->delta_y == 0)
+			evt = RBUP;				
+
+	updateState(evt); // Updates in case the state is RBUP OR OTHER
+	return
+}
+
