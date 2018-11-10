@@ -296,14 +296,14 @@ void updateState(enum event_type ev){
 	}
 }
 
-void event (struct packet *pp , uint8_t x_len){
+bool event (struct packet *pp , uint8_t x_len){
 	enum event_type evt = OTHER;
 
 	if (pp->lb == 1 && pp->mb * pp->rb ==0)   //////// LBDOWN ////////
 		if(pp->delta_x * pp->delta_y == 0){
 			evt = LBDOWN;
 			updateState(evt);
-			return;
+			return false;
 		}
 
 	if (pp->lb == 1 && pp->mb * pp->rb ==0)    /////// MOVEUP /////// 
@@ -312,7 +312,7 @@ void event (struct packet *pp , uint8_t x_len){
 				if (pp->delta_x < x_len) {
 					evt = MOVEUP;
 					updateState(evt);
-					return;
+					return false;
 				}
 
 	if (st != MOVEDOWN)
@@ -320,7 +320,7 @@ void event (struct packet *pp , uint8_t x_len){
 			if(pp->delta_x * pp->delta_y == 0){
 				evt = LBUP;
 				updateState(evt);
-				return;
+				return false;
 			}
 
 	if (st == VERTEX)
@@ -330,7 +330,7 @@ void event (struct packet *pp , uint8_t x_len){
 		if(pp->delta_x * pp->delta_y == 0){
 			evt = RBDOWN;
 			updateState(evt);
-			return;
+			return false;
 		}
 
 	if (pp->rb == 1 && pp->mb * pp->lb == 0)   //////// MOVEDOWN ////////
@@ -339,7 +339,7 @@ void event (struct packet *pp , uint8_t x_len){
 				if (pp->delta_x < x_len){
 					evt = MOVEDOWN;
 					updateState(evt);
-					return;
+					return false;
 				}
 
 	if (pp->rb == 0 && pp->mb * pp->lb ==0)   /////// RBUP ///////
@@ -347,6 +347,9 @@ void event (struct packet *pp , uint8_t x_len){
 			evt = RBUP;				
 
 	updateState(evt); // Updates in case the state is RBUP OR OTHER
-	return;
+	if (st == FINAL)
+		return true;
+
+	return false;
 }
 
