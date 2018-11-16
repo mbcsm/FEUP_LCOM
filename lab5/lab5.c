@@ -55,9 +55,6 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
 
 
   //Draw a Blue Square
-  int h_res = get_h_res();
-  int bits_per_pixel = get_bits_per_pixel();
-  void *video_mem = get_video_mem();
 
   while ((unsigned int) counter < sys_hz() * delay) {
     if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
@@ -89,17 +86,16 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
 
 int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
                        uint16_t width, uint16_t height, uint32_t color) {
-  extern int counter;
+  
+  extern uint32_t kbdData;
 
   int ipc_status;
-  message msg;
-  uint8_t bit_no;
-  int r;
+	message msg;
+	uint8_t bit_no;
+	int r;
 
-  if (timer_subscribe_int(&bit_no) != OK)
-    return -1;
-
-  uint64_t irq_set_timer = BIT(bit_no);
+  kbd_subscribe_int(&bit_no);
+	uint64_t irq_set_kbd = BIT(bit_no);
 
   vg_start(mode);
   
@@ -109,8 +105,8 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
   int bits_per_pixel = get_bits_per_pixel();
   void *video_mem = get_video_mem();
 
-  for(int i = x; i < width; i++){
-    for(int j = y; j < height; j++){
+  for(int i = x; i < width + x; i++){
+    for(int j = y; j < height + y; j++){
       char *ptr_VM = video_mem;
       ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
       *ptr_VM = color;
@@ -118,32 +114,34 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
   }
 
 
-  while ((unsigned int) counter < sys_hz() * 5) {
-    if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
-      printf("driver_receive failed with: %d", r);
-      continue;
-    }
-
-    if (is_ipc_notify(ipc_status)) { /* received notification */
-      switch (_ENDPOINT_P(msg.m_source)) {
-        case HARDWARE: /* hardware interrupt notification */
-          if (msg.m_notify.interrupts & irq_set_timer) {
-            timer_int_handler();
-          }
-          break;
-        default:
-          break; /* no other notifications expected: do nothing */
-      }
-    }
-  }
+  while (kbdData != ESC) {
+		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
+			printf("driver_receive failed with: %d", r);
+			continue;
+		}
+		if (is_ipc_notify(ipc_status)) { /* received notification */
+			switch (_ENDPOINT_P(msg.m_source)) {
+				case HARDWARE: /* hardware interrupt notification */
+					if (msg.m_notify.interrupts & irq_set_kbd) {
+						kbdData = 0;
+				    kbd_ih();
+					}
+          /*if (msg.m_notify.interrupts & irq_set) { // INTERRUPT NOTIFICATION FOR ANOTHER 
+						
+					}*/
+					break;
+				default:
+					break; /* no other notifications expected: do nothing */
+			}
+		}
+	}
+	kbd_unsubscribe_int();
 
   if (vg_exit() == 0) {
     return 0;
   }
   else
     return 1;
-  
-  return 0;
 }
 
 int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles, uint32_t first, uint8_t step) {
