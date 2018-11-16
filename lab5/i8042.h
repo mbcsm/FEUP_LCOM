@@ -6,17 +6,19 @@
 #define KBD_IRQ         1
 #define MOUSE_IRQ       12
 
+
+// Registers
 #define STAT_REG        0x64
 #define KBC_CMD_REG     0x64
 #define IN_BUF          0x60
 #define OUT_BUF         0x60
 
+
+// KBC Commands (command byte related)
 #define KBC_READ_CMD    0x20
 #define KBC_WRITE_CMD   0x60
 
-
-
-
+// Status bits
 #define OBF             BIT(0)
 #define IBF             BIT(1)
 #define AUX             BIT(5)
@@ -30,21 +32,24 @@
 #define INT2            BIT(1)
 #define INT             BIT(0)
 
-#define WAIT_KBC 		60000
+#define WAIT_KBC 		20000
 
+
+// Keycodes
 #define BYTE2           0xe0
 
 #define ESC             0x81
 
-// Mouse Command
+// KBC Write to Mouse Command
 
 #define MOUSE_WRITE_CMD 0xD4
 
-// ------- Commands
+// ------- Mouse Commands
 #define EN_DATA_REPORT  0xF4
 #define DIS_DATA_REPORT 0xF5
 #define RESET           0xFF
 #define SET_STREAM      0xEA
+#define SET_REMOTE      0xF0
 #define READ_DATA       0xEB
 
 // ------- Responses
