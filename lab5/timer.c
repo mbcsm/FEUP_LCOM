@@ -75,8 +75,7 @@ int(timer_unsubscribe_int)() {
   //printf("unsubscibe successfull\n");
   return 0;
 }
-
-int counterSeconds, counter;
+int counterSeconds = 0, counter = 0;
 void(timer_int_handler)() {
 	counter++;
 	if(counter % sys_hz() == 0){
