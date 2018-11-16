@@ -126,9 +126,7 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
 						kbdData = 0;
 				    kbd_ih();
 					}
-          /*if (msg.m_notify.interrupts & irq_set) { // INTERRUPT NOTIFICATION FOR ANOTHER 
-						
-					}*/
+
 					break;
 				default:
 					break; /* no other notifications expected: do nothing */
@@ -145,8 +143,74 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
 }
 
 int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles, uint32_t first, uint8_t step) {
-  /* To be completed */
-  printf("%s(0x%03x, %u, 0x%08x, %d): under construction\n", __func__, mode, no_rectangles, first, step);
+ extern uint32_t kbdData;
 
-  return 1;
+  int ipc_status;
+	message msg;
+	uint8_t bit_no;
+	int r;
+
+  kbd_subscribe_int(&bit_no);
+	uint64_t irq_set_kbd = BIT(bit_no);
+
+  vg_start(mode);
+  
+  //Draw a Blue Square
+  int h_res = get_h_res();
+  int v_res = get_v_res();
+  int bits_per_pixel = get_bits_per_pixel();
+  void *video_mem = get_video_mem();
+
+
+  int width = h_res / no_rectangles;
+  int height = v_res / no_rectangles;
+
+  int current_x = 0;
+  int current_y = 0;
+  int total = 0;
+
+  for(int rec_index; rec_index < no_rectangles * no_rectangles; rec_index ++ ){
+    for(int i = current_x; i < width + current_x; i++){
+      for(int j = current_y; j < height + current_y; j++){
+        char *ptr_VM = video_mem;
+        ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
+        *ptr_VM = 1;
+      }
+    }
+    total++;
+    if(total % no_rectangles == 0){
+      current_x = 0;
+      current_y += height;
+    }else{
+      current_x += width;
+    }
+  }
+
+
+  while (kbdData != ESC) {
+		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
+			printf("driver_receive failed with: %d", r);
+			continue;
+		}
+		if (is_ipc_notify(ipc_status)) { /* received notification */
+			switch (_ENDPOINT_P(msg.m_source)) {
+				case HARDWARE: /* hardware interrupt notification */
+					if (msg.m_notify.interrupts & irq_set_kbd) {
+						kbdData = 0;
+				    kbd_ih();
+					}
+
+					break;
+				default:
+					break; /* no other notifications expected: do nothing */
+			}
+		}
+	}
+	kbd_unsubscribe_int();
+
+  if (vg_exit() == 0) {
+    return 0;
+  }
+  else
+    return 1;
 }
