@@ -6,9 +6,9 @@
 #include "keyboard.h"
 #include "video.h"
 
-#include <i8042.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <i8042.h>
 
 // Any header files included below this line should have been created by you
 
@@ -41,36 +41,35 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
 
   extern int counter;
 
+
   int ipc_status;
   message msg;
   uint8_t bit_no;
   int r;
 
-  if (timer_subscribe_int(&bit_no) != OK)
-    return -1;
+	if(timer_subscribe_int(&bit_no) != OK)
+		return -1;
+	
+	uint64_t irq_set_timer = BIT(bit_no);
+  
+  
 
-  uint64_t irq_set_timer = BIT(bit_no);
+	vbe_mode_info_t vbe_mode;
 
-  vg_start(mode);
+  vbe_get_mode_info(mode, &vbe_mode);
+  
+  struct reg86u reg86;
+  memset(&reg86, 0, sizeof(reg86)); /* zero the structure */
+  reg86.u.w.ax = 0x4F02; // VBE call, function 02 -- set VBE mode
+  reg86.u.w.bx = 1<<14|mode; // set bit 14: linear framebuffer
+  reg86.u.b.intno = 0x10;
 
-
-  //Draw a Blue Square
-  int h_res = get_h_res();
-  int bits_per_pixel = get_bits_per_pixel();
-  void *video_mem = get_video_mem();
-
-  printf("%d", h_res);
-
-  for(int i = 0; i < 100; i++){
-    for(int j = 0; j < 100; j++){
-      char *ptr_VM = video_mem;
-      ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
-      *ptr_VM = 1;
-    }
+  if( sys_int86(&reg86) != OK ) {
+    printf("set_vbe_mode: sys_int86() failed \n");
+    return 1;
   }
 
-   
-
+  
 
   while ((unsigned int) counter < sys_hz() * delay) {
     if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
@@ -83,6 +82,7 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
         case HARDWARE: /* hardware interrupt notification */
           if (msg.m_notify.interrupts & irq_set_timer) {
             timer_int_handler();
+             
           }
           break;
         default:
@@ -91,10 +91,7 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
     }
   }
 
-  if (vg_exit() == 0) {
-    return 0;
-  }
-  else
+  if (vg_exit() != 0)
     return 1;
   
   return 0;
@@ -118,6 +115,8 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
 	uint64_t irq_set_kbd = BIT(bit_no);
 
   //initVG
+  
+  mapVRAM();
 
   vbe_mode_info_t vbe_info;
   vbe_get_mode_info(mode, &vbe_info);

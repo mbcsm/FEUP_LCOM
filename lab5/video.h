@@ -9,6 +9,9 @@
 #include <stdint.h>
 #include <stdio.h>
 
+
+int mapVRAM();
+
 static char *video_mem;		/* Process (virtual) address to which VRAM is mapped */
 
 static unsigned h_res;	        /* Horizontal resolution in pixels */
