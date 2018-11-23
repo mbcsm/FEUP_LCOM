@@ -86,7 +86,7 @@ int(video_test_init)(uint16_t mode, uint8_t delay) {
 
 int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
                        uint16_t width, uint16_t height, uint32_t color) {
-  
+
   extern uint32_t kbdData;
 
   int ipc_status;
@@ -142,8 +142,9 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
     return 1;
 }
 
-int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles, uint32_t first, uint8_t step) {
- extern uint32_t kbdData;
+int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles,  uint32_t first, uint8_t step) {
+
+  extern uint32_t kbdData;
 
   int ipc_status;
 	message msg;
@@ -164,25 +165,51 @@ int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles, uint32_t first, ui
 
   int width = h_res / no_rectangles;
   int height = v_res / no_rectangles;
+  int size = 0;
+
+  if(width < height){
+    size = width;
+  }else{
+    size = height;
+  }
 
   int current_x = 0;
   int current_y = 0;
+  int current_rec_x = 0;
+  int current_rec_y = 0;
   int total = 0;
 
-  for(int rec_index; rec_index < no_rectangles * no_rectangles; rec_index ++ ){
-    for(int i = current_x; i < width + current_x; i++){
-      for(int j = current_y; j < height + current_y; j++){
+  
+  for(int rec_index = 0 ; rec_index < no_rectangles * no_rectangles; rec_index ++ ){
+    
+    
+    uint8_t color = (first + (current_rec_x * no_rectangles + current_rec_y) * step) % (1 << get_bits_per_pixel());
+
+/*
+    uint8_t R = (R(first) + col * step) % (1 << RedScreeMask);
+    uint8_t G = (G(first) + row * step) % (1 << GreenScreeMask);
+    uint8_t B = (B(first) + (col + row) * step) % (1 << BlueScreeMask);	
+*/
+
+    printf("Drawing: %d | %d | %d | %d\n", rec_index, current_rec_x, current_rec_y, color);
+
+    for(int i = current_x; i < size + current_x; i++){
+      for(int j = current_y; j < size + current_y; j++){
         char *ptr_VM = video_mem;
         ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
-        *ptr_VM = 1;
+        *ptr_VM = color;
       }
     }
+
+    current_rec_x++;
     total++;
     if(total % no_rectangles == 0){
+      current_rec_x = 0;
+      current_rec_y++;
       current_x = 0;
-      current_y += height;
+      current_y += size;
     }else{
-      current_x += width;
+      current_x += size;
     }
   }
 

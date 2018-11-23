@@ -3,6 +3,8 @@
 
 
 int(vg_start)(uint16_t mode) {
+    lm_init(false);
+
 	vbe_mode_info_t vbe_mode;
   vbe_get_mode_info(mode, &vbe_mode);
 
