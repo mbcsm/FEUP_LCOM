@@ -5,6 +5,7 @@
 
 #include "keyboard.h"
 #include "video.h"
+#include <lcom/pixmap.h>
 
 #include <i8042.h>
 #include <stdint.h>
@@ -108,7 +109,7 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
   for(int i = x; i < width + x; i++){
     for(int j = y; j < height + y; j++){
       char *ptr_VM = video_mem;
-      ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
+      ptr_VM += (i * h_res + j) * (bits_per_pixel / 8);
       *ptr_VM = color;
     }
   }
@@ -241,3 +242,64 @@ int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles,  uint32_t first, u
   else
     return 1;
 }
+
+int (video_test_xpm)(const char *xpm[], uint16_t xi, uint16_t yi){
+  int h, w;
+  char *map;
+
+  extern uint32_t kbdData;
+
+  int ipc_status;
+	message msg;
+	uint8_t bit_no;
+	int r;
+
+  kbd_subscribe_int(&bit_no);
+	uint64_t irq_set_kbd = BIT(bit_no);
+
+  vg_start(0x105);
+
+  int h_res = get_h_res();
+  //int v_res = get_v_res();
+  int bits_per_pixel = get_bits_per_pixel();
+  void *video_mem = get_video_mem();
+
+  map = read_xpm(xpm, &w, &h);
+
+  for (int i = xi; i < xi + h; i++)
+    for (int j= yi; j < yi + w; j++){
+      char *ptr_VM = video_mem;
+      ptr_VM += (i * h_res + j) * (bits_per_pixel / 8);
+      *ptr_VM = *map;
+      map += 1;
+    }
+
+  while (kbdData != ESC) {
+		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
+			printf("driver_receive failed with: %d", r);
+			continue;
+		}
+		if (is_ipc_notify(ipc_status)) { /* received notification */
+			switch (_ENDPOINT_P(msg.m_source)) {
+				case HARDWARE: /* hardware interrupt notification */
+					if (msg.m_notify.interrupts & irq_set_kbd) {
+						kbdData = 0;
+				    kbd_ih();
+					}
+
+					break;
+				default:
+					break; /* no other notifications expected: do nothing */
+			}
+		}
+	}
+	kbd_unsubscribe_int();
+
+  printf("%d", xpm[0]);
+
+  if (vg_exit() != 0) 
+    return 1;
+
+  return 0;
+}
+
