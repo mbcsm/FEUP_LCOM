@@ -11,6 +11,18 @@ int(vg_start)(uint16_t mode) {
   v_res = vbe_mode.YResolution;
   h_res = vbe_mode.XResolution;
   bits_per_pixel = vbe_mode.BitsPerPixel;
+  memory_model = vbe_mode.MemoryModel;
+
+
+  BlueScreeMask = vbe_mode.BlueMaskSize;
+  GreenScreeMask = vbe_mode.GreenMaskSize;
+  RedScreeMask = vbe_mode.RedMaskSize;
+
+  RedFieldPosition = vbe_mode.RedFieldPosition;
+  BlueFieldPosition = vbe_mode.BlueFieldPosition;
+  GreenFieldPosition = vbe_mode.GreenFieldPosition;
+
+  
 
   struct reg86u reg86;
   memset(&reg86, 0, sizeof(reg86)); /* zero the structure */
@@ -51,4 +63,25 @@ int(get_bits_per_pixel)(){
 }
 void * (get_video_mem)(){
   return video_mem;
+}
+uint8_t (get_memory_model)(){
+  return memory_model;
+}
+uint8_t(get_blue_screen_mask)(){
+  return BlueScreeMask;
+}
+uint8_t(get_green_screen_mask)(){
+  return GreenScreeMask;
+}
+uint8_t(get_red_screen_mask)(){
+  return RedScreeMask;
+}
+uint8_t(get_blue_screen_mask_position)(){
+  return BlueFieldPosition;
+}
+uint8_t(get_green_screen_mask_position)(){
+  return GreenFieldPosition;
+}
+uint8_t(get_red_screen_mask_position)(){
+  return RedFieldPosition;
 }

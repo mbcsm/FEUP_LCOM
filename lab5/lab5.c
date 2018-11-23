@@ -105,12 +105,28 @@ int (video_test_rectangle)(uint16_t mode, uint16_t x, uint16_t y,
   //int v_res = get_v_res();
   int bits_per_pixel = get_bits_per_pixel();
   void *video_mem = get_video_mem();
+  
 
+
+  uint8_t color_component_blue = (color >> get_blue_screen_mask_position()) & get_blue_screen_mask();
+  uint8_t color_component_green = (color >> get_green_screen_mask_position()) & get_green_screen_mask();
+  uint8_t color_component_red = (color >> get_red_screen_mask_position()) & get_red_screen_mask();
+
+  uint8_t color_treated;
+    
+  if(mode == 0x105){
+    color_treated = (color) % (1 << get_bits_per_pixel());
+  }else{
+    uint8_t R = color_component_red % (1 << get_red_screen_mask());
+    uint8_t G = color_component_green % (1 << get_green_screen_mask());
+    uint8_t B = color_component_blue % (1 << get_blue_screen_mask());	
+    color_treated = R | G | B;
+  }
   for(int i = x; i < width + x; i++){
     for(int j = y; j < height + y; j++){
       char *ptr_VM = video_mem;
-      ptr_VM += (i * h_res + j) * (bits_per_pixel / 8);
-      *ptr_VM = color;
+      ptr_VM += (i + h_res + j) * (bits_per_pixel / 8);
+      *ptr_VM = color_treated;
     }
   }
 
@@ -180,19 +196,23 @@ int(video_test_pattern)(uint16_t mode, uint8_t no_rectangles,  uint32_t first, u
   int current_rec_y = 0;
   int total = 0;
 
-  
+
+  uint8_t color_component_blue = (first >> get_blue_screen_mask_position()) & get_blue_screen_mask();
+  uint8_t color_component_green = (first >> get_green_screen_mask_position()) & get_green_screen_mask();
+  uint8_t color_component_red = (first >> get_red_screen_mask_position()) & get_red_screen_mask();
+
   for(int rec_index = 0 ; rec_index < no_rectangles * no_rectangles; rec_index ++ ){
+     uint8_t color;
     
-    
-    uint8_t color = (first + (current_rec_x * no_rectangles + current_rec_y) * step) % (1 << get_bits_per_pixel());
+    if(mode == 0x105){
+      color = (first + (current_rec_x * no_rectangles + current_rec_y) * step) % (1 << get_bits_per_pixel());
+    }else{
+      uint8_t R = (color_component_red + current_rec_x * step) % (1 << get_red_screen_mask());
+      uint8_t G = (color_component_green + current_rec_y * step) % (1 << get_green_screen_mask());
+      uint8_t B = (color_component_blue + (current_rec_x + current_rec_y) * step) % (1 << get_blue_screen_mask());	
+      color = R | G | B;
+    }
 
-/*
-    uint8_t R = (R(first) + col * step) % (1 << RedScreeMask);
-    uint8_t G = (G(first) + row * step) % (1 << GreenScreeMask);
-    uint8_t B = (B(first) + (col + row) * step) % (1 << BlueScreeMask);	
-*/
-
-    printf("Drawing: %d | %d | %d | %d\n", rec_index, current_rec_x, current_rec_y, color);
 
     for(int i = current_x; i < size + current_x; i++){
       for(int j = current_y; j < size + current_y; j++){
