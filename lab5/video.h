@@ -37,3 +37,5 @@ uint8_t get_red_screen_mask();
 uint8_t get_blue_screen_mask_position();
 uint8_t get_green_screen_mask_position();
 uint8_t get_red_screen_mask_position();
+
+void clearW_H(int x, int y, uint16_t width, uint16_t hight);
