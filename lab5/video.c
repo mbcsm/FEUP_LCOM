@@ -43,8 +43,6 @@ int(vg_start)(uint16_t mode) {
 
 
 
-
-
   struct reg86u reg86;
   memset(&reg86, 0, sizeof(reg86)); /* zero the structure */
   reg86.u.w.ax = 0x4F02;            // VBE call, function 02 -- set VBE mode
@@ -55,9 +53,6 @@ int(vg_start)(uint16_t mode) {
     printf("set_vbe_mode: sys_int86() failed \n");
     return 1;
   }
-
-
-
 
     return 0;
 }
@@ -95,21 +90,4 @@ uint8_t(get_green_screen_mask_position)(){
 uint8_t(get_red_screen_mask_position)(){
   return RedFieldPosition;
 }
-
-void (clearW_H)(int x, int y, uint16_t width, uint16_t height){
-
-  int h_res = get_h_res();
-  //int v_res = get_v_res();
-  int bits_per_pixel = get_bits_per_pixel();
-  void *video_mem = get_video_mem();
-  
-
-  for (int j = y; j < y + height; j++)
-    for (int i = x; i < x + width; i++){
-      char *ptr_VM = video_mem;
-      ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
-      *ptr_VM = 0;
-    }
-}
-
 

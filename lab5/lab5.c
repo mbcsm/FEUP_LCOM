@@ -40,51 +40,13 @@ int main(int argc, char *argv[]) {
 
 int(video_test_init)(uint16_t mode, uint8_t delay) {
 
-  extern int counter;
-
-  /*int ipc_status;
-  message msg;
-  uint8_t bit_no;
-  int r;
-
-  if (timer_subscribe_int(&bit_no) != OK)
-    return -1;
-
-  uint64_t irq_set_timer = BIT(bit_no);*/
-
   vg_start(mode);
 
   sleep(delay);
-  //Draw a Blue Square
-/*
-  while ((unsigned int) counter < sys_hz() * delay) {
-    if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
-      printf("driver_receive failed with: %d", r);
-      continue;
-    }
-
-    if (is_ipc_notify(ipc_status)) { // received notification 
-      switch (_ENDPOINT_P(msg.m_source)) {
-        case HARDWARE: // hardware interrupt notification 
-          if (msg.m_notify.interrupts & irq_set_timer) {
-            timer_int_handler();
-          }
-          break;
-        default:
-          break; /// no other notifications expected: do nothing 
-      }
-    }
-  }*/
-
-  if (vg_exit() == 0) {
-    return 0;
-  }
-  else
-    return 1;
-/*
-  if (timer_unsubscribe_int() != OK)
-    return -1;*/
   
+  if (vg_exit() != 0)
+    return 1;
+ 
   return 0;
 }
 
@@ -329,6 +291,7 @@ int (video_test_xpm)(const char *xpm[], uint16_t xi, uint16_t yi){
 
 int (video_test_move)(const char *xpm[], uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, int16_t speed, uint8_t fr_rate){
   extern int counter;
+  extern uint32_t kbdData;
 
   int ipc_status;
 	message msg;
@@ -350,9 +313,14 @@ int (video_test_move)(const char *xpm[], uint16_t xi, uint16_t yi, uint16_t xf, 
   timer_subscribe_int(&bit_no);
   uint64_t irq_set_timer = BIT(bit_no);
 
-uint16_t xn = xi, yn = yi;
+  kbd_subscribe_int(&bit_no);
+  uint64_t irq_set_kbd = BIT(bit_no);
 
-  while (xn < xf || yn < yf) {
+
+uint16_t xn = xi, yn = yi;
+bool ends = false;
+
+  while (!ends && kbdData != ESC) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
 			continue;
@@ -364,23 +332,54 @@ uint16_t xn = xi, yn = yi;
 
             if (counter % (sys_hz() / fr_rate) == 0){
             map = read_xpm(xpm, &w, &h);
+            if (counter > 0)
+              for (int j= yi; j < yi + h; j++)
+                for (int i = xi; i < xi + w; i++){
+                  char *ptr_VM = video_mem;
+                  ptr_VM += (i + h_res * j) * (bits_per_pixel / 8); /* Fazer funcao de acesso a posicao no array*/
+                  *ptr_VM = 0;
+                }
 
-            clearW_H(xn - speed, yn - speed, w, h);
-            for (int j= yn; j < yn + h; j++)
-              for (int i = xn; i < xn + w; i++){
-                char *ptr_VM = video_mem;
-                ptr_VM += (i + h_res * j) * (bits_per_pixel / 8); /* Fazer funcao de acesso a posicao no array*/
-                *ptr_VM = *map;
-                map += 1;
+              for (int j= yn; j < yn + h; j++)
+                for (int i = xn; i < xn + w; i++){
+                  char *ptr_VM = video_mem;
+                  ptr_VM += (i + h_res * j) * (bits_per_pixel / 8); /* Fazer funcao de acesso a posicao no array*/
+                  *ptr_VM = *map;
+                  map += 1;
+                }
+              xi = xn;
+              yi = yn;
+
+
+              if (xn == xf && yn == yf){
+                ends = true;
+                break;
               }
-            if (xn == xf && speed > 0)
-              yn += speed; 
-            else if (yn == yf && speed > 0)
-              xn += speed; 
+              if (xn == xf && speed > 0){
+                if (yn < yf)
+                  yn += speed; 
+                else { 
+                  yn -= speed; 
+                }
+              }
+              else {
+                if (yn == yf && speed > 0){
+                  if (xn < xf)
+                    xn += speed; 
+                  else { 
+                    xn -= speed; 
+                  }
+                }
+              }
             }
 
 
 						timer_int_handler();
+					}
+
+          if (msg.m_notify.interrupts & irq_set_kbd) {
+						kbdData = 0;
+				    kbd_ih();
 					}
           
 					break;
@@ -392,34 +391,11 @@ uint16_t xn = xi, yn = yi;
 
 timer_unsubscribe_int();
 
-kbd_subscribe_int(&bit_no);
-uint64_t irq_set_kbd = BIT(bit_no);
-extern uint32_t kbdData;
+  if (vg_exit() != 0) 
+    return 1;
 
-while (kbdData != ESC) {
-		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
-			printf("driver_receive failed with: %d", r);
-			continue;
-		}
-		if (is_ipc_notify(ipc_status)) { /* received notification */
-			switch (_ENDPOINT_P(msg.m_source)) {
-				case HARDWARE: /* hardware interrupt notification */
-					if (msg.m_notify.interrupts & irq_set_kbd) {
-						kbdData = 0;
-				    kbd_ih();
-					}
-
-					break;
-				default:
-					break; /* no other notifications expected: do nothing */
-			}
-		}
-	}
 	kbd_unsubscribe_int();
 
-
-if (vg_exit() != 0) 
-    return 1;
 
 return 0;
 

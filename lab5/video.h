@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+
 static char *video_mem;		/* Process (virtual) address to which VRAM is mapped */
 
 static unsigned h_res;	        /* Horizontal resolution in pixels */
@@ -38,4 +39,4 @@ uint8_t get_blue_screen_mask_position();
 uint8_t get_green_screen_mask_position();
 uint8_t get_red_screen_mask_position();
 
-void clearW_H(int x, int y, uint16_t width, uint16_t hight);
+
