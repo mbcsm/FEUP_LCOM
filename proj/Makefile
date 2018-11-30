@@ -1,9 +1,8 @@
-PROG=project
+PROG=proj
 
-SRCS = project.c keyboard.c timer.c video.c
+SRCS = proj.c
 
-CPPFLAGS += -pedantic
-CPPFLAGS += -D LAB4
+CPPFLAGS += -pedantic #-D __LCOM_OPTIMIZED__
 
 DPADD += ${LIBLCF}
 LDADD += -llcf
