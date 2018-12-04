@@ -24,10 +24,6 @@ int(vg_start)(uint16_t mode) {
   GreenFieldPosition = vbe_mode.GreenFieldPosition;
 
 
-
-
-
-
   int r_mem;
   struct minix_mem_range mr;
   unsigned int vram_size = h_res * v_res * (bits_per_pixel / 8);
@@ -42,8 +38,6 @@ int(vg_start)(uint16_t mode) {
   if (video_mem == MAP_FAILED)
     panic("couldn’t map video memory");
 
-
-
   struct reg86u reg86;
   memset(&reg86, 0, sizeof(reg86)); /* zero the structure */
   reg86.u.w.ax = 0x4F02;            // VBE call, function 02 -- set VBE mode
@@ -55,40 +49,57 @@ int(vg_start)(uint16_t mode) {
     return 1;
   }
 
-    return 0;
+  return 0;
 }
 
 int(get_h_res)(){
   return h_res;
 }
+
 int(get_v_res)(){
   return v_res;
 }
+
 int(get_bits_per_pixel)(){
   return bits_per_pixel;
 }
+
 void * (get_video_mem)(){
   return video_mem;
 }
+
 uint8_t (get_memory_model)(){
   return memory_model;
 }
+
 uint8_t(get_blue_screen_mask)(){
   return BlueScreeMask;
 }
+
 uint8_t(get_green_screen_mask)(){
   return GreenScreeMask;
 }
+
 uint8_t(get_red_screen_mask)(){
   return RedScreeMask;
 }
+
 uint8_t(get_blue_screen_mask_position)(){
   return BlueFieldPosition;
 }
+
 uint8_t(get_green_screen_mask_position)(){
   return GreenFieldPosition;
 }
+
 uint8_t(get_red_screen_mask_position)(){
   return RedFieldPosition;
+}
+
+void (changePixel)(int i , int j, uint8_t color){
+  void *vm = get_video_mem();
+  char *ptr_VM = vm;
+  ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
+  *ptr_VM = color;
 }
 
