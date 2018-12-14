@@ -6,26 +6,26 @@
 #include "i8254.h"
 #include "i8042.h"
 
-int hookidms = 2;
+int hookid_mouse = 2;
 
 int (mouse_subscribe_int)(uint8_t *bit_no){
 
-    *bit_no = hookidms;
-	if (sys_irqsetpolicy(MOUSE_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &hookidms) != OK)
+    *bit_no = hookid_mouse;
+	if (sys_irqsetpolicy(MOUSE_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &hookid_mouse) != OK)
 		return -1;  
     
     return 0;  
 }
 
 int(mouse_unsubscribe_int)(){
-    if (sys_irqrmpolicy(&hookidms) != OK) {
+    if (sys_irqrmpolicy(&hookid_mouse) != OK) {
         return -1;
     }
     return 0;
 }
 
 int (mouse_enable_int)(){
-	if (sys_irqenable(&hookidms) != OK)
+	if (sys_irqenable(&hookid_mouse) != OK)
 		return -1;
 
 	return 0;
@@ -33,14 +33,13 @@ int (mouse_enable_int)(){
 
 int (mouse_disable_int)(){   
 
-	if (sys_irqdisable(&hookidms) != OK)
+	if (sys_irqdisable(&hookid_mouse) != OK)
 		return -1;
 
 	return 0;
 }
 
 uint32_t mouseData;
-
 void (mouse_ih)(){
     
     uint32_t stat = 0;
@@ -54,7 +53,7 @@ void (mouse_ih)(){
 			mouseData = data;
         }
 		else
-			mouseData = 0x12345678;
+			mouseData = 0;
     return;
 	}
 }
@@ -76,7 +75,7 @@ uint32_t (read_kbc)(){
 			else
 				return -1;
 		}
-		//tickdelay(micros_to_ticks(WAIT_KBC));
+		tickdelay(micros_to_ticks(WAIT_KBC));
 		i++;
 	}
 	return -1;
@@ -95,7 +94,7 @@ int (write_kbc_command)(uint8_t command){
 			//printf("d4 to kbc_reg\n");
             return 0;
         }	
-        //tickdelay(micros_to_ticks(WAIT_KBC));
+        tickdelay(micros_to_ticks(WAIT_KBC));
 		attempts--;
     }
 	return -1;
@@ -112,7 +111,7 @@ int (write_kbc_argument)(uint8_t argument){
 			//printf("arg sent\n");
             return 0;
         }	
-        //tickdelay(micros_to_ticks(WAIT_KBC));
+        tickdelay(micros_to_ticks(WAIT_KBC));
 		attempts--;
     }
 	return -1;
