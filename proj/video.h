@@ -41,5 +41,4 @@ uint8_t get_blue_screen_mask_position();
 uint8_t get_green_screen_mask_position();
 uint8_t get_red_screen_mask_position();
 
-void changePixel(int x, int y, uint8_t color);
 
