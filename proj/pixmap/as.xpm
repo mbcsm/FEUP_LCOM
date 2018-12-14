@@ -1,5 +1,5 @@
 /* XPM */
-static const char * play_button[] = {
+static char * as_xpm[] = {
 "437 229 238 2",
 "  	c None",
 ". 	c #000000",

@@ -6,26 +6,26 @@
 #include "i8254.h"
 #include "i8042.h"
 
-int hookid = 2;
+int hookid_mouse = 2;
 
 int (mouse_subscribe_int)(uint8_t *bit_no){
 
-    *bit_no = hookid;
-	if (sys_irqsetpolicy(MOUSE_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &hookid) != OK)
+    *bit_no = hookid_mouse;
+	if (sys_irqsetpolicy(MOUSE_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &hookid_mouse) != OK)
 		return -1;  
     
     return 0;  
 }
 
 int(mouse_unsubscribe_int)(){
-    if (sys_irqrmpolicy(&hookid) != OK) {
+    if (sys_irqrmpolicy(&hookid_mouse) != OK) {
         return -1;
     }
     return 0;
 }
 
 int (mouse_enable_int)(){
-	if (sys_irqenable(&hookid) != OK)
+	if (sys_irqenable(&hookid_mouse) != OK)
 		return -1;
 
 	return 0;
@@ -33,7 +33,7 @@ int (mouse_enable_int)(){
 
 int (mouse_disable_int)(){   
 
-	if (sys_irqdisable(&hookid) != OK)
+	if (sys_irqdisable(&hookid_mouse) != OK)
 		return -1;
 
 	return 0;
