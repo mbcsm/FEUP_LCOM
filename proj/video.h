@@ -9,10 +9,11 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define MODE105 0x105
-#define BLACK_MD_105 0
+#define GAME_MODE 0x11A
 
 static char *video_mem;		/* Process (virtual) address to which VRAM is mapped */
+
+
 
 static unsigned h_res;	        /* Horizontal resolution in pixels */
 static unsigned v_res;	        /* Vertical resolution in pixels */
@@ -41,5 +42,5 @@ uint8_t get_blue_screen_mask_position();
 uint8_t get_green_screen_mask_position();
 uint8_t get_red_screen_mask_position();
 
-void changePixel(int x, int y, uint8_t color);
+void changePixel(int x, int y, uint16_t color);
 

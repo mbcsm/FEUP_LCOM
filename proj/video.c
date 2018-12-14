@@ -96,7 +96,7 @@ uint8_t(get_red_screen_mask_position)(){
   return RedFieldPosition;
 }
 
-void (changePixel)(int i , int j, uint8_t color){
+void (changePixel)(int i , int j, uint16_t color){
   void *vm = get_video_mem();
   char *ptr_VM = vm;
   ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
