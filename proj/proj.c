@@ -5,7 +5,10 @@
 
 #include "keyboard.h"
 #include "video.h"
+#include "mouse.h"
+#include "packet.h"
 #include "pixmap/play_button.h"
+#include "pixmap/title.h"
 
 #include <i8042.h>
 #include <stdint.h>
@@ -44,42 +47,70 @@ int main(int argc, char *argv[]) {
 
 void display_menu() {
 
-  extern uint32_t kbdData;
-
-  int ipc_status;
-  message msg;
-  uint8_t bit_no;
-  int r;
-
-  kbd_subscribe_int(&bit_no);
-  uint64_t irq_set_kbd = BIT(bit_no);
 
   vg_start(0x11A);
 
   int h_res = get_h_res();
+  int v_res = get_v_res();
   //int bits_per_pixel = get_bits_per_pixel();
   void *video_mem = get_video_mem();
 
 
-  int xi = 0, yi = 0;
-
-
   xpm_image_t img;
-  uint16_t *sprite = (uint16_t*)xpm_load(play_button, XPM_5_6_5, &img);
+  uint16_t *sprite_button = (uint16_t*)xpm_load(play_button, XPM_5_6_5, &img);
 
-  const uint16_t  transp = xpm_transparency_color(XPM_5_6_5);
+  const uint16_t transp = xpm_transparency_color(XPM_5_6_5);
+
+  int xi =  v_res/2 - img.height, yi = h_res/2 - img.width/2;
 
   for (int i = xi; i < xi + img.height; i++){
     for (int j = yi; j < yi + img.width; j++) {
       uint16_t *ptr_VM = (uint16_t*)video_mem;
       ptr_VM += (i * h_res + j);
-      if(*sprite != transp)
-        *ptr_VM = *sprite;
-      sprite++;
+      if(*sprite_button != transp)
+        *ptr_VM = *sprite_button;
+      sprite_button++;
     }
   }
 
-  while (kbdData != ESC) {
+  uint16_t *sprite_title = (uint16_t*)xpm_load(title_xpm, XPM_5_6_5, &img);
+
+  xi =  xi*(3/2) - img.height;
+  yi = h_res/2 - img.width/2;
+
+  for (int i = xi; i < xi + img.height; i++){
+    for (int j = yi; j < yi + img.width; j++) {
+      uint16_t *ptr_VM = (uint16_t*)video_mem;
+      ptr_VM += (i * h_res + j);
+      if(*sprite_title != transp)
+        *ptr_VM = *sprite_title;
+      sprite_title++;
+    }
+  }
+
+
+
+
+  uint32_t byteCounter = 0;
+  struct packet pp;
+
+	int ipc_status;
+	message msg;
+	uint8_t bit_no_kbd, bit_no_mouse;
+	int r;
+
+  extern uint32_t mouseData;
+  extern uint32_t kbdData;
+
+  kbd_subscribe_int(&bit_no_kbd);
+  uint64_t irq_set_kbd = BIT(bit_no_kbd);
+
+  mouse_subscribe_int(&bit_no_mouse);
+	uint64_t irq_set_mouse = BIT(bit_no_mouse);
+
+  bool click = false;
+
+  while (kbdData != ESC || click == true) {
     if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
       printf("driver_receive failed with: %d", r);
       continue;
@@ -90,17 +121,33 @@ void display_menu() {
           if (msg.m_notify.interrupts & irq_set_kbd) {
             kbdData = 0;
             kbd_ih();
-          }
+          }else if (msg.m_notify.interrupts & irq_set_mouse) {
+						mouseData = 0;   
 
-          break;
-        default:
-          break;
+            mouse_ih();                        
+            byteCounter++;
+
+            parseToPacket(byteCounter % 3, mouseData, &pp);
+            if(pp.lb == 1){
+              click = true;
+            }
+
+            if (byteCounter % 3 == 0){
+              mouse_print_packet(&pp);
+              resetPacket(&pp);
+            }
+					}
+					break;
+				default:
+					break; /* no other notifications expected: do nothing */
       }
     }
   }
   kbd_unsubscribe_int();
 
-  //printf("%d", xpm[0]);
+  if(click == true){
+    //TODO: call function to start game here!!!!!!!
+  }
 
   if (vg_exit() != 0)
     return ;
