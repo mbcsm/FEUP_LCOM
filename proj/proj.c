@@ -167,15 +167,14 @@ int (proj_main_loop)(int argc, char *argv[]) {
   
 
 	Game *game = Start();
-    
-  	Handler(game);
+
+  if (game != NULL)
+    Handler(game);
+  else printf("nogame brutha");
   
-	End(game);
+	End();
 
 	//display_menu();
 
   return 0;
-}
-  return 1;
-
 }

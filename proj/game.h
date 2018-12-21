@@ -3,6 +3,7 @@
 
 uint8_t bit_no_kbd;
 uint8_t bit_no_mouse;
+uint8_t bit_no_timer;
 
 typedef enum {
     MENU,
@@ -23,8 +24,8 @@ GameState getGameState(Game* game);
 
 void Handler(Game* game);
 
-int End(Game* game);
+int End();
 
-void process_mouse_event(Game* game, struct packet* pp, cursor* c);
+void process_mouse_event(Game* game, struct packet* pp);
 
-void draw_xpm(int x, int y);
+
