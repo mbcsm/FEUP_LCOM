@@ -315,13 +315,6 @@ void process_mouse_event(Game *game, struct packet* pp){
     updatePosition(pp, &yCursor, &xCursor);
     
     //drawCursor(c);
-    if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
-        underMouse();
-        draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
-    }
-
-    resetPacket(pp);
-
 
     GameState gameSt = getGameState(game);
 
@@ -331,19 +324,26 @@ void process_mouse_event(Game *game, struct packet* pp){
     if (pp->lb)
         switch(gameSt) {
             case MENU:
-                //getPosition(c, &x, &y);
-                /*if (x>0 && x < 200 && y > 0 && y < 200)
-                    for (int j = y; j < y + 200; j++)
-                        for (int i = x; i < x + 200; i++){
-                            changePixel(i, j, 100);
-                        }*/
-                game->gState = MODE_MENU;
+                //getPosition(c, &x, &y);              coordinates to allow painting  top 175x  180y   to 870x  925y
+                if (yCursor > 175 && yCursor < 870 && xCursor > 180 && xCursor < 925)
+                    for (int j = xCursor; j < xCursor + 55; j++)      // square size ~ 55x55
+                        for (int i = yCursor; i < yCursor + 55; i++){
+                            changePixel(i, j, 0x0080);
+                        }
+                //game->gState = MODE_MENU;
                 
                 break;
         
             default:
 					break;
         }
+
+    if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
+        underMouse();
+        draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
+    }
+
+    resetPacket(pp);
 }
 
 
