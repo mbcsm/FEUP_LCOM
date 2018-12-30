@@ -16,6 +16,7 @@
 #include "pixmap/dice4.h"
 #include "pixmap/dice5.h"
 #include "pixmap/dice6.h"
+#include "pixmap/ball.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -24,8 +25,20 @@
 static int xCursor = 0;
 static int yCursor = 0;
 
+int currentPull_x = 0, 
+    currentPull_y = 0,
+    clickPos_x = 0,
+    clickPos_y = 0;
+bool pull = false;
+
+
+
+
 xpm_image_t imgC;
 uint16_t *mCursor; //= (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
+
+xpm_image_t imgBall;
+uint16_t *mBall;
 
 uint16_t  transp;
 
@@ -55,6 +68,7 @@ uint16_t *diceSix;
 /////////////////////////////////////////////////////////////
 
 uint16_t dynamicUMOUSEArray[24*36];
+uint16_t dynamicUARROWArray[200*200];
 void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
     int h_res = get_h_res();
   //int bits_per_pixel = get_bits_per_pixel();
@@ -67,6 +81,25 @@ void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
 
             uint16_t color = *ptr_VM;
             dynamicUMOUSEArray[i * h_res + j] = color;
+        }
+    }
+}
+void underArrow(){
+    int h_res = get_h_res();
+    //int bits_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
+
+    printf("%d | %d\n", clickPos_x, clickPos_y);
+
+    for (int i =xCursor; i < xCursor + 40; i++){
+        if(i<0){continue;}
+        for (int j = yCursor; j < yCursor + 40; j++) {
+            if(j<0){continue;}
+            uint16_t *ptr_VM = (uint16_t*)video_mem;
+            ptr_VM += (i * h_res + j);
+
+            uint16_t color = *ptr_VM;
+            dynamicUARROWArray[i * h_res + j] = color;
         }
     }
 }
@@ -89,6 +122,8 @@ Game* Start() {
     diceFour = (uint16_t*)xpm_load(dice4_xpm, XPM_5_6_5, &imgDiceFour);
     diceFive = (uint16_t*)xpm_load(dice5_xpm, XPM_5_6_5, &imgDiceFive);
     diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);
+
+    mBall = (uint16_t*)xpm_load(ball_xpm, XPM_5_6_5, &imgBall);
 
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
     transp = xpm_transparency_color(XPM_5_6_5);
@@ -181,7 +216,6 @@ void Handler(Game* game){
     while (kbdData != ESC) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
-			//continue; Cicle is outside this function
             return;
 		}
 		if (is_ipc_notify(ipc_status)) { /* received notification */
@@ -219,14 +253,9 @@ void Handler(Game* game){
                         
 
                         if (byteCounter % 3 == 0){
-                            /*clearCursor(game->gameCursor);
-                            updatePosition(&pp, game->gameCursor);
-                            //memcpy(video_mem, clear, sizeof(video_mem));
-                            drawCursor(game->gameCursor);
-                            resetPacket(&pp);*/
 
                             process_mouse_event(game, &pp);
-                            //draw_xpm(0, 0);
+                            updateScreen();
                         }
 			        }
                     break;
@@ -273,23 +302,6 @@ GameState getGameState(Game* game){
 }
 
 
-/*uint16_t dynamicUMOUSEArray[24*36];
-void underMouse(//int xcursor, int ycursor, int cursorwidth, int cursorheight*//*){
-    int h_res = get_h_res();
-  //int bits_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();
-
-    for (int i = xCursor; i < xCursor + imgC.height; i++){
-        for (int j = yCursor; j < yCursor + imgC.width; j++) {
-            uint16_t *ptr_VM = (uint16_t*)video_mem;
-            ptr_VM += (i * h_res + j);
-
-            uint16_t color = *ptr_VM;
-            dynamicUMOUSEArray[i * h_res + j] = color;
-        }
-    }
-}*/
-
 void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
     int h_res = get_h_res();
   //int bits_per_pixel = get_bits_per_pixel();
@@ -306,37 +318,64 @@ void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
 }
 
 void process_mouse_event(Game *game, struct packet* pp){
-
-    //clearCursor(c);
     if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
         clearMouse();
     }
     
     updatePosition(pp, &yCursor, &xCursor);
-    
-    //drawCursor(c);
 
     GameState gameSt = getGameState(game);
 
-
-    //int x, y;
-    
-    if (pp->lb)
-        switch(gameSt) {
-            case MENU:
-                //getPosition(c, &x, &y);              coordinates to allow painting  top 175x  180y   to 870x  925y
-                if (yCursor > 175 && yCursor < 870 && xCursor > 180 && xCursor < 925)
-                    for (int j = xCursor; j < xCursor + 55; j++)      // square size ~ 55x55
-                        for (int i = yCursor; i < yCursor + 55; i++){
-                            changePixel(i, j, 0x0080);
-                        }
-                //game->gState = MODE_MENU;
-                
-                break;
-        
-            default:
-					break;
+    if (pp->lb){
+        if(!pull){
+            printf("pulling\n");
+            pull = true;
+            currentPull_x = 0;
+            currentPull_y = 0;
+            clickPos_x = yCursor;
+            clickPos_y = xCursor;
         }
+
+        currentPull_x+=pp->delta_x;
+        currentPull_y+=pp->delta_y;
+
+        underArrow();
+        int pixelDraw_x = 0;
+        int pixelDraw_y = 0;
+        for (int i = 0; i < abs(currentPull_x); i++){
+            for (int j = 0; j < abs(currentPull_y); j++){
+
+                if(currentPull_x>0)
+                    pixelDraw_x = clickPos_x - i;
+                else
+                    pixelDraw_x = clickPos_x + i;
+
+                if(currentPull_y>0)
+                    pixelDraw_y = clickPos_y + j;
+                else
+                    pixelDraw_y = clickPos_y - j;
+
+                if(pixelDraw_x > 0 && pixelDraw_y > 0 )
+                    changePixel(pixelDraw_x, pixelDraw_y, 0x0080);
+            }
+        }
+        printf("pixelDraw_x:%d | pixelDraw_y:%d \n",  pixelDraw_x, pixelDraw_y);
+    }else{
+        if(pull){
+            pull = false;
+            currentPull_x = 0;
+            currentPull_y = 0;
+        }
+    }
+    
+    if (pp->lb){
+        switch(gameSt) {
+            case MENU:   
+                break;
+            default:	
+                break;
+        }
+    }
 
     if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
         underMouse();
@@ -344,18 +383,17 @@ void process_mouse_event(Game *game, struct packet* pp){
     }
 
     resetPacket(pp);
+
 }
-
-
-/*
+void updateScreen(){
     int h_res = get_h_res();
-    //int v_res = get_v_res();
-    int bits_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();*/
+    int v_res = get_v_res();
+    int bytes_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
+    memset(video_mem, 0,  h_res * v_res * bytes_per_pixel);
 
-    /*int x = 200, y = 100;
-
-    for (int j = y; j < y + 50; j++)
-      for (int i = x; i < x + 100; i++){
-               changePixel(i, j, 100);
-    }*/
+    if(pull == true){drawMousePull();}
+}
+void drawMousePull(){
+    draw_xpm(0,0, board, imgBall, transp);
+}
