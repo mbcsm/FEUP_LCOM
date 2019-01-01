@@ -6,6 +6,7 @@ uint8_t bit_no_kbd;
 uint8_t bit_no_mouse;
 uint8_t bit_no_timer;
 
+#define PI 3.14159265
 typedef enum {
     MENU,
     MODE_MENU, 

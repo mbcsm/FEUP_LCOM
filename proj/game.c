@@ -17,10 +17,12 @@
 #include "pixmap/dice5.h"
 #include "pixmap/dice6.h"
 #include "pixmap/ball.h"
+#include "pixmap/ball_filler.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 
 static int xCursor = 0;
 static int yCursor = 0;
@@ -31,6 +33,13 @@ int currentPull_x = 0,
     clickPos_y = 0;
 bool pull = false;
 
+int MOUSE_PULL_START_X = 400;
+int MOUSE_PULL_START_Y = 400;
+int MOUSE_MAX_PULL = 300;
+
+int mouse_bubbles_pos_x[3] = {0,0,0};
+int mouse_bubbles_pos_y[3] = {0,0,0};
+
 
 
 
@@ -39,6 +48,8 @@ uint16_t *mCursor; //= (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
 
 xpm_image_t imgBall;
 uint16_t *mBall;
+xpm_image_t imgBallFiller;
+uint16_t *mBallFiller;
 
 uint16_t  transp;
 
@@ -124,18 +135,19 @@ Game* Start() {
     diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);
 
     mBall = (uint16_t*)xpm_load(ball_xpm, XPM_5_6_5, &imgBall);
+    mBallFiller = (uint16_t*)xpm_load(ball_filler_xpm, XPM_5_6_5, &imgBallFiller);
 
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
     transp = xpm_transparency_color(XPM_5_6_5);
 
     game->gState = MENU;
     
-    draw_xpm(0,0, board, imgBoard, transp);
+    //draw_xpm(0,0, board, imgBoard, transp);
 
-    draw_xpm(700, 980, diceOne, imgDiceOne, transp);
+    //draw_xpm(700, 980, diceOne, imgDiceOne, transp);
     
     underMouse();
-    draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
+    //draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 
     srand(time(0));
 
@@ -218,7 +230,10 @@ void Handler(Game* game){
 			printf("driver_receive failed with: %d", r);
             return;
 		}
+        //printf("loop\n");
+
 		if (is_ipc_notify(ipc_status)) { /* received notification */
+                        //printf("is_ipc_notify\n");
 			switch (_ENDPOINT_P(msg.m_source)) {
 				case HARDWARE: /* hardware interrupt notification */
                     if (msg.m_notify.interrupts & irq_set_kbd) {
@@ -246,6 +261,7 @@ void Handler(Game* game){
                         
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
+                        //printf("irq_set_mouse\n");
                         mouseData = 0;   
                         mouse_ih();
                         byteCounter++;
@@ -253,16 +269,17 @@ void Handler(Game* game){
                         
 
                         if (byteCounter % 3 == 0){
-
                             process_mouse_event(game, &pp);
-                            updateScreen();
                         }
 			        }
                     break;
                     
 		        default:
 					break; /* no other notifications expected: do nothing */
+                
 			}
+            //printf("updateScreen\n");
+            updateScreen();
 
             //DRAWMODE
 
@@ -338,28 +355,6 @@ void process_mouse_event(Game *game, struct packet* pp){
 
         currentPull_x+=pp->delta_x;
         currentPull_y+=pp->delta_y;
-
-        underArrow();
-        int pixelDraw_x = 0;
-        int pixelDraw_y = 0;
-        for (int i = 0; i < abs(currentPull_x); i++){
-            for (int j = 0; j < abs(currentPull_y); j++){
-
-                if(currentPull_x>0)
-                    pixelDraw_x = clickPos_x - i;
-                else
-                    pixelDraw_x = clickPos_x + i;
-
-                if(currentPull_y>0)
-                    pixelDraw_y = clickPos_y + j;
-                else
-                    pixelDraw_y = clickPos_y - j;
-
-                if(pixelDraw_x > 0 && pixelDraw_y > 0 )
-                    changePixel(pixelDraw_x, pixelDraw_y, 0x0080);
-            }
-        }
-        printf("pixelDraw_x:%d | pixelDraw_y:%d \n",  pixelDraw_x, pixelDraw_y);
     }else{
         if(pull){
             pull = false;
@@ -386,14 +381,36 @@ void process_mouse_event(Game *game, struct packet* pp){
 
 }
 void updateScreen(){
-    int h_res = get_h_res();
-    int v_res = get_v_res();
-    int bytes_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();
-    memset(video_mem, 0,  h_res * v_res * bytes_per_pixel);
+
+  
+
 
     if(pull == true){drawMousePull();}
 }
 void drawMousePull(){
-    draw_xpm(0,0, board, imgBall, transp);
+    
+
+    if(currentPull_y >= 0 || currentPull_x == 0 ){return;}
+
+    printf("drawing mouse pull\n");
+
+    int pixelDraw_x = MOUSE_PULL_START_X;
+    int pixelDraw_y = MOUSE_PULL_START_Y;
+
+    int increment_x = -currentPull_x / 3;
+    int increment_y = currentPull_y / 3;
+
+    printf("increment_x: %d | increment_y: %d\n", increment_x, increment_y);
+    
+
+    for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
+    for (int i = 0; i < 3; i++){
+        pixelDraw_x += increment_x;
+        pixelDraw_y += increment_y;
+        mouse_bubbles_pos_x[i] = pixelDraw_x;
+        mouse_bubbles_pos_y[i] = pixelDraw_y;
+
+        draw_xpm(pixelDraw_y, pixelDraw_x, mBall, imgBall, transp);
+    }
+    
 }

@@ -18,6 +18,7 @@ static char *video_mem;		/* Process (virtual) address to which VRAM is mapped */
 static unsigned h_res;	        /* Horizontal resolution in pixels */
 static unsigned v_res;	        /* Vertical resolution in pixels */
 static unsigned bits_per_pixel; /* Number of VRAM bits per pixel */
+static unsigned short *back_buffer; /* Secondary buffer to use for double buffering */
 static unsigned memory_model;
 static unsigned BlueScreeMask;
 static unsigned GreenScreeMask;
@@ -34,6 +35,7 @@ int get_h_res();
 int get_v_res();
 int get_bits_per_pixel();
 void * get_video_mem();
+void * get_back_buffer();
 uint8_t get_memory_model();
 uint8_t get_blue_screen_mask();
 uint8_t get_green_screen_mask();
