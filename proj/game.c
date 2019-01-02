@@ -388,11 +388,13 @@ void process_mouse_event(Game *game, struct packet* pp){
     if (pp->lb){
         if(!pull){
             printf("pulling\n");
+            shootBullet(currentPull_x, currentPull_y);
             pull = true;
             currentPull_x = 0;
             currentPull_y = 0;
             clickPos_x = yCursor;
             clickPos_y = xCursor;
+              for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
         }
 
         currentPull_x+=pp->delta_x;
@@ -438,6 +440,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 void updateScreen(){
 
   
+    if(bullet != NULL){drawBullet();}
 
 
     if(pull == true){drawMousePull();}
@@ -483,7 +486,7 @@ void drawMousePull(){
         uint16_t *ptr_VM = (uint16_t)video_mem;
         
     }
-    }*/
+    
 
     int increment_x = -currentPull_x / 3;
     int increment_y = currentPull_y / 3;
@@ -500,6 +503,52 @@ void drawMousePull(){
 
         draw_xpm(pixelDraw_y, pixelDraw_x, mBall, imgBall, transp);
     }
+    }
+    }
     
 }
+void drawBullet(){
+    draw_xpm(bullet -> posY, bullet -> posX, mBallFiller, imgBallFiller, transp);
 
+     if(bullet -> posX > get_h_res() - 50)
+        bullet -> speedX = -bullet -> speedX;
+    if(bullet -> posX < 0)
+        bullet -> speedX = -bullet -> speedX;
+    if(bullet -> posY < 50)
+        bullet -> speedY = -bullet -> speedY;
+    if(bullet -> posY > get_v_res() - 500){
+        free(bullet);
+        bullet = NULL;
+        return;
+    }
+
+    if(bullet -> speedX > 0)
+        bullet -> posX += 10;
+    else
+        bullet -> posX -= 10;
+
+    if(bullet -> speedY > 0)
+        bullet -> posY += 10;
+    else
+        bullet -> posY -= 10;
+
+   
+    
+    draw_xpm(bullet -> posY, bullet -> posX, mBall, imgBall, transp);
+
+    
+}
+void shootBullet(int pullX, int pullY){
+    bullet = malloc(sizeof(Bullet));
+    bullet -> id = 1;
+    bullet -> posX = MOUSE_PULL_START_X;
+    bullet -> posY = MOUSE_PULL_START_Y;
+
+
+    int speedX = 10 * pullX/pullY;
+    int speedY = 10 * pullY/pullX;
+
+
+    bullet -> speedX = speedX;
+    bullet -> speedY = -speedY;    
+}

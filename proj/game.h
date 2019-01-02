@@ -20,6 +20,15 @@ typedef struct {
 
 } Game;
 
+typedef struct {
+    int speedX,
+        speedY,
+        posX,
+        posY,
+        id;
+    
+} Bullet;
+
 
 Game* Start();
 
@@ -36,5 +45,7 @@ void underArrow();
 
 void updateScreen();
 void drawMousePull();
+void drawBullet();
+void shootBullet(int pullX, int pullY);
 
 
