@@ -16,13 +16,14 @@
 #include "pixmap/dice4.h"
 #include "pixmap/dice5.h"
 #include "pixmap/dice6.h"
+#include "pixmap/b.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 
-static int xCursor = 0;
-static int yCursor = 0;
+static int xCursor = 500;
+static int yCursor = 500;
 
 xpm_image_t imgC;
 uint16_t *mCursor; //= (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
@@ -99,7 +100,7 @@ Game* Start() {
 
     draw_xpm(700, 980, diceOne, imgDiceOne, transp);
     
-    underMouse();
+	underMouse();
     draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 
     srand(time(0));
@@ -119,7 +120,7 @@ Game* Start() {
 
     if (enable_data_report() != 0)
         return NULL;
-
+	
     if (mouse_enable_int() != 0)
         return NULL;
 
@@ -202,6 +203,17 @@ void Handler(Game* game){
                                 ticks = 0;
                                 }
                         }
+                        if (kbdData & 0x80)
+                            drawDice(10, 30 , 6);
+                        if (kbdData == 0x1e)
+                            drawDice(10, 30 , 4);
+                        if (kbdData == 0x1f)
+                            drawDice(10, 30 , 5);
+                        if (kbdData == 0x20)
+                            drawDice(10, 30 , 4);
+                        if (kbdData == 0x21)
+                            drawDice(10, 30 , 5);
+
                     }
                     if (msg.m_notify.interrupts & irq_set_timer){
                         if (game->gState == PLAYING){
@@ -305,6 +317,32 @@ void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
     }
 }
 
+uint16_t getpixel(int x, int y){
+    uint16_t color;
+    int h_res = get_h_res();
+  //int bits_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
+    uint16_t *ptr_VM = (uint16_t*)video_mem;
+    ptr_VM += (y * h_res + x);
+
+    color = *ptr_VM;
+
+    return color;
+}
+xpm_image_t imgb;
+uint16_t *b;// = (uint16_t*)xpm_load(b_xpm, XPM_5_6_5, &imgb);
+uint16_t black = 0;
+
+void fill(int x, int y, uint16_t color){
+    if (getpixel(x,y) > 0x7777){
+        draw_xpm(y, x, b, imgb, transp);
+        fill(x+1,y,color);
+        fill(x,y+1,color);
+        fill(x-1,y,color);
+        fill(x,y-1,color);
+    }
+}
+
 void process_mouse_event(Game *game, struct packet* pp){
 
     //clearCursor(c);
@@ -325,11 +363,14 @@ void process_mouse_event(Game *game, struct packet* pp){
         switch(gameSt) {
             case MENU:
                 //getPosition(c, &x, &y);              coordinates to allow painting  top 175x  180y   to 870x  925y
-                if (yCursor > 175 && yCursor < 870 && xCursor > 180 && xCursor < 925)
-                    for (int j = xCursor; j < xCursor + 55; j++)      // square size ~ 55x55
+                b = (uint16_t*)xpm_load(b_xpm, XPM_5_6_5, &imgb);
+                if (yCursor > 175 && yCursor < 870 && xCursor > 180 && xCursor < 925){
+                    /*for (int j = xCursor; j < xCursor + 55; j++)      // square size ~ 55x55
                         for (int i = yCursor; i < yCursor + 55; i++){
                             changePixel(i, j, 0x0080);
-                        }
+                        }*/
+                    fill(yCursor, xCursor, 0x001f);
+                }
                 //game->gState = MODE_MENU;
                 
                 break;
@@ -337,7 +378,7 @@ void process_mouse_event(Game *game, struct packet* pp){
             default:
 					break;
         }
-
+    
     if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
         underMouse();
         draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
@@ -358,4 +399,32 @@ void process_mouse_event(Game *game, struct packet* pp){
     for (int j = y; j < y + 50; j++)
       for (int i = x; i < x + 100; i++){
                changePixel(i, j, 100);
+
+
+
+    int x = xCursor;
+    int y = yCursor;
+
+    void *video_mem = get_video_mem();
+    uint16_t *ptr_VM = (uint16_t*)video_mem;
+
+    while (1){
+        if ()
+        ptr_VM += (y * h_res + x);
+
+        if (*ptr_VM != 0xffff)
+            break;
+        *ptr_VM = color;
+
+        x++;
+
+        uint16_t *ptr_VM = (uint16_t*)video_mem;
+        ptr_VM += (y * h_res + x)
+        if (*ptr_VM != 0xffff)
+            y++;
+        x = xCursor;
+        
+        uint16_t *ptr_VM = (uint16_t)video_mem;
+        
+    }
     }*/
