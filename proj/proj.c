@@ -45,50 +45,29 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-
+/*
 void display_menu() {
 
 
   vg_start(0x11A);
 
-  int h_res = get_h_res();
-  int v_res = get_v_res();
+  //int h_res = get_h_res();
+  //int v_res = get_v_res();
   //int bits_per_pixel = get_bits_per_pixel();
-  void *video_mem = get_video_mem();
 
 
-  xpm_image_t img;
-  uint16_t *sprite_button = (uint16_t*)xpm_load(play_button, XPM_5_6_5, &img);
+  //xpm_image_t img;
+  //uint16_t *sprite_button = (uint16_t*)xpm_load(play_button, XPM_5_6_5, &img);
 
-  const uint16_t transp = xpm_transparency_color(XPM_5_6_5);
+  //const uint16_t transp = xpm_transparency_color(XPM_5_6_5);
 
-  int xi =  v_res/2 - img.height, yi = h_res/2 - img.width/2;
+  //int xi =  v_res/2 - img.height, yi = h_res/2 - img.width/2;
+  //uint16_t *sprite_title = (uint16_t*)xpm_load(title_xpm, XPM_5_6_5, &img);
 
-  for (int i = xi; i < xi + img.height; i++){
-    for (int j = yi; j < yi + img.width; j++) {
-      uint16_t *ptr_VM = (uint16_t*)video_mem;
-      ptr_VM += (i * h_res + j);
-      if(*sprite_button != transp)
-        *ptr_VM = *sprite_button;
-      sprite_button++;
-    }
-  }
-
-  uint16_t *sprite_title = (uint16_t*)xpm_load(title_xpm, XPM_5_6_5, &img);
-
-  xi =  xi*(3/2) - img.height;
-  yi = h_res/2 - img.width/2;
-
-  for (int i = xi; i < xi + img.height; i++){
-    for (int j = yi; j < yi + img.width; j++) {
-      uint16_t *ptr_VM = (uint16_t*)video_mem;
-      ptr_VM += (i * h_res + j);
-      if(*sprite_title != transp)
-        *ptr_VM = *sprite_title;
-      sprite_title++;
-    }
-  }
-
+  //xi =  xi*(3/2) - img.height;
+  //yi = h_res/2 - img.width/2;
+  
+  //draw_xpm(700, 980, sprite_title, img, transp);
 
 
 
@@ -140,7 +119,7 @@ void display_menu() {
 					}
 					break;
 				default:
-					break; /* no other notifications expected: do nothing */
+					break; 
       }
     }
   }
@@ -155,7 +134,7 @@ void display_menu() {
 
   return ;
 }
-
+*/
 
 
 
@@ -165,6 +144,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
   printf("%s(%d, %p): under construction\n", __func__, argc, argv);
 
   
+	///display_menu();
 
 	Game *game = Start();
 
@@ -174,7 +154,6 @@ int (proj_main_loop)(int argc, char *argv[]) {
   
 	End();
 
-	//display_menu();
 
   return 0;
 }

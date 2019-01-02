@@ -42,7 +42,7 @@ int(vg_start)(uint16_t mode) {
   if (video_mem == MAP_FAILED)
     panic("couldn’t map video memory");
 
-
+  back_buffer = malloc(vram_size);
 
   struct reg86u reg86;
   memset(&reg86, 0, sizeof(reg86)); /* zero the structure */
@@ -69,6 +69,9 @@ int(get_bits_per_pixel)(){
 }
 void * (get_video_mem)(){
   return video_mem;
+}
+void * (get_back_buffer)() {
+  return back_buffer;
 }
 uint8_t (get_memory_model)(){
   return memory_model;

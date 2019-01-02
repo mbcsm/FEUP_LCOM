@@ -8,6 +8,14 @@
   // Controls the wrapping column of the editor when `editor.wordWrap` is 'wordWrapColumn' or 'bounded'.
   "editor.wordWrapColumn": 100,
   "files.associations": {
-    "lab5.h": "c"
+    "lab5.h": "c",
+    "play.h": "c",
+    "xpm.h": "c",
+    "cursor_pixmap.h": "c",
+    "game.h": "c",
+    "packet.h": "c",
+    "lcf.h": "c",
+    "video.h": "c",
+    "stdio.h": "c"
   },
 }
