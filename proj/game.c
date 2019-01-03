@@ -430,13 +430,11 @@ void process_mouse_event(Game *game, struct packet* pp){
     if (pp->rb){
         if(!pull){
             printf("pulling\n");
-            shootBullet(currentPull_x, currentPull_y);
             pull = true;
             currentPull_x = 0;
             currentPull_y = 0;
             clickPos_x = yCursor;
             clickPos_y = xCursor;
-              for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_x[i], mouse_bubbles_pos_y[i], mBallFiller, imgBallFiller, transp);}
         }
 
         currentPull_x+=pp->delta_x;
@@ -444,11 +442,13 @@ void process_mouse_event(Game *game, struct packet* pp){
     }else{
         if(pull){
             pull = false;
+            shootBullet(currentPull_x, currentPull_y);
             currentPull_x = 0;
             currentPull_y = 0;
+            for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
         }
     }
-    
+
     if (pp->lb)
         switch(gameSt) {
             case MENU:
@@ -465,7 +465,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 
             case PLAYING:
                 //getPosition(c, &x, &y);              coordinates to allow painting  top 175x  180y   to 870x  925y
-                paintCell();
+                //paintCell();
                 
                 
                 break;
@@ -483,14 +483,12 @@ void process_mouse_event(Game *game, struct packet* pp){
 
 }
 void updateScreen(){
-    //if(bullet != NULL){drawBullet();}
-
-    //if(pull == true){drawMousePull();}
+    if(bullet != NULL){drawBullet();}
+    if(pull == true){drawMousePull();}
 }
-/*
-void drawMousePull(){
-    
 
+
+void drawMousePull(){
     if(currentPull_y >= 0 || currentPull_x == 0 ){return;}
 
     printf("drawing mouse pull\n");
@@ -498,43 +496,9 @@ void drawMousePull(){
     int pixelDraw_x = MOUSE_PULL_START_X;
     int pixelDraw_y = MOUSE_PULL_START_Y;
 
-    for (int j = y; j < y + 50; j++)
-      for (int i = x; i < x + 100; i++){
-               changePixel(i, j, 100);
-
-
-
-    int x = xCursor;
-    int y = yCursor;
-
-    void *video_mem = get_video_mem();
-    uint16_t *ptr_VM = (uint16_t*)video_mem;
-
-    while (1){
-        if ()
-        ptr_VM += (y * h_res + x);
-
-        if (*ptr_VM != 0xffff)
-            break;
-        *ptr_VM = color;
-
-        x++;
-
-        uint16_t *ptr_VM = (uint16_t*)video_mem;
-        ptr_VM += (y * h_res + x)
-        if (*ptr_VM != 0xffff)
-            y++;
-        x = xCursor;
-        
-        uint16_t *ptr_VM = (uint16_t)video_mem;
-        
-    }
-    
-
     int increment_x = -currentPull_x / 3;
     int increment_y = currentPull_y / 3;
 
-    printf("increment_x: %d | increment_y: %d\n", increment_x, increment_y);
     
 
     for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
@@ -544,15 +508,11 @@ void drawMousePull(){
         mouse_bubbles_pos_x[i] = pixelDraw_x;
         mouse_bubbles_pos_y[i] = pixelDraw_y;
 
-        draw_xpm(pixelDraw_y, pixelDraw_x, mBall, imgBall, transp);
+        draw_xpm(pixelDraw_x, pixelDraw_y, mBall, imgBall, transp);
     }
-    }
-}*/
-    
-
-/*
+}
 void drawBullet(){
-    draw_xpm(bullet->posX, bullet->posY, mBallFiller, imgBallFiller, transp);
+    draw_xpm(bullet -> posY, bullet -> posX, mBallFiller, imgBallFiller, transp);
 
      if(bullet -> posX > get_h_res() - 50)
         bullet -> speedX = -bullet -> speedX;
@@ -581,19 +541,19 @@ void drawBullet(){
     draw_xpm(bullet -> posY, bullet -> posX, mBall, imgBall, transp);
 
     
-}*/
+}
+
 void shootBullet(int pullX, int pullY){
-    Bullet *bullet = malloc(sizeof(Bullet));
-    
-    bullet->id = 1;
-    bullet->posX = MOUSE_PULL_START_X;
-    bullet->posY = MOUSE_PULL_START_Y;
+    bullet = malloc(sizeof(Bullet));
+    bullet -> id = 1;
+    bullet -> posX = MOUSE_PULL_START_X;
+    bullet -> posY = MOUSE_PULL_START_Y;
 
 
     int speedX = 10 * pullX/pullY;
     int speedY = 10 * pullY/pullX;
 
 
-    bullet->speedX = speedX;
-    bullet->speedY = -speedY;    
+    bullet -> speedX = speedX;
+    bullet -> speedY = -speedY;    
 }

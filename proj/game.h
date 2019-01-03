@@ -29,6 +29,8 @@ typedef struct {
     
 } Bullet;
 
+Bullet *bullet;
+
 Game* Start();
 
 GameState getGameState(Game* game);
