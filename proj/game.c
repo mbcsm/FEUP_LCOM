@@ -436,7 +436,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 
     if (pp->rb){
         if(!pull){
-            printf("pulling\n");
+            //printf("pulling\n");
             pull = true;
             currentPull_x = 0;
             currentPull_y = 0;
@@ -499,7 +499,7 @@ void updateScreen(){
 void drawMousePull(){
     if(currentPull_y >= 0 || currentPull_x == 0 ){return;}
 
-    printf("drawing mouse pull\n");
+    //printf("drawing mouse pull\n");
 
     int pixelDraw_x = MOUSE_PULL_START_X;
     int pixelDraw_y = MOUSE_PULL_START_Y;
@@ -509,7 +509,7 @@ void drawMousePull(){
 
     
 
-    underBall();
+    //underBall();
 
     /*for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}*/
     for (int i = 0; i < 3; i++){
@@ -564,8 +564,8 @@ void shootBullet(int pullX, int pullY){
     if(speedY < 0){speedY = -speedY;}
 
 
-    printf("pullX: %d | pullY: %d\n", pullX, pullY);
-    printf("speedX: %d | speedY: %d\n", speedX, speedY);
+    //printf("pullX: %d | pullY: %d\n", pullX, pullY);
+    //printf("speedX: %d | speedY: %d\n", speedX, speedY);
 
 
     bullet -> speedX = speedX;
