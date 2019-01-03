@@ -22,7 +22,7 @@
 #include "pixmap/ball.h"
 #include "pixmap/ball_filler.h"
 
-
+#include "board.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -147,6 +147,7 @@ Game* Start() {
     game->gState = PLAYING;
     
     draw_xpm(0,0, board, imgBoard, transp);
+    startBoard();
 
     //draw_xpm(700, 980, diceOne, imgDiceOne, transp);
     
@@ -154,7 +155,7 @@ Game* Start() {
     underMouse();
     draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 
-    srand(time(0));
+    //srand(time(NULL));
 
     if (kbd_subscribe_int(&bit_no_kbd) != 0)
       return NULL;
@@ -266,6 +267,11 @@ void Handler(Game* game){
                             drawDice(10, 30 , 4);
                         if (kbdData == 0x21)
                             drawDice(10, 30 , 5);
+                        if (kbdData == 0xb6){  //Left-Shift BreakCode
+                            updateBoard(ticks);
+                            //printBoard();
+                            paintBoard();
+                        }
 
                     }
                     if (msg.m_notify.interrupts & irq_set_timer){
@@ -274,6 +280,8 @@ void Handler(Game* game){
                             //if (ticks % (sys_hz() / 8) == 0)
                                 //randDice();
                         }
+                        if (ticks > 20000)
+                            ticks = 0;
                         
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
@@ -295,8 +303,11 @@ void Handler(Game* game){
                 
 			}
             //printf("updateScreen\n");
-            updateScreen();
-
+            //updateScreen();
+            if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+                underMouse();
+                draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
+            }
             //DRAWMODE
 
 
@@ -350,18 +361,6 @@ void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
     }
 }
 
-/*uint16_t getpixel(int x, int y){
-    uint16_t color;
-    int h_res = get_h_res();
-  //int bits_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();
-    uint16_t *ptr_VM = (uint16_t*)video_mem;
-    ptr_VM += (y * h_res + x);
-
-    color = *ptr_VM;
-
-    return color;
-}*/
 xpm_image_t imgb;
 uint16_t *b;// = (uint16_t*)xpm_load(b_xpm, XPM_5_6_5, &imgb);
 uint16_t black = 0;
@@ -384,15 +383,6 @@ void refill(int x, int y, uint16_t oldColor, uint16_t color){
         refill(x-1, y, oldColor, color);
         refill(x, y-1, oldColor, color);
     }
-}
-
-bool emptyCell(int x, int y){
-    y = y + 63;
-    if (x < 175 || x > 870 || y < 180 || y > 925)
-        return false;
-    if (getpixel(x, y) > 0xdddd)
-        return true;
-    return false;
 }
 
 void paintCell(){
