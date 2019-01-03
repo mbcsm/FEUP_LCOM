@@ -6,6 +6,7 @@ uint8_t bit_no_kbd;
 uint8_t bit_no_mouse;
 uint8_t bit_no_timer;
 
+
 #define PI 3.14159265
 typedef enum {
     MENU,
@@ -29,6 +30,13 @@ typedef struct {
     
 } Bullet;
 
+typedef struct {
+    int x,
+        y;
+    bool alive;
+} Block;
+
+Block blocks[256];
 Bullet *bullet;
 
 Game* Start();
@@ -49,8 +57,12 @@ void underBall();
 void updateScreen();
 void drawMousePull();
 void drawBullet();
+void drawBlocks();
 void shootBullet(int pullX, int pullY);
 
 void paintCell();
+
+
+void nextLevel();
 
 

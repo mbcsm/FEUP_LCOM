@@ -28,6 +28,8 @@
 #include <time.h>
 #include <math.h>
 
+int level = 1;
+
 static int xCursor = 500;
 static int yCursor = 500;
 
@@ -153,6 +155,9 @@ void underArrow(){
 
 Game* Start() {
     Game *game = malloc(sizeof(Game));
+
+    blocks[0].x = 600;
+    blocks[0].y = 400;
 
     vg_start(GAME_MODE);
 
@@ -493,6 +498,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 }
 void updateScreen(){
     draw_xpm(0,0, board, imgBoard, transp);
+    drawBlocks();
     fill(400, 400, 0x001e);
     if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
@@ -510,27 +516,18 @@ void drawMousePull(){
     int increment_x = -currentPull_x / 3;
     int increment_y = currentPull_y / 3;
 
-    
-
-    //underBall();
-
-    /*for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}*/
     for (int i = 0; i < 3; i++){
         pixelDraw_x += increment_x;
         pixelDraw_y += increment_y;
         mouse_bubbles_pos_x[i] = pixelDraw_x;
         mouse_bubbles_pos_y[i] = pixelDraw_y;
-        //printf("mouse_bubbles_pos_x: %d | mouse_bubbles_pos_y: %d\n", mouse_bubbles_pos_x[i], mouse_bubbles_pos_y[i]);
-
         draw_xpm(pixelDraw_x, pixelDraw_y, mBall, imgBall, transp);
     }
     //printf("___________________\n");
 }
 void drawBullet(){
-    //draw_xpm(bullet -> posX, bullet -> posY, mBallFiller, imgBallFiller, transp);
-    //printf("drawBullet\n");
-
     if(getpixel(bullet -> posX, bullet -> posY) == 0x001e){
+        nextLevel();
         printf("Bullet collided with square!!!\n");
         free(bullet);
         bullet = NULL;
@@ -563,11 +560,6 @@ void shootBullet(int pullX, int pullY){
     bullet -> posX = MOUSE_PULL_START_X;
     bullet -> posY = MOUSE_PULL_START_Y;
 
-
-
-
-    pullX += 50;
-
     int speedX = 5 * pullX/pullY;
     int speedY = 5 * pullY/pullX;
 
@@ -580,4 +572,17 @@ void shootBullet(int pullX, int pullY){
 
     bullet -> speedX = speedX;
     bullet -> speedY = -speedY;
+}
+
+void drawBlocks(){
+    for(int i = 0; i < 256; i++){
+        if(blocks[i].alive){
+            //fill(blocks[0].x * CELL_WIDTH + FIRST_CELL_X, blocks[0].y * CELL_HEIGHT + FIRST_CELL_Y, 0x001e);
+        }
+    }
+}
+
+
+
+void nextLevel(){
 }

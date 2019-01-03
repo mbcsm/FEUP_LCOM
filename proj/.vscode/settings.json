@@ -16,6 +16,7 @@
     "packet.h": "c",
     "lcf.h": "c",
     "video.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "cursor.h": "c"
   },
 }
