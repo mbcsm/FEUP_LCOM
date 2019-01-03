@@ -22,10 +22,12 @@ void updateBoard(int seed){
         for (unsigned j = 0; j < 12; j++)
             boardArr[i][j] = boardArr[i - 1][j];
     
-    int newSqs = (rand() % seed + 13) % 12;
+    int newSqs = (rand() % (seed)) % 12;
+    printf("number %d", newSqs);
 
     for (int i = 0; i < newSqs; i++){
-        int col = (rand() % seed) % 12;
+        int col = (rand() % (seed)) % 12;
+        printf("position %d", col);
         boardArr[0][col] = 1;
     }
 }

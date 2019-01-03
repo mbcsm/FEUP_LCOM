@@ -84,6 +84,22 @@ uint16_t *diceSix;
 
 uint16_t dynamicUMOUSEArray[24*36];
 uint16_t dynamicUARROWArray[200*200];
+
+void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
+    int h_res = get_h_res();
+  //int bits_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
+
+    for (int i = yCursor; i < yCursor + imgC.height; i++){
+        for (int j = xCursor; j < xCursor + imgC.width; j++) {
+            uint16_t *ptr_VM = (uint16_t*)video_mem;
+            ptr_VM += (i * h_res + j);
+
+            *ptr_VM = dynamicUMOUSEArray[i * h_res + j];
+        }
+    }
+}
+
 void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
     int h_res = get_h_res();
   //int bits_per_pixel = get_bits_per_pixel();
@@ -303,8 +319,9 @@ void Handler(Game* game){
                 
 			}
             //printf("updateScreen\n");
-            //updateScreen();
+            updateScreen();
             if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+                clearMouse();
                 underMouse();
                 draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
             }
@@ -345,21 +362,6 @@ GameState getGameState(Game* game){
     return game->gState;
 }
 
-
-void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
-    int h_res = get_h_res();
-  //int bits_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();
-
-    for (int i = yCursor; i < yCursor + imgC.height; i++){
-        for (int j = xCursor; j < xCursor + imgC.width; j++) {
-            uint16_t *ptr_VM = (uint16_t*)video_mem;
-            ptr_VM += (i * h_res + j);
-
-            *ptr_VM = dynamicUMOUSEArray[i * h_res + j];
-        }
-    }
-}
 
 xpm_image_t imgb;
 uint16_t *b;// = (uint16_t*)xpm_load(b_xpm, XPM_5_6_5, &imgb);
