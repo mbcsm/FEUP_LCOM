@@ -504,33 +504,28 @@ void drawMousePull(){
     }
 }
 void drawBullet(){
-    draw_xpm(bullet -> posY, bullet -> posX, mBallFiller, imgBallFiller, transp);
+    draw_xpm(bullet -> posX, bullet -> posY, mBallFiller, imgBallFiller, transp);
 
-     if(bullet -> posX > get_h_res() - 50)
+     if(bullet -> posX > get_h_res() - 400)
         bullet -> speedX = -bullet -> speedX;
-    if(bullet -> posX < 0)
+    if(bullet -> posX < 100)
         bullet -> speedX = -bullet -> speedX;
-    if(bullet -> posY < 50)
+    if(bullet -> posY < 100)
         bullet -> speedY = -bullet -> speedY;
-    if(bullet -> posY > get_v_res() - 500){
+    if(bullet -> posY > get_v_res() /2){
         free(bullet);
         bullet = NULL;
+        printf("free bullet\n");
         return;
+        ///bullet -> speedY = -bullet -> speedY;
     }
 
-    if(bullet -> speedX > 0)
-        bullet -> posX += 10;
-    else
-        bullet -> posX -= 10;
-
-    if(bullet -> speedY > 0)
-        bullet -> posY += 10;
-    else
-        bullet -> posY -= 10;
+    bullet -> posX += bullet -> speedX;
+    bullet -> posY += bullet -> speedY;
 
    
     
-    draw_xpm(bullet -> posY, bullet -> posX, mBall, imgBall, transp);
+    draw_xpm(bullet -> posX, bullet -> posY, mBall, imgBall, transp);
 
     
 }
@@ -542,8 +537,17 @@ void shootBullet(int pullX, int pullY){
     bullet -> posY = MOUSE_PULL_START_Y;
 
 
+
+
+    
     int speedX = 10 * pullX/pullY;
     int speedY = 10 * pullY/pullX;
+
+    if(speedY < 0){speedY = -speedY;}
+
+
+    printf("pullX: %d | pullY: %d\n", pullX, pullY);
+    printf("speedX: %d | speedY: %d\n", speedX, speedY);
 
 
     bullet -> speedX = speedX;
