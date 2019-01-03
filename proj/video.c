@@ -96,10 +96,39 @@ uint8_t(get_red_screen_mask_position)(){
 }
 
 
-void (changePixel)(int i , int j, uint16_t color){
+void (clearScreen)(){
+  for (unsigned i = 0; i < h_res; i++)
+    for (unsigned j = 0; j < v_res; j++){
+      changePixel(i,j,0x0000);
+    }
+}
+
+uint16_t (getpixel)(int x, int y){
+    uint16_t color;
+    int h_res = get_h_res();
+  //int bits_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
+    uint16_t *ptr_VM = (uint16_t*)video_mem;
+    ptr_VM += (y * h_res + x);
+
+    color = *ptr_VM;
+
+    return color;
+}
+
+void (changePixel)(int x, int y, uint16_t color){
+  int h_res = get_h_res();
+  void *video_mem = get_video_mem();
+
+  uint16_t *ptr_VM = (uint16_t*)video_mem;
+  ptr_VM += (y * h_res + x);
+
+  *ptr_VM = color;
+
+  /*
   void *vm = get_video_mem();
   char *ptr_VM = vm;
   ptr_VM += (i + h_res * j) * (bits_per_pixel / 8);
-  *ptr_VM = color;
+  *ptr_VM = color;*/
 }
 

@@ -150,7 +150,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
 
   if (game != NULL)
     Handler(game);
-  else printf("nogame brutha");
+  else printf(" ");
   
 	End();
 

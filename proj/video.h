@@ -45,6 +45,9 @@ uint8_t get_green_screen_mask_position();
 uint8_t get_red_screen_mask_position();
 
 
+void clearScreen();
+
+uint16_t getpixel(int x, int y);
 void changePixel(int x, int y, uint16_t color);
 
 

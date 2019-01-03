@@ -89,8 +89,8 @@ void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
   //int bits_per_pixel = get_bits_per_pixel();
     void *video_mem = get_video_mem();
 
-    for (int i = xCursor; i < xCursor + imgC.height; i++){
-        for (int j = yCursor; j < yCursor + imgC.width; j++) {
+    for (int i = yCursor; i < yCursor + imgC.height; i++){
+        for (int j = xCursor; j < xCursor + imgC.width; j++) {
             uint16_t *ptr_VM = (uint16_t*)video_mem;
             ptr_VM += (i * h_res + j);
 
@@ -144,15 +144,15 @@ Game* Start() {
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
     transp = xpm_transparency_color(XPM_5_6_5);
 
-    game->gState = MENU;
+    game->gState = PLAYING;
     
-    //draw_xpm(0,0, board, imgBoard, transp);
+    draw_xpm(0,0, board, imgBoard, transp);
 
     //draw_xpm(700, 980, diceOne, imgDiceOne, transp);
     
 
     underMouse();
-    //draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
+    draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 
     srand(time(0));
 
@@ -271,8 +271,8 @@ void Handler(Game* game){
                     if (msg.m_notify.interrupts & irq_set_timer){
                         if (game->gState == PLAYING){
                             ticks++;
-                            if (ticks % (sys_hz() / 8) == 0)
-                                randDice();
+                            //if (ticks % (sys_hz() / 8) == 0)
+                                //randDice();
                         }
                         
                     }
@@ -340,8 +340,8 @@ void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
   //int bits_per_pixel = get_bits_per_pixel();
     void *video_mem = get_video_mem();
 
-    for (int i = xCursor; i < xCursor + imgC.height; i++){
-        for (int j = yCursor; j < yCursor + imgC.width; j++) {
+    for (int i = yCursor; i < yCursor + imgC.height; i++){
+        for (int j = xCursor; j < xCursor + imgC.width; j++) {
             uint16_t *ptr_VM = (uint16_t*)video_mem;
             ptr_VM += (i * h_res + j);
 
@@ -350,7 +350,7 @@ void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
     }
 }
 
-uint16_t getpixel(int x, int y){
+/*uint16_t getpixel(int x, int y){
     uint16_t color;
     int h_res = get_h_res();
   //int bits_per_pixel = get_bits_per_pixel();
@@ -361,31 +361,73 @@ uint16_t getpixel(int x, int y){
     color = *ptr_VM;
 
     return color;
-}
+}*/
 xpm_image_t imgb;
 uint16_t *b;// = (uint16_t*)xpm_load(b_xpm, XPM_5_6_5, &imgb);
 uint16_t black = 0;
 
 void fill(int x, int y, uint16_t color){
-    if (getpixel(x,y) > 0x7777){
-        draw_xpm(y, x, b, imgb, transp);
-        fill(x+1,y,color);
-        fill(x,y+1,color);
-        fill(x-1,y,color);
-        fill(x,y-1,color);
+    if (getpixel(x,y) > 0xdddd){
+        changePixel(x,y, color);
+        fill(x+1, y, color);
+        fill(x, y+1, color);
+        fill(x-1, y, color);
+        fill(x, y-1, color);
     }
 }
 
+void refill(int x, int y, uint16_t oldColor, uint16_t color){
+    if (getpixel(x,y) == oldColor){
+        changePixel(x,y, color);
+        refill(x+1, y, oldColor, color);
+        refill(x, y+1, oldColor, color);
+        refill(x-1, y, oldColor, color);
+        refill(x, y-1, oldColor, color);
+    }
+}
+
+bool emptyCell(int x, int y){
+    y = y + 63;
+    if (x < 175 || x > 870 || y < 180 || y > 925)
+        return false;
+    if (getpixel(x, y) > 0xdddd)
+        return true;
+    return false;
+}
+
+void paintCell(){
+    int x = xCursor, y = yCursor;
+    do {
+        if (x > 175 && x < 870 && y > 180 && y < 925){
+            fill(x, y, 0x001e);
+        }
+        if (emptyCell(x,y)){
+            //sleep(1);
+            refill(x, y, 0x001e, 0xffff);
+            y = y + 63;
+        }
+        else{
+            fill(x, y, 0x001e);
+            return;
+        }
+    } while (emptyCell(x,y));
+
+    fill(x, y, 0x001e);
+}
+
 void process_mouse_event(Game *game, struct packet* pp){
-    if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
+
+    mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
+    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         clearMouse();
     }
     
-    updatePosition(pp, &yCursor, &xCursor);
+    updatePosition(pp, &xCursor, &yCursor);
+    
 
     GameState gameSt = getGameState(game);
 
-    if (pp->lb){
+    if (pp->rb){
         if(!pull){
             printf("pulling\n");
             shootBullet(currentPull_x, currentPull_y);
@@ -394,7 +436,7 @@ void process_mouse_event(Game *game, struct packet* pp){
             currentPull_y = 0;
             clickPos_x = yCursor;
             clickPos_y = xCursor;
-              for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
+              for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_x[i], mouse_bubbles_pos_y[i], mBallFiller, imgBallFiller, transp);}
         }
 
         currentPull_x+=pp->delta_x;
@@ -407,29 +449,32 @@ void process_mouse_event(Game *game, struct packet* pp){
         }
     }
     
-    if (pp->lb){
+    if (pp->lb)
         switch(gameSt) {
             case MENU:
-                //getPosition(c, &x, &y);              coordinates to allow painting  top 175x  180y   to 870x  925y
-                b = (uint16_t*)xpm_load(b_xpm, XPM_5_6_5, &imgb);
-                if (yCursor > 175 && yCursor < 870 && xCursor > 180 && xCursor < 925){
-                    /*for (int j = xCursor; j < xCursor + 55; j++)      // square size ~ 55x55
-                        for (int i = yCursor; i < yCursor + 55; i++){
-                            changePixel(i, j, 0x0080);
-                        }*/
-                    fill(yCursor, xCursor, 0x001f);
+                if (xCursor > 200 && yCursor > 200){
+                    game->gState = PLAYING;
+                    board = (uint16_t*)xpm_load(board_pre_xpm, XPM_5_6_5, &imgBoard);
+                    //clearScreen();
+                    draw_xpm(0,0, board, imgBoard, transp);
                 }
-                //game->gState = MODE_MENU;
-                
-
-            default:
+                if (xCursor < 50 && yCursor < 50){
+                    game->gState = EXIT;
+                }
                 break;
+
+            case PLAYING:
+                //getPosition(c, &x, &y);              coordinates to allow painting  top 175x  180y   to 870x  925y
+                paintCell();
+                
+                
+                break;
+        
+            default:
+					break;
         }
-
-    }
-
-
-    if (xCursor + imgC.height < get_v_res() && yCursor + imgC.width < get_h_res()){
+    
+    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         underMouse();
         draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
     }
@@ -438,13 +483,11 @@ void process_mouse_event(Game *game, struct packet* pp){
 
 }
 void updateScreen(){
+    //if(bullet != NULL){drawBullet();}
 
-  
-    if(bullet != NULL){drawBullet();}
-
-
-    if(pull == true){drawMousePull();}
+    //if(pull == true){drawMousePull();}
 }
+/*
 void drawMousePull(){
     
 
@@ -504,11 +547,12 @@ void drawMousePull(){
         draw_xpm(pixelDraw_y, pixelDraw_x, mBall, imgBall, transp);
     }
     }
-    }
+}*/
     
-}
+
+/*
 void drawBullet(){
-    draw_xpm(bullet -> posY, bullet -> posX, mBallFiller, imgBallFiller, transp);
+    draw_xpm(bullet->posX, bullet->posY, mBallFiller, imgBallFiller, transp);
 
      if(bullet -> posX > get_h_res() - 50)
         bullet -> speedX = -bullet -> speedX;
@@ -537,18 +581,19 @@ void drawBullet(){
     draw_xpm(bullet -> posY, bullet -> posX, mBall, imgBall, transp);
 
     
-}
+}*/
 void shootBullet(int pullX, int pullY){
-    bullet = malloc(sizeof(Bullet));
-    bullet -> id = 1;
-    bullet -> posX = MOUSE_PULL_START_X;
-    bullet -> posY = MOUSE_PULL_START_Y;
+    Bullet *bullet = malloc(sizeof(Bullet));
+    
+    bullet->id = 1;
+    bullet->posX = MOUSE_PULL_START_X;
+    bullet->posY = MOUSE_PULL_START_Y;
 
 
     int speedX = 10 * pullX/pullY;
     int speedY = 10 * pullY/pullX;
 
 
-    bullet -> speedX = speedX;
-    bullet -> speedY = -speedY;    
+    bullet->speedX = speedX;
+    bullet->speedY = -speedY;    
 }

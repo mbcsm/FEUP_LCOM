@@ -29,7 +29,6 @@ typedef struct {
     
 } Bullet;
 
-
 Game* Start();
 
 GameState getGameState(Game* game);
@@ -47,5 +46,7 @@ void updateScreen();
 void drawMousePull();
 void drawBullet();
 void shootBullet(int pullX, int pullY);
+
+void paintCell();
 
 
