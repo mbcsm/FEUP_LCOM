@@ -37,8 +37,8 @@ int currentPull_x = 0,
     clickPos_y = 0;
 bool pull = false;
 
-int MOUSE_PULL_START_X = 400;
-int MOUSE_PULL_START_Y = 400;
+int MOUSE_PULL_START_X = 500;
+int MOUSE_PULL_START_Y = 900;
 int MOUSE_MAX_PULL = 300;
 
 int mouse_bubbles_pos_x[3] = {0,0,0};
@@ -84,6 +84,7 @@ uint16_t *diceSix;
 
 uint16_t dynamicUMOUSEArray[24*36];
 uint16_t dynamicUARROWArray[200*200];
+uint16_t dynamicUBALLArray[1440*840];
 
 void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
     int h_res = get_h_res();
@@ -112,6 +113,20 @@ void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
 
             uint16_t color = *ptr_VM;
             dynamicUMOUSEArray[i * h_res + j] = color;
+        }
+    }
+}
+void underBall(){
+    int h_res = get_h_res();
+    void *video_mem = get_video_mem();
+
+    for (int i = MOUSE_PULL_START_Y; i < MOUSE_PULL_START_Y - currentPull_y; i++){
+        for (int j = MOUSE_PULL_START_X; j < MOUSE_PULL_START_Y - currentPull_x; j++) {
+            uint16_t *ptr_VM = (uint16_t*)video_mem;
+            ptr_VM += (i * h_res + j);
+
+            uint16_t color = *ptr_VM;
+            dynamicUBALLArray[i * h_res + j] = color;
         }
     }
 }
@@ -475,6 +490,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 
 }
 void updateScreen(){
+    draw_xpm(0,0, board, imgBoard, transp);
     if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
 }
@@ -493,7 +509,9 @@ void drawMousePull(){
 
     
 
-    for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
+    underBall();
+
+    /*for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}*/
     for (int i = 0; i < 3; i++){
         pixelDraw_x += increment_x;
         pixelDraw_y += increment_y;
@@ -504,15 +522,15 @@ void drawMousePull(){
     }
 }
 void drawBullet(){
-    draw_xpm(bullet -> posX, bullet -> posY, mBallFiller, imgBallFiller, transp);
+    //draw_xpm(bullet -> posX, bullet -> posY, mBallFiller, imgBallFiller, transp);
 
-     if(bullet -> posX > get_h_res() - 400)
+     if(bullet -> posX > get_h_res() - 450)
         bullet -> speedX = -bullet -> speedX;
-    if(bullet -> posX < 100)
+    if(bullet -> posX < 150)
         bullet -> speedX = -bullet -> speedX;
-    if(bullet -> posY < 100)
+    if(bullet -> posY < 175)
         bullet -> speedY = -bullet -> speedY;
-    if(bullet -> posY > get_v_res() /2){
+    if(bullet -> posY > MOUSE_PULL_START_Y){
         free(bullet);
         bullet = NULL;
         printf("free bullet\n");
@@ -540,8 +558,8 @@ void shootBullet(int pullX, int pullY){
 
 
     
-    int speedX = 10 * pullX/pullY;
-    int speedY = 10 * pullY/pullX;
+    int speedX = 5 * pullX/pullY;
+    int speedY = 5 * pullY/pullX;
 
     if(speedY < 0){speedY = -speedY;}
 

@@ -44,6 +44,8 @@ void process_mouse_event(Game* game, struct packet* pp);
 void clearArrow();
 void underArrow();
 
+void underBall();
+
 void updateScreen();
 void drawMousePull();
 void drawBullet();
