@@ -452,7 +452,7 @@ void process_mouse_event(Game *game, struct packet* pp){
             shootBullet(currentPull_x, currentPull_y);
             currentPull_x = 0;
             currentPull_y = 0;
-            for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}
+            /*for(int i = 0; i < 3; i++){draw_xpm(mouse_bubbles_pos_y[i], mouse_bubbles_pos_x[i], mBallFiller, imgBallFiller, transp);}*/
         }
     }
 
