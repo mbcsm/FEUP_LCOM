@@ -135,7 +135,7 @@ void underArrow(){
     //int bits_per_pixel = get_bits_per_pixel();
     void *video_mem = get_video_mem();
 
-    printf("%d | %d\n", clickPos_x, clickPos_y);
+    //printf("%d | %d\n", clickPos_x, clickPos_y);
 
     for (int i =xCursor; i < xCursor + 40; i++){
         if(i<0){continue;}
@@ -313,6 +313,9 @@ void Handler(Game* game){
                         }
                         if (ticks > 20000)
                             ticks = 0;
+
+
+                        updateScreen();
                         
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
@@ -334,7 +337,6 @@ void Handler(Game* game){
                 
 			}
             //printf("updateScreen\n");
-            updateScreen();
             if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
                 clearMouse();
                 underMouse();
@@ -402,8 +404,7 @@ void refill(int x, int y, uint16_t oldColor, uint16_t color){
     }
 }
 
-void paintCell(){
-    int x = xCursor, y = yCursor;
+void paintCell(int x, int y){
     do {
         if (x > 175 && x < 870 && y > 180 && y < 925){
             fill(x, y, 0x001e);
@@ -448,6 +449,7 @@ void process_mouse_event(Game *game, struct packet* pp){
         currentPull_y+=pp->delta_y;
     }else{
         if(pull){
+            //printf("pull over\n");
             pull = false;
             shootBullet(currentPull_x, currentPull_y);
             currentPull_x = 0;
@@ -491,6 +493,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 }
 void updateScreen(){
     draw_xpm(0,0, board, imgBoard, transp);
+    fill(400, 400, 0x001e);
     if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
 }
@@ -517,33 +520,39 @@ void drawMousePull(){
         pixelDraw_y += increment_y;
         mouse_bubbles_pos_x[i] = pixelDraw_x;
         mouse_bubbles_pos_y[i] = pixelDraw_y;
+        //printf("mouse_bubbles_pos_x: %d | mouse_bubbles_pos_y: %d\n", mouse_bubbles_pos_x[i], mouse_bubbles_pos_y[i]);
 
         draw_xpm(pixelDraw_x, pixelDraw_y, mBall, imgBall, transp);
     }
+    //printf("___________________\n");
 }
 void drawBullet(){
     //draw_xpm(bullet -> posX, bullet -> posY, mBallFiller, imgBallFiller, transp);
+    //printf("drawBullet\n");
 
-     if(bullet -> posX > get_h_res() - 450)
-        bullet -> speedX = -bullet -> speedX;
-    if(bullet -> posX < 150)
-        bullet -> speedX = -bullet -> speedX;
-    if(bullet -> posY < 175)
-        bullet -> speedY = -bullet -> speedY;
+    if(getpixel(bullet -> posX, bullet -> posY) == 0x001e){
+        printf("Bullet collided with square!!!\n");
+        free(bullet);
+        bullet = NULL;
+        return;
+    }
+
+
+     if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
+    if(bullet -> posY < 175){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
         free(bullet);
         bullet = NULL;
-        printf("free bullet\n");
         return;
-        ///bullet -> speedY = -bullet -> speedY;
     }
+    
 
     bullet -> posX += bullet -> speedX;
     bullet -> posY += bullet -> speedY;
-
-   
     
     draw_xpm(bullet -> posX, bullet -> posY, mBall, imgBall, transp);
+
+
 
     
 }
@@ -557,7 +566,8 @@ void shootBullet(int pullX, int pullY){
 
 
 
-    
+    pullX += 50;
+
     int speedX = 5 * pullX/pullY;
     int speedY = 5 * pullY/pullX;
 
@@ -569,5 +579,5 @@ void shootBullet(int pullX, int pullY){
 
 
     bullet -> speedX = speedX;
-    bullet -> speedY = -speedY;    
+    bullet -> speedY = -speedY;
 }
