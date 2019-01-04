@@ -6,12 +6,6 @@ uint8_t bit_no_kbd;
 uint8_t bit_no_mouse;
 uint8_t bit_no_timer;
 
-int const aFIRST_CELL_X = 205;
-int const aFIRST_CELL_Y = 201;
-int const aCELL_WIDTH = 59;
-int const aCELL_HEIGHT = 63;
-uint16_t aCELL_COLOR = 0x001f;
-uint16_t aWHITE_CELL = 0xffff;
 
 #define PI 3.14159265
 typedef enum {

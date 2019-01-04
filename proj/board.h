@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 int boardArr[12][12];
 
 void startBoard();

@@ -23,6 +23,7 @@
 #include "pixmap/ball_filler.h"
 
 #include "board.h"
+#include "font.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -156,8 +157,6 @@ void underArrow(){
 Game* Start() {
     Game *game = malloc(sizeof(Game));
 
-    for(int j = 0; j < 256; j ++){blocks[j].alive = false;}
-
     blocks[0].x = 600;
     blocks[0].y = 400;
 
@@ -189,7 +188,7 @@ Game* Start() {
 
     //draw_xpm(700, 980, diceOne, imgDiceOne, transp);
     
-
+    printstring("lcom", 4, "", 600, 10);
     underMouse();
     draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 
@@ -318,11 +317,12 @@ void Handler(Game* game){
                             //if (ticks % (sys_hz() / 8) == 0)
                                 //randDice();
                         }
-                        if (ticks > 20000)
+                        if (ticks > 20000){
                             ticks = 0;
+                        }
 
-
-                        updateScreen();
+                        //if (ticks % 2 == 0)
+                        //updateScreen();
                         
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
@@ -344,11 +344,11 @@ void Handler(Game* game){
                 
 			}
             //printf("updateScreen\n");
-            if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+            /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
                 clearMouse();
                 underMouse();
                 draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
-            }
+            }*/
             //DRAWMODE
 
 
@@ -501,6 +501,7 @@ void process_mouse_event(Game *game, struct packet* pp){
 void updateScreen(){
     draw_xpm(0,0, board, imgBoard, transp);
     drawBlocks();
+    fill(400, 400, 0x001e);
     if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
 }
@@ -528,17 +529,17 @@ void drawMousePull(){
 }
 void drawBullet(){
     if(getpixel(bullet -> posX, bullet -> posY) == 0x001e){
+        nextLevel();
         printf("Bullet collided with square!!!\n");
-        //free(bullet);
-        //bullet = NULL;
-        ///return;
+        free(bullet);
+        bullet = NULL;
+        return;
     }
 
 
      if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
     if(bullet -> posY < 175){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
-        nextLevel();
         free(bullet);
         bullet = NULL;
         return;
@@ -578,7 +579,7 @@ void shootBullet(int pullX, int pullY){
 void drawBlocks(){
     for(int i = 0; i < 256; i++){
         if(blocks[i].alive){
-            fill(blocks[i].x * aCELL_WIDTH + aFIRST_CELL_X, blocks[i].y * aCELL_HEIGHT + aFIRST_CELL_Y, 0x001e);
+            //fill(blocks[0].x * CELL_WIDTH + FIRST_CELL_X, blocks[0].y * CELL_HEIGHT + FIRST_CELL_Y, 0x001e);
         }
     }
 }
@@ -586,29 +587,4 @@ void drawBlocks(){
 
 
 void nextLevel(){
-    for(int j = 0; j < 256; j ++){
-        if(blocks[j].alive){
-            blocks[j].y += 1;
-            if(blocks[j].y ==12){
-                printf("Game OVER!\n");
-            }
-        }
-    }
-
-    for(int i = 0; i < 12; i++){
-        srand ( time(NULL) );
-        int prob = rand() % 100;
-        printf("%d\n", prob);
-        if(prob < 50){
-            for(int j = 0; j < 256; j ++){
-                if(!blocks[j].alive){
-                    printf("found dead block\n");
-                    blocks[j].alive = true;
-                    blocks[j].x = i;
-                    blocks[j].y = 0;
-                    j = 500;
-                }
-            }
-        }
-    }
 }
