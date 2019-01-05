@@ -322,7 +322,7 @@ void Handler(Game* game){
                         }
 
                         //if (ticks % 2 == 0)
-                        //updateScreen();
+                        updateScreen();
                         
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
@@ -501,7 +501,6 @@ void process_mouse_event(Game *game, struct packet* pp){
 void updateScreen(){
     draw_xpm(0,0, board, imgBoard, transp);
     drawBlocks();
-    fill(400, 400, 0x001e);
     if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
 }
@@ -540,6 +539,7 @@ void drawBullet(){
      if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
     if(bullet -> posY < 175){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
+        nextLevel();
         free(bullet);
         bullet = NULL;
         return;
@@ -562,29 +562,50 @@ void shootBullet(int pullX, int pullY){
     bullet -> posX = MOUSE_PULL_START_X;
     bullet -> posY = MOUSE_PULL_START_Y;
 
-    int speedX = 5 * pullX/pullY;
-    int speedY = 5 * pullY/pullX;
-
-    if(speedY < 0){speedY = -speedY;}
+    int speedX = pullX;
+    int speedY = pullY;
 
 
-    //printf("pullX: %d | pullY: %d\n", pullX, pullY);
-    //printf("speedX: %d | speedY: %d\n", speedX, speedY);
+    while(abs(speedX) > 10 && abs(speedX) >  10){
+        speedX = speedX/10;
+        speedY = speedY/10;
+    }
 
 
-    bullet -> speedX = speedX;
-    bullet -> speedY = -speedY;
+    bullet -> speedX = -speedX;
+    bullet -> speedY = speedY;
 }
 
 void drawBlocks(){
     for(int i = 0; i < 256; i++){
         if(blocks[i].alive){
-            //fill(blocks[0].x * CELL_WIDTH + FIRST_CELL_X, blocks[0].y * CELL_HEIGHT + FIRST_CELL_Y, 0x001e);
+            fill(blocks[i].x * aCELL_WIDTH + aFIRST_CELL_X, blocks[i].y * aCELL_HEIGHT + aFIRST_CELL_Y, 0x001e);
         }
     }
 }
 
-
-
 void nextLevel(){
+    for(int j = 0; j < 256; j ++){
+        if(blocks[j].alive){
+            blocks[j].y += 1;
+            if(blocks[j].y ==12){
+                printf("Game OVER!\n");
+            }
+        }
+    }
+
+    for(int i = 0; i < 12; i++){
+        srand ( time(NULL) );
+        int prob = rand() % 100;
+        if(prob < 50){
+            for(int j = 0; j < 256; j ++){
+                if(!blocks[j].alive){
+                    blocks[j].alive = true;
+                    blocks[j].x = i;
+                    blocks[j].y = 0;
+                    j = 500;
+                }
+            }
+        }
+    }
 }
