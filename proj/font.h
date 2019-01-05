@@ -1,4 +1,8 @@
 #pragma once
+#ifndef FONT_H
+#define FONT_H
+
+#include "xpm.h"
 
 #include "pixmap/fonts/black-size36/1.h"
 #include "pixmap/fonts/black-size36/0.h"
@@ -43,5 +47,7 @@
 void printstring(char * string, int size, char * font, int x , int y);
 
 bool loadChar(char textI, uint16_t *data, xpm_image_t imgData);
+
+#endif
 
 

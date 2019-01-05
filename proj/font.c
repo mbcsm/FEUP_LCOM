@@ -1,6 +1,5 @@
 #include <lcom/lcf.h>
 #include "font.h"
-//#include "xpm.h"
 #include "video.h"
 
 
@@ -9,21 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h> /* for tolower */
-
-void draw_xpms(int x, int y, uint16_t *sprite, xpm_image_t img, const uint16_t transp){
-    int h_res = get_h_res();
-    void *video_mem = get_video_mem();
-
-    for (int i = y; i < y + img.height; i++){
-        for (int j = x; j < x + img.width; j++) {
-            uint16_t *ptr_VM = (uint16_t*)video_mem;
-            ptr_VM += (i * h_res + j);
-            if(*sprite != transp)
-                *ptr_VM = *sprite;
-            sprite++;
-        }
-    }
-}
 
 void printstring(char * text, int size, char * font , int x , int y) {
     uint16_t transp = xpm_transparency_color(XPM_5_6_5);
@@ -167,9 +151,9 @@ void printstring(char * text, int size, char * font , int x , int y) {
     }
 
         if (data != NULL/*loadChar(text[i], aChar, imgChar)*/){
-            draw_xpms(x, y, data, imgData, transp);
+            draw_xpm(x, y, data, imgData, transp);
         }
-        else draw_xpms(x, y, aTemplate, imgTemplate, transp);
+        else draw_xpm(x, y, aTemplate, imgTemplate, transp);
         printf("1");
 
         x += imgTemplate.width;

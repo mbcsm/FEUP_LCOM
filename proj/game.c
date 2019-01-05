@@ -188,8 +188,8 @@ Game* Start() {
 
     //draw_xpm(700, 980, diceOne, imgDiceOne, transp);
     
-    printstring("lcom", 4, "", 600, 10);
-    underMouse();
+    //printstring("lcom", 4, "", 600, 10);
+    underArrow();
     draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 
     //srand(time(NULL));
@@ -306,7 +306,7 @@ void Handler(Game* game){
                             drawDice(10, 30 , 5);
                         if (kbdData == 0xb6){  //Left-Shift BreakCode
                             updateBoard(ticks);
-                            //printBoard();
+                            printBoard();
                             paintBoard();
                         }
 
@@ -321,8 +321,7 @@ void Handler(Game* game){
                             ticks = 0;
                         }
 
-                        //if (ticks % 2 == 0)
-                        //updateScreen();
+                       updateScreen();
                         
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {

@@ -13,5 +13,6 @@ typedef struct {
     bool active;
     PlayerState p;
     uint16t color;
+    
 
 } player;
