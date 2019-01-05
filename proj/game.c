@@ -433,9 +433,9 @@ void paintCell(int x, int y){
 void process_mouse_event(Game *game, struct packet* pp){
 
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
-    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+    /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         clearMouse();
-    }
+    }*/
     
     updatePosition(pp, &xCursor, &yCursor);
     
@@ -490,10 +490,10 @@ void process_mouse_event(Game *game, struct packet* pp){
 					break;
         }
     
-    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+    /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         underMouse();
         draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
-    }
+    }*/
 
     resetPacket(pp);
 
@@ -503,6 +503,7 @@ void updateScreen(){
     drawBlocks();
     if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
+    draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
 }
 
 
@@ -527,28 +528,7 @@ void drawMousePull(){
     //printf("___________________\n");
 }
 void drawBullet(){
-
-    bool left = false, right = false, up = false, down = false;
-    if(getpixel(bullet -> posX - imgBall.width/2, bullet -> posY) == 0x001e){
-        left = true;
-    }
-    if(getpixel(bullet -> posX + imgBall.width/2, bullet -> posY) == 0x001e){
-        right = true;
-    }
-    if(getpixel(bullet -> posX, bullet -> posY + imgBall.height/2) == 0x001e){
-        down = true;
-    }
-    if(getpixel(bullet -> posX, bullet -> posY - imgBall.height/2) == 0x001e){
-        up = true;
-    }
-
-    if(left || right){bullet -> speedX = -bullet -> speedX;}
-    if(down || up){bullet -> speedY = -bullet -> speedY;}
-
-
-
-
-    if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
+    if((bullet -> posX > get_h_res() - 430) || (bullet -> posX < 180)){bullet -> speedX = -bullet -> speedX;}
     if(bullet -> posY < 175){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
         nextLevel();
@@ -556,11 +536,42 @@ void drawBullet(){
         bullet = NULL;
         return;
     }
-    
-
     bullet -> posX += bullet -> speedX;
     bullet -> posY += bullet -> speedY;
     
+
+
+
+    bool left = false, right = false, up = false, down = false;
+    int deleteX = -1, deleteY = -1;
+    if(getpixel(bullet -> posX - imgBall.width, bullet -> posY) == 0x001e){
+        left = true; 
+    }else if(getpixel(bullet -> posX + imgBall.width, bullet -> posY) == 0x001e){
+        right = true; 
+    }else if(getpixel(bullet -> posX, bullet -> posY + imgBall.height) == 0x001e){
+        down = true;  
+    }else if(getpixel(bullet -> posX, bullet -> posY - imgBall.height) == 0x001e){
+        up = true; 
+    }
+
+    deleteX = (bullet -> posX - aaFIRST_CELL_X) / aaCELL_WIDTH;
+    deleteY = (bullet -> posY - aaFIRST_CELL_Y) / aaCELL_HEIGHT;  
+
+    if(left || right){bullet -> speedX = -bullet -> speedX;}
+    if(down || up){bullet -> speedY = -bullet -> speedY;} 
+    if(left || right || up || down){
+        printf("deleteX:%d | deleteY:%d\n", deleteX, deleteY);
+        for(int j = 0; j < 256; j ++){
+            if(blocks[j].x == deleteX && blocks[j].y == deleteY){
+                //printf("blockX:%d | blockY:%d\n", blocks[j].x, blocks[j].y);
+                blocks[j].alive = false;
+                printf("block found\n");
+                j = 500;
+            }
+        }
+    }
+    
+
     draw_xpm(bullet -> posX, bullet -> posY, mBall, imgBall, transp);
 }
 
@@ -573,11 +584,16 @@ void shootBullet(int pullX, int pullY){
     int speedX = pullX;
     int speedY = pullY;
 
-    while(abs(speedX) > 10 && abs(speedX) >  10){
-        speedX = speedX/10;
-        speedY = speedY/10;
+    while(abs(speedX) > 10 || abs(speedY) >  10){
+        speedX = speedX/5;
+        speedY = speedY/5;
+    }
+    while(abs(speedX) < 5 && abs(speedY) <  5){
+        speedX = speedX * 2;
+        speedY = speedY * 2;
     }
 
+    //printf("speedX:%d | speedY:%d\n", speedX, speedY);
     bullet -> speedX = -speedX;
     bullet -> speedY = speedY;
 }
