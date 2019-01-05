@@ -527,16 +527,28 @@ void drawMousePull(){
     //printf("___________________\n");
 }
 void drawBullet(){
-    if(getpixel(bullet -> posX, bullet -> posY) == 0x001e){
-        nextLevel();
-        printf("Bullet collided with square!!!\n");
-        free(bullet);
-        bullet = NULL;
-        return;
+
+    bool left = false, right = false, up = false, down = false;
+    if(getpixel(bullet -> posX - imgBall.width/2, bullet -> posY) == 0x001e){
+        left = true;
+    }
+    if(getpixel(bullet -> posX + imgBall.width/2, bullet -> posY) == 0x001e){
+        right = true;
+    }
+    if(getpixel(bullet -> posX, bullet -> posY + imgBall.height/2) == 0x001e){
+        down = true;
+    }
+    if(getpixel(bullet -> posX, bullet -> posY - imgBall.height/2) == 0x001e){
+        up = true;
     }
 
+    if(left || right){bullet -> speedX = -bullet -> speedX;}
+    if(down || up){bullet -> speedY = -bullet -> speedY;}
 
-     if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
+
+
+
+    if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
     if(bullet -> posY < 175){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
         nextLevel();
@@ -550,10 +562,6 @@ void drawBullet(){
     bullet -> posY += bullet -> speedY;
     
     draw_xpm(bullet -> posX, bullet -> posY, mBall, imgBall, transp);
-
-
-
-    
 }
 
 void shootBullet(int pullX, int pullY){
@@ -565,12 +573,10 @@ void shootBullet(int pullX, int pullY){
     int speedX = pullX;
     int speedY = pullY;
 
-
     while(abs(speedX) > 10 && abs(speedX) >  10){
         speedX = speedX/10;
         speedY = speedY/10;
     }
-
 
     bullet -> speedX = -speedX;
     bullet -> speedY = speedY;
@@ -579,7 +585,7 @@ void shootBullet(int pullX, int pullY){
 void drawBlocks(){
     for(int i = 0; i < 256; i++){
         if(blocks[i].alive){
-            fill(blocks[i].x * aCELL_WIDTH + aFIRST_CELL_X, blocks[i].y * aCELL_HEIGHT + aFIRST_CELL_Y, 0x001e);
+            fill(blocks[i].x * aaCELL_WIDTH + aaFIRST_CELL_X, blocks[i].y * aaCELL_HEIGHT + aaFIRST_CELL_Y, 0x001e);
         }
     }
 }
