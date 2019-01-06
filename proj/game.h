@@ -26,6 +26,8 @@ typedef struct {
         speedY,
         posX,
         posY,
+        x,
+        y,
         id;
     
 } Bullet;

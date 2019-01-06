@@ -48,6 +48,15 @@ int MOUSE_MAX_PULL = 300;
 int mouse_bubbles_pos_x[3] = {0,0,0};
 int mouse_bubbles_pos_y[3] = {0,0,0};
 
+int const bFIRST_CELL_X = 205;
+int const bFIRST_CELL_Y = 201;
+int const bCELL_WIDTH = 55;
+int const bCELL_HEIGHT = 60;
+uint16_t bCELL_COLOR = 0x001f;
+uint16_t bWHITE_CELL = 0xffff;
+
+int totalBlocks = 0;
+
 
 
 
@@ -323,9 +332,9 @@ void Handler(Game* game){
                         if (ticks > 20000){
                             ticks = 0;
                         }
-
                     
                        updateScreen();
+
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
                         //printf("irq_set_mouse\n");
@@ -435,9 +444,9 @@ void paintCell(int x, int y){
 void process_mouse_event(Game *game, struct packet* pp){
 
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
-    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+    /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         clearMouse();
-    }
+    }*/
     
     updatePosition(pp, &xCursor, &yCursor);
     
@@ -492,10 +501,10 @@ void process_mouse_event(Game *game, struct packet* pp){
 					break;
         }
     
-    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+    /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         underMouse();
         draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
-    }
+    }*/
 
     resetPacket(pp);
 
@@ -503,9 +512,9 @@ void process_mouse_event(Game *game, struct packet* pp){
 void updateScreen(){
     draw_xpm(0,0, board, imgBoard, transp);
     drawBlocks();
-    fill(400, 400, 0x001e);
-    if(bullet != NULL){drawBullet();}
     if(pull == true){drawMousePull();}
+    draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
+    if(bullet != NULL){drawBullet();}
 }
 
 
@@ -530,32 +539,61 @@ void drawMousePull(){
     //printf("___________________\n");
 }
 void drawBullet(){
-    if(getpixel(bullet -> posX, bullet -> posY) == 0x001e){
-        nextLevel();
-        printf("Bullet collided with square!!!\n");
-        free(bullet);
-        bullet = NULL;
-        return;
-    }
-
-
-     if((bullet -> posX > get_h_res() - 450) || (bullet -> posX < 150)){bullet -> speedX = -bullet -> speedX;}
-    if(bullet -> posY < 175){bullet -> speedY = -bullet -> speedY;}
+    if((bullet -> posX > get_h_res() - 430) || (bullet -> posX < 180)){bullet -> speedX = -bullet -> speedX;}
+    if(bullet -> posY < 200){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
+        nextLevel();
         free(bullet);
         bullet = NULL;
         return;
     }
-    
-
     bullet -> posX += bullet -> speedX;
     bullet -> posY += bullet -> speedY;
-    
+
+
+    bullet -> x = (bullet -> posX - bFIRST_CELL_X) / bCELL_WIDTH;
+    bullet -> y = (bullet -> posY - bFIRST_CELL_Y) / bCELL_HEIGHT;
+
     draw_xpm(bullet -> posX, bullet -> posY, mBall, imgBall, transp);
 
+    int deleteX = -1, deleteY = -1;
+    bool blockCollision = false, blockFound = false;
+
+
+    if(getpixel(bullet -> posX, bullet -> posY) != bWHITE_CELL
+    ||  getpixel(bullet -> posX + imgBall.width, bullet -> posY) != bWHITE_CELL
+    ||  getpixel(bullet -> posX, bullet -> posY + imgBall.height) != bWHITE_CELL
+    ||  getpixel(bullet -> posX + imgBall.width, bullet -> posY + imgBall.height) != bWHITE_CELL){
+        deleteX = bullet -> x;
+        deleteY = bullet -> y;
+        blockCollision = true;   
+    }
 
 
     
+    if(blockCollision == true){
+        //printf("deleteX:%d | deleteY:%d\n", deleteX, deleteY);
+        for(int j = 0; j < totalBlocks; j ++){
+            if(blocks[j].x == deleteX && blocks[j].y == deleteY && blocks[j].alive){
+                blocks[j].alive = false;
+                blockFound = true;
+                return;
+            }
+        }
+        /*
+        if(blockFound){
+            if(bullet->speedX > 0 && bullet->speedY > 0){
+                if((bullet -> posX - bFIRST_CELL_X) != deleteX){
+                    bullet -> speedY = -bullet -> speedY;
+                }else{
+                    bullet -> speedX = -bullet -> speedX;
+                }
+                bullet -> posX += bullet -> speedX * 2;
+                bullet -> posY += bullet -> speedY * 2;
+            }
+        }
+        */
+    }
 }
 
 void shootBullet(int pullX, int pullY){
@@ -564,29 +602,55 @@ void shootBullet(int pullX, int pullY){
     bullet -> posX = MOUSE_PULL_START_X;
     bullet -> posY = MOUSE_PULL_START_Y;
 
-    int speedX = 5 * pullX/pullY;
-    int speedY = 5 * pullY/pullX;
+    int speedX = pullX;
+    int speedY = pullY;
 
-    if(speedY < 0){speedY = -speedY;}
+    while(abs(speedX) > 10 || abs(speedY) >  10){
+        speedX = speedX/5;
+        speedY = speedY/5;
+    }
+    while(abs(speedX) < 5 && abs(speedY) <  5){
+        speedX = speedX * 2;
+        speedY = speedY * 2;
+    }
 
+    bullet -> speedX = -speedX;
+    bullet -> speedY = speedY;
 
-    //printf("pullX: %d | pullY: %d\n", pullX, pullY);
-    //printf("speedX: %d | speedY: %d\n", speedX, speedY);
-
-
-    bullet -> speedX = speedX;
-    bullet -> speedY = -speedY;
+    for(int i = 0; i < totalBlocks; i++){
+        if(blocks[i].alive){
+            printf("i: %d |blocks[i].x: %d | blocks[i].y: %d\n",i, blocks[i].x, blocks[i].y);
+        }
+    }
+    printf("_____________________\n");
 }
 
 void drawBlocks(){
-    for(int i = 0; i < 256; i++){
+    for(int i = 0; i < totalBlocks; i++){
         if(blocks[i].alive){
-            //fill(blocks[0].x * CELL_WIDTH + FIRST_CELL_X, blocks[0].y * CELL_HEIGHT + FIRST_CELL_Y, 0x001e);
+            fill(blocks[i].x * 60 + bFIRST_CELL_X, blocks[i].y * 60 + bFIRST_CELL_Y, 0x001e);
         }
     }
 }
 
-
-
 void nextLevel(){
+    for(int j = 0; j < 256; j ++){
+        if(blocks[j].alive){
+            blocks[j].y += 1;
+            if(blocks[j].y ==12){
+                printf("Game OVER!\n");
+            }
+        }
+    }
+
+    for(int i = 0; i < 12; i++){
+        srand ( time(NULL) );
+        int prob = rand() % 100;
+        if(prob < 50){
+            blocks[totalBlocks].alive = true;
+            blocks[totalBlocks].x = i;
+            blocks[totalBlocks].y = 0;
+            totalBlocks++;
+        }
+    }
 }
