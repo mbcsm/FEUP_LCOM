@@ -1,9 +1,24 @@
 #ifndef MENU_H
 #define MENU_H
 
-#define PLAY_BUTTON_Y           100
-#define HIGHSCORES_BUTTON_Y     500
-#define EXIT_BUTTON_Y           900
+#define PLAY_BUTTON_Y           200
+#define HIGHSCORES_BUTTON_Y     400
+#define EXIT_BUTTON_Y           600
+
+#include "xpm.h"
+#include "font.h"
+#include "cursor.h"
+
+/* ------------- XPMs --------------- */
+
+#include "pixmap/menu/exit_button.h"
+#include "pixmap/menu/exit_button_over.h"
+#include "pixmap/menu/highscores_button.h"
+#include "pixmap/menu/highscores_button_over.h"
+#include "pixmap/menu/play_button.h"
+#include "pixmap/menu/play_button_over.h"
+
+/*------------------------------------*/
 
 typedef enum {
     VOID,
@@ -20,11 +35,11 @@ typedef enum {
     CLICKED    
 } Click;
 
-void startMenu();
+int startMenu();
 
-void menuIH(bool mouse, bool kbd, struct packet pp, uint32_t kbdData);
+int menuIH(bool mouse, bool kbd, struct packet* pp, uint32_t kbdData);
 
-void displayMenu();
+int displayMenu();
 
 void displayHighscores();
 

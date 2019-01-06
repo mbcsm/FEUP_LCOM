@@ -10,13 +10,12 @@ uint8_t bit_no_timer;
 #define PI 3.14159265
 typedef enum {
     MENU,
-    MODE_MENU, 
     PLAYING,
     EXIT
 } GameState; 
 
 typedef struct {
-    cursor *gameCursor;
+    //cursor *gameCursor;
     GameState gState;
 
 } Game;

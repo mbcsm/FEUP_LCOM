@@ -147,7 +147,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
 	///display_menu();
 
 	Game *game = Start();
-
+  printf("Started");
   if (game != NULL)
     Handler(game);
   else printf(" ");

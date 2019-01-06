@@ -1,30 +1,29 @@
 #include <lcom/lcf.h>
+
 #include "cursor.h"
-#include "video.h"
-#include "pixmap/cursor_pixmap.h"
 
-    uint16_t *spritet;
-    uint16_t  transpi;
-    xpm_image_t imge;
 
-cursor * (newCursor)(){
-    cursor *c = malloc(sizeof(cursor));
-    c->x = get_h_res() / 2;
-    c->y = get_v_res() / 2;
-    
-    spritet = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &(imge));
+int x_Cursor = 500;
+int y_Cursor = 500;
 
-    transpi = xpm_transparency_color(XPM_5_6_5);
+xpm_image_t imgC;
+uint16_t *mCursor;
+uint16_t transp;
 
-    c->verticalRes = c->img.height;
-    c->horizontalRes = c->img.width;
+uint16_t dynamicUMOUSEArray[24*36];
 
-    return c;
+int startCursor(){
+    mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
+    transp = xpm_transparency_color(XPM_5_6_5);
+    underMouse();
+    draw_xpm(x_Cursor, y_Cursor, mCursor, imgC, transp);
+
+    return 0;
 }
 
-void (getPosition)(cursor *c, int *x, int *y){
-    *x = c->x;
-    *y = c->y;
+void (getPosition)(int *x, int *y){
+    *x = x_Cursor;
+    *y = y_Cursor;
 }
 
 void (updatePosition)(struct packet *pp, int *x, int *y){
@@ -40,81 +39,38 @@ void (updatePosition)(struct packet *pp, int *x, int *y){
         *y = get_v_res();
     else if (*y < 0)
         *y = 0;
+
+        x_Cursor = *x;
+        y_Cursor = *y;
 }
 
-uint16_t *dynamicArray[24*36] = {0};
-//int size = 2;
-//dynamicArray = malloc(24*36 * sizeof(uint16_t));
-
-void (drawCursor)(cursor *c){
-    int cx ,cy;
-    getPosition(c, &cy, &cx);
-
-    /*dynamicArray = malloc(24 * 36 * sizeof(uint16_t));
-    
-    uint16_t *ptr_VM = (uint16_t*)video_mem;
-    ptr_VM += (cy * h_res + cx);
-                
-    uint16_t *back = dynamicArray;
-    memcpy(back, ptr_VM, sizeof(uint16_t) * 36 * 24);*/
-
-    if (cx >= 0 && cy >= 0 && cx < get_h_res() && cy < get_v_res()){
-        for (int j = cy; j < cy + 36; j++)
-            for (int i = cx; i < cx + 24; i++){ 
-                if (j > get_v_res())
-                    return;
-                uint16_t *ptr_VM = (uint16_t*)video_mem;
-                ptr_VM += (i * h_res + j);
-                
-                //uint16_t *back = dynamicArray;
-                
-                dynamicArray[j * 24 + i] = (ptr_VM); /////// HERE
-                //printf("lul");
-                //back++;
-                
-            }    
-    //draw_xpmc(cx, cy);
-    
-    }
-}
-
-void (clearCursor)(cursor * c){
-       
-    int x ,y;
-    getPosition(c, &y, &x);
-
-    //int h_res = get_h_res();
+void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
+    int h_res = get_h_res();
   //int bits_per_pixel = get_bits_per_pixel();
-  //void *video_mem = get_video_mem();
+    void *video_mem = get_video_mem();
 
-  /*xpm_image_t img;
-  uint16_t *sprite = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &img);
+    for (int i = y_Cursor; i < y_Cursor + imgC.height; i++){
+        for (int j = x_Cursor; j < x_Cursor + imgC.width; j++) {
+            uint16_t *ptr_VM = (uint16_t*)video_mem;
+            ptr_VM += (i * h_res + j);
 
-  const uint16_t  transp = xpm_transparency_color(XPM_5_6_5);
-
-  for (int i = x; i < x + img.height; i++){
-    for (int j = y; j < y + img.width; j++) {
-      uint16_t *ptr_VM = (uint16_t*)video_mem;
-      ptr_VM += (i * h_res + j);
-      if(*(sprite) != transp)
-        *ptr_VM = 0;
-      (sprite)++;
+            *ptr_VM = dynamicUMOUSEArray[i * h_res + j];
+        }
     }
-}*/
-/*
-if (x >= 0 && y >= 0 && x < get_h_res() && y < get_v_res()){
-        for (int j = y; j < y + 36; j++)
-            for (int i = x; i < x + 24; i++){ 
-                if (j > get_v_res())
-                    return;
-                uint16_t *ptr_VM = (uint16_t*)video_mem;
-                ptr_VM += (i * h_res + j);
-                
-                //uint16_t *back = dynamicArray;
-                
-                *ptr_VM = *(dynamicArray[j * 24 + i]); /////// HERE
-}
-}*/
 }
 
+void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
+    int h_res = get_h_res();
+  //int bits_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
 
+    for (int i = y_Cursor; i < y_Cursor + imgC.height; i++){
+        for (int j = x_Cursor; j < x_Cursor + imgC.width; j++) {
+            uint16_t *ptr_VM = (uint16_t*)video_mem;
+            ptr_VM += (i * h_res + j);
+
+            uint16_t color = *ptr_VM;
+            dynamicUMOUSEArray[i * h_res + j] = color;
+        }
+    }
+}

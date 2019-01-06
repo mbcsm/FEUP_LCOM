@@ -8,7 +8,7 @@
 #include "video.h"
 #include "cursor.h"
 #include "xpm.h"
-#include "pixmap/cursor_pixmap.h"
+//#include "pixmap/cursor_pixmap.h"
 #include "pixmap/play.h"
 #include "pixmap/dice1.h"
 #include "pixmap/dice2.h"
@@ -32,8 +32,8 @@
 
 int level = 1;
 
-static int xCursor = 500;
-static int yCursor = 500;
+int xCursor = 500;
+int yCursor = 500;
 
 int currentPull_x = 0, 
     currentPull_y = 0,
@@ -95,40 +95,9 @@ uint16_t *diceSix;
 
 /////////////////////////////////////////////////////////////
 
-uint16_t dynamicUMOUSEArray[24*36];
 uint16_t dynamicUARROWArray[200*200];
 uint16_t dynamicUBALLArray[1440*840];
 
-void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
-    int h_res = get_h_res();
-  //int bits_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();
-
-    for (int i = yCursor; i < yCursor + imgC.height; i++){
-        for (int j = xCursor; j < xCursor + imgC.width; j++) {
-            uint16_t *ptr_VM = (uint16_t*)video_mem;
-            ptr_VM += (i * h_res + j);
-
-            *ptr_VM = dynamicUMOUSEArray[i * h_res + j];
-        }
-    }
-}
-
-void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/){
-    int h_res = get_h_res();
-  //int bits_per_pixel = get_bits_per_pixel();
-    void *video_mem = get_video_mem();
-
-    for (int i = yCursor; i < yCursor + imgC.height; i++){
-        for (int j = xCursor; j < xCursor + imgC.width; j++) {
-            uint16_t *ptr_VM = (uint16_t*)video_mem;
-            ptr_VM += (i * h_res + j);
-
-            uint16_t color = *ptr_VM;
-            dynamicUMOUSEArray[i * h_res + j] = color;
-        }
-    }
-}
 void underBall(){
     int h_res = get_h_res();
     void *video_mem = get_video_mem();
@@ -166,38 +135,33 @@ void underArrow(){
 
 Game* Start() {
     Game *game = malloc(sizeof(Game));
+    game->gState = MENU;
+
 
     blocks[0].x = 600;
     blocks[0].y = 400;
 
     vg_start(GAME_MODE);
 
-    /*game->gameCursor = newCursor();
-    xCursor = get_h_res() / 2;
-    yCursor = get_v_res() / 2;*/
-
     board = (uint16_t*)xpm_load(board_pre_xpm, XPM_5_6_5, &imgBoard);
 
-    diceOne = (uint16_t*)xpm_load(dice1_xpm, XPM_5_6_5, &imgDiceOne);
+    /*diceOne = (uint16_t*)xpm_load(dice1_xpm, XPM_5_6_5, &imgDiceOne);
     diceTwo = (uint16_t*)xpm_load(dice2_xpm, XPM_5_6_5, &imgDiceTwo);
     diceThree = (uint16_t*)xpm_load(dice3_xpm, XPM_5_6_5, &imgDiceThree);
     diceFour = (uint16_t*)xpm_load(dice4_xpm, XPM_5_6_5, &imgDiceFour);
     diceFive = (uint16_t*)xpm_load(dice5_xpm, XPM_5_6_5, &imgDiceFive);
-    diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);
+    diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);*/
 
-    mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
-    transp = xpm_transparency_color(XPM_5_6_5);
-
-    game->gState = PLAYING;
     
-    draw_xpm(0,0, board, imgBoard, transp);
-    startBoard();
-
-    //draw_xpm(700, 980, diceOne, imgDiceOne, transp);
+    if (startMenu() == 0)
+        printf("Started Menu");
+    if (startCursor() == 0)
+        printf("Started Cursor");
     
-    //printstring("lcom", 4, "", 600, 10);
-    underArrow();
-    draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
+    
+    /*draw_xpm(0,0, board, imgBoard, transp);
+    startBoard();*/
+
 
     //srand(time(NULL));
 
@@ -275,7 +239,7 @@ void Handler(Game* game){
     int byteCounter = 0;
     int ticks = 0;
 
-    while (kbdData != ESC) {
+    while (game->gState != EXIT) {
 		if ((r = driver_receive(ANY, &msg, &ipc_status)) != 0) {
 			printf("driver_receive failed with: %d", r);
             return;
@@ -291,36 +255,35 @@ void Handler(Game* game){
                         kbd_ih();
                         
                         if (kbdData == ESC){
-                            game->gState = EXIT;
-                            break;
-                        }
-
-                        if (game->gState == MENU)
-                            menuIH(false, true, pp, kbdData);
-
-                        /*if (kbdData == 0x39){
-                            if (game->gState == MENU)
-                                game->gState = PLAYING;
+                            if (game->gState == MENU){
+                                game->gState = EXIT;
+                                break;
+                            }
                             else if (game->gState == PLAYING){
                                 game->gState = MENU;
-                                ticks = 0;
-                                }
+                                //SAVE THE SCORE
+                                startMenu();
+                                startCursor();
+                            }
                         }
-                        if (kbdData & 0x80)
-                            drawDice(10, 30 , 6);
-                        if (kbdData == 0x1e)
-                            drawDice(10, 30 , 4);
-                        if (kbdData == 0x1f)
-                            drawDice(10, 30 , 5);
-                        if (kbdData == 0x20)
-                            drawDice(10, 30 , 4);
-                        if (kbdData == 0x21)
-                            drawDice(10, 30 , 5);
-                        if (kbdData == 0xb6){  //Left-Shift BreakCode
-                            updateBoard(ticks);
-                            printBoard();
-                            paintBoard();
-                        }*/
+                        
+                        if (game->gState == MENU){
+                            int response = menuIH(false, true, &pp, kbdData);                           
+                            switch (response)
+                            {
+                                case 2:
+                                    game->gState = EXIT;
+                                    break;
+                                case 1:
+                                    game->gState = PLAYING;
+                                    clearScreen();
+                                    // start actual game here
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
+                        }
 
                     }
                     if (msg.m_notify.interrupts & irq_set_timer){
@@ -332,8 +295,8 @@ void Handler(Game* game){
                         if (ticks > 20000){
                             ticks = 0;
                         }
-                    
-                       updateScreen();
+                        if (game->gState == PLAYING)
+                            updateScreen();
 
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
@@ -444,15 +407,15 @@ void paintCell(int x, int y){
 void process_mouse_event(Game *game, struct packet* pp){
 
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
-    /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         clearMouse();
-    }*/
+    }
     
     updatePosition(pp, &xCursor, &yCursor);
     
 
     GameState gameSt = getGameState(game);
-
+    if (gameSt == PLAYING){
     if (pp->rb){
         if(!pull){
             //printf("pulling\n");
@@ -500,11 +463,29 @@ void process_mouse_event(Game *game, struct packet* pp){
             default:
 					break;
         }
+    }
+    else if (game->gState == MENU){
+            int kbd = 0;
+            int response = menuIH(true, false, pp, kbd);
+            switch (response){
+                    case -1:
+                        game->gState = EXIT;
+                        break;
+                    case 1:
+                        game->gState = PLAYING;
+                        // start actual game here
+                        break;
+                            
+                    default:
+                        break;
+            }
+    }
+
     
-    /*if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
+    if (yCursor + imgC.height < get_v_res() && xCursor + imgC.width < get_h_res()){
         underMouse();
         draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
-    }*/
+    }
 
     resetPacket(pp);
 
