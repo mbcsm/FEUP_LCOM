@@ -17,6 +17,7 @@
 #include "pixmap/menu/highscores_button_over.h"
 #include "pixmap/menu/play_button.h"
 #include "pixmap/menu/play_button_over.h"
+#include "pixmap/menu/highscores.h"
 
 /*------------------------------------*/
 
@@ -33,7 +34,7 @@ typedef enum {
     LB_PRESS,
     LB_UP,
     CLICKED    
-} Click;
+} LeftClick;
 
 int startMenu();
 

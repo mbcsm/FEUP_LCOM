@@ -17,6 +17,8 @@
 #include "pixmap/dice5.h"
 #include "pixmap/dice6.h"
 
+#include "pixmap/fonts/white-size22/z.h"
+
 #include "pixmap/b.h"
 
 #include "pixmap/ball.h"
@@ -157,6 +159,12 @@ Game* Start() {
         printf("Started Menu");
     if (startCursor() == 0)
         printf("Started Cursor");
+
+    xpm_image_t imgData;
+    uint16_t *data;
+
+    data = (uint16_t*)xpm_load(zw_xpm, XPM_5_6_5, &imgData);
+    draw_xpm(10, 10, data, imgData, getTransparency());
     
     
     /*draw_xpm(0,0, board, imgBoard, transp);
@@ -468,9 +476,9 @@ void process_mouse_event(Game *game, struct packet* pp){
             int kbd = 0;
             int response = menuIH(true, false, pp, kbd);
             switch (response){
-                    case -1:
+                    case 2:
                         game->gState = EXIT;
-                        break;
+                        return;
                     case 1:
                         game->gState = PLAYING;
                         // start actual game here

@@ -26,10 +26,14 @@ xpm_image_t imgExitButton;
 uint16_t *exitbuttonover;
 xpm_image_t imgExitButtonOver;  
 
+uint16_t *highscoresscreen;
+xpm_image_t imgHighscoresScreen;
+
 /*------------------------------------*/
 
 
 Menu menuState = VOID;
+LeftClick lc = NON;
 
 int startMenu(){
     
@@ -40,6 +44,7 @@ int startMenu(){
     highscoresbuttonover = (uint16_t*)xpm_load(highscores_button_over_xpm, XPM_5_6_5, &imgHighscoresButtonOver);
     exitbutton = (uint16_t*)xpm_load(exit_button_xpm, XPM_5_6_5, &imgExitButton);
     exitbuttonover = (uint16_t*)xpm_load(exit_button_over_xpm, XPM_5_6_5, &imgExitButtonOver);
+    highscoresscreen = (uint16_t*)xpm_load(highscores_xpm, XPM_5_6_5, &imgHighscoresScreen);
 
     printf("Button xpms started");
 
@@ -95,9 +100,43 @@ int menuIH(bool mouse, bool kbd, struct packet* pp, uint32_t kbdData){
         }
 
         bool lb = pp->lb;
-        if (lb)
-        printf("erg");
+        if (!lb && lc == NON){
+            if (menuState == PLAY_BUTTON_OVER)
+                lc = LB_UP;
+            if (menuState == HIGHSCORES_BUTTON_OVER)
+                lc = LB_UP;
+            if (menuState == EXIT_BUTTON_OVER)
+                lc = LB_UP;
+            if (menuState == VOID)
+                lc = NON;
+        }
+
+        if (lb && lc == LB_UP){
+            if (menuState == PLAY_BUTTON_OVER)
+                lc = LB_PRESS;
+            if (menuState == HIGHSCORES_BUTTON_OVER)
+                lc = LB_PRESS;
+            if (menuState == EXIT_BUTTON_OVER)
+                lc = LB_PRESS;
+            if (menuState == VOID)
+                lc = NON;
+        }
+
+        if (!lb && lc == LB_PRESS)
+            lc = CLICKED;
         
+        
+        if (lc == CLICKED){
+            lc = NON;
+            if (menuState == PLAY_BUTTON_OVER)
+                return 1; 
+            else if (menuState == HIGHSCORES_BUTTON_OVER){
+                menuState = HIGHSCORES;
+                displayMenu();
+            }
+            else if (menuState == EXIT_BUTTON_OVER)
+                return 2;
+        }
         
     }
     else if (kbd){
@@ -237,5 +276,6 @@ int displayMenu(){
 }
 
 void displayScores(){
+    draw_xpm(0, 0, highscoresscreen, imgHighscoresScreen, getTransparency());
 
 }
