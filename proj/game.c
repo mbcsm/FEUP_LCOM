@@ -24,6 +24,7 @@
 
 #include "board.h"
 #include "font.h"
+#include "menu.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -175,9 +176,6 @@ Game* Start() {
     diceFive = (uint16_t*)xpm_load(dice5_xpm, XPM_5_6_5, &imgDiceFive);
     diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);
 
-    mBall = (uint16_t*)xpm_load(ball_xpm, XPM_5_6_5, &imgBall);
-    mBallFiller = (uint16_t*)xpm_load(ball_filler_xpm, XPM_5_6_5, &imgBallFiller);
-
     mCursor = (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
     transp = xpm_transparency_color(XPM_5_6_5);
 
@@ -283,10 +281,15 @@ void Handler(Game* game){
                         kbdData = 0;
                         kbd_ih();
                         
-                        if (kbdData == ESC)
+                        if (kbdData == ESC){
                             game->gState = EXIT;
+                            break;
+                        }
 
-                        if (kbdData == 0x39){
+                        if (game->gState == MENU)
+                            menuIH(false, true, pp, kbdData);
+
+                        /*if (kbdData == 0x39){
                             if (game->gState == MENU)
                                 game->gState = PLAYING;
                             else if (game->gState == PLAYING){
@@ -308,7 +311,7 @@ void Handler(Game* game){
                             updateBoard(ticks);
                             printBoard();
                             paintBoard();
-                        }
+                        }*/
 
                     }
                     if (msg.m_notify.interrupts & irq_set_timer){
@@ -321,8 +324,8 @@ void Handler(Game* game){
                             ticks = 0;
                         }
 
+                    
                        updateScreen();
-                        
                     }
 		            if (msg.m_notify.interrupts & irq_set_mouse) {
                         //printf("irq_set_mouse\n");

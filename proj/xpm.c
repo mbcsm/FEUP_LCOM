@@ -17,3 +17,11 @@ void draw_xpm(int x, int y, uint16_t *sprite, xpm_image_t img, const uint16_t tr
     }
 }
 
+uint16_t getTransparency(){
+    return xpm_transparency_color(XPM_5_6_5);
+}
+
+int align_x_center(xpm_image_t img){
+    return 0 + (get_h_res() / 2) - (img.width / 2);
+}
+

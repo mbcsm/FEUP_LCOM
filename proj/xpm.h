@@ -6,4 +6,8 @@
 
 void draw_xpm(int x, int y, uint16_t *sprite, xpm_image_t img, const uint16_t transp);
 
+uint16_t getTransparency();
+
+int align_x_center(xpm_image_t img);
+
 #endif
