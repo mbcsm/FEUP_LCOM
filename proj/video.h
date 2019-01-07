@@ -44,10 +44,25 @@ uint8_t get_blue_screen_mask_position();
 uint8_t get_green_screen_mask_position();
 uint8_t get_red_screen_mask_position();
 
-
+/**
+ * @brief clear the whole screen
+ */
 void clearScreen();
 
+/**
+ * @brief get pixel color from a position on the screen 
+ * @param x the x position of the pixel on the screen
+ * @param y the y position of the pixel on the screen
+ * @return the pixel color value
+ */
 uint16_t getpixel(int x, int y);
+
+/**
+ * @brief set pixel color to a position on the screen 
+ * @param x the x position of the pixel on the screen
+ * @param y the y position of the pixel on the screen
+ * @param color the color of the pixel to be painted
+ */
 void changePixel(int x, int y, uint16_t color);
 
 

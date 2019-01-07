@@ -15,6 +15,9 @@ typedef struct {
 
 } Player;
 
+/**
+ * @brief Initializes player
+ */
 void startPlayer();
 
 #endif

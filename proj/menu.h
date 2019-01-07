@@ -36,14 +36,34 @@ typedef enum {
     CLICKED    
 } LeftClick;
 
+
+/**
+ * @brief Initializes the menu images and data
+*/
 int startMenu();
 
+/**
+ * @brief Handles the input on the menu wether it is from the mouse or keyboard
+ * @param mouse is the input mouse
+ * @param kbd is the input keyboard
+ * @param pp mouse packet
+ * @param kbdData keyboard buffer data
+*/
 int menuIH(bool mouse, bool kbd, struct packet* pp, uint32_t kbdData);
 
+/**
+ * @brief Displays the menu on the screen
+*/
 int displayMenu();
 
+/**
+ * @brief Displays the highscores on the screen
+*/
 void displayHighscores();
 
+/**
+ * @brief Displays the scores on the screen
+*/
 void displayScores();
 
 #endif

@@ -20,10 +20,19 @@ typedef struct
 
 } Scores;
 
+/**
+ * @brief Loads scores from file to a struct, recording the best 5 scores
+ */
 void loadScores();
 
+/**
+ * @brief Saves scores to a file, recording the best 5 scores
+ */
 void saveScores();
 
+/**
+ * @brief adds new score if it is better than the currenctly saved ones
+ */
 void addNewScore(int score);
 
 
