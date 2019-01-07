@@ -1,0 +1,31 @@
+<map id="Start" name="Start">
+<area shape="rect" id="node1" title=" " alt="" coords="5,464,56,490"/>
+<area shape="rect" id="node2" href="$group__video.html#gac67621adf87bcebb04fab536c7245315" title=" " alt="" coords="143,185,210,212"/>
+<area shape="rect" id="node3" href="$group__menu.html#ga3bd019c071fe96105524873879e16c06" title="Initializes the menu images and data." alt="" coords="137,236,217,262"/>
+<area shape="rect" id="node13" href="$group__cursor.html#ga832ef8a00055d81e9bbba145f018eefe" title="Initializes the cursors image." alt="" coords="562,286,649,313"/>
+<area shape="rect" id="node15" href="$group__score.html#ga1d81d36cfc183a1a1c8524facb3497aa" title="Loads scores from file to a struct, recording the best 5 scores." alt="" coords="133,388,220,414"/>
+<area shape="rect" id="node16" href="$group__font.html#ga673023bd0075969c22f8aa5761f59908" title="Prints string onto a location on the screen." alt="" coords="137,286,216,313"/>
+<area shape="rect" id="node18" href="$group__keyboard.html#gaa7a491d4d95eab5ca5326c4000ad67f8" title="Subscribes keyboard interrupts." alt="" coords="113,438,240,465"/>
+<area shape="rect" id="node19" href="$group__timer.html#ga6f786481e80308348d629d605ffa2d84" title="Subscribes and enables Timer 0 interrupts." alt="" coords="109,489,244,516"/>
+<area shape="rect" id="node20" href="$group__mouse.html#ga9da18257ff113b686bb826d154bfaa87" title="Subscribes Mouse interrupts." alt="" coords="104,540,249,566"/>
+<area shape="rect" id="node21" href="$group__mouse.html#ga9b5d5366f7067f50586c03e9a3f000cd" title="Disables mouse." alt="" coords="111,590,242,617"/>
+<area shape="rect" id="node22" href="$group__mouse.html#ga898e9289d77e1290373396a43ee9c53d" title="Enables Data report." alt="" coords="111,641,243,668"/>
+<area shape="rect" id="node27" href="$group__mouse.html#gaf19e0109275a1162be7188deb9c02b41" title="Enables mouse." alt="" coords="113,692,240,718"/>
+<area shape="rect" id="node28" href="$rtc_8c.html#a5171a9c0f54940fe60f7500896afcc86" title=" " alt="" coords="116,742,237,769"/>
+<area shape="rect" id="node4" href="$group__menu.html#gaad9ed7a055a99883645739e4bfca0e5e" title="Displays the menu on the screen." alt="" coords="345,109,439,136"/>
+<area shape="rect" id="node5" href="$group__video.html#ga9d7e8af417b6d543da691e9c0e2f6f9f" title="clear the whole screen" alt="" coords="560,33,651,60"/>
+<area shape="rect" id="node9" href="$group__xpm.html#ga7b37b2adae7cdc46c3092db82641ba9a" title="aligns an image by the center horizontally" alt="" coords="730,8,837,34"/>
+<area shape="rect" id="node10" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="743,185,824,212"/>
+<area shape="rect" id="node11" href="$group__xpm.html#ga17ee83c00b60b303af02d92b1ad8c64f" title="returns the value of the transparent color" alt="" coords="724,134,843,161"/>
+<area shape="rect" id="node12" href="$group__menu.html#ga4e67dd36352ce9409d1994cad2553089" title="Displays the scores on the screen." alt="" coords="553,134,657,161"/>
+<area shape="rect" id="node6" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="737,84,830,110"/>
+<area shape="rect" id="node7" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="907,109,986,136"/>
+<area shape="rect" id="node8" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="891,185,1003,212"/>
+<area shape="rect" id="node14" href="$group__cursor.html#ga10ade0aba9d682a7f9fa64c65ef3a8e3" title="Saves the pixel information bellow the cusrsor." alt="" coords="737,236,830,262"/>
+<area shape="rect" id="node17" href="$group__font.html#ga924391150c43d65d2a69422b57f0e9ca" title="Loads a char pixmap." alt="" coords="355,286,429,313"/>
+<area shape="rect" id="node23" href="$group__mouse.html#ga26d0989b9acaa8dea02b2f0639916c0e" title="makes a mouse kernel call" alt="" coords="313,666,471,693"/>
+<area shape="rect" id="node26" href="$group__mouse.html#gad82d7239d54c89cbccd5c7e8f742973d" title="Read from the kbc buffer." alt="" coords="355,616,429,642"/>
+<area shape="rect" id="node24" href="$group__mouse.html#gac193b39c229dcec39b0d82bb9f242574" title="makes a kbd kernel call" alt="" coords="535,692,676,718"/>
+<area shape="rect" id="node25" href="$group__mouse.html#gaa581647856759c0789e39e87beb056c0" title=" " alt="" coords="536,641,675,668"/>
+<area shape="rect" id="node29" href="$group__rtc.html#ga1d3c9242fe8175549f6b898cf55582fd" title="Enables RTC Update Interrupts." alt="" coords="297,742,487,769"/>
+</map>

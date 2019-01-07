@@ -1,0 +1,7 @@
+<map id="enable_data_report" name="enable_data_report">
+<area shape="rect" id="node1" title="Enables Data report." alt="" coords="5,56,137,83"/>
+<area shape="rect" id="node2" href="$group__mouse.html#ga26d0989b9acaa8dea02b2f0639916c0e" title="makes a mouse kernel call" alt="" coords="185,31,344,57"/>
+<area shape="rect" id="node5" href="$group__mouse.html#gad82d7239d54c89cbccd5c7e8f742973d" title="Read from the kbc buffer." alt="" coords="227,81,302,108"/>
+<area shape="rect" id="node3" href="$group__mouse.html#gac193b39c229dcec39b0d82bb9f242574" title="makes a kbd kernel call" alt="" coords="392,5,533,32"/>
+<area shape="rect" id="node4" href="$group__mouse.html#gaa581647856759c0789e39e87beb056c0" title=" " alt="" coords="393,56,532,83"/>
+</map>

@@ -3,4 +3,74 @@
 {\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}board.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}video.\+h\char`\"{}}\newline
-Include dependency graph for board.\+c\+:
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__board_ga978d4c9242b0a08ccba7244855a6fd34}{start\+Board}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the board\textquotesingle{}s array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__board_ga8cfe09094cdbdece93ee59c05c3c9375}{update\+Board}} (int seed)
+\begin{DoxyCompactList}\small\item\em Updates the board\textquotesingle{}s array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__board_ga8310d6d1e915cb179f834d9ca017950a}{print\+Board}} ()
+\begin{DoxyCompactList}\small\item\em Prints current board onto the terminal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__board_gac7217ffded731ca5e0785e35b36c0191}{empty\+Cell}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Checks if a cell is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__board_gaca3eaa2f0cd1abf2f8cb0e6d80f0048f}{paint\+Board\+Cell}} (int x, int y, uint16\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em paints a board cell \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__board_ga5559e08677901d82c4ad934914c0b9dc}{clear\+Board\+Cell}} (int x, int y, uint16\+\_\+t old\+Color, uint16\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em clears a board cell with a new color \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__board_ga7f29585bdde7d843e71f9f2c80c8543a}{paint\+Board}} ()
+\begin{DoxyCompactList}\small\item\em paints board with the alive blocks \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int const \mbox{\hyperlink{board_8c_a2d65c64fbd6ca1ea09f81fff9745fdfa}{F\+I\+R\+S\+T\+\_\+\+C\+E\+L\+L\+\_\+X}} = 205
+\item 
+int const \mbox{\hyperlink{board_8c_a26e2edd5c3a3059eae3676625857e409}{F\+I\+R\+S\+T\+\_\+\+C\+E\+L\+L\+\_\+Y}} = 201
+\item 
+int const \mbox{\hyperlink{board_8c_a615fe582e151b1a4b1e51716eba9304b}{C\+E\+L\+L\+\_\+\+W\+I\+D\+TH}} = 59
+\item 
+int const \mbox{\hyperlink{board_8c_ad3b53eb0d9780169b152d15253a1f096}{C\+E\+L\+L\+\_\+\+H\+E\+I\+G\+HT}} = 63
+\item 
+uint16\+\_\+t \mbox{\hyperlink{board_8c_adbe045b34406417959ab57868113b754}{C\+E\+L\+L\+\_\+\+C\+O\+L\+OR}} = 0x001f
+\item 
+uint16\+\_\+t \mbox{\hyperlink{board_8c_a3643966d753a1a7af0ce1533036c431a}{W\+H\+I\+T\+E\+\_\+\+C\+E\+LL}} = 0xffff
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{board_8c_adbe045b34406417959ab57868113b754}\label{board_8c_adbe045b34406417959ab57868113b754}} 
+\index{board.c@{board.c}!CELL\_COLOR@{CELL\_COLOR}}
+\index{CELL\_COLOR@{CELL\_COLOR}!board.c@{board.c}}
+\subsubsection{\texorpdfstring{CELL\_COLOR}{CELL\_COLOR}}
+{\footnotesize\ttfamily uint16\+\_\+t C\+E\+L\+L\+\_\+\+C\+O\+L\+OR = 0x001f}
+
+\mbox{\Hypertarget{board_8c_ad3b53eb0d9780169b152d15253a1f096}\label{board_8c_ad3b53eb0d9780169b152d15253a1f096}} 
+\index{board.c@{board.c}!CELL\_HEIGHT@{CELL\_HEIGHT}}
+\index{CELL\_HEIGHT@{CELL\_HEIGHT}!board.c@{board.c}}
+\subsubsection{\texorpdfstring{CELL\_HEIGHT}{CELL\_HEIGHT}}
+{\footnotesize\ttfamily int const C\+E\+L\+L\+\_\+\+H\+E\+I\+G\+HT = 63}
+
+\mbox{\Hypertarget{board_8c_a615fe582e151b1a4b1e51716eba9304b}\label{board_8c_a615fe582e151b1a4b1e51716eba9304b}} 
+\index{board.c@{board.c}!CELL\_WIDTH@{CELL\_WIDTH}}
+\index{CELL\_WIDTH@{CELL\_WIDTH}!board.c@{board.c}}
+\subsubsection{\texorpdfstring{CELL\_WIDTH}{CELL\_WIDTH}}
+{\footnotesize\ttfamily int const C\+E\+L\+L\+\_\+\+W\+I\+D\+TH = 59}
+
+\mbox{\Hypertarget{board_8c_a2d65c64fbd6ca1ea09f81fff9745fdfa}\label{board_8c_a2d65c64fbd6ca1ea09f81fff9745fdfa}} 
+\index{board.c@{board.c}!FIRST\_CELL\_X@{FIRST\_CELL\_X}}
+\index{FIRST\_CELL\_X@{FIRST\_CELL\_X}!board.c@{board.c}}
+\subsubsection{\texorpdfstring{FIRST\_CELL\_X}{FIRST\_CELL\_X}}
+{\footnotesize\ttfamily int const F\+I\+R\+S\+T\+\_\+\+C\+E\+L\+L\+\_\+X = 205}
+
+\mbox{\Hypertarget{board_8c_a26e2edd5c3a3059eae3676625857e409}\label{board_8c_a26e2edd5c3a3059eae3676625857e409}} 
+\index{board.c@{board.c}!FIRST\_CELL\_Y@{FIRST\_CELL\_Y}}
+\index{FIRST\_CELL\_Y@{FIRST\_CELL\_Y}!board.c@{board.c}}
+\subsubsection{\texorpdfstring{FIRST\_CELL\_Y}{FIRST\_CELL\_Y}}
+{\footnotesize\ttfamily int const F\+I\+R\+S\+T\+\_\+\+C\+E\+L\+L\+\_\+Y = 201}
+
+\mbox{\Hypertarget{board_8c_a3643966d753a1a7af0ce1533036c431a}\label{board_8c_a3643966d753a1a7af0ce1533036c431a}} 
+\index{board.c@{board.c}!WHITE\_CELL@{WHITE\_CELL}}
+\index{WHITE\_CELL@{WHITE\_CELL}!board.c@{board.c}}
+\subsubsection{\texorpdfstring{WHITE\_CELL}{WHITE\_CELL}}
+{\footnotesize\ttfamily uint16\+\_\+t W\+H\+I\+T\+E\+\_\+\+C\+E\+LL = 0xffff}
+

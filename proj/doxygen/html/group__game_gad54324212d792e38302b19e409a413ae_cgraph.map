@@ -1,0 +1,21 @@
+<map id="process_mouse_event" name="process_mouse_event">
+<area shape="rect" id="node1" title="processes mouse event by changing relevant information like pull values and also prints the cursor on..." alt="" coords="5,436,156,463"/>
+<area shape="rect" id="node2" href="$group__video.html#gaa6c3dbf699d3dda9444bdcd71bf85234" title=" " alt="" coords="369,5,446,32"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="841,208,919,235"/>
+<area shape="rect" id="node4" href="$group__cursor.html#gaf48e820503f0becc55d9eb740bffe3e8" title="Removes the cursor image from the screen." alt="" coords="672,411,761,437"/>
+<area shape="rect" id="node6" href="$group__cursor.html#gaeeb5e132ce880a8269b3bd40c748b534" title="updates the position and image of the cursor" alt="" coords="204,56,312,83"/>
+<area shape="rect" id="node7" href="$group__game.html#gaf4496cd5f0ca56890acbe30e9f10e438" title=" " alt="" coords="205,563,311,589"/>
+<area shape="rect" id="node8" href="$group__game.html#ga8aa45a2e3dda0d09a4002eb399e587a9" title="Calculates the speed with which the bullet is going to get fired at at both the x and componnent,..." alt="" coords="215,613,301,640"/>
+<area shape="rect" id="node9" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="676,309,757,336"/>
+<area shape="rect" id="node10" href="$group__menu.html#ga1c459dc7e822e8e658b11c66508d79f1" title="Handles the input on the menu wether it is from the mouse or keyboard." alt="" coords="225,284,291,311"/>
+<area shape="rect" id="node18" href="$group__cursor.html#ga10ade0aba9d682a7f9fa64c65ef3a8e3" title="Saves the pixel information bellow the cusrsor." alt="" coords="670,360,763,387"/>
+<area shape="rect" id="node19" href="$group__packet.html#gaba77b8d667ad6e8f70d3437e0f970d9f" title="Clears the packet." alt="" coords="212,664,304,691"/>
+<area shape="rect" id="node5" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="824,335,936,361"/>
+<area shape="rect" id="node11" href="$group__cursor.html#gac47a960acd2af3996c2b28d8150dcd8c" title="returns the current position of the cursor" alt="" coords="364,309,451,336"/>
+<area shape="rect" id="node12" href="$group__xpm.html#ga7b37b2adae7cdc46c3092db82641ba9a" title="aligns an image by the center horizontally" alt="" coords="503,157,609,184"/>
+<area shape="rect" id="node13" href="$group__menu.html#gaad9ed7a055a99883645739e4bfca0e5e" title="Displays the menu on the screen." alt="" coords="360,259,455,285"/>
+<area shape="rect" id="node14" href="$group__video.html#ga9d7e8af417b6d543da691e9c0e2f6f9f" title="clear the whole screen" alt="" coords="511,208,601,235"/>
+<area shape="rect" id="node16" href="$group__xpm.html#ga17ee83c00b60b303af02d92b1ad8c64f" title="returns the value of the transparent color" alt="" coords="657,259,776,285"/>
+<area shape="rect" id="node17" href="$group__menu.html#ga4e67dd36352ce9409d1994cad2553089" title="Displays the scores on the screen." alt="" coords="504,309,608,336"/>
+<area shape="rect" id="node15" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="670,208,763,235"/>
+</map>

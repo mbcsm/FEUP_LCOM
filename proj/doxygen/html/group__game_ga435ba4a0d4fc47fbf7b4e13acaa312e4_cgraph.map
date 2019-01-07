@@ -1,0 +1,5 @@
+<map id="drawBoard" name="drawBoard">
+<area shape="rect" id="node1" title="Draws the board with the &quot;alive&quot; blocks on to the screen." alt="" coords="5,31,88,57"/>
+<area shape="rect" id="node2" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="153,5,231,32"/>
+<area shape="rect" id="node3" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="136,56,248,83"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="drawBlocks" name="drawBlocks">
+<area shape="rect" id="node1" title="Draws the blocks that are alive and that are going to be saved to the backbuffer." alt="" coords="5,31,95,57"/>
+<area shape="rect" id="node2" href="$game_8c.html#ab7541b0b00bd52aea5dd7edb1f9d61b4" title=" " alt="" coords="143,31,181,57"/>
+<area shape="rect" id="node3" href="$group__video.html#ga07dd5e8b0cf0aa3aa860a89f4093045b" title="get pixel color from a position on the screen" alt="" coords="243,5,309,32"/>
+<area shape="rect" id="node6" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="229,56,323,83"/>
+<area shape="rect" id="node4" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="387,5,466,32"/>
+<area shape="rect" id="node5" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="371,56,483,83"/>
+</map>

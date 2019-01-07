@@ -1,0 +1,12 @@
+<map id="drawBullet" name="drawBullet">
+<area shape="rect" id="node1" title="Draws the bullet fired by the player." alt="" coords="5,169,88,196"/>
+<area shape="rect" id="node2" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="685,93,763,120"/>
+<area shape="rect" id="node3" href="$group__game.html#gac165fe517b083b5ccd861bf028a67b7e" title="Advances the player on to the next level." alt="" coords="136,195,212,221"/>
+<area shape="rect" id="node4" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="397,296,479,323"/>
+<area shape="rect" id="node6" href="$group__game.html#ga172749cfe0f9091767c74e3004188ffc" title="Draws the blocks that are alive and that are going to be saved to the backbuffer." alt="" coords="260,245,349,272"/>
+<area shape="rect" id="node8" href="$group__video.html#ga07dd5e8b0cf0aa3aa860a89f4093045b" title="get pixel color from a position on the screen" alt="" coords="540,93,607,120"/>
+<area shape="rect" id="node10" href="$group__game.html#ga0cf89070294bbf27c335ebf047e0f1f6" title="fills the backbuffer of the board with the available blocks" alt="" coords="263,144,346,171"/>
+<area shape="rect" id="node5" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="668,195,780,221"/>
+<area shape="rect" id="node7" href="$game_8c.html#ab7541b0b00bd52aea5dd7edb1f9d61b4" title=" " alt="" coords="419,144,457,171"/>
+<area shape="rect" id="node9" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="527,144,620,171"/>
+</map>

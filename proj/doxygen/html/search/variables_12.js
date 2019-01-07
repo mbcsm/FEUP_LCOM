@@ -1,29 +1,7 @@
 var searchData=
 [
-  ['s',['s',['../score_8c.html#ae63d902c3408e792c50067d0e12e5513',1,'score.c']]],
-  ['s_5fxpm',['s_xpm',['../black-size36_2s_8h.html#aebce0ed91c247ad983f2f14b15c2256e',1,'s.h']]],
-  ['score',['score',['../struct_player.html#ace6abae8d66534ad0a1fd6458f786a6e',1,'Player::score()'],['../player_8c.html#a7aaf402558efbb864b266aff9bd517c1',1,'score():&#160;player.c']]],
-  ['scorefive',['scoreFive',['../struct_scores.html#af612fcb18aa267e7f2a870fab6e47078',1,'Scores']]],
-  ['scorefivedate',['scoreFiveDate',['../struct_scores.html#a2969fd6fb35ea3cb390ac89b825bec99',1,'Scores']]],
-  ['scorefour',['scoreFour',['../struct_scores.html#ac054163467e4a504f597ff797c82d801',1,'Scores']]],
-  ['scorefourdate',['scoreFourDate',['../struct_scores.html#adf4634c7d0242005e8296f5ad771396a',1,'Scores']]],
-  ['scoreone',['scoreOne',['../struct_scores.html#a6aca31bb273b6fad076dc50a5a6e3a8e',1,'Scores']]],
-  ['scoreonedate',['scoreOneDate',['../struct_scores.html#a5986b967a1bad15dd675bfa65365f842',1,'Scores']]],
-  ['scorethree',['scoreThree',['../struct_scores.html#aec915cffa1ccb8645ad6ee54b359f687',1,'Scores']]],
-  ['scorethreedate',['scoreThreeDate',['../struct_scores.html#a4e480e0715f82dc3e69dbcd87c6290af',1,'Scores']]],
-  ['scoretwo',['scoreTwo',['../struct_scores.html#ac138adaf6d9c61b3e6c8ee88915c3c31',1,'Scores']]],
-  ['scoretwodate',['scoreTwoDate',['../struct_scores.html#a6eb8b4bc814ae505d20c5c77c8e19c96',1,'Scores']]],
-  ['second',['second',['../struct_date__and___time.html#aed8b75bcb223dd5828a2b8ed0b5c9eec',1,'Date_and_Time']]],
-  ['seven_5fxpm',['seven_xpm',['../black-size36_27_8h.html#aac4834b73a0e390da79d0d829fe3143b',1,'7.h']]],
-  ['sevenw_5fxpm',['sevenw_xpm',['../white-size22_27_8h.html#a12e4c3b21fd5fe4d403d0f322cccea26',1,'7.h']]],
-  ['six_5fxpm',['six_xpm',['../black-size36_26_8h.html#a259dbfe741cdbb89320273c25d67172e',1,'6.h']]],
-  ['sixw_5fxpm',['sixw_xpm',['../white-size22_26_8h.html#afce922e6c0edcc6380a4f9dffc831326',1,'6.h']]],
-  ['slash_5fxpm',['slash_xpm',['../black-size36_2slash_8h.html#a75aeb3cbc2201956b5a6be0228f5b2b2',1,'slash.h']]],
-  ['slashw_5fxpm',['slashw_xpm',['../white-size22_2slash_8h.html#ad099df0b7ca09f7cd96aa479efa03d53',1,'slash.h']]],
-  ['speedx',['speedX',['../struct_bullet.html#a82599c14ed9a73741bc856d476176da3',1,'Bullet']]],
-  ['speedy',['speedY',['../struct_bullet.html#a26093711aaa5ded2d5665ee5132672d8',1,'Bullet']]],
-  ['square_5fxpm',['square_xpm',['../square_8h.html#a063a5904fb82f647fe37989dcfbab3c6',1,'square.h']]],
-  ['st',['st',['../mouse_8c.html#a06c4c56ffe97daec8ce7a2db42cadc96',1,'mouse.c']]],
-  ['startplayer',['startPlayer',['../player_8c.html#aa3f9e54c2bf4757a93fbcbdd3503b420',1,'player.c']]],
-  ['sw_5fxpm',['sw_xpm',['../white-size22_2s_8h.html#aeb1f845c2c8fab44bb92840995825390',1,'s.h']]]
+  ['x',['x',['../struct_bullet.html#add8da3ee8a3265a38ebbfe8a254ebb19',1,'Bullet::x()'],['../struct_block.html#a13d0a6d225233353862fa5adcbadf661',1,'Block::x()']]],
+  ['x_5fcursor',['x_Cursor',['../cursor_8c.html#a566c9c1cb2793b9d967216675bff33b9',1,'cursor.c']]],
+  ['x_5flen',['x_len',['../mouse_8c.html#ab981e40c34558bd6e7061094fe1d92de',1,'mouse.c']]],
+  ['xcursor',['xCursor',['../game_8c.html#a6186c07837a5c62bcfc21fa5693573a1',1,'game.c']]]
 ];

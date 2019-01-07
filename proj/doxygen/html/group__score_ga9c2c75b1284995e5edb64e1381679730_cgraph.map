@@ -1,0 +1,4 @@
+<map id="addNewScore" name="addNewScore">
+<area shape="rect" id="node1" title="adds new score if it is better than the currenctly saved ones" alt="" coords="5,5,108,32"/>
+<area shape="rect" id="node2" href="$group__rtc.html#ga42d5a1a9ae07d38ec73c43499ec429ee" title="Return a string with current the date and time." alt="" coords="156,5,335,32"/>
+</map>

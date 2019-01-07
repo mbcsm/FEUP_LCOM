@@ -1,0 +1,13 @@
+<map id="menuIH" name="menuIH">
+<area shape="rect" id="node1" title="Handles the input on the menu wether it is from the mouse or keyboard." alt="" coords="5,56,72,83"/>
+<area shape="rect" id="node2" href="$group__cursor.html#gac47a960acd2af3996c2b28d8150dcd8c" title="returns the current position of the cursor" alt="" coords="124,5,211,32"/>
+<area shape="rect" id="node3" href="$group__xpm.html#ga7b37b2adae7cdc46c3092db82641ba9a" title="aligns an image by the center horizontally" alt="" coords="263,43,369,69"/>
+<area shape="rect" id="node5" href="$group__menu.html#gaad9ed7a055a99883645739e4bfca0e5e" title="Displays the menu on the screen." alt="" coords="120,132,215,159"/>
+<area shape="rect" id="node4" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="601,93,679,120"/>
+<area shape="rect" id="node6" href="$group__video.html#ga9d7e8af417b6d543da691e9c0e2f6f9f" title="clear the whole screen" alt="" coords="271,93,361,120"/>
+<area shape="rect" id="node9" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="436,195,517,221"/>
+<area shape="rect" id="node10" href="$group__xpm.html#ga17ee83c00b60b303af02d92b1ad8c64f" title="returns the value of the transparent color" alt="" coords="417,144,536,171"/>
+<area shape="rect" id="node11" href="$group__menu.html#ga4e67dd36352ce9409d1994cad2553089" title="Displays the scores on the screen." alt="" coords="264,195,368,221"/>
+<area shape="rect" id="node7" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="430,93,523,120"/>
+<area shape="rect" id="node8" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="584,169,696,196"/>
+</map>

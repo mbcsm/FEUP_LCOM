@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['q_5fxpm',['q_xpm',['../black-size36_2q_8h.html#a7b42597d066f3f091a0e44300f52f3c1',1,'q.h']]],
-  ['question_5fmark_5fxpm',['question_mark_xpm',['../black-size36_2question__mark_8h.html#a06319aa5bfded1f76f2cf433e18bd02b',1,'question_mark.h']]],
-  ['question_5fmarkw_5fxpm',['question_markw_xpm',['../white-size22_2question__mark_8h.html#aa4741031ef0acf14500c26fe4bebd2c3',1,'question_mark.h']]],
-  ['qw_5fxpm',['qw_xpm',['../white-size22_2q_8h.html#ada31866b49de6960f7d6a2f4db3acc2e',1,'q.h']]]
+  ['v_5fres',['v_res',['../group__video.html#ga5bda1b499253a8fbf3cab646f8760391',1,'video.h']]],
+  ['video_5fmem',['video_mem',['../group__video.html#ga93a24e067b9083bed6fb5c0336fd7a01',1,'video.h']]]
 ];

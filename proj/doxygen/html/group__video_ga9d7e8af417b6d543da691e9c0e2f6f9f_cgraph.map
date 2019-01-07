@@ -1,0 +1,6 @@
+<map id="clearScreen" name="clearScreen">
+<area shape="rect" id="node1" title="clear the whole screen" alt="" coords="5,31,96,57"/>
+<area shape="rect" id="node2" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="144,31,237,57"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="302,5,381,32"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="285,56,397,83"/>
+</map>

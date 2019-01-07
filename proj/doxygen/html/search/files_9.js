@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['9_2eh',['9.h',['../black-size36_29_8h.html',1,'(Global Namespace)'],['../white-size22_29_8h.html',1,'(Global Namespace)']]]
+  ['score_2ec',['score.c',['../score_8c.html',1,'']]],
+  ['score_2eh',['score.h',['../score_8h.html',1,'']]]
 ];

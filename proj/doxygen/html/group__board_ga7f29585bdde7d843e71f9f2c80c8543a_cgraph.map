@@ -1,0 +1,9 @@
+<map id="paintBoard" name="paintBoard">
+<area shape="rect" id="node1" title="paints board with the alive blocks" alt="" coords="5,50,89,77"/>
+<area shape="rect" id="node2" href="$group__video.html#ga07dd5e8b0cf0aa3aa860a89f4093045b" title="get pixel color from a position on the screen" alt="" coords="305,50,372,77"/>
+<area shape="rect" id="node5" href="$group__board.html#gaca3eaa2f0cd1abf2f8cb0e6d80f0048f" title="paints a board cell" alt="" coords="137,125,244,151"/>
+<area shape="rect" id="node7" href="$group__board.html#ga5559e08677901d82c4ad934914c0b9dc" title="clears a board cell with a new color" alt="" coords="137,50,244,77"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="450,50,529,77"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="433,101,545,127"/>
+<area shape="rect" id="node6" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="292,101,385,127"/>
+</map>

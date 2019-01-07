@@ -1,0 +1,7 @@
+<map id="paintBoardCell" name="paintBoardCell">
+<area shape="rect" id="node1" title="paints a board cell" alt="" coords="5,31,112,57"/>
+<area shape="rect" id="node2" href="$group__video.html#ga07dd5e8b0cf0aa3aa860a89f4093045b" title="get pixel color from a position on the screen" alt="" coords="173,5,240,32"/>
+<area shape="rect" id="node5" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="160,56,253,83"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="318,5,397,32"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="301,56,413,83"/>
+</map>

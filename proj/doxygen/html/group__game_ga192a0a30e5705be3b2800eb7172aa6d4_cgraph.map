@@ -1,0 +1,15 @@
+<map id="updateScreen" name="updateScreen">
+<area shape="rect" id="node1" title="Calls a series of functions to print every element on to the screen during play time." alt="" coords="5,93,108,120"/>
+<area shape="rect" id="node2" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="449,131,531,157"/>
+<area shape="rect" id="node5" href="$group__game.html#ga0cf89070294bbf27c335ebf047e0f1f6" title="fills the backbuffer of the board with the available blocks" alt="" coords="449,296,531,323"/>
+<area shape="rect" id="node6" href="$group__game.html#ga435ba4a0d4fc47fbf7b4e13acaa312e4" title="Draws the board with the &quot;alive&quot; blocks on to the screen." alt="" coords="675,43,757,69"/>
+<area shape="rect" id="node7" href="$group__game.html#ga072809b49225566117672a2ec734b2cc" title="Draws the pull of the mouse in game." alt="" coords="287,93,397,120"/>
+<area shape="rect" id="node8" href="$group__game.html#ga43d711f5646009700e97e8cce499d5fc" title="Draws the bullet fired by the player." alt="" coords="156,245,239,272"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="827,271,906,297"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="811,144,923,171"/>
+<area shape="rect" id="node9" href="$group__game.html#gac165fe517b083b5ccd861bf028a67b7e" title="Advances the player on to the next level." alt="" coords="304,195,380,221"/>
+<area shape="rect" id="node10" href="$group__game.html#ga172749cfe0f9091767c74e3004188ffc" title="Draws the blocks that are alive and that are going to be saved to the backbuffer." alt="" coords="445,207,535,233"/>
+<area shape="rect" id="node12" href="$group__video.html#ga07dd5e8b0cf0aa3aa860a89f4093045b" title="get pixel color from a position on the screen" alt="" coords="683,245,749,272"/>
+<area shape="rect" id="node11" href="$game_8c.html#ab7541b0b00bd52aea5dd7edb1f9d61b4" title=" " alt="" coords="583,207,621,233"/>
+<area shape="rect" id="node13" href="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348" title="set pixel color to a position on the screen" alt="" coords="669,195,763,221"/>
+</map>

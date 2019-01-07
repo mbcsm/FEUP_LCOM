@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['5_2eh',['5.h',['../black-size36_25_8h.html',1,'(Global Namespace)'],['../white-size22_25_8h.html',1,'(Global Namespace)']]]
+  ['keyboard_2ec',['keyboard.c',['../keyboard_8c.html',1,'']]],
+  ['keyboard_2eh',['keyboard.h',['../keyboard_8h.html',1,'']]]
 ];

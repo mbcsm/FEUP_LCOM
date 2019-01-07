@@ -1,0 +1,7 @@
+<map id="displayScores" name="displayScores">
+<area shape="rect" id="node1" title="Displays the scores on the screen." alt="" coords="5,56,109,83"/>
+<area shape="rect" id="node2" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="176,31,257,57"/>
+<area shape="rect" id="node5" href="$group__xpm.html#ga17ee83c00b60b303af02d92b1ad8c64f" title="returns the value of the transparent color" alt="" coords="157,81,276,108"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="341,5,419,32"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="324,56,436,83"/>
+</map>

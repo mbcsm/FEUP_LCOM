@@ -1,0 +1,7 @@
+<map id="randDice" name="randDice">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,79,57"/>
+<area shape="rect" id="node2" href="$game_8c.html#ad3d5c671521a730697bcdd67f20b0891" title=" " alt="" coords="127,31,201,57"/>
+<area shape="rect" id="node3" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="249,31,331,57"/>
+<area shape="rect" id="node4" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="395,5,474,32"/>
+<area shape="rect" id="node5" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="379,56,491,83"/>
+</map>

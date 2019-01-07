@@ -1,0 +1,7 @@
+<map id="printstring" name="printstring">
+<area shape="rect" id="node1" title="Prints string onto a location on the screen." alt="" coords="5,31,84,57"/>
+<area shape="rect" id="node2" href="$group__font.html#ga924391150c43d65d2a69422b57f0e9ca" title="Loads a char pixmap." alt="" coords="136,5,209,32"/>
+<area shape="rect" id="node3" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="132,56,213,83"/>
+<area shape="rect" id="node4" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="278,31,357,57"/>
+<area shape="rect" id="node5" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="261,81,373,108"/>
+</map>

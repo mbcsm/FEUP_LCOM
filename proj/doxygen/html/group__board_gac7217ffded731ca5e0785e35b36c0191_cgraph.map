@@ -1,0 +1,6 @@
+<map id="emptyCell" name="emptyCell">
+<area shape="rect" id="node1" title="Checks if a cell is empty." alt="" coords="5,31,85,57"/>
+<area shape="rect" id="node2" href="$group__video.html#ga07dd5e8b0cf0aa3aa860a89f4093045b" title="get pixel color from a position on the screen" alt="" coords="133,31,200,57"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="265,5,343,32"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="248,56,360,83"/>
+</map>

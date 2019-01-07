@@ -1,0 +1,4 @@
+<map id="event" name="event">
+<area shape="rect" id="node1" title="handles an event of moving and clicking to make an M on the screen with the mouse" alt="" coords="5,5,57,32"/>
+<area shape="rect" id="node2" href="$group__mouse.html#gabf7bb26fb5683538fbe802be6df228f1" title="updates the state of the mouse" alt="" coords="105,5,197,32"/>
+</map>

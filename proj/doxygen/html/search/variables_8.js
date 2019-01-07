@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['i_5fxpm',['i_xpm',['../black-size36_2i_8h.html#abf5f011ea851b6395f388125b76fd147',1,'i.h']]],
   ['id',['id',['../struct_bullet.html#a0a9eaf4c15d27ab4354a242503ddd0af',1,'Bullet']]],
   ['imgb',['imgb',['../game_8c.html#a09be42732901a21807ebe36ed252f8ab',1,'game.c']]],
   ['imgball',['imgBall',['../game_8c.html#ace2829d036b50b48f0f6b349443e9703',1,'game.c']]],
@@ -23,6 +22,5 @@ var searchData=
   ['imgplaybutton',['imgPlayButton',['../menu_8c.html#a60c8cac1cea6dd23a2e664d4114522aa',1,'menu.c']]],
   ['imgplaybuttonover',['imgPlayButtonOver',['../menu_8c.html#a9b9bcf471079754dcc53549169673026',1,'menu.c']]],
   ['imgsquare',['imgSquare',['../game_8c.html#ab95895ceb70acb65005604d2bafd02fb',1,'game.c']]],
-  ['in_5fmode',['in_mode',['../group__timer.html#ga16c0028c537ce578196381bdc0cd97fd',1,'timer_status_field_val']]],
-  ['iw_5fxpm',['iw_xpm',['../white-size22_2i_8h.html#aa6debbc4bb360c171c1ea93ca614615c',1,'i.h']]]
+  ['in_5fmode',['in_mode',['../group__timer.html#ga16c0028c537ce578196381bdc0cd97fd',1,'timer_status_field_val']]]
 ];

@@ -1,7 +1,20 @@
 var searchData=
 [
-  ['o_5fxpm',['o_xpm',['../black-size36_2o_8h.html#ac2f0e26b00d38f1f4c90c21eecef1d85',1,'o.h']]],
-  ['one_5fxpm',['one_xpm',['../black-size36_21_8h.html#a6d942619574fb4ca9cfc834b653c4bca',1,'1.h']]],
-  ['onew_5fxpm',['onew_xpm',['../white-size22_21_8h.html#acffd72b104beef6e4141297cadc36d46',1,'1.h']]],
-  ['ow_5fxpm',['ow_xpm',['../white-size22_2o_8h.html#a24b5584c1f98f90ae6c348e87f19aea9',1,'o.h']]]
+  ['s',['s',['../score_8c.html#ae63d902c3408e792c50067d0e12e5513',1,'score.c']]],
+  ['score',['score',['../struct_player.html#ace6abae8d66534ad0a1fd6458f786a6e',1,'Player::score()'],['../player_8c.html#a7aaf402558efbb864b266aff9bd517c1',1,'score():&#160;player.c']]],
+  ['scorefive',['scoreFive',['../struct_scores.html#af612fcb18aa267e7f2a870fab6e47078',1,'Scores']]],
+  ['scorefivedate',['scoreFiveDate',['../struct_scores.html#a2969fd6fb35ea3cb390ac89b825bec99',1,'Scores']]],
+  ['scorefour',['scoreFour',['../struct_scores.html#ac054163467e4a504f597ff797c82d801',1,'Scores']]],
+  ['scorefourdate',['scoreFourDate',['../struct_scores.html#adf4634c7d0242005e8296f5ad771396a',1,'Scores']]],
+  ['scoreone',['scoreOne',['../struct_scores.html#a6aca31bb273b6fad076dc50a5a6e3a8e',1,'Scores']]],
+  ['scoreonedate',['scoreOneDate',['../struct_scores.html#a5986b967a1bad15dd675bfa65365f842',1,'Scores']]],
+  ['scorethree',['scoreThree',['../struct_scores.html#aec915cffa1ccb8645ad6ee54b359f687',1,'Scores']]],
+  ['scorethreedate',['scoreThreeDate',['../struct_scores.html#a4e480e0715f82dc3e69dbcd87c6290af',1,'Scores']]],
+  ['scoretwo',['scoreTwo',['../struct_scores.html#ac138adaf6d9c61b3e6c8ee88915c3c31',1,'Scores']]],
+  ['scoretwodate',['scoreTwoDate',['../struct_scores.html#a6eb8b4bc814ae505d20c5c77c8e19c96',1,'Scores']]],
+  ['second',['second',['../struct_date__and___time.html#aed8b75bcb223dd5828a2b8ed0b5c9eec',1,'Date_and_Time']]],
+  ['speedx',['speedX',['../struct_bullet.html#a82599c14ed9a73741bc856d476176da3',1,'Bullet']]],
+  ['speedy',['speedY',['../struct_bullet.html#a26093711aaa5ded2d5665ee5132672d8',1,'Bullet']]],
+  ['st',['st',['../mouse_8c.html#a06c4c56ffe97daec8ce7a2db42cadc96',1,'mouse.c']]],
+  ['startplayer',['startPlayer',['../player_8c.html#aa3f9e54c2bf4757a93fbcbdd3503b420',1,'player.c']]]
 ];

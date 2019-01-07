@@ -1,0 +1,7 @@
+<map id="startCursor" name="startCursor">
+<area shape="rect" id="node1" title="Initializes the cursors image." alt="" coords="5,31,92,57"/>
+<area shape="rect" id="node2" href="$group__cursor.html#ga10ade0aba9d682a7f9fa64c65ef3a8e3" title="Saves the pixel information bellow the cusrsor." alt="" coords="140,5,233,32"/>
+<area shape="rect" id="node5" href="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7" title="draws xpm to a postion on the screen" alt="" coords="146,56,227,83"/>
+<area shape="rect" id="node3" href="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1" title=" " alt="" coords="298,5,377,32"/>
+<area shape="rect" id="node4" href="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea" title=" " alt="" coords="281,56,393,83"/>
+</map>

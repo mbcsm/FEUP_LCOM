@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['n_5fxpm',['n_xpm',['../black-size36_2n_8h.html#a5c6661a72ba47e7bc8b89ee6bdd504be',1,'n.h']]],
-  ['nine_5fxpm',['nine_xpm',['../black-size36_29_8h.html#a463710ef8e20e62ca79425f24079db70',1,'9.h']]],
-  ['ninew_5fxpm',['ninew_xpm',['../white-size22_29_8h.html#a5974886943bb40e4cc9f2a3e73f24c9b',1,'9.h']]],
-  ['nw_5fxpm',['nw_xpm',['../white-size22_2n_8h.html#a6c3e42d8641d2c7ba7d603230d31487a',1,'n.h']]]
+  ['redfieldposition',['RedFieldPosition',['../group__video.html#ga3a7a89d7ef4fe63fce7122ef46f3045b',1,'video.h']]],
+  ['redmasksize',['RedMaskSize',['../group__video.html#gac8bf88bea3e2d2723d6c038fcd75589f',1,'video.h']]],
+  ['redscreemask',['RedScreeMask',['../group__video.html#ga4b1b7cf1a9d2ad7605c72850290546e0',1,'video.h']]]
 ];

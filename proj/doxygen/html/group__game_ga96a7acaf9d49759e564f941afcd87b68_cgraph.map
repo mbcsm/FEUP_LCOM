@@ -1,0 +1,12 @@
+<map id="End" name="End">
+<area shape="rect" id="node1" title="Closes all the interruptions at the end of the program." alt="" coords="5,107,51,133"/>
+<area shape="rect" id="node2" href="$group__mouse.html#ga9b5d5366f7067f50586c03e9a3f000cd" title="Disables mouse." alt="" coords="113,5,243,32"/>
+<area shape="rect" id="node3" href="$group__mouse.html#ga9d37a10902df825a7445faa3261f1a91" title="Disables Data report." alt="" coords="111,56,245,83"/>
+<area shape="rect" id="node8" href="$group__mouse.html#ga685ad2706aca36d9869a30a19b9f446a" title="Unsubscribes Mouse interrupts." alt="" coords="99,107,257,133"/>
+<area shape="rect" id="node9" href="$group__keyboard.html#ga5bdf6cfb570c375192b0d87913b65c57" title="Unsubscribes keyboard interrupts." alt="" coords="107,157,249,184"/>
+<area shape="rect" id="node10" href="$group__timer.html#gab9eea51549744bca5c5c923b388bb4ee" title="Unsubscribes Timer 0 interrupts." alt="" coords="103,208,253,235"/>
+<area shape="rect" id="node4" href="$group__mouse.html#ga26d0989b9acaa8dea02b2f0639916c0e" title="makes a mouse kernel call" alt="" coords="305,31,464,57"/>
+<area shape="rect" id="node7" href="$group__mouse.html#gad82d7239d54c89cbccd5c7e8f742973d" title="Read from the kbc buffer." alt="" coords="347,81,422,108"/>
+<area shape="rect" id="node5" href="$group__mouse.html#gac193b39c229dcec39b0d82bb9f242574" title="makes a kbd kernel call" alt="" coords="512,5,653,32"/>
+<area shape="rect" id="node6" href="$group__mouse.html#gaa581647856759c0789e39e87beb056c0" title=" " alt="" coords="513,56,652,83"/>
+</map>

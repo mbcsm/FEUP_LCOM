@@ -1,0 +1,5 @@
+<map id="write_mouse_command" name="write_mouse_command">
+<area shape="rect" id="node1" title="makes a mouse kernel call" alt="" coords="5,31,164,57"/>
+<area shape="rect" id="node2" href="$group__mouse.html#gac193b39c229dcec39b0d82bb9f242574" title="makes a kbd kernel call" alt="" coords="212,5,353,32"/>
+<area shape="rect" id="node3" href="$group__mouse.html#gaa581647856759c0789e39e87beb056c0" title=" " alt="" coords="213,56,352,83"/>
+</map>
