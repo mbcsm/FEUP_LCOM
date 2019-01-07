@@ -10,12 +10,14 @@
 #include "xpm.h"
 //#include "pixmap/cursor_pixmap.h"
 #include "pixmap/play.h"
+#include "pixmap/bullet.h"
 #include "pixmap/dice1.h"
 #include "pixmap/dice2.h"
 #include "pixmap/dice3.h"
 #include "pixmap/dice4.h"
 #include "pixmap/dice5.h"
 #include "pixmap/dice6.h"
+#include "pixmap/square.h"
 
 #include "pixmap/fonts/white-size22/z.h"
 
@@ -33,6 +35,7 @@
 #include <math.h>
 
 int level = 1;
+bool ended = false;
 
 int xCursor = 500;
 int yCursor = 500;
@@ -58,15 +61,17 @@ uint16_t bCELL_COLOR = 0x001f;
 uint16_t bWHITE_CELL = 0xffff;
 
 int totalBlocks = 0;
-
-
-
+int gameIteration = 0;
 
 xpm_image_t imgC;
 uint16_t *mCursor; //= (uint16_t*)xpm_load(cursor_xpm_xpm, XPM_5_6_5, &imgC);
 
 xpm_image_t imgBall;
 uint16_t *mBall;
+
+xpm_image_t imgBullet;
+uint16_t *mBullet;
+
 xpm_image_t imgBallFiller;
 uint16_t *mBallFiller;
 
@@ -75,6 +80,8 @@ uint16_t  transp;
 xpm_image_t imgBoard;
 uint16_t *board;
 
+xpm_image_t imgSquare;
+uint16_t *mSquare;
 
 ////////////////////////  DICE  ///////////////////////////
 xpm_image_t imgDiceOne;
@@ -98,22 +105,39 @@ uint16_t *diceSix;
 /////////////////////////////////////////////////////////////
 
 uint16_t dynamicUARROWArray[200*200];
-uint16_t dynamicUBALLArray[1440*840];
+uint16_t dynamicUBOARDArray[1280*1024];
 
-void underBall(){
+void saveBoard(){
     int h_res = get_h_res();
     void *video_mem = get_video_mem();
 
-    for (int i = MOUSE_PULL_START_Y; i < MOUSE_PULL_START_Y - currentPull_y; i++){
-        for (int j = MOUSE_PULL_START_X; j < MOUSE_PULL_START_Y - currentPull_x; j++) {
+    printf("started saving board\n");
+    for (int i = 100; i < 1000; i++){
+        for (int j = 100; j < 1200; j++) {
             uint16_t *ptr_VM = (uint16_t*)video_mem;
             ptr_VM += (i * h_res + j);
 
             uint16_t color = *ptr_VM;
-            dynamicUBALLArray[i * h_res + j] = color;
+            dynamicUBOARDArray[i * h_res + j] = color;
+        }
+    }
+    printf("finished saving board\n");
+}
+void drawBoard(){
+    int h_res = get_h_res();
+  //int bits_per_pixel = get_bits_per_pixel();
+    void *video_mem = get_video_mem();
+
+    for (int i = 100; i < 1000; i++){
+        for (int j = 100; j < 1200; j++) {
+            uint16_t *ptr_VM = (uint16_t*)video_mem;
+            ptr_VM += (i * h_res + j);
+
+            *ptr_VM = dynamicUBOARDArray[i * h_res + j];
         }
     }
 }
+
 void underArrow(){
     int h_res = get_h_res();
     //int bits_per_pixel = get_bits_per_pixel();
@@ -154,7 +178,8 @@ Game* Start() {
     diceFive = (uint16_t*)xpm_load(dice5_xpm, XPM_5_6_5, &imgDiceFive);
     diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);*/
     mBall = (uint16_t*)xpm_load(ball_xpm, XPM_5_6_5, &imgBall);
-
+    mBullet = (uint16_t*)xpm_load(bullet_xpm, XPM_5_6_5, &imgBullet);
+    mSquare = (uint16_t*)xpm_load(bullet_xpm, XPM_5_6_5, &imgSquare);
     
     if (startMenu() == 0)
         printf("Started Menu");
@@ -500,9 +525,15 @@ void process_mouse_event(Game *game, struct packet* pp){
 
 }
 void updateScreen(){
-    draw_xpm(0,0, board, imgBoard, transp);
-    drawBlocks();
+    if(gameIteration == 0){
+        draw_xpm(0,0, board, imgBoard, transp);
+        saveBoard();
+    }
+    gameIteration++;
+    drawBoard();
+    //printf("draw board\n");
     if(pull == true){drawMousePull();}
+    //printf("draw pull\n");
     draw_xpm(xCursor, yCursor, mCursor, imgC, transp);
     if(bullet != NULL){drawBullet();}
 }
@@ -511,7 +542,7 @@ void updateScreen(){
 void drawMousePull(){
     if(currentPull_y >= 0 || currentPull_x == 0 ){return;}
 
-    printf("drawing mouse pull\n");
+    //printf("drawing mouse pull\n");
 
     int pixelDraw_x = MOUSE_PULL_START_X;
     int pixelDraw_y = MOUSE_PULL_START_Y;
@@ -519,17 +550,19 @@ void drawMousePull(){
     int increment_x = -currentPull_x / 3;
     int increment_y = currentPull_y / 3;
 
+
     for (int i = 0; i < 3; i++){
         pixelDraw_x += increment_x;
         pixelDraw_y += increment_y;
         mouse_bubbles_pos_x[i] = pixelDraw_x;
         mouse_bubbles_pos_y[i] = pixelDraw_y;
+        if(pixelDraw_x < 100 || pixelDraw_x > 1000 || pixelDraw_y > 1000 || pixelDraw_y < 100){continue;}
         draw_xpm(pixelDraw_x, pixelDraw_y, mBall, imgBall, transp);
     }
     //printf("___________________\n");
 }
 void drawBullet(){
-    if((bullet -> posX > get_h_res() - 430) || (bullet -> posX < 180)){bullet -> speedX = -bullet -> speedX;}
+    if((bullet -> posX > get_h_res() - 430) || (bullet -> posX < 190)){bullet -> speedX = -bullet -> speedX;}
     if(bullet -> posY < 200){bullet -> speedY = -bullet -> speedY;}
     if(bullet -> posY > MOUSE_PULL_START_Y){
         nextLevel();
@@ -541,21 +574,20 @@ void drawBullet(){
     bullet -> posY += bullet -> speedY;
 
 
-    bullet -> x = (bullet -> posX - bFIRST_CELL_X) / bCELL_WIDTH;
-    bullet -> y = (bullet -> posY - bFIRST_CELL_Y) / bCELL_HEIGHT;
+    bullet -> x = (bullet -> posX + imgBall.width/2 - bFIRST_CELL_X) / bCELL_WIDTH;
+    bullet -> y = (bullet -> posY + imgBall.height/2 - bFIRST_CELL_Y) / bCELL_HEIGHT;
 
-    draw_xpm(bullet -> posX, bullet -> posY, mBall, imgBall, transp);
+    draw_xpm(bullet -> posX, bullet -> posY, mBullet, imgBullet, transp);
 
     int deleteX = -1, deleteY = -1;
     bool blockCollision = false, blockFound = false, topLeft = false, topRight = false, bottomLeft = false, bottomRight = false;
 
-      if(getpixel(bullet -> posX, bullet -> posY) != bWHITE_CELL){
-          topLeft = true;
-      }
-    if(getpixel(bullet -> posX + imgBall.width, bullet -> posY) != bWHITE_CELL){topRight = true;}
-    if(getpixel(bullet -> posX + imgBall.width, bullet -> posY) != bWHITE_CELL){topRight = true;}
-    if(getpixel(bullet -> posX, bullet -> posY + imgBall.height) != bWHITE_CELL){bottomRight= true;}
-    if(getpixel(bullet -> posX + imgBall.width, bullet -> posY + imgBall.height) != bWHITE_CELL){bottomLeft = true;}
+    if(getpixel(bullet -> posX - imgBall.width, bullet -> posY - imgBall.height) != bWHITE_CELL){
+        topLeft = true;
+    }
+    if(getpixel(bullet -> posX + imgBall.width*2, bullet -> posY - imgBall.height) != bWHITE_CELL){topRight = true;}
+    if(getpixel(bullet -> posX - imgBall.width, bullet -> posY + imgBall.height*2) != bWHITE_CELL){bottomRight= true;}
+    if(getpixel(bullet -> posX + imgBall.width*2, bullet -> posY + imgBall.height*2) != bWHITE_CELL){bottomLeft = true;}
 
 
     if(getpixel(bullet -> posX, bullet -> posY) != bWHITE_CELL
@@ -576,6 +608,10 @@ void drawBullet(){
                 blocks[j].alive = false;
                 blockFound = true;
 
+                draw_xpm(0,0, board, imgBoard, transp);
+                drawBlocks();
+                saveBoard();
+
                 bool directionChanged = false;
                 if((topLeft && topRight) || (bottomLeft && bottomRight)){
                     bullet -> speedY = -bullet -> speedY;
@@ -587,6 +623,7 @@ void drawBullet(){
                 }
                 if(!directionChanged){
                     bullet -> speedX = -bullet -> speedX;
+                    bullet -> speedY = -bullet -> speedY;
                 }
                 return;
             }
@@ -628,7 +665,7 @@ void drawBlocks(){
     //printf("drawing blocks\n");
     for(int i = 0; i < totalBlocks; i++){
         if(blocks[i].alive){
-            fill(blocks[i].x * 60 + bFIRST_CELL_X, blocks[i].y * 60 + bFIRST_CELL_Y, 0x001e);
+            fill(blocks[i].x * 58  + bFIRST_CELL_X, blocks[i].y * 62 + bFIRST_CELL_Y, 0x001e);
         }
     }
 }
@@ -638,7 +675,8 @@ void nextLevel(){
     for(int j = 0; j < 256; j ++){
         if(blocks[j].alive){
             blocks[j].y += 1;
-            if(blocks[j].y ==12){
+            if(blocks[j].y ==11){
+                //TODO: GO BACK TO MENU
                 printf("Game OVER!\n");
             }
         }
@@ -654,4 +692,9 @@ void nextLevel(){
             totalBlocks++;
         }
     }
+    level++;
+    draw_xpm(0,0, board, imgBoard, transp);
+    drawBlocks();
+    saveBoard();
+    printf("save board\n");
 }

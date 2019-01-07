@@ -53,7 +53,8 @@ void process_mouse_event(Game* game, struct packet* pp);
 void clearArrow();
 void underArrow();
 
-void underBall();
+void saveBoard();
+void drawBoard();
 
 void updateScreen();
 void drawMousePull();
