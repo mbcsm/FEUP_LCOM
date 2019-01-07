@@ -44,4 +44,6 @@ int displayMenu();
 
 void displayHighscores();
 
+void displayScores();
+
 #endif

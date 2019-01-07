@@ -266,7 +266,7 @@ int displayMenu(){
             break;
 
         case HIGHSCORES:
-            /* code */
+            displayScores();
             break;
     
         default:
@@ -277,5 +277,6 @@ int displayMenu(){
 
 void displayScores(){
     draw_xpm(0, 0, highscoresscreen, imgHighscoresScreen, getTransparency());
+
 
 }

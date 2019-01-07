@@ -37,8 +37,8 @@ void (updatePosition)(struct packet *pp, int *x, int *y){
 
     if (*y > get_v_res())
         *y = get_v_res();
-    else if (*y < 0)
-        *y = 0;
+    else if (*y < 15)
+        *y = 15;
 
         x_Cursor = *x;
         y_Cursor = *y;

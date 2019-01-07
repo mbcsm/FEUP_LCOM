@@ -5,6 +5,7 @@
 uint8_t bit_no_kbd;
 uint8_t bit_no_mouse;
 uint8_t bit_no_timer;
+uint8_t bit_no_rtc;
 
 
 #define PI 3.14159265
