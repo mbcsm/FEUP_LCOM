@@ -6,6 +6,7 @@
 #include "mouse.h"
 #include "packet.h"
 #include "video.h"
+#include "rtc.h"
 #include "cursor.h"
 #include "xpm.h"
 //#include "pixmap/cursor_pixmap.h"
@@ -19,7 +20,7 @@
 #include "pixmap/dice6.h"
 #include "pixmap/square.h"
 
-#include "pixmap/fonts/white-size22/z.h"
+//#include "pixmap/fonts/white-size22/z.h"
 
 #include "pixmap/b.h"
 
@@ -29,6 +30,7 @@
 #include "board.h"
 #include "font.h"
 #include "menu.h"
+#include "score.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -186,11 +188,15 @@ Game* Start() {
     if (startCursor() == 0)
         printf("Started Cursor");
 
-    xpm_image_t imgData;
+    loadScores();
+
+    /*xpm_image_t imgData;
     uint16_t *data;
 
     data = (uint16_t*)xpm_load(zw_xpm, XPM_5_6_5, &imgData);
-    draw_xpm(10, 10, data, imgData, getTransparency());
+    draw_xpm(10, 10, data, imgData, getTransparency());*/
+
+    printstring("lcom", 4, "w", 2, 500);
     
     
     /*draw_xpm(0,0, board, imgBoard, transp);
@@ -216,6 +222,9 @@ Game* Start() {
         return NULL;
 	
     if (mouse_enable_int() != 0)
+        return NULL;
+
+    if (rtc_subscribe_int(&bit_no_rtc) != 0)
         return NULL;
 
     return game;
@@ -268,6 +277,7 @@ void Handler(Game* game){
     uint64_t irq_set_timer = BIT(bit_no_timer);
     uint64_t irq_set_kbd = BIT(bit_no_kbd);
     uint64_t irq_set_mouse = BIT(bit_no_mouse);
+    uint64_t irq_set_rtc = BIT(bit_no_rtc);
 
 
     int byteCounter = 0;
@@ -295,7 +305,8 @@ void Handler(Game* game){
                             }
                             else if (game->gState == PLAYING){
                                 game->gState = MENU;
-                                //SAVE THE SCORE
+                                addNewScore(200);
+                                saveScores();
                                 startMenu();
                                 startCursor();
                             }
@@ -345,6 +356,9 @@ void Handler(Game* game){
                             process_mouse_event(game, &pp);
                         }
 			        }
+                    if (msg.m_notify.interrupts & irq_set_rtc) {
+                        rtc_ih();
+                    }
                     break;
                     
 		        default:
