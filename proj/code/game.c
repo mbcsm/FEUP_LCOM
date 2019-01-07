@@ -162,6 +162,7 @@ void underArrow(){
 
 
 Game* Start() {
+
     Game *game = malloc(sizeof(Game));
     game->gState = MENU;
 
@@ -305,8 +306,8 @@ void Handler(Game* game){
                             }
                             else if (game->gState == PLAYING){
                                 game->gState = MENU;
-                                addNewScore(200);
-                                saveScores();
+                                //addNewScore(200);
+                                //saveScores();
                                 startMenu();
                                 startCursor();
                             }
@@ -332,6 +333,12 @@ void Handler(Game* game){
 
                     }
                     if (msg.m_notify.interrupts & irq_set_timer){
+                         if (ended == true){
+                            ended = false;
+                            game->gState = MENU;
+                            startMenu();
+                            startCursor();
+                        }
                         if (game->gState == PLAYING){
                             ticks++;
                             //if (ticks % (sys_hz() / 8) == 0)
@@ -522,6 +529,14 @@ void process_mouse_event(Game *game, struct packet* pp){
                     case 1:
                         game->gState = PLAYING;
                         // start actual game here
+                        bullet = NULL;
+                        ended = false;
+                        level = 1;
+                        gameIteration = 0;
+                        for(int j = 0; j < totalBlocks; j ++){
+                            blocks[j].alive = false;
+                        }
+                        draw_xpm(0,0, board, imgBoard, transp);
                         break;
                             
                     default:
@@ -539,6 +554,8 @@ void process_mouse_event(Game *game, struct packet* pp){
 
 }
 void updateScreen(){
+    if(ended){return;}
+
     if(gameIteration == 0){
         draw_xpm(0,0, board, imgBoard, transp);
         saveBoard();
@@ -685,13 +702,15 @@ void drawBlocks(){
 }
 
 void nextLevel(){
+    
     printf("next level\n");
-    for(int j = 0; j < 256; j ++){
+    for(int j = 0; j < totalBlocks; j ++){
         if(blocks[j].alive){
             blocks[j].y += 1;
             if(blocks[j].y ==11){
                 //TODO: GO BACK TO MENU
                 printf("Game OVER!\n");
+                ended = true;
             }
         }
     }
