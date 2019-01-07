@@ -1,0 +1,127 @@
+\hypertarget{group__rtc}{}\section{rtc}
+\label{group__rtc}\index{rtc@{rtc}}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_date__and___time}{Date\+\_\+and\+\_\+\+Time}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__rtc_gabd8de825e876e8ef94c64ac616f68a11}{rtc\+\_\+subscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Subscribes R\+TC interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_gab8f17bf5280c908c8b199a90fefcc758}{rtc\+\_\+unsubscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes R\+TC interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_ga57f7116af216e3779ad9d6e98351d329}{rtc\+\_\+ih}} ()
+\begin{DoxyCompactList}\small\item\em R\+TC Interrupt Handler. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_ga1d3c9242fe8175549f6b898cf55582fd}{rtc\+\_\+enable\+\_\+update\+\_\+interrupts}} ()
+\begin{DoxyCompactList}\small\item\em Enables R\+TC Update Interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_ga71a212cd88a2e2b09096d345a86c1eb8}{rtc\+\_\+disable\+\_\+update\+\_\+interrupts}} ()
+\begin{DoxyCompactList}\small\item\em Disables R\+TC Update Interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_gac55b23b9b681e0bd120a88e35580825a}{update\+\_\+\+R\+T\+C\+\_\+date}} ()
+\begin{DoxyCompactList}\small\item\em Updates the currently date when an update interrupt is recieved. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{group__rtc_ga42d5a1a9ae07d38ec73c43499ec429ee}{get\+\_\+current\+\_\+date\+\_\+and\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Return a string with current the date and time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for rtc 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__rtc_ga42d5a1a9ae07d38ec73c43499ec429ee}\label{group__rtc_ga42d5a1a9ae07d38ec73c43499ec429ee}} 
+\index{rtc@{rtc}!get\_current\_date\_and\_time@{get\_current\_date\_and\_time}}
+\index{get\_current\_date\_and\_time@{get\_current\_date\_and\_time}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{get\_current\_date\_and\_time()}{get\_current\_date\_and\_time()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+current\+\_\+date\+\_\+and\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return a string with current the date and time. 
+
+\begin{DoxyReturn}{Returns}
+Returns 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__rtc_ga71a212cd88a2e2b09096d345a86c1eb8}\label{group__rtc_ga71a212cd88a2e2b09096d345a86c1eb8}} 
+\index{rtc@{rtc}!rtc\_disable\_update\_interrupts@{rtc\_disable\_update\_interrupts}}
+\index{rtc\_disable\_update\_interrupts@{rtc\_disable\_update\_interrupts}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{rtc\_disable\_update\_interrupts()}{rtc\_disable\_update\_interrupts()}}
+{\footnotesize\ttfamily int rtc\+\_\+disable\+\_\+update\+\_\+interrupts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disables R\+TC Update Interrupts. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, not -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__rtc_ga1d3c9242fe8175549f6b898cf55582fd}\label{group__rtc_ga1d3c9242fe8175549f6b898cf55582fd}} 
+\index{rtc@{rtc}!rtc\_enable\_update\_interrupts@{rtc\_enable\_update\_interrupts}}
+\index{rtc\_enable\_update\_interrupts@{rtc\_enable\_update\_interrupts}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{rtc\_enable\_update\_interrupts()}{rtc\_enable\_update\_interrupts()}}
+{\footnotesize\ttfamily int rtc\+\_\+enable\+\_\+update\+\_\+interrupts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Enables R\+TC Update Interrupts. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, not -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__rtc_ga57f7116af216e3779ad9d6e98351d329}\label{group__rtc_ga57f7116af216e3779ad9d6e98351d329}} 
+\index{rtc@{rtc}!rtc\_ih@{rtc\_ih}}
+\index{rtc\_ih@{rtc\_ih}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{rtc\_ih()}{rtc\_ih()}}
+{\footnotesize\ttfamily int rtc\+\_\+ih (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+R\+TC Interrupt Handler. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, not -\/1 otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{group__rtc_gabd8de825e876e8ef94c64ac616f68a11}\label{group__rtc_gabd8de825e876e8ef94c64ac616f68a11}} 
+\index{rtc@{rtc}!rtc\_subscribe\_int@{rtc\_subscribe\_int}}
+\index{rtc\_subscribe\_int@{rtc\_subscribe\_int}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{rtc\_subscribe\_int()}{rtc\_subscribe\_int()}}
+{\footnotesize\ttfamily int rtc\+\_\+subscribe\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Subscribes R\+TC interrupts. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if succesful, not -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__rtc_gab8f17bf5280c908c8b199a90fefcc758}\label{group__rtc_gab8f17bf5280c908c8b199a90fefcc758}} 
+\index{rtc@{rtc}!rtc\_unsubscribe\_int@{rtc\_unsubscribe\_int}}
+\index{rtc\_unsubscribe\_int@{rtc\_unsubscribe\_int}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{rtc\_unsubscribe\_int()}{rtc\_unsubscribe\_int()}}
+{\footnotesize\ttfamily int rtc\+\_\+unsubscribe\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Unsubscribes R\+TC interrupts. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, not -\/1 otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{group__rtc_gac55b23b9b681e0bd120a88e35580825a}\label{group__rtc_gac55b23b9b681e0bd120a88e35580825a}} 
+\index{rtc@{rtc}!update\_RTC\_date@{update\_RTC\_date}}
+\index{update\_RTC\_date@{update\_RTC\_date}!rtc@{rtc}}
+\subsubsection{\texorpdfstring{update\_RTC\_date()}{update\_RTC\_date()}}
+{\footnotesize\ttfamily int update\+\_\+\+R\+T\+C\+\_\+date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates the currently date when an update interrupt is recieved. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, not -\/1 otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2

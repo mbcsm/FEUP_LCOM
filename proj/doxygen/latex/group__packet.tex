@@ -1,0 +1,49 @@
+\hypertarget{group__packet}{}\section{packet}
+\label{group__packet}\index{packet@{packet}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__packet_gaba77b8d667ad6e8f70d3437e0f970d9f}{reset\+Packet}} (struct packet $\ast$pp)
+\begin{DoxyCompactList}\small\item\em Clears the packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__packet_gab8c9528083362ee2239ec6a11e9e5b94}{parse\+To\+Packet}} (int byte, uint32\+\_\+t \mbox{\hyperlink{font_8c_a5d286c9bcb0e4c4f62d09f5ec39118e4}{data}}, struct packet $\ast$pp)
+\begin{DoxyCompactList}\small\item\em Parses the mouse information into a more usable struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for packet 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__packet_gab8c9528083362ee2239ec6a11e9e5b94}\label{group__packet_gab8c9528083362ee2239ec6a11e9e5b94}} 
+\index{packet@{packet}!parseToPacket@{parseToPacket}}
+\index{parseToPacket@{parseToPacket}!packet@{packet}}
+\subsubsection{\texorpdfstring{parseToPacket()}{parseToPacket()}}
+{\footnotesize\ttfamily void parse\+To\+Packet (\begin{DoxyParamCaption}\item[{int}]{byte,  }\item[{uint32\+\_\+t}]{data,  }\item[{struct packet $\ast$}]{pp }\end{DoxyParamCaption})}
+
+
+
+Parses the mouse information into a more usable struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte} & \\
+\hline
+{\em data} & mouse data $\ast$ \\
+\hline
+{\em packet} & pointer to the mouse packet \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__packet_gaba77b8d667ad6e8f70d3437e0f970d9f}\label{group__packet_gaba77b8d667ad6e8f70d3437e0f970d9f}} 
+\index{packet@{packet}!resetPacket@{resetPacket}}
+\index{resetPacket@{resetPacket}!packet@{packet}}
+\subsubsection{\texorpdfstring{resetPacket()}{resetPacket()}}
+{\footnotesize\ttfamily void reset\+Packet (\begin{DoxyParamCaption}\item[{struct packet $\ast$}]{pp }\end{DoxyParamCaption})}
+
+
+
+Clears the packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pp} & pointer to the mouse packet \\
+\hline
+\end{DoxyParams}

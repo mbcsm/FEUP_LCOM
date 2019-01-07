@@ -1,0 +1,79 @@
+\hypertarget{game_8h}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/game.h File Reference}
+\label{game_8h}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/game.h@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/game.h}}
+{\ttfamily \#include \char`\"{}cursor.\+h\char`\"{}}\newline
+Include dependency graph for game.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_game}{Game}}
+\item 
+struct \mbox{\hyperlink{struct_bullet}{Bullet}}
+\item 
+struct \mbox{\hyperlink{struct_block}{Block}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__game_ga598a3330b3c21701223ee0ca14316eca}{PI}}~3.\+14159265
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} \{ \mbox{\hyperlink{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a4c40e60bc71a32b924ce1f08d57f9721}{M\+E\+NU}}, 
+\mbox{\hyperlink{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285af095245f5cebc27a97a124345269fed8}{P\+L\+A\+Y\+I\+NG}}, 
+\mbox{\hyperlink{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a7a10b5d68d31711288e1fe0fa17dbf4f}{E\+X\+IT}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_game}{Game}} $\ast$ \mbox{\hyperlink{group__game_gaaae55be55be73d9c3073893b52530b32}{Start}} ()
+\item 
+\mbox{\hyperlink{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} \mbox{\hyperlink{group__game_gaf4496cd5f0ca56890acbe30e9f10e438}{get\+Game\+State}} (\mbox{\hyperlink{struct_game}{Game}} $\ast$game)
+\item 
+void \mbox{\hyperlink{group__game_ga5b0e92642a5a6f7584bf752ebf7d91e6}{Handler}} (\mbox{\hyperlink{struct_game}{Game}} $\ast$game)
+\begin{DoxyCompactList}\small\item\em Handles every interruption made by the drivers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__game_ga96a7acaf9d49759e564f941afcd87b68}{End}} ()
+\begin{DoxyCompactList}\small\item\em Closes all the interruptions at the end of the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gad54324212d792e38302b19e409a413ae}{process\+\_\+mouse\+\_\+event}} (\mbox{\hyperlink{struct_game}{Game}} $\ast$game, struct packet $\ast$pp)
+\begin{DoxyCompactList}\small\item\em processes mouse event by changing relevant information like pull values and also prints the cursor on to the screen \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga7ab4e7bd56aa5de2995f358a255aeb86}{clear\+Arrow}} ()
+\begin{DoxyCompactList}\small\item\em erases cursor from screen \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gaa6f544d0a9fe4df07759118388d9ec22}{under\+Arrow}} ()
+\begin{DoxyCompactList}\small\item\em fills the backbuffer of whatś behind the cursor image \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga0cf89070294bbf27c335ebf047e0f1f6}{save\+Board}} ()
+\begin{DoxyCompactList}\small\item\em fills the backbuffer of the board with the available blocks \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga435ba4a0d4fc47fbf7b4e13acaa312e4}{draw\+Board}} ()
+\begin{DoxyCompactList}\small\item\em Draws the board with the \char`\"{}alive\char`\"{} blocks on to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga192a0a30e5705be3b2800eb7172aa6d4}{update\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Calls a series of functions to print every element on to the screen during play time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga072809b49225566117672a2ec734b2cc}{draw\+Mouse\+Pull}} ()
+\begin{DoxyCompactList}\small\item\em Draws the pull of the mouse in game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga43d711f5646009700e97e8cce499d5fc}{draw\+Bullet}} ()
+\begin{DoxyCompactList}\small\item\em Draws the bullet fired by the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga172749cfe0f9091767c74e3004188ffc}{draw\+Blocks}} ()
+\begin{DoxyCompactList}\small\item\em Draws the blocks that are alive and that are going to be saved to the backbuffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga8aa45a2e3dda0d09a4002eb399e587a9}{shoot\+Bullet}} (int pullX, int pullY)
+\begin{DoxyCompactList}\small\item\em Calculates the speed with which the bullet is going to get fired at at both the x and componnent, depending on how the pulling event is at the moment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gac9ffb5de47cf14e382f2f7c0f359eb39}{paint\+Cell}} ()
+\begin{DoxyCompactList}\small\item\em Paints a cell of the board with a block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gac165fe517b083b5ccd861bf028a67b7e}{next\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Advances the player on to the next level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga6d6813b4ed3fe31a49b13b3cd616beb5}{bit\+\_\+no\+\_\+kbd}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga3553354293e11c5cd620f549a9b0125d}{bit\+\_\+no\+\_\+mouse}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga4594ebb7bd04d177d6cd263c79326508}{bit\+\_\+no\+\_\+timer}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga260e7fab8fc77111f366569f300d9947}{bit\+\_\+no\+\_\+rtc}}
+\item 
+\mbox{\hyperlink{struct_block}{Block}} \mbox{\hyperlink{group__game_ga20059dbeabda880205889c9dd7da0413}{blocks}} \mbox{[}256\mbox{]}
+\item 
+\mbox{\hyperlink{struct_bullet}{Bullet}} $\ast$ \mbox{\hyperlink{group__game_gaecc50182d564a1688000de7e0dae0c1a}{bullet}}
+\end{DoxyCompactItemize}

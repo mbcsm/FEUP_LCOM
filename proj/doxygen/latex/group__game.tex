@@ -1,0 +1,346 @@
+\hypertarget{group__game}{}\section{game}
+\label{group__game}\index{game@{game}}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_game}{Game}}
+\item 
+struct \mbox{\hyperlink{struct_bullet}{Bullet}}
+\item 
+struct \mbox{\hyperlink{struct_block}{Block}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__game_ga598a3330b3c21701223ee0ca14316eca}{PI}}~3.\+14159265
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} \{ \mbox{\hyperlink{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a4c40e60bc71a32b924ce1f08d57f9721}{M\+E\+NU}}, 
+\mbox{\hyperlink{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285af095245f5cebc27a97a124345269fed8}{P\+L\+A\+Y\+I\+NG}}, 
+\mbox{\hyperlink{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a7a10b5d68d31711288e1fe0fa17dbf4f}{E\+X\+IT}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_game}{Game}} $\ast$ \mbox{\hyperlink{group__game_gaaae55be55be73d9c3073893b52530b32}{Start}} ()
+\item 
+\mbox{\hyperlink{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} \mbox{\hyperlink{group__game_gaf4496cd5f0ca56890acbe30e9f10e438}{get\+Game\+State}} (\mbox{\hyperlink{struct_game}{Game}} $\ast$game)
+\item 
+void \mbox{\hyperlink{group__game_ga5b0e92642a5a6f7584bf752ebf7d91e6}{Handler}} (\mbox{\hyperlink{struct_game}{Game}} $\ast$game)
+\begin{DoxyCompactList}\small\item\em Handles every interruption made by the drivers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__game_ga96a7acaf9d49759e564f941afcd87b68}{End}} ()
+\begin{DoxyCompactList}\small\item\em Closes all the interruptions at the end of the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gad54324212d792e38302b19e409a413ae}{process\+\_\+mouse\+\_\+event}} (\mbox{\hyperlink{struct_game}{Game}} $\ast$game, struct packet $\ast$pp)
+\begin{DoxyCompactList}\small\item\em processes mouse event by changing relevant information like pull values and also prints the cursor on to the screen \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga7ab4e7bd56aa5de2995f358a255aeb86}{clear\+Arrow}} ()
+\begin{DoxyCompactList}\small\item\em erases cursor from screen \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gaa6f544d0a9fe4df07759118388d9ec22}{under\+Arrow}} ()
+\begin{DoxyCompactList}\small\item\em fills the backbuffer of whatś behind the cursor image \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga0cf89070294bbf27c335ebf047e0f1f6}{save\+Board}} ()
+\begin{DoxyCompactList}\small\item\em fills the backbuffer of the board with the available blocks \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga435ba4a0d4fc47fbf7b4e13acaa312e4}{draw\+Board}} ()
+\begin{DoxyCompactList}\small\item\em Draws the board with the \char`\"{}alive\char`\"{} blocks on to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga192a0a30e5705be3b2800eb7172aa6d4}{update\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Calls a series of functions to print every element on to the screen during play time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga072809b49225566117672a2ec734b2cc}{draw\+Mouse\+Pull}} ()
+\begin{DoxyCompactList}\small\item\em Draws the pull of the mouse in game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga43d711f5646009700e97e8cce499d5fc}{draw\+Bullet}} ()
+\begin{DoxyCompactList}\small\item\em Draws the bullet fired by the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga172749cfe0f9091767c74e3004188ffc}{draw\+Blocks}} ()
+\begin{DoxyCompactList}\small\item\em Draws the blocks that are alive and that are going to be saved to the backbuffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_ga8aa45a2e3dda0d09a4002eb399e587a9}{shoot\+Bullet}} (int pullX, int pullY)
+\begin{DoxyCompactList}\small\item\em Calculates the speed with which the bullet is going to get fired at at both the x and componnent, depending on how the pulling event is at the moment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gac9ffb5de47cf14e382f2f7c0f359eb39}{paint\+Cell}} ()
+\begin{DoxyCompactList}\small\item\em Paints a cell of the board with a block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__game_gac165fe517b083b5ccd861bf028a67b7e}{next\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Advances the player on to the next level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga6d6813b4ed3fe31a49b13b3cd616beb5}{bit\+\_\+no\+\_\+kbd}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga3553354293e11c5cd620f549a9b0125d}{bit\+\_\+no\+\_\+mouse}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga4594ebb7bd04d177d6cd263c79326508}{bit\+\_\+no\+\_\+timer}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game_ga260e7fab8fc77111f366569f300d9947}{bit\+\_\+no\+\_\+rtc}}
+\item 
+\mbox{\hyperlink{struct_block}{Block}} \mbox{\hyperlink{group__game_ga20059dbeabda880205889c9dd7da0413}{blocks}} \mbox{[}256\mbox{]}
+\item 
+\mbox{\hyperlink{struct_bullet}{Bullet}} $\ast$ \mbox{\hyperlink{group__game_gaecc50182d564a1688000de7e0dae0c1a}{bullet}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for game 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__game_ga598a3330b3c21701223ee0ca14316eca}\label{group__game_ga598a3330b3c21701223ee0ca14316eca}} 
+\index{game@{game}!PI@{PI}}
+\index{PI@{PI}!game@{game}}
+\subsubsection{\texorpdfstring{PI}{PI}}
+{\footnotesize\ttfamily \#define PI~3.\+14159265}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}\label{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}} 
+\index{game@{game}!GameState@{GameState}}
+\index{GameState@{GameState}!game@{game}}
+\subsubsection{\texorpdfstring{GameState}{GameState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU@{MENU}!game@{game}}\index{game@{game}!MENU@{MENU}}}\mbox{\Hypertarget{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a4c40e60bc71a32b924ce1f08d57f9721}\label{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a4c40e60bc71a32b924ce1f08d57f9721}} 
+M\+E\+NU&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PLAYING@{PLAYING}!game@{game}}\index{game@{game}!PLAYING@{PLAYING}}}\mbox{\Hypertarget{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285af095245f5cebc27a97a124345269fed8}\label{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285af095245f5cebc27a97a124345269fed8}} 
+P\+L\+A\+Y\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EXIT@{EXIT}!game@{game}}\index{game@{game}!EXIT@{EXIT}}}\mbox{\Hypertarget{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a7a10b5d68d31711288e1fe0fa17dbf4f}\label{group__game_gga7899b65f1ea0f655e4bbf8d2a5714285a7a10b5d68d31711288e1fe0fa17dbf4f}} 
+E\+X\+IT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__game_ga7ab4e7bd56aa5de2995f358a255aeb86}\label{group__game_ga7ab4e7bd56aa5de2995f358a255aeb86}} 
+\index{game@{game}!clearArrow@{clearArrow}}
+\index{clearArrow@{clearArrow}!game@{game}}
+\subsubsection{\texorpdfstring{clearArrow()}{clearArrow()}}
+{\footnotesize\ttfamily void clear\+Arrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+erases cursor from screen 
+
+\mbox{\Hypertarget{group__game_ga172749cfe0f9091767c74e3004188ffc}\label{group__game_ga172749cfe0f9091767c74e3004188ffc}} 
+\index{game@{game}!drawBlocks@{drawBlocks}}
+\index{drawBlocks@{drawBlocks}!game@{game}}
+\subsubsection{\texorpdfstring{drawBlocks()}{drawBlocks()}}
+{\footnotesize\ttfamily void draw\+Blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the blocks that are alive and that are going to be saved to the backbuffer. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{group__game_ga435ba4a0d4fc47fbf7b4e13acaa312e4}\label{group__game_ga435ba4a0d4fc47fbf7b4e13acaa312e4}} 
+\index{game@{game}!drawBoard@{drawBoard}}
+\index{drawBoard@{drawBoard}!game@{game}}
+\subsubsection{\texorpdfstring{drawBoard()}{drawBoard()}}
+{\footnotesize\ttfamily void draw\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the board with the \char`\"{}alive\char`\"{} blocks on to the screen. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{group__game_ga43d711f5646009700e97e8cce499d5fc}\label{group__game_ga43d711f5646009700e97e8cce499d5fc}} 
+\index{game@{game}!drawBullet@{drawBullet}}
+\index{drawBullet@{drawBullet}!game@{game}}
+\subsubsection{\texorpdfstring{drawBullet()}{drawBullet()}}
+{\footnotesize\ttfamily void draw\+Bullet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the bullet fired by the player. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{group__game_ga072809b49225566117672a2ec734b2cc}\label{group__game_ga072809b49225566117672a2ec734b2cc}} 
+\index{game@{game}!drawMousePull@{drawMousePull}}
+\index{drawMousePull@{drawMousePull}!game@{game}}
+\subsubsection{\texorpdfstring{drawMousePull()}{drawMousePull()}}
+{\footnotesize\ttfamily void draw\+Mouse\+Pull (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draws the pull of the mouse in game. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{group__game_ga96a7acaf9d49759e564f941afcd87b68}\label{group__game_ga96a7acaf9d49759e564f941afcd87b68}} 
+\index{game@{game}!End@{End}}
+\index{End@{End}!game@{game}}
+\subsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily int End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Closes all the interruptions at the end of the program. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\mbox{\Hypertarget{group__game_gaf4496cd5f0ca56890acbe30e9f10e438}\label{group__game_gaf4496cd5f0ca56890acbe30e9f10e438}} 
+\index{game@{game}!getGameState@{getGameState}}
+\index{getGameState@{getGameState}!game@{game}}
+\subsubsection{\texorpdfstring{getGameState()}{getGameState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__game_ga7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} get\+Game\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_game}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{group__game_ga5b0e92642a5a6f7584bf752ebf7d91e6}\label{group__game_ga5b0e92642a5a6f7584bf752ebf7d91e6}} 
+\index{game@{game}!Handler@{Handler}}
+\index{Handler@{Handler}!game@{game}}
+\subsubsection{\texorpdfstring{Handler()}{Handler()}}
+{\footnotesize\ttfamily void Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_game}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles every interruption made by the drivers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to the \mbox{\hyperlink{struct_game}{Game}} struct of the current session \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{group__game_gac165fe517b083b5ccd861bf028a67b7e}\label{group__game_gac165fe517b083b5ccd861bf028a67b7e}} 
+\index{game@{game}!nextLevel@{nextLevel}}
+\index{nextLevel@{nextLevel}!game@{game}}
+\subsubsection{\texorpdfstring{nextLevel()}{nextLevel()}}
+{\footnotesize\ttfamily void next\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Advances the player on to the next level. 
+
+Here is the call graph for this function\+:
+% FIG 6
+\mbox{\Hypertarget{group__game_gac9ffb5de47cf14e382f2f7c0f359eb39}\label{group__game_gac9ffb5de47cf14e382f2f7c0f359eb39}} 
+\index{game@{game}!paintCell@{paintCell}}
+\index{paintCell@{paintCell}!game@{game}}
+\subsubsection{\texorpdfstring{paintCell()}{paintCell()}}
+{\footnotesize\ttfamily void paint\+Cell (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Paints a cell of the board with a block. 
+
+\mbox{\Hypertarget{group__game_gad54324212d792e38302b19e409a413ae}\label{group__game_gad54324212d792e38302b19e409a413ae}} 
+\index{game@{game}!process\_mouse\_event@{process\_mouse\_event}}
+\index{process\_mouse\_event@{process\_mouse\_event}!game@{game}}
+\subsubsection{\texorpdfstring{process\_mouse\_event()}{process\_mouse\_event()}}
+{\footnotesize\ttfamily void process\+\_\+mouse\+\_\+event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_game}{Game}} $\ast$}]{game,  }\item[{struct packet $\ast$}]{pp }\end{DoxyParamCaption})}
+
+
+
+processes mouse event by changing relevant information like pull values and also prints the cursor on to the screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & pointer to the \mbox{\hyperlink{struct_game}{Game}} struct of the current session \\
+\hline
+{\em pp} & packet of the mouse input \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 7
+\mbox{\Hypertarget{group__game_ga0cf89070294bbf27c335ebf047e0f1f6}\label{group__game_ga0cf89070294bbf27c335ebf047e0f1f6}} 
+\index{game@{game}!saveBoard@{saveBoard}}
+\index{saveBoard@{saveBoard}!game@{game}}
+\subsubsection{\texorpdfstring{saveBoard()}{saveBoard()}}
+{\footnotesize\ttfamily void save\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+fills the backbuffer of the board with the available blocks 
+
+Here is the call graph for this function\+:
+% FIG 8
+\mbox{\Hypertarget{group__game_ga8aa45a2e3dda0d09a4002eb399e587a9}\label{group__game_ga8aa45a2e3dda0d09a4002eb399e587a9}} 
+\index{game@{game}!shootBullet@{shootBullet}}
+\index{shootBullet@{shootBullet}!game@{game}}
+\subsubsection{\texorpdfstring{shootBullet()}{shootBullet()}}
+{\footnotesize\ttfamily void shoot\+Bullet (\begin{DoxyParamCaption}\item[{int}]{pullX,  }\item[{int}]{pullY }\end{DoxyParamCaption})}
+
+
+
+Calculates the speed with which the bullet is going to get fired at at both the x and componnent, depending on how the pulling event is at the moment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pullX} & pull x component \\
+\hline
+{\em pullX} & pull y component \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__game_gaaae55be55be73d9c3073893b52530b32}\label{group__game_gaaae55be55be73d9c3073893b52530b32}} 
+\index{game@{game}!Start@{Start}}
+\index{Start@{Start}!game@{game}}
+\subsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_game}{Game}}$\ast$ Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 9
+\mbox{\Hypertarget{group__game_gaa6f544d0a9fe4df07759118388d9ec22}\label{group__game_gaa6f544d0a9fe4df07759118388d9ec22}} 
+\index{game@{game}!underArrow@{underArrow}}
+\index{underArrow@{underArrow}!game@{game}}
+\subsubsection{\texorpdfstring{underArrow()}{underArrow()}}
+{\footnotesize\ttfamily void under\+Arrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+fills the backbuffer of whatś behind the cursor image 
+
+Here is the call graph for this function\+:
+% FIG 10
+\mbox{\Hypertarget{group__game_ga192a0a30e5705be3b2800eb7172aa6d4}\label{group__game_ga192a0a30e5705be3b2800eb7172aa6d4}} 
+\index{game@{game}!updateScreen@{updateScreen}}
+\index{updateScreen@{updateScreen}!game@{game}}
+\subsubsection{\texorpdfstring{updateScreen()}{updateScreen()}}
+{\footnotesize\ttfamily void update\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calls a series of functions to print every element on to the screen during play time. 
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group__game_ga6d6813b4ed3fe31a49b13b3cd616beb5}\label{group__game_ga6d6813b4ed3fe31a49b13b3cd616beb5}} 
+\index{game@{game}!bit\_no\_kbd@{bit\_no\_kbd}}
+\index{bit\_no\_kbd@{bit\_no\_kbd}!game@{game}}
+\subsubsection{\texorpdfstring{bit\_no\_kbd}{bit\_no\_kbd}}
+{\footnotesize\ttfamily uint8\+\_\+t bit\+\_\+no\+\_\+kbd}
+
+\mbox{\Hypertarget{group__game_ga3553354293e11c5cd620f549a9b0125d}\label{group__game_ga3553354293e11c5cd620f549a9b0125d}} 
+\index{game@{game}!bit\_no\_mouse@{bit\_no\_mouse}}
+\index{bit\_no\_mouse@{bit\_no\_mouse}!game@{game}}
+\subsubsection{\texorpdfstring{bit\_no\_mouse}{bit\_no\_mouse}}
+{\footnotesize\ttfamily uint8\+\_\+t bit\+\_\+no\+\_\+mouse}
+
+\mbox{\Hypertarget{group__game_ga260e7fab8fc77111f366569f300d9947}\label{group__game_ga260e7fab8fc77111f366569f300d9947}} 
+\index{game@{game}!bit\_no\_rtc@{bit\_no\_rtc}}
+\index{bit\_no\_rtc@{bit\_no\_rtc}!game@{game}}
+\subsubsection{\texorpdfstring{bit\_no\_rtc}{bit\_no\_rtc}}
+{\footnotesize\ttfamily uint8\+\_\+t bit\+\_\+no\+\_\+rtc}
+
+\mbox{\Hypertarget{group__game_ga4594ebb7bd04d177d6cd263c79326508}\label{group__game_ga4594ebb7bd04d177d6cd263c79326508}} 
+\index{game@{game}!bit\_no\_timer@{bit\_no\_timer}}
+\index{bit\_no\_timer@{bit\_no\_timer}!game@{game}}
+\subsubsection{\texorpdfstring{bit\_no\_timer}{bit\_no\_timer}}
+{\footnotesize\ttfamily uint8\+\_\+t bit\+\_\+no\+\_\+timer}
+
+\mbox{\Hypertarget{group__game_ga20059dbeabda880205889c9dd7da0413}\label{group__game_ga20059dbeabda880205889c9dd7da0413}} 
+\index{game@{game}!blocks@{blocks}}
+\index{blocks@{blocks}!game@{game}}
+\subsubsection{\texorpdfstring{blocks}{blocks}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_block}{Block}} blocks\mbox{[}256\mbox{]}}
+
+\mbox{\Hypertarget{group__game_gaecc50182d564a1688000de7e0dae0c1a}\label{group__game_gaecc50182d564a1688000de7e0dae0c1a}} 
+\index{game@{game}!bullet@{bullet}}
+\index{bullet@{bullet}!game@{game}}
+\subsubsection{\texorpdfstring{bullet}{bullet}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bullet}{Bullet}}$\ast$ bullet}
+

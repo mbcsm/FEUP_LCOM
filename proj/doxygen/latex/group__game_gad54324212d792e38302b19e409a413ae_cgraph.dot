@@ -1,0 +1,60 @@
+digraph "process_mouse_event"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node87 [label="process_mouse_event",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="processes mouse event by changing relevant information like pull values and also prints the cursor on..."];
+  Node87 -> Node88 [color="midnightblue",fontsize="10",style="solid"];
+  Node88 [label="get_v_res",height=0.2,width=0.4,color="black",URL="$group__video.html#gaa6c3dbf699d3dda9444bdcd71bf85234",tooltip=" "];
+  Node87 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node89 [label="get_h_res",height=0.2,width=0.4,color="black",URL="$group__video.html#ga3456b8539e4326dd13cbfc4f81b609f1",tooltip=" "];
+  Node87 -> Node90 [color="midnightblue",fontsize="10",style="solid"];
+  Node90 [label="clearMouse",height=0.2,width=0.4,color="black",URL="$group__cursor.html#gaf48e820503f0becc55d9eb740bffe3e8",tooltip="Removes the cursor image from the screen."];
+  Node90 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node90 -> Node91 [color="midnightblue",fontsize="10",style="solid"];
+  Node91 [label="get_video_mem",height=0.2,width=0.4,color="black",URL="$group__video.html#ga1d04069f4e8b1556a7a1ed2cd95bfdea",tooltip=" "];
+  Node87 -> Node92 [color="midnightblue",fontsize="10",style="solid"];
+  Node92 [label="updatePosition",height=0.2,width=0.4,color="black",URL="$group__cursor.html#gaeeb5e132ce880a8269b3bd40c748b534",tooltip="updates the position and image of the cursor"];
+  Node92 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node92 -> Node88 [color="midnightblue",fontsize="10",style="solid"];
+  Node87 -> Node93 [color="midnightblue",fontsize="10",style="solid"];
+  Node93 [label="getGameState",height=0.2,width=0.4,color="black",URL="$group__game.html#gaf4496cd5f0ca56890acbe30e9f10e438",tooltip=" "];
+  Node87 -> Node94 [color="midnightblue",fontsize="10",style="solid"];
+  Node94 [label="shootBullet",height=0.2,width=0.4,color="black",URL="$group__game.html#ga8aa45a2e3dda0d09a4002eb399e587a9",tooltip="Calculates the speed with which the bullet is going to get fired at at both the x and componnent,..."];
+  Node87 -> Node95 [color="midnightblue",fontsize="10",style="solid"];
+  Node95 [label="draw_xpm",height=0.2,width=0.4,color="black",URL="$group__xpm.html#ga92528cf77a6ddfa6a4844c50896600a7",tooltip="draws xpm to a postion on the screen"];
+  Node95 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node95 -> Node91 [color="midnightblue",fontsize="10",style="solid"];
+  Node87 -> Node96 [color="midnightblue",fontsize="10",style="solid"];
+  Node96 [label="menuIH",height=0.2,width=0.4,color="black",URL="$group__menu.html#ga1c459dc7e822e8e658b11c66508d79f1",tooltip="Handles the input on the menu wether it is from the mouse or keyboard."];
+  Node96 -> Node97 [color="midnightblue",fontsize="10",style="solid"];
+  Node97 [label="getPosition",height=0.2,width=0.4,color="black",URL="$group__cursor.html#gac47a960acd2af3996c2b28d8150dcd8c",tooltip="returns the current position of the cursor"];
+  Node96 -> Node98 [color="midnightblue",fontsize="10",style="solid"];
+  Node98 [label="align_x_center",height=0.2,width=0.4,color="black",URL="$group__xpm.html#ga7b37b2adae7cdc46c3092db82641ba9a",tooltip="aligns an image by the center horizontally"];
+  Node98 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node96 -> Node99 [color="midnightblue",fontsize="10",style="solid"];
+  Node99 [label="displayMenu",height=0.2,width=0.4,color="black",URL="$group__menu.html#gaad9ed7a055a99883645739e4bfca0e5e",tooltip="Displays the menu on the screen."];
+  Node99 -> Node100 [color="midnightblue",fontsize="10",style="solid"];
+  Node100 [label="clearScreen",height=0.2,width=0.4,color="black",URL="$group__video.html#ga9d7e8af417b6d543da691e9c0e2f6f9f",tooltip="clear the whole screen"];
+  Node100 -> Node101 [color="midnightblue",fontsize="10",style="solid"];
+  Node101 [label="changePixel",height=0.2,width=0.4,color="black",URL="$group__video.html#gaad3b8372cfabe442562c9c5d6e4db348",tooltip="set pixel color to a position on the screen"];
+  Node101 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node101 -> Node91 [color="midnightblue",fontsize="10",style="solid"];
+  Node99 -> Node98 [color="midnightblue",fontsize="10",style="solid"];
+  Node99 -> Node95 [color="midnightblue",fontsize="10",style="solid"];
+  Node99 -> Node102 [color="midnightblue",fontsize="10",style="solid"];
+  Node102 [label="getTransparency",height=0.2,width=0.4,color="black",URL="$group__xpm.html#ga17ee83c00b60b303af02d92b1ad8c64f",tooltip="returns the value of the transparent color"];
+  Node99 -> Node103 [color="midnightblue",fontsize="10",style="solid"];
+  Node103 [label="displayScores",height=0.2,width=0.4,color="black",URL="$group__menu.html#ga4e67dd36352ce9409d1994cad2553089",tooltip="Displays the scores on the screen."];
+  Node103 -> Node95 [color="midnightblue",fontsize="10",style="solid"];
+  Node103 -> Node102 [color="midnightblue",fontsize="10",style="solid"];
+  Node87 -> Node104 [color="midnightblue",fontsize="10",style="solid"];
+  Node104 [label="underMouse",height=0.2,width=0.4,color="black",URL="$group__cursor.html#ga10ade0aba9d682a7f9fa64c65ef3a8e3",tooltip="Saves the pixel information bellow the cusrsor."];
+  Node104 -> Node89 [color="midnightblue",fontsize="10",style="solid"];
+  Node104 -> Node91 [color="midnightblue",fontsize="10",style="solid"];
+  Node87 -> Node105 [color="midnightblue",fontsize="10",style="solid"];
+  Node105 [label="resetPacket",height=0.2,width=0.4,color="black",URL="$group__packet.html#gaba77b8d667ad6e8f70d3437e0f970d9f",tooltip="Clears the packet."];
+}

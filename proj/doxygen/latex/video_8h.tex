@@ -1,0 +1,85 @@
+\hypertarget{video_8h}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/video.h File Reference}
+\label{video_8h}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/video.h@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/video.h}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$lcom/lab5.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}video.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$i8042.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for video.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__video_ga0e6eed752f69ec92baec7d38a6ff3f04}{G\+A\+M\+E\+\_\+\+M\+O\+DE}}~0x11A
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__video_gac67621adf87bcebb04fab536c7245315}{vg\+\_\+start}} (uint16\+\_\+t \mbox{\hyperlink{group__timer_ggada782f3116a896caaa602b70c0c6d8b7af1982b2b77f9b0e7cd29e39b39d8a0b4}{mode}})
+\item 
+int \mbox{\hyperlink{group__video_ga3456b8539e4326dd13cbfc4f81b609f1}{get\+\_\+h\+\_\+res}} ()
+\item 
+int \mbox{\hyperlink{group__video_gaa6c3dbf699d3dda9444bdcd71bf85234}{get\+\_\+v\+\_\+res}} ()
+\item 
+int \mbox{\hyperlink{group__video_ga93c2bd40f276f3ac190868b704a0b460}{get\+\_\+bits\+\_\+per\+\_\+pixel}} ()
+\item 
+void $\ast$ \mbox{\hyperlink{group__video_ga1d04069f4e8b1556a7a1ed2cd95bfdea}{get\+\_\+video\+\_\+mem}} ()
+\item 
+void $\ast$ \mbox{\hyperlink{group__video_gabf77be88afd0e4b1165719c50c8896ba}{get\+\_\+back\+\_\+buffer}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_gaee3838c12a8543f378920ab8f6c3cae2}{get\+\_\+memory\+\_\+model}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_ga6929228fd26ebbf17efe05d9a72658a7}{get\+\_\+blue\+\_\+screen\+\_\+mask}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_ga0f0db7b6e31ed06140761c77d5b338ab}{get\+\_\+green\+\_\+screen\+\_\+mask}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_gac758200041aed05cff7f056c48456157}{get\+\_\+red\+\_\+screen\+\_\+mask}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_gae739d88cacef84ab9c419526fd0cc635}{get\+\_\+blue\+\_\+screen\+\_\+mask\+\_\+position}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_ga6212cfb721ba6c38f52de83d57788d69}{get\+\_\+green\+\_\+screen\+\_\+mask\+\_\+position}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_ga5ad95fa9656e4db3ac20e178769336f9}{get\+\_\+red\+\_\+screen\+\_\+mask\+\_\+position}} ()
+\item 
+void \mbox{\hyperlink{group__video_ga9d7e8af417b6d543da691e9c0e2f6f9f}{clear\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em clear the whole screen \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__video_ga07dd5e8b0cf0aa3aa860a89f4093045b}{getpixel}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em get pixel color from a position on the screen \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_gaad3b8372cfabe442562c9c5d6e4db348}{change\+Pixel}} (int x, int y, uint16\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em set pixel color to a position on the screen \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static char $\ast$ \mbox{\hyperlink{group__video_ga93a24e067b9083bed6fb5c0336fd7a01}{video\+\_\+mem}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga43e7e5a0a8f9069e6413b2066ca52f3e}{h\+\_\+res}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga5bda1b499253a8fbf3cab646f8760391}{v\+\_\+res}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga89fa3fb58e975d148fcb2413e24b78a1}{bits\+\_\+per\+\_\+pixel}}
+\item 
+static unsigned short $\ast$ \mbox{\hyperlink{group__video_ga41adf31cc71966f661d4c9bdef60eabc}{back\+\_\+buffer}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga94d1ad38320b633fccc0727cf1006e8f}{memory\+\_\+model}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_gabbaa4ba33859ae6a9e1880b78b9b3c74}{Blue\+Scree\+Mask}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_gabd638c84042b50e5a4940b7b67040fd5}{Green\+Scree\+Mask}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga4b1b7cf1a9d2ad7605c72850290546e0}{Red\+Scree\+Mask}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga202380a3a4b30055510bd3aec0c4a552}{Blue\+Mask\+Size}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga9a171eef67bbe18d271e3b6038e6b72c}{Green\+Mask\+Size}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_gac8bf88bea3e2d2723d6c038fcd75589f}{Red\+Mask\+Size}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga078507f7d25b8fb655535ee5ef313e20}{Blue\+Field\+Position}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga711985669f3b146a60c238efc74e6e7f}{Green\+Field\+Position}}
+\item 
+static unsigned \mbox{\hyperlink{group__video_ga3a7a89d7ef4fe63fce7122ef46f3045b}{Red\+Field\+Position}}
+\end{DoxyCompactItemize}

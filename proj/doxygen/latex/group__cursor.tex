@@ -1,0 +1,95 @@
+\hypertarget{group__cursor}{}\section{cursor}
+\label{group__cursor}\index{cursor@{cursor}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__cursor_ga832ef8a00055d81e9bbba145f018eefe}{start\+Cursor}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the cursors image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__cursor_gac47a960acd2af3996c2b28d8150dcd8c}{get\+Position}} (int $\ast$x, int $\ast$y)
+\begin{DoxyCompactList}\small\item\em returns the current position of the cursor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__cursor_gaeeb5e132ce880a8269b3bd40c748b534}{update\+Position}} (struct packet $\ast$pp, int $\ast$x, int $\ast$y)
+\begin{DoxyCompactList}\small\item\em updates the position and image of the cursor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__cursor_gaf48e820503f0becc55d9eb740bffe3e8}{clear\+Mouse}} ()
+\begin{DoxyCompactList}\small\item\em Removes the cursor image from the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__cursor_ga10ade0aba9d682a7f9fa64c65ef3a8e3}{under\+Mouse}} ()
+\begin{DoxyCompactList}\small\item\em Saves the pixel information bellow the cusrsor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for cursor 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__cursor_gaf48e820503f0becc55d9eb740bffe3e8}\label{group__cursor_gaf48e820503f0becc55d9eb740bffe3e8}} 
+\index{cursor@{cursor}!clearMouse@{clearMouse}}
+\index{clearMouse@{clearMouse}!cursor@{cursor}}
+\subsubsection{\texorpdfstring{clearMouse()}{clearMouse()}}
+{\footnotesize\ttfamily void clear\+Mouse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Removes the cursor image from the screen. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{group__cursor_gac47a960acd2af3996c2b28d8150dcd8c}\label{group__cursor_gac47a960acd2af3996c2b28d8150dcd8c}} 
+\index{cursor@{cursor}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!cursor@{cursor}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily void get\+Position (\begin{DoxyParamCaption}\item[{int $\ast$}]{x,  }\item[{int $\ast$}]{y }\end{DoxyParamCaption})}
+
+
+
+returns the current position of the cursor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & pointer of the x position \\
+\hline
+{\em y} & pointer of the y position \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__cursor_ga832ef8a00055d81e9bbba145f018eefe}\label{group__cursor_ga832ef8a00055d81e9bbba145f018eefe}} 
+\index{cursor@{cursor}!startCursor@{startCursor}}
+\index{startCursor@{startCursor}!cursor@{cursor}}
+\subsubsection{\texorpdfstring{startCursor()}{startCursor()}}
+{\footnotesize\ttfamily int start\+Cursor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the cursors image. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{group__cursor_ga10ade0aba9d682a7f9fa64c65ef3a8e3}\label{group__cursor_ga10ade0aba9d682a7f9fa64c65ef3a8e3}} 
+\index{cursor@{cursor}!underMouse@{underMouse}}
+\index{underMouse@{underMouse}!cursor@{cursor}}
+\subsubsection{\texorpdfstring{underMouse()}{underMouse()}}
+{\footnotesize\ttfamily void under\+Mouse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Saves the pixel information bellow the cusrsor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{group__cursor_gaeeb5e132ce880a8269b3bd40c748b534}\label{group__cursor_gaeeb5e132ce880a8269b3bd40c748b534}} 
+\index{cursor@{cursor}!updatePosition@{updatePosition}}
+\index{updatePosition@{updatePosition}!cursor@{cursor}}
+\subsubsection{\texorpdfstring{updatePosition()}{updatePosition()}}
+{\footnotesize\ttfamily void update\+Position (\begin{DoxyParamCaption}\item[{struct packet $\ast$}]{pp,  }\item[{int $\ast$}]{x,  }\item[{int $\ast$}]{y }\end{DoxyParamCaption})}
+
+
+
+updates the position and image of the cursor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pp} & pointer of mouse packet \\
+\hline
+{\em x} & pointer of the x position \\
+\hline
+{\em y} & pointer of the y position \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3

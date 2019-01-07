@@ -1,0 +1,14 @@
+digraph "C:/Users/manel/Desktop" {
+  bgcolor=transparent;
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_98a67ff8e9e90a9aa3058e7c9853fd53 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="manel" fontname="Helvetica", fontsize="10", URL="dir_98a67ff8e9e90a9aa3058e7c9853fd53.html"]
+  subgraph clusterdir_33bc72ab2cd79fc43fadd2e88807d46e {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_33bc72ab2cd79fc43fadd2e88807d46e.html"];
+    dir_33bc72ab2cd79fc43fadd2e88807d46e [shape=plaintext label="Desktop"];
+    dir_c025bebfa88a710a6a26995ae6444247 [shape=box label="FEUP" color="red" fillcolor="white" style="filled" URL="dir_c025bebfa88a710a6a26995ae6444247.html"];
+  }
+  }
+}

@@ -1,0 +1,80 @@
+\hypertarget{keyboard_8c}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/keyboard.c File Reference}
+\label{keyboard_8c}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/keyboard.c@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/keyboard.c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$lcom/timer.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}keyboard.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}i8254.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}i8042.\+h\char`\"{}}\newline
+Include dependency graph for keyboard.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{keyboard_8c_aefb2d8ab6a450744c686e348063ebc32}{sys\+\_\+inb\+\_\+cnt}}(p,  q)~sys\+\_\+inb(p,q)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int() \mbox{\hyperlink{group__keyboard_gaa7a491d4d95eab5ca5326c4000ad67f8}{kbd\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t $\ast$bit\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Subscribes keyboard interrupts. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__keyboard_ga3b35eecf289446fe614818dd6ab6d5bf}{kbd\+\_\+ih}} ()
+\begin{DoxyCompactList}\small\item\em Reads the buffer s data using c. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__keyboard_ga5bdf6cfb570c375192b0d87913b65c57}{kbd\+\_\+unsubscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes keyboard interrupts. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{keyboard_8c_a2665ec6dff89d2aecc8a1497c505f6e2}{sys\+\_\+inb\+\_\+cnt}} (port\+\_\+t port, uint32\+\_\+t $\ast$byte)
+\item 
+int() \mbox{\hyperlink{group__keyboard_ga86798e38df77561e5a7a8d09fc28014b}{kbd\+\_\+write}} (uint8\+\_\+t cmd)
+\begin{DoxyCompactList}\small\item\em writes a scan code onto the buffer. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__keyboard_ga285ec963b858023390824480d3c5c531}{kbd\+\_\+read}} ()
+\begin{DoxyCompactList}\small\item\em Gets the scan code read from the keyboard. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__keyboard_ga7c34e9167923607131568a4ec42859a5}{kbd\+\_\+cmd\+\_\+reset}} (uint32\+\_\+t cmd, uint32\+\_\+t arg)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{keyboard_8c_a3f07434f2f0a6a358f8342924ceb3c74}{hookid}} = 1
+\item 
+uint32\+\_\+t \mbox{\hyperlink{keyboard_8c_a6486f62fb206e8e9ca3ace0ba1e6efbf}{kbd\+Data}} = 0
+\item 
+int \mbox{\hyperlink{keyboard_8c_aca145364b71365ea2514beaa9ae662c3}{cnt\+\_\+sys\+\_\+inb}} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{keyboard_8c_aefb2d8ab6a450744c686e348063ebc32}\label{keyboard_8c_aefb2d8ab6a450744c686e348063ebc32}} 
+\index{keyboard.c@{keyboard.c}!sys\_inb\_cnt@{sys\_inb\_cnt}}
+\index{sys\_inb\_cnt@{sys\_inb\_cnt}!keyboard.c@{keyboard.c}}
+\subsubsection{\texorpdfstring{sys\_inb\_cnt}{sys\_inb\_cnt}}
+{\footnotesize\ttfamily \#define sys\+\_\+inb\+\_\+cnt(\begin{DoxyParamCaption}\item[{}]{p,  }\item[{}]{q }\end{DoxyParamCaption})~sys\+\_\+inb(p,q)}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{keyboard_8c_a2665ec6dff89d2aecc8a1497c505f6e2}\label{keyboard_8c_a2665ec6dff89d2aecc8a1497c505f6e2}} 
+\index{keyboard.c@{keyboard.c}!sys\_inb\_cnt@{sys\_inb\_cnt}}
+\index{sys\_inb\_cnt@{sys\_inb\_cnt}!keyboard.c@{keyboard.c}}
+\subsubsection{\texorpdfstring{sys\_inb\_cnt()}{sys\_inb\_cnt()}}
+{\footnotesize\ttfamily int() sys\+\_\+inb\+\_\+cnt (\begin{DoxyParamCaption}\item[{port\+\_\+t}]{port,  }\item[{uint32\+\_\+t $\ast$}]{byte }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{keyboard_8c_aca145364b71365ea2514beaa9ae662c3}\label{keyboard_8c_aca145364b71365ea2514beaa9ae662c3}} 
+\index{keyboard.c@{keyboard.c}!cnt\_sys\_inb@{cnt\_sys\_inb}}
+\index{cnt\_sys\_inb@{cnt\_sys\_inb}!keyboard.c@{keyboard.c}}
+\subsubsection{\texorpdfstring{cnt\_sys\_inb}{cnt\_sys\_inb}}
+{\footnotesize\ttfamily int cnt\+\_\+sys\+\_\+inb = 0}
+
+\mbox{\Hypertarget{keyboard_8c_a3f07434f2f0a6a358f8342924ceb3c74}\label{keyboard_8c_a3f07434f2f0a6a358f8342924ceb3c74}} 
+\index{keyboard.c@{keyboard.c}!hookid@{hookid}}
+\index{hookid@{hookid}!keyboard.c@{keyboard.c}}
+\subsubsection{\texorpdfstring{hookid}{hookid}}
+{\footnotesize\ttfamily int hookid = 1}
+
+\mbox{\Hypertarget{keyboard_8c_a6486f62fb206e8e9ca3ace0ba1e6efbf}\label{keyboard_8c_a6486f62fb206e8e9ca3ace0ba1e6efbf}} 
+\index{keyboard.c@{keyboard.c}!kbdData@{kbdData}}
+\index{kbdData@{kbdData}!keyboard.c@{keyboard.c}}
+\subsubsection{\texorpdfstring{kbdData}{kbdData}}
+{\footnotesize\ttfamily uint32\+\_\+t kbd\+Data = 0}
+

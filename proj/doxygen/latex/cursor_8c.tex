@@ -1,0 +1,73 @@
+\hypertarget{cursor_8c}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/cursor.c File Reference}
+\label{cursor_8c}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/cursor.c@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/cursor.c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}cursor.\+h\char`\"{}}\newline
+Include dependency graph for cursor.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__cursor_ga832ef8a00055d81e9bbba145f018eefe}{start\+Cursor}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the cursors image. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__cursor_gac47a960acd2af3996c2b28d8150dcd8c}{get\+Position}} (int $\ast$x, int $\ast$y)
+\begin{DoxyCompactList}\small\item\em returns the current position of the cursor \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__cursor_gaeeb5e132ce880a8269b3bd40c748b534}{update\+Position}} (struct packet $\ast$pp, int $\ast$x, int $\ast$y)
+\begin{DoxyCompactList}\small\item\em updates the position and image of the cursor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__cursor_gaf48e820503f0becc55d9eb740bffe3e8}{clear\+Mouse}} ()
+\begin{DoxyCompactList}\small\item\em Removes the cursor image from the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__cursor_ga10ade0aba9d682a7f9fa64c65ef3a8e3}{under\+Mouse}} ()
+\begin{DoxyCompactList}\small\item\em Saves the pixel information bellow the cusrsor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{cursor_8c_a566c9c1cb2793b9d967216675bff33b9}{x\+\_\+\+Cursor}} = 500
+\item 
+int \mbox{\hyperlink{cursor_8c_a44faf40dc45246e061f50c89ee18ed25}{y\+\_\+\+Cursor}} = 500
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{cursor_8c_acf58344a8d3a998b198f878ed1d40f9c}{imgC}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{cursor_8c_ac6e8217ede4e795ae81add88b6ea28dc}{m\+Cursor}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{cursor_8c_a965e392ceb7250e27fd2bc5a17f65f1b}{transp}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{cursor_8c_a23b6869c878b2d785bd6a6e34dbfa4a4}{dynamic\+U\+M\+O\+U\+S\+E\+Array}} \mbox{[}24 $\ast$36\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{cursor_8c_a23b6869c878b2d785bd6a6e34dbfa4a4}\label{cursor_8c_a23b6869c878b2d785bd6a6e34dbfa4a4}} 
+\index{cursor.c@{cursor.c}!dynamicUMOUSEArray@{dynamicUMOUSEArray}}
+\index{dynamicUMOUSEArray@{dynamicUMOUSEArray}!cursor.c@{cursor.c}}
+\subsubsection{\texorpdfstring{dynamicUMOUSEArray}{dynamicUMOUSEArray}}
+{\footnotesize\ttfamily uint16\+\_\+t dynamic\+U\+M\+O\+U\+S\+E\+Array\mbox{[}24 $\ast$36\mbox{]}}
+
+\mbox{\Hypertarget{cursor_8c_acf58344a8d3a998b198f878ed1d40f9c}\label{cursor_8c_acf58344a8d3a998b198f878ed1d40f9c}} 
+\index{cursor.c@{cursor.c}!imgC@{imgC}}
+\index{imgC@{imgC}!cursor.c@{cursor.c}}
+\subsubsection{\texorpdfstring{imgC}{imgC}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t imgC}
+
+\mbox{\Hypertarget{cursor_8c_ac6e8217ede4e795ae81add88b6ea28dc}\label{cursor_8c_ac6e8217ede4e795ae81add88b6ea28dc}} 
+\index{cursor.c@{cursor.c}!mCursor@{mCursor}}
+\index{mCursor@{mCursor}!cursor.c@{cursor.c}}
+\subsubsection{\texorpdfstring{mCursor}{mCursor}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ m\+Cursor}
+
+\mbox{\Hypertarget{cursor_8c_a965e392ceb7250e27fd2bc5a17f65f1b}\label{cursor_8c_a965e392ceb7250e27fd2bc5a17f65f1b}} 
+\index{cursor.c@{cursor.c}!transp@{transp}}
+\index{transp@{transp}!cursor.c@{cursor.c}}
+\subsubsection{\texorpdfstring{transp}{transp}}
+{\footnotesize\ttfamily uint16\+\_\+t transp}
+
+\mbox{\Hypertarget{cursor_8c_a566c9c1cb2793b9d967216675bff33b9}\label{cursor_8c_a566c9c1cb2793b9d967216675bff33b9}} 
+\index{cursor.c@{cursor.c}!x\_Cursor@{x\_Cursor}}
+\index{x\_Cursor@{x\_Cursor}!cursor.c@{cursor.c}}
+\subsubsection{\texorpdfstring{x\_Cursor}{x\_Cursor}}
+{\footnotesize\ttfamily int x\+\_\+\+Cursor = 500}
+
+\mbox{\Hypertarget{cursor_8c_a44faf40dc45246e061f50c89ee18ed25}\label{cursor_8c_a44faf40dc45246e061f50c89ee18ed25}} 
+\index{cursor.c@{cursor.c}!y\_Cursor@{y\_Cursor}}
+\index{y\_Cursor@{y\_Cursor}!cursor.c@{cursor.c}}
+\subsubsection{\texorpdfstring{y\_Cursor}{y\_Cursor}}
+{\footnotesize\ttfamily int y\+\_\+\+Cursor = 500}
+

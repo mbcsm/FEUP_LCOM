@@ -1,0 +1,154 @@
+\hypertarget{menu_8c}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/menu.c File Reference}
+\label{menu_8c}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/menu.c@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/menu.c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xpm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}font.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cursor.\+h\char`\"{}}\newline
+Include dependency graph for menu.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__menu_ga3bd019c071fe96105524873879e16c06}{start\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the menu images and data. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__menu_ga1c459dc7e822e8e658b11c66508d79f1}{menu\+IH}} (bool mouse, bool kbd, struct packet $\ast$pp, uint32\+\_\+t \mbox{\hyperlink{keyboard_8c_a6486f62fb206e8e9ca3ace0ba1e6efbf}{kbd\+Data}})
+\begin{DoxyCompactList}\small\item\em Handles the input on the menu wether it is from the mouse or keyboard. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__menu_gaad9ed7a055a99883645739e4bfca0e5e}{display\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Displays the menu on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__menu_ga4e67dd36352ce9409d1994cad2553089}{display\+Scores}} ()
+\begin{DoxyCompactList}\small\item\em Displays the scores on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_a159b7d5a090eb9b0e27a6bb53cc6aa44}{playbutton}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_a60c8cac1cea6dd23a2e664d4114522aa}{img\+Play\+Button}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_a685e552b5a6c1d045c510ccb1b655beb}{playbuttonover}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_a9b9bcf471079754dcc53549169673026}{img\+Play\+Button\+Over}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_a99c1a526ea8eae7f7e5dff1053b9ce45}{highscoresbutton}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_ae4b5459a0a6ea0d4483e10be72d6ab5b}{img\+Highscores\+Button}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_a68682c8934b0adf4a9f79b93c60767f3}{highscoresbuttonover}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_af3338fb8cb2562fc591ae8069d8bf7de}{img\+Highscores\+Button\+Over}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_ae7d0907f0deb75f6251c43a20275aa38}{exitbutton}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_aa4890c31dc0eb5beae50266f83f5c083}{img\+Exit\+Button}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_adeeb2bdcc901d926eeb3451bd3d1f095}{exitbuttonover}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_a0a38b98fdb8903b0b4b9b43df4a6e7e1}{img\+Exit\+Button\+Over}}
+\item 
+uint16\+\_\+t $\ast$ \mbox{\hyperlink{menu_8c_a210f04e8a8cf716704a21e254f0bac4d}{highscoresscreen}}
+\item 
+xpm\+\_\+image\+\_\+t \mbox{\hyperlink{menu_8c_a2a59e08c20cba986ebd872da129baa9e}{img\+Highscores\+Screen}}
+\item 
+\mbox{\hyperlink{group__menu_gaf3d52afbb0d088f62e02208b24a9cbd2}{Menu}} \mbox{\hyperlink{menu_8c_aba2291237bea2a08be38031cf54071aa}{menu\+State}} = \mbox{\hyperlink{group__menu_ggaf3d52afbb0d088f62e02208b24a9cbd2adb31f5ef7acca5e1131fcc0fbfa6911d}{V\+O\+ID}}
+\item 
+\mbox{\hyperlink{group__menu_ga6cd15c139ec2e31ed2f511e39e296376}{Left\+Click}} \mbox{\hyperlink{menu_8c_a8dc17d7014f17f3bfb87a7542d6288e6}{lc}} = \mbox{\hyperlink{group__menu_gga6cd15c139ec2e31ed2f511e39e296376a7905fcd753e9915a521ea77aa7066415}{N\+ON}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{menu_8c_ae7d0907f0deb75f6251c43a20275aa38}\label{menu_8c_ae7d0907f0deb75f6251c43a20275aa38}} 
+\index{menu.c@{menu.c}!exitbutton@{exitbutton}}
+\index{exitbutton@{exitbutton}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{exitbutton}{exitbutton}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ exitbutton}
+
+\mbox{\Hypertarget{menu_8c_adeeb2bdcc901d926eeb3451bd3d1f095}\label{menu_8c_adeeb2bdcc901d926eeb3451bd3d1f095}} 
+\index{menu.c@{menu.c}!exitbuttonover@{exitbuttonover}}
+\index{exitbuttonover@{exitbuttonover}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{exitbuttonover}{exitbuttonover}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ exitbuttonover}
+
+\mbox{\Hypertarget{menu_8c_a99c1a526ea8eae7f7e5dff1053b9ce45}\label{menu_8c_a99c1a526ea8eae7f7e5dff1053b9ce45}} 
+\index{menu.c@{menu.c}!highscoresbutton@{highscoresbutton}}
+\index{highscoresbutton@{highscoresbutton}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{highscoresbutton}{highscoresbutton}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ highscoresbutton}
+
+\mbox{\Hypertarget{menu_8c_a68682c8934b0adf4a9f79b93c60767f3}\label{menu_8c_a68682c8934b0adf4a9f79b93c60767f3}} 
+\index{menu.c@{menu.c}!highscoresbuttonover@{highscoresbuttonover}}
+\index{highscoresbuttonover@{highscoresbuttonover}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{highscoresbuttonover}{highscoresbuttonover}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ highscoresbuttonover}
+
+\mbox{\Hypertarget{menu_8c_a210f04e8a8cf716704a21e254f0bac4d}\label{menu_8c_a210f04e8a8cf716704a21e254f0bac4d}} 
+\index{menu.c@{menu.c}!highscoresscreen@{highscoresscreen}}
+\index{highscoresscreen@{highscoresscreen}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{highscoresscreen}{highscoresscreen}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ highscoresscreen}
+
+\mbox{\Hypertarget{menu_8c_aa4890c31dc0eb5beae50266f83f5c083}\label{menu_8c_aa4890c31dc0eb5beae50266f83f5c083}} 
+\index{menu.c@{menu.c}!imgExitButton@{imgExitButton}}
+\index{imgExitButton@{imgExitButton}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgExitButton}{imgExitButton}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Exit\+Button}
+
+\mbox{\Hypertarget{menu_8c_a0a38b98fdb8903b0b4b9b43df4a6e7e1}\label{menu_8c_a0a38b98fdb8903b0b4b9b43df4a6e7e1}} 
+\index{menu.c@{menu.c}!imgExitButtonOver@{imgExitButtonOver}}
+\index{imgExitButtonOver@{imgExitButtonOver}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgExitButtonOver}{imgExitButtonOver}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Exit\+Button\+Over}
+
+\mbox{\Hypertarget{menu_8c_ae4b5459a0a6ea0d4483e10be72d6ab5b}\label{menu_8c_ae4b5459a0a6ea0d4483e10be72d6ab5b}} 
+\index{menu.c@{menu.c}!imgHighscoresButton@{imgHighscoresButton}}
+\index{imgHighscoresButton@{imgHighscoresButton}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgHighscoresButton}{imgHighscoresButton}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Highscores\+Button}
+
+\mbox{\Hypertarget{menu_8c_af3338fb8cb2562fc591ae8069d8bf7de}\label{menu_8c_af3338fb8cb2562fc591ae8069d8bf7de}} 
+\index{menu.c@{menu.c}!imgHighscoresButtonOver@{imgHighscoresButtonOver}}
+\index{imgHighscoresButtonOver@{imgHighscoresButtonOver}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgHighscoresButtonOver}{imgHighscoresButtonOver}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Highscores\+Button\+Over}
+
+\mbox{\Hypertarget{menu_8c_a2a59e08c20cba986ebd872da129baa9e}\label{menu_8c_a2a59e08c20cba986ebd872da129baa9e}} 
+\index{menu.c@{menu.c}!imgHighscoresScreen@{imgHighscoresScreen}}
+\index{imgHighscoresScreen@{imgHighscoresScreen}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgHighscoresScreen}{imgHighscoresScreen}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Highscores\+Screen}
+
+\mbox{\Hypertarget{menu_8c_a60c8cac1cea6dd23a2e664d4114522aa}\label{menu_8c_a60c8cac1cea6dd23a2e664d4114522aa}} 
+\index{menu.c@{menu.c}!imgPlayButton@{imgPlayButton}}
+\index{imgPlayButton@{imgPlayButton}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgPlayButton}{imgPlayButton}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Play\+Button}
+
+\mbox{\Hypertarget{menu_8c_a9b9bcf471079754dcc53549169673026}\label{menu_8c_a9b9bcf471079754dcc53549169673026}} 
+\index{menu.c@{menu.c}!imgPlayButtonOver@{imgPlayButtonOver}}
+\index{imgPlayButtonOver@{imgPlayButtonOver}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{imgPlayButtonOver}{imgPlayButtonOver}}
+{\footnotesize\ttfamily xpm\+\_\+image\+\_\+t img\+Play\+Button\+Over}
+
+\mbox{\Hypertarget{menu_8c_a8dc17d7014f17f3bfb87a7542d6288e6}\label{menu_8c_a8dc17d7014f17f3bfb87a7542d6288e6}} 
+\index{menu.c@{menu.c}!lc@{lc}}
+\index{lc@{lc}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{lc}{lc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__menu_ga6cd15c139ec2e31ed2f511e39e296376}{Left\+Click}} lc = \mbox{\hyperlink{group__menu_gga6cd15c139ec2e31ed2f511e39e296376a7905fcd753e9915a521ea77aa7066415}{N\+ON}}}
+
+\mbox{\Hypertarget{menu_8c_aba2291237bea2a08be38031cf54071aa}\label{menu_8c_aba2291237bea2a08be38031cf54071aa}} 
+\index{menu.c@{menu.c}!menuState@{menuState}}
+\index{menuState@{menuState}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{menuState}{menuState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__menu_gaf3d52afbb0d088f62e02208b24a9cbd2}{Menu}} menu\+State = \mbox{\hyperlink{group__menu_ggaf3d52afbb0d088f62e02208b24a9cbd2adb31f5ef7acca5e1131fcc0fbfa6911d}{V\+O\+ID}}}
+
+\mbox{\Hypertarget{menu_8c_a159b7d5a090eb9b0e27a6bb53cc6aa44}\label{menu_8c_a159b7d5a090eb9b0e27a6bb53cc6aa44}} 
+\index{menu.c@{menu.c}!playbutton@{playbutton}}
+\index{playbutton@{playbutton}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{playbutton}{playbutton}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ playbutton}
+
+\mbox{\Hypertarget{menu_8c_a685e552b5a6c1d045c510ccb1b655beb}\label{menu_8c_a685e552b5a6c1d045c510ccb1b655beb}} 
+\index{menu.c@{menu.c}!playbuttonover@{playbuttonover}}
+\index{playbuttonover@{playbuttonover}!menu.c@{menu.c}}
+\subsubsection{\texorpdfstring{playbuttonover}{playbuttonover}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ playbuttonover}
+

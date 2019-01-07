@@ -1,0 +1,37 @@
+\hypertarget{timer_8h}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/timer.h File Reference}
+\label{timer_8h}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/timer.h@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/timer.h}}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{uniontimer__status__field__val}{timer\+\_\+status\+\_\+field\+\_\+val}}
+\begin{DoxyCompactList}\small\item\em Union for storing values of timer status fields, including the full status byte. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__timer_gada782f3116a896caaa602b70c0c6d8b7}{timer\+\_\+status\+\_\+field}} \{ \mbox{\hyperlink{group__timer_ggada782f3116a896caaa602b70c0c6d8b7a8701c301e7c87ec4d4f3aee33c6128d7}{all}}, 
+\mbox{\hyperlink{group__timer_ggada782f3116a896caaa602b70c0c6d8b7a6c39f4aa1a0747304627e85d357f4bc8}{initial}}, 
+\mbox{\hyperlink{group__timer_ggada782f3116a896caaa602b70c0c6d8b7af1982b2b77f9b0e7cd29e39b39d8a0b4}{mode}}, 
+\mbox{\hyperlink{group__timer_ggada782f3116a896caaa602b70c0c6d8b7a27df5ef1a125f452469fe47a7158cb16}{base}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerated type for identifying the timer status fields. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{group__timer_ga5cc20f14fd50625eea9b20f58fbe2a55}{timer\+\_\+init}} \{ \mbox{\hyperlink{group__timer_gga5cc20f14fd50625eea9b20f58fbe2a55a829d958875d8e92068f1b07f858721a4}{I\+N\+V\+A\+L\+\_\+val}}, 
+\mbox{\hyperlink{group__timer_gga5cc20f14fd50625eea9b20f58fbe2a55a9a2e8b22f6d5ee33cc37829164a55955}{L\+S\+B\+\_\+only}}, 
+\mbox{\hyperlink{group__timer_gga5cc20f14fd50625eea9b20f58fbe2a55ae46d93c3576b5f78ae1aeb4ee4fc4938}{M\+S\+B\+\_\+only}}, 
+\mbox{\hyperlink{group__timer_gga5cc20f14fd50625eea9b20f58fbe2a55a7d392c02b4f52d93c10e4c646f8cedc7}{M\+S\+B\+\_\+after\+\_\+\+L\+SB}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerated type for specifying the timer value initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__timer_gafafc1891c876602d55b894103b1841a7}{timer\+\_\+get\+\_\+conf}} (uint8\+\_\+t timer, uint8\+\_\+t $\ast$\mbox{\hyperlink{mouse_8c_a06c4c56ffe97daec8ce7a2db42cadc96}{st}})
+\begin{DoxyCompactList}\small\item\em Reads the input timer configuration (status) via read-\/back command. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__timer_ga2f6a1c71f61dce5b3b6eecba83e7d7e9}{timer\+\_\+display\+\_\+conf}} (uint8\+\_\+t timer, uint8\+\_\+t \mbox{\hyperlink{mouse_8c_a06c4c56ffe97daec8ce7a2db42cadc96}{st}}, enum \mbox{\hyperlink{group__timer_gada782f3116a896caaa602b70c0c6d8b7}{timer\+\_\+status\+\_\+field}} field)
+\begin{DoxyCompactList}\small\item\em Shows timer configuration. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__timer_gaca1506be74dfc71c6f90772ca269c619}{timer\+\_\+set\+\_\+frequency}} (uint8\+\_\+t timer, uint32\+\_\+t freq)
+\begin{DoxyCompactList}\small\item\em Changes the operating frequency of a timer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__timer_ga6f786481e80308348d629d605ffa2d84}{timer\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t $\ast$bit\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Subscribes and enables Timer 0 interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__timer_gab9eea51549744bca5c5c923b388bb4ee}{timer\+\_\+unsubscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes Timer 0 interrupts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__timer_ga10fc9c867b15c7da6649311c9987cd17}{timer\+\_\+int\+\_\+handler}} ()
+\begin{DoxyCompactList}\small\item\em Timer 0 interrupt handler. \end{DoxyCompactList}\end{DoxyCompactItemize}

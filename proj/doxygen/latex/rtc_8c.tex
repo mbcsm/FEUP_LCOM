@@ -1,0 +1,68 @@
+\hypertarget{rtc_8c}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/rtc.c File Reference}
+\label{rtc_8c}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/rtc.c@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/rtc.c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}rtc.\+h\char`\"{}}\newline
+Include dependency graph for rtc.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{rtc_8c_a5171a9c0f54940fe60f7500896afcc86}{rtc\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t $\ast$bit\+\_\+no)
+\item 
+int \mbox{\hyperlink{group__rtc_gab8f17bf5280c908c8b199a90fefcc758}{rtc\+\_\+unsubscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes R\+TC interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_ga57f7116af216e3779ad9d6e98351d329}{rtc\+\_\+ih}} ()
+\begin{DoxyCompactList}\small\item\em R\+TC Interrupt Handler. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_ga1d3c9242fe8175549f6b898cf55582fd}{rtc\+\_\+enable\+\_\+update\+\_\+interrupts}} ()
+\begin{DoxyCompactList}\small\item\em Enables R\+TC Update Interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__rtc_ga71a212cd88a2e2b09096d345a86c1eb8}{rtc\+\_\+disable\+\_\+update\+\_\+interrupts}} ()
+\begin{DoxyCompactList}\small\item\em Disables R\+TC Update Interrupts. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{rtc_8c_a57bc32eb833cd2002811512d2b90d911}{data\+\_\+bcd\+\_\+to\+\_\+binary}} (uint32\+\_\+t n)
+\item 
+int \mbox{\hyperlink{group__rtc_gac55b23b9b681e0bd120a88e35580825a}{update\+\_\+\+R\+T\+C\+\_\+date}} ()
+\begin{DoxyCompactList}\small\item\em Updates the currently date when an update interrupt is recieved. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{group__rtc_ga42d5a1a9ae07d38ec73c43499ec429ee}{get\+\_\+current\+\_\+date\+\_\+and\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Return a string with current the date and time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{rtc_8c_a335004d2faafc9c746b8c55b9b391ac8}{hook\+Id}} = 8
+\item 
+\mbox{\hyperlink{struct_date__and___time}{Date\+\_\+and\+\_\+\+Time}} \mbox{\hyperlink{rtc_8c_a025752b46c2359590996f614f6eb039a}{dt}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{rtc_8c_a57bc32eb833cd2002811512d2b90d911}\label{rtc_8c_a57bc32eb833cd2002811512d2b90d911}} 
+\index{rtc.c@{rtc.c}!data\_bcd\_to\_binary@{data\_bcd\_to\_binary}}
+\index{data\_bcd\_to\_binary@{data\_bcd\_to\_binary}!rtc.c@{rtc.c}}
+\subsubsection{\texorpdfstring{data\_bcd\_to\_binary()}{data\_bcd\_to\_binary()}}
+{\footnotesize\ttfamily uint32\+\_\+t data\+\_\+bcd\+\_\+to\+\_\+binary (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{rtc_8c_a5171a9c0f54940fe60f7500896afcc86}\label{rtc_8c_a5171a9c0f54940fe60f7500896afcc86}} 
+\index{rtc.c@{rtc.c}!rtc\_subscribe\_int@{rtc\_subscribe\_int}}
+\index{rtc\_subscribe\_int@{rtc\_subscribe\_int}!rtc.c@{rtc.c}}
+\subsubsection{\texorpdfstring{rtc\_subscribe\_int()}{rtc\_subscribe\_int()}}
+{\footnotesize\ttfamily int rtc\+\_\+subscribe\+\_\+int (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{bit\+\_\+no }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 2
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{rtc_8c_a025752b46c2359590996f614f6eb039a}\label{rtc_8c_a025752b46c2359590996f614f6eb039a}} 
+\index{rtc.c@{rtc.c}!dt@{dt}}
+\index{dt@{dt}!rtc.c@{rtc.c}}
+\subsubsection{\texorpdfstring{dt}{dt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_date__and___time}{Date\+\_\+and\+\_\+\+Time}} dt}
+
+\mbox{\Hypertarget{rtc_8c_a335004d2faafc9c746b8c55b9b391ac8}\label{rtc_8c_a335004d2faafc9c746b8c55b9b391ac8}} 
+\index{rtc.c@{rtc.c}!hookId@{hookId}}
+\index{hookId@{hookId}!rtc.c@{rtc.c}}
+\subsubsection{\texorpdfstring{hookId}{hookId}}
+{\footnotesize\ttfamily int hook\+Id = 8}
+

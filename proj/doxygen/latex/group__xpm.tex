@@ -1,0 +1,75 @@
+\hypertarget{group__xpm}{}\section{xpm}
+\label{group__xpm}\index{xpm@{xpm}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__xpm_ga92528cf77a6ddfa6a4844c50896600a7}{draw\+\_\+xpm}} (int x, int y, uint16\+\_\+t $\ast$sprite, xpm\+\_\+image\+\_\+t img, const uint16\+\_\+t \mbox{\hyperlink{game_8c_a965e392ceb7250e27fd2bc5a17f65f1b}{transp}})
+\begin{DoxyCompactList}\small\item\em draws xpm to a postion on the screen \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__xpm_ga17ee83c00b60b303af02d92b1ad8c64f}{get\+Transparency}} ()
+\begin{DoxyCompactList}\small\item\em returns the value of the transparent color \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__xpm_ga7b37b2adae7cdc46c3092db82641ba9a}{align\+\_\+x\+\_\+center}} (xpm\+\_\+image\+\_\+t img)
+\begin{DoxyCompactList}\small\item\em aligns an image by the center horizontally \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for xpm 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__xpm_ga7b37b2adae7cdc46c3092db82641ba9a}\label{group__xpm_ga7b37b2adae7cdc46c3092db82641ba9a}} 
+\index{xpm@{xpm}!align\_x\_center@{align\_x\_center}}
+\index{align\_x\_center@{align\_x\_center}!xpm@{xpm}}
+\subsubsection{\texorpdfstring{align\_x\_center()}{align\_x\_center()}}
+{\footnotesize\ttfamily int align\+\_\+x\+\_\+center (\begin{DoxyParamCaption}\item[{xpm\+\_\+image\+\_\+t}]{img }\end{DoxyParamCaption})}
+
+
+
+aligns an image by the center horizontally 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & image to be align \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+updated position 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{group__xpm_ga92528cf77a6ddfa6a4844c50896600a7}\label{group__xpm_ga92528cf77a6ddfa6a4844c50896600a7}} 
+\index{xpm@{xpm}!draw\_xpm@{draw\_xpm}}
+\index{draw\_xpm@{draw\_xpm}!xpm@{xpm}}
+\subsubsection{\texorpdfstring{draw\_xpm()}{draw\_xpm()}}
+{\footnotesize\ttfamily void draw\+\_\+xpm (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{uint16\+\_\+t $\ast$}]{sprite,  }\item[{xpm\+\_\+image\+\_\+t}]{img,  }\item[{const uint16\+\_\+t}]{transp }\end{DoxyParamCaption})}
+
+
+
+draws xpm to a postion on the screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & the x position of the pixel on the screen \\
+\hline
+{\em y} & the y position of the pixel on the screen \\
+\hline
+{\em sprite} & pointer to the sprite to be drawn \\
+\hline
+{\em img} & image to be drawn \\
+\hline
+{\em transp} & value of the transparent color \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{group__xpm_ga17ee83c00b60b303af02d92b1ad8c64f}\label{group__xpm_ga17ee83c00b60b303af02d92b1ad8c64f}} 
+\index{xpm@{xpm}!getTransparency@{getTransparency}}
+\index{getTransparency@{getTransparency}!xpm@{xpm}}
+\subsubsection{\texorpdfstring{getTransparency()}{getTransparency()}}
+{\footnotesize\ttfamily uint16\+\_\+t get\+Transparency (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns the value of the transparent color 
+
+\begin{DoxyReturn}{Returns}
+transp value of the transparent color 
+\end{DoxyReturn}

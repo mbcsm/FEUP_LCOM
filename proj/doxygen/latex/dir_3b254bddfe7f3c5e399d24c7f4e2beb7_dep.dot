@@ -1,0 +1,15 @@
+digraph "C:/Users/manel/Desktop/FEUP/LCOM/FEUP_LCOM/proj/code" {
+  bgcolor=transparent;
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_108662027ddb514285aefcd626ffec0b {
+    graph [ bgcolor="#ddddee", pencolor="black", label="proj" fontname="Helvetica", fontsize="10", URL="dir_108662027ddb514285aefcd626ffec0b.html"]
+  subgraph clusterdir_3b254bddfe7f3c5e399d24c7f4e2beb7 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_3b254bddfe7f3c5e399d24c7f4e2beb7.html"];
+    dir_3b254bddfe7f3c5e399d24c7f4e2beb7 [shape=plaintext label="code"];
+    dir_7d8d41d6aa193877d80ee967f7e89030 [shape=box label="pixmap" color="red" fillcolor="white" style="filled" URL="dir_7d8d41d6aa193877d80ee967f7e89030.html"];
+  }
+  }
+  dir_3b254bddfe7f3c5e399d24c7f4e2beb7->dir_7d8d41d6aa193877d80ee967f7e89030 [headlabel="101", labeldistance=1.5 headhref="dir_000007_000008.html"];
+}

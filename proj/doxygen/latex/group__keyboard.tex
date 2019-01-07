@@ -1,0 +1,110 @@
+\hypertarget{group__keyboard}{}\section{keyboard}
+\label{group__keyboard}\index{keyboard@{keyboard}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__keyboard_gaa7a491d4d95eab5ca5326c4000ad67f8}{kbd\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t $\ast$bit\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Subscribes keyboard interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__keyboard_ga5bdf6cfb570c375192b0d87913b65c57}{kbd\+\_\+unsubscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes keyboard interrupts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__keyboard_ga3b35eecf289446fe614818dd6ab6d5bf}{kbd\+\_\+ih}} ()
+\begin{DoxyCompactList}\small\item\em Reads the buffer s data using c. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__keyboard_gad89ba783e5c20d2626d7d68921339235}{kbd\+\_\+asm\+\_\+ih}} ()
+\begin{DoxyCompactList}\small\item\em Reads the buffer s data iusing assembly. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__keyboard_ga86798e38df77561e5a7a8d09fc28014b}{kbd\+\_\+write}} (uint8\+\_\+t cmd)
+\begin{DoxyCompactList}\small\item\em writes a scan code onto the buffer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__keyboard_ga285ec963b858023390824480d3c5c531}{kbd\+\_\+read}} ()
+\begin{DoxyCompactList}\small\item\em Gets the scan code read from the keyboard. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__keyboard_ga7c34e9167923607131568a4ec42859a5}{kbd\+\_\+cmd\+\_\+reset}} (uint32\+\_\+t cmd, uint32\+\_\+t arg)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for keyboard 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__keyboard_gad89ba783e5c20d2626d7d68921339235}\label{group__keyboard_gad89ba783e5c20d2626d7d68921339235}} 
+\index{keyboard@{keyboard}!kbd\_asm\_ih@{kbd\_asm\_ih}}
+\index{kbd\_asm\_ih@{kbd\_asm\_ih}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_asm\_ih()}{kbd\_asm\_ih()}}
+{\footnotesize\ttfamily void kbd\+\_\+asm\+\_\+ih (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads the buffer s data iusing assembly. 
+
+\mbox{\Hypertarget{group__keyboard_ga7c34e9167923607131568a4ec42859a5}\label{group__keyboard_ga7c34e9167923607131568a4ec42859a5}} 
+\index{keyboard@{keyboard}!kbd\_cmd\_reset@{kbd\_cmd\_reset}}
+\index{kbd\_cmd\_reset@{kbd\_cmd\_reset}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_cmd\_reset()}{kbd\_cmd\_reset()}}
+{\footnotesize\ttfamily int kbd\+\_\+cmd\+\_\+reset (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{cmd,  }\item[{uint32\+\_\+t}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{group__keyboard_ga3b35eecf289446fe614818dd6ab6d5bf}\label{group__keyboard_ga3b35eecf289446fe614818dd6ab6d5bf}} 
+\index{keyboard@{keyboard}!kbd\_ih@{kbd\_ih}}
+\index{kbd\_ih@{kbd\_ih}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_ih()}{kbd\_ih()}}
+{\footnotesize\ttfamily void kbd\+\_\+ih (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads the buffer s data using c. 
+
+\mbox{\Hypertarget{group__keyboard_ga285ec963b858023390824480d3c5c531}\label{group__keyboard_ga285ec963b858023390824480d3c5c531}} 
+\index{keyboard@{keyboard}!kbd\_read@{kbd\_read}}
+\index{kbd\_read@{kbd\_read}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_read()}{kbd\_read()}}
+{\footnotesize\ttfamily int kbd\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the scan code read from the keyboard. 
+
+\begin{DoxyReturn}{Returns}
+Returns the scan code read from the keyboard 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__keyboard_gaa7a491d4d95eab5ca5326c4000ad67f8}\label{group__keyboard_gaa7a491d4d95eab5ca5326c4000ad67f8}} 
+\index{keyboard@{keyboard}!kbd\_subscribe\_int@{kbd\_subscribe\_int}}
+\index{kbd\_subscribe\_int@{kbd\_subscribe\_int}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_subscribe\_int()}{kbd\_subscribe\_int()}}
+{\footnotesize\ttfamily int kbd\+\_\+subscribe\+\_\+int (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{bit\+\_\+no }\end{DoxyParamCaption})}
+
+
+
+Subscribes keyboard interrupts. 
+
+\begin{DoxyReturn}{Returns}
+bit\+\_\+no 
+
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__keyboard_ga5bdf6cfb570c375192b0d87913b65c57}\label{group__keyboard_ga5bdf6cfb570c375192b0d87913b65c57}} 
+\index{keyboard@{keyboard}!kbd\_unsubscribe\_int@{kbd\_unsubscribe\_int}}
+\index{kbd\_unsubscribe\_int@{kbd\_unsubscribe\_int}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_unsubscribe\_int()}{kbd\_unsubscribe\_int()}}
+{\footnotesize\ttfamily int kbd\+\_\+unsubscribe\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Unsubscribes keyboard interrupts. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__keyboard_ga86798e38df77561e5a7a8d09fc28014b}\label{group__keyboard_ga86798e38df77561e5a7a8d09fc28014b}} 
+\index{keyboard@{keyboard}!kbd\_write@{kbd\_write}}
+\index{kbd\_write@{kbd\_write}!keyboard@{keyboard}}
+\subsubsection{\texorpdfstring{kbd\_write()}{kbd\_write()}}
+{\footnotesize\ttfamily int kbd\+\_\+write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd }\end{DoxyParamCaption})}
+
+
+
+writes a scan code onto the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}

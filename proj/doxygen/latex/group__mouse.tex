@@ -1,0 +1,374 @@
+\hypertarget{group__mouse}{}\section{mouse}
+\label{group__mouse}\index{mouse@{mouse}}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__mouse_gadc6e5733fc3c22f0a7b2914188c49c90}{state}} \{ \newline
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a0cb1b2c6a7db1f1084886c98909a3f36}{I\+N\+IT}}, 
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a95c27d9a235430a1380b71452a22e5f0}{I\+D\+R\+A\+WU}}, 
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90ae865d89f10995da8a2841e096d2d9612}{D\+R\+A\+W\+I\+N\+G\+UP}}, 
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a2e4d5495bd9d476f78962cebe074ebbd}{V\+E\+R\+T\+EX}}, 
+\newline
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a300768b35034f2965b4959bd636b4935}{I\+D\+R\+A\+WD}}, 
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90acc3b3364ddd3d1ff8d1ec4b3a4ccb084}{D\+R\+A\+W\+I\+N\+G\+D\+O\+WN}}, 
+\mbox{\hyperlink{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90afb43b8264ea4d3dd9957ba1b3fd3f3d5}{F\+I\+N\+AL}}
+ \}
+\item 
+enum \mbox{\hyperlink{group__mouse_ga430b444c74dd3fd1472a31714ec5f1ce}{event\+\_\+type}} \{ \newline
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea204b51c992a983e4d4e2ad2f45fb8d0f}{L\+B\+D\+O\+WN}}, 
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea63e85bd7fa21d4c81d1bb3f1e7f2e68e}{L\+B\+UP}}, 
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea3de8d07eecf5f64918e68c39d277fee1}{M\+O\+V\+E\+UP}}, 
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea3ecb230b89d639d32e0dc7604bf1e7cb}{R\+E\+S\+I\+D\+U\+AL}}, 
+\newline
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1ceac00f67d46584d4140771d51009c928cf}{R\+B\+D\+O\+WN}}, 
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea2b0e41e08471d21e8976e692151f19db}{R\+B\+UP}}, 
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea18357293287736d4f149934f8833f21a}{M\+O\+V\+E\+D\+O\+WN}}, 
+\mbox{\hyperlink{group__mouse_gga430b444c74dd3fd1472a31714ec5f1ceadbf1dee1b8cd7ea3c82661943c7b74f4}{O\+T\+H\+ER}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__mouse_ga9da18257ff113b686bb826d154bfaa87}{mouse\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t $\ast$bit\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Subscribes Mouse interrupts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_ga685ad2706aca36d9869a30a19b9f446a}{mouse\+\_\+unsubscribe\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes Mouse interrupts. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__mouse_gad82d7239d54c89cbccd5c7e8f742973d}{read\+\_\+kbc}} ()
+\begin{DoxyCompactList}\small\item\em Read from the kbc buffer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_gac193b39c229dcec39b0d82bb9f242574}{write\+\_\+kbc\+\_\+command}} (uint8\+\_\+t command)
+\begin{DoxyCompactList}\small\item\em makes a kbd kernel call \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_gaa581647856759c0789e39e87beb056c0}{write\+\_\+kbc\+\_\+argument}} (uint8\+\_\+t argument)
+\item 
+int \mbox{\hyperlink{group__mouse_gae71de5cc3d84045784f84fb32e0c4bd3}{write\+\_\+kbc\+\_\+cmd\+\_\+byte}} (uint32\+\_\+t cmd\+\_\+byte)
+\item 
+int \mbox{\hyperlink{group__mouse_ga26d0989b9acaa8dea02b2f0639916c0e}{write\+\_\+mouse\+\_\+command}} (uint32\+\_\+t command)
+\begin{DoxyCompactList}\small\item\em makes a mouse kernel call \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_ga9b5d5366f7067f50586c03e9a3f000cd}{mouse\+\_\+disable\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Disables mouse. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_gaf19e0109275a1162be7188deb9c02b41}{mouse\+\_\+enable\+\_\+int}} ()
+\begin{DoxyCompactList}\small\item\em Enables mouse. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_ga898e9289d77e1290373396a43ee9c53d}{enable\+\_\+data\+\_\+report}} ()
+\begin{DoxyCompactList}\small\item\em Enables Data report. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_ga9d37a10902df825a7445faa3261f1a91}{disable\+\_\+data\+\_\+report}} ()
+\begin{DoxyCompactList}\small\item\em Disables Data report. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_gabf86ae410ee145ab149b704b7c09d4a0}{set\+\_\+stream\+\_\+mode}} ()
+\begin{DoxyCompactList}\small\item\em Set stream mode of the mouse. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_ga775294026ae46cbb8e4a5d376c0111a2}{set\+\_\+remote\+\_\+mode}} ()
+\begin{DoxyCompactList}\small\item\em Set remote mode of the mouse. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__mouse_ga41c4d2b9b295568179b689915a8acfa8}{read\+\_\+mouse\+\_\+data}} (uint32\+\_\+t $\ast$packet)
+\begin{DoxyCompactList}\small\item\em reads data from mouse buffer \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__mouse_gabf7bb26fb5683538fbe802be6df228f1}{update\+State}} (enum \mbox{\hyperlink{group__mouse_ga430b444c74dd3fd1472a31714ec5f1ce}{event\+\_\+type}} evt)
+\begin{DoxyCompactList}\small\item\em updates the state of the mouse \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__mouse_ga0fff8c8e9b1e2af4e52d276fba5aff0b}{event}} (struct packet $\ast$pp, uint8\+\_\+t x, uint8\+\_\+t tolerance)
+\begin{DoxyCompactList}\small\item\em handles an event of moving and clicking to make an M on the screen with the mouse \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+utils for mouse 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__mouse_ga430b444c74dd3fd1472a31714ec5f1ce}\label{group__mouse_ga430b444c74dd3fd1472a31714ec5f1ce}} 
+\index{mouse@{mouse}!event\_type@{event\_type}}
+\index{event\_type@{event\_type}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{event\_type}{event\_type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group__mouse_ga430b444c74dd3fd1472a31714ec5f1ce}{event\+\_\+type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LBDOWN@{LBDOWN}!mouse@{mouse}}\index{mouse@{mouse}!LBDOWN@{LBDOWN}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea204b51c992a983e4d4e2ad2f45fb8d0f}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea204b51c992a983e4d4e2ad2f45fb8d0f}} 
+L\+B\+D\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LBUP@{LBUP}!mouse@{mouse}}\index{mouse@{mouse}!LBUP@{LBUP}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea63e85bd7fa21d4c81d1bb3f1e7f2e68e}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea63e85bd7fa21d4c81d1bb3f1e7f2e68e}} 
+L\+B\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVEUP@{MOVEUP}!mouse@{mouse}}\index{mouse@{mouse}!MOVEUP@{MOVEUP}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea3de8d07eecf5f64918e68c39d277fee1}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea3de8d07eecf5f64918e68c39d277fee1}} 
+M\+O\+V\+E\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RESIDUAL@{RESIDUAL}!mouse@{mouse}}\index{mouse@{mouse}!RESIDUAL@{RESIDUAL}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea3ecb230b89d639d32e0dc7604bf1e7cb}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea3ecb230b89d639d32e0dc7604bf1e7cb}} 
+R\+E\+S\+I\+D\+U\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RBDOWN@{RBDOWN}!mouse@{mouse}}\index{mouse@{mouse}!RBDOWN@{RBDOWN}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1ceac00f67d46584d4140771d51009c928cf}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1ceac00f67d46584d4140771d51009c928cf}} 
+R\+B\+D\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RBUP@{RBUP}!mouse@{mouse}}\index{mouse@{mouse}!RBUP@{RBUP}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea2b0e41e08471d21e8976e692151f19db}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea2b0e41e08471d21e8976e692151f19db}} 
+R\+B\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVEDOWN@{MOVEDOWN}!mouse@{mouse}}\index{mouse@{mouse}!MOVEDOWN@{MOVEDOWN}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea18357293287736d4f149934f8833f21a}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1cea18357293287736d4f149934f8833f21a}} 
+M\+O\+V\+E\+D\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OTHER@{OTHER}!mouse@{mouse}}\index{mouse@{mouse}!OTHER@{OTHER}}}\mbox{\Hypertarget{group__mouse_gga430b444c74dd3fd1472a31714ec5f1ceadbf1dee1b8cd7ea3c82661943c7b74f4}\label{group__mouse_gga430b444c74dd3fd1472a31714ec5f1ceadbf1dee1b8cd7ea3c82661943c7b74f4}} 
+O\+T\+H\+ER&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{group__mouse_gadc6e5733fc3c22f0a7b2914188c49c90}\label{group__mouse_gadc6e5733fc3c22f0a7b2914188c49c90}} 
+\index{mouse@{mouse}!state@{state}}
+\index{state@{state}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group__mouse_gadc6e5733fc3c22f0a7b2914188c49c90}{state}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INIT@{INIT}!mouse@{mouse}}\index{mouse@{mouse}!INIT@{INIT}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a0cb1b2c6a7db1f1084886c98909a3f36}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a0cb1b2c6a7db1f1084886c98909a3f36}} 
+I\+N\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IDRAWU@{IDRAWU}!mouse@{mouse}}\index{mouse@{mouse}!IDRAWU@{IDRAWU}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a95c27d9a235430a1380b71452a22e5f0}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a95c27d9a235430a1380b71452a22e5f0}} 
+I\+D\+R\+A\+WU&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DRAWINGUP@{DRAWINGUP}!mouse@{mouse}}\index{mouse@{mouse}!DRAWINGUP@{DRAWINGUP}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90ae865d89f10995da8a2841e096d2d9612}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90ae865d89f10995da8a2841e096d2d9612}} 
+D\+R\+A\+W\+I\+N\+G\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VERTEX@{VERTEX}!mouse@{mouse}}\index{mouse@{mouse}!VERTEX@{VERTEX}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a2e4d5495bd9d476f78962cebe074ebbd}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a2e4d5495bd9d476f78962cebe074ebbd}} 
+V\+E\+R\+T\+EX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IDRAWD@{IDRAWD}!mouse@{mouse}}\index{mouse@{mouse}!IDRAWD@{IDRAWD}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a300768b35034f2965b4959bd636b4935}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90a300768b35034f2965b4959bd636b4935}} 
+I\+D\+R\+A\+WD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DRAWINGDOWN@{DRAWINGDOWN}!mouse@{mouse}}\index{mouse@{mouse}!DRAWINGDOWN@{DRAWINGDOWN}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90acc3b3364ddd3d1ff8d1ec4b3a4ccb084}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90acc3b3364ddd3d1ff8d1ec4b3a4ccb084}} 
+D\+R\+A\+W\+I\+N\+G\+D\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FINAL@{FINAL}!mouse@{mouse}}\index{mouse@{mouse}!FINAL@{FINAL}}}\mbox{\Hypertarget{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90afb43b8264ea4d3dd9957ba1b3fd3f3d5}\label{group__mouse_ggadc6e5733fc3c22f0a7b2914188c49c90afb43b8264ea4d3dd9957ba1b3fd3f3d5}} 
+F\+I\+N\+AL&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__mouse_ga9d37a10902df825a7445faa3261f1a91}\label{group__mouse_ga9d37a10902df825a7445faa3261f1a91}} 
+\index{mouse@{mouse}!disable\_data\_report@{disable\_data\_report}}
+\index{disable\_data\_report@{disable\_data\_report}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{disable\_data\_report()}{disable\_data\_report()}}
+{\footnotesize\ttfamily int disable\+\_\+data\+\_\+report (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disables Data report. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{group__mouse_ga898e9289d77e1290373396a43ee9c53d}\label{group__mouse_ga898e9289d77e1290373396a43ee9c53d}} 
+\index{mouse@{mouse}!enable\_data\_report@{enable\_data\_report}}
+\index{enable\_data\_report@{enable\_data\_report}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{enable\_data\_report()}{enable\_data\_report()}}
+{\footnotesize\ttfamily int enable\+\_\+data\+\_\+report (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Enables Data report. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{group__mouse_ga0fff8c8e9b1e2af4e52d276fba5aff0b}\label{group__mouse_ga0fff8c8e9b1e2af4e52d276fba5aff0b}} 
+\index{mouse@{mouse}!event@{event}}
+\index{event@{event}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{event()}{event()}}
+{\footnotesize\ttfamily bool event (\begin{DoxyParamCaption}\item[{struct packet $\ast$}]{pp,  }\item[{uint8\+\_\+t}]{x,  }\item[{uint8\+\_\+t}]{tolerance }\end{DoxyParamCaption})}
+
+
+
+handles an event of moving and clicking to make an M on the screen with the mouse 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & pointer to the mouse packet \\
+\hline
+{\em x} & minimum lenght of the arm \\
+\hline
+{\em tolerance} & permited to the user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return true upon success and false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{group__mouse_ga9b5d5366f7067f50586c03e9a3f000cd}\label{group__mouse_ga9b5d5366f7067f50586c03e9a3f000cd}} 
+\index{mouse@{mouse}!mouse\_disable\_int@{mouse\_disable\_int}}
+\index{mouse\_disable\_int@{mouse\_disable\_int}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{mouse\_disable\_int()}{mouse\_disable\_int()}}
+{\footnotesize\ttfamily int mouse\+\_\+disable\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disables mouse. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_gaf19e0109275a1162be7188deb9c02b41}\label{group__mouse_gaf19e0109275a1162be7188deb9c02b41}} 
+\index{mouse@{mouse}!mouse\_enable\_int@{mouse\_enable\_int}}
+\index{mouse\_enable\_int@{mouse\_enable\_int}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{mouse\_enable\_int()}{mouse\_enable\_int()}}
+{\footnotesize\ttfamily int mouse\+\_\+enable\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Enables mouse. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_ga9da18257ff113b686bb826d154bfaa87}\label{group__mouse_ga9da18257ff113b686bb826d154bfaa87}} 
+\index{mouse@{mouse}!mouse\_subscribe\_int@{mouse\_subscribe\_int}}
+\index{mouse\_subscribe\_int@{mouse\_subscribe\_int}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{mouse\_subscribe\_int()}{mouse\_subscribe\_int()}}
+{\footnotesize\ttfamily int mouse\+\_\+subscribe\+\_\+int (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{bit\+\_\+no }\end{DoxyParamCaption})}
+
+
+
+Subscribes Mouse interrupts. 
+
+\begin{DoxyReturn}{Returns}
+bit\+\_\+no 
+
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_ga685ad2706aca36d9869a30a19b9f446a}\label{group__mouse_ga685ad2706aca36d9869a30a19b9f446a}} 
+\index{mouse@{mouse}!mouse\_unsubscribe\_int@{mouse\_unsubscribe\_int}}
+\index{mouse\_unsubscribe\_int@{mouse\_unsubscribe\_int}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{mouse\_unsubscribe\_int()}{mouse\_unsubscribe\_int()}}
+{\footnotesize\ttfamily int mouse\+\_\+unsubscribe\+\_\+int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Unsubscribes Mouse interrupts. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_gad82d7239d54c89cbccd5c7e8f742973d}\label{group__mouse_gad82d7239d54c89cbccd5c7e8f742973d}} 
+\index{mouse@{mouse}!read\_kbc@{read\_kbc}}
+\index{read\_kbc@{read\_kbc}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{read\_kbc()}{read\_kbc()}}
+{\footnotesize\ttfamily uint32\+\_\+t read\+\_\+kbc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Read from the kbc buffer. 
+
+\begin{DoxyReturn}{Returns}
+Return buffer information 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_ga41c4d2b9b295568179b689915a8acfa8}\label{group__mouse_ga41c4d2b9b295568179b689915a8acfa8}} 
+\index{mouse@{mouse}!read\_mouse\_data@{read\_mouse\_data}}
+\index{read\_mouse\_data@{read\_mouse\_data}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{read\_mouse\_data()}{read\_mouse\_data()}}
+{\footnotesize\ttfamily int read\+\_\+mouse\+\_\+data (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+reads data from mouse buffer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & pointer to the mouse packet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{group__mouse_ga775294026ae46cbb8e4a5d376c0111a2}\label{group__mouse_ga775294026ae46cbb8e4a5d376c0111a2}} 
+\index{mouse@{mouse}!set\_remote\_mode@{set\_remote\_mode}}
+\index{set\_remote\_mode@{set\_remote\_mode}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{set\_remote\_mode()}{set\_remote\_mode()}}
+{\footnotesize\ttfamily int set\+\_\+remote\+\_\+mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set remote mode of the mouse. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_gabf86ae410ee145ab149b704b7c09d4a0}\label{group__mouse_gabf86ae410ee145ab149b704b7c09d4a0}} 
+\index{mouse@{mouse}!set\_stream\_mode@{set\_stream\_mode}}
+\index{set\_stream\_mode@{set\_stream\_mode}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{set\_stream\_mode()}{set\_stream\_mode()}}
+{\footnotesize\ttfamily int set\+\_\+stream\+\_\+mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set stream mode of the mouse. 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\mbox{\Hypertarget{group__mouse_gabf7bb26fb5683538fbe802be6df228f1}\label{group__mouse_gabf7bb26fb5683538fbe802be6df228f1}} 
+\index{mouse@{mouse}!updateState@{updateState}}
+\index{updateState@{updateState}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{updateState()}{updateState()}}
+{\footnotesize\ttfamily void update\+State (\begin{DoxyParamCaption}\item[{enum \mbox{\hyperlink{group__mouse_ga430b444c74dd3fd1472a31714ec5f1ce}{event\+\_\+type}}}]{evt }\end{DoxyParamCaption})}
+
+
+
+updates the state of the mouse 
+
+
+\begin{DoxyParams}{Parameters}
+{\em evt} & enum of the mouse events \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mouse_gaa581647856759c0789e39e87beb056c0}\label{group__mouse_gaa581647856759c0789e39e87beb056c0}} 
+\index{mouse@{mouse}!write\_kbc\_argument@{write\_kbc\_argument}}
+\index{write\_kbc\_argument@{write\_kbc\_argument}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{write\_kbc\_argument()}{write\_kbc\_argument()}}
+{\footnotesize\ttfamily int write\+\_\+kbc\+\_\+argument (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{argument }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{group__mouse_gae71de5cc3d84045784f84fb32e0c4bd3}\label{group__mouse_gae71de5cc3d84045784f84fb32e0c4bd3}} 
+\index{mouse@{mouse}!write\_kbc\_cmd\_byte@{write\_kbc\_cmd\_byte}}
+\index{write\_kbc\_cmd\_byte@{write\_kbc\_cmd\_byte}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{write\_kbc\_cmd\_byte()}{write\_kbc\_cmd\_byte()}}
+{\footnotesize\ttfamily int write\+\_\+kbc\+\_\+cmd\+\_\+byte (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{cmd\+\_\+byte }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 5
+\mbox{\Hypertarget{group__mouse_gac193b39c229dcec39b0d82bb9f242574}\label{group__mouse_gac193b39c229dcec39b0d82bb9f242574}} 
+\index{mouse@{mouse}!write\_kbc\_command@{write\_kbc\_command}}
+\index{write\_kbc\_command@{write\_kbc\_command}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{write\_kbc\_command()}{write\_kbc\_command()}}
+{\footnotesize\ttfamily int write\+\_\+kbc\+\_\+command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{command }\end{DoxyParamCaption})}
+
+
+
+makes a kbd kernel call 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__mouse_ga26d0989b9acaa8dea02b2f0639916c0e}\label{group__mouse_ga26d0989b9acaa8dea02b2f0639916c0e}} 
+\index{mouse@{mouse}!write\_mouse\_command@{write\_mouse\_command}}
+\index{write\_mouse\_command@{write\_mouse\_command}!mouse@{mouse}}
+\subsubsection{\texorpdfstring{write\_mouse\_command()}{write\_mouse\_command()}}
+{\footnotesize\ttfamily int write\+\_\+mouse\+\_\+command (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{command }\end{DoxyParamCaption})}
+
+
+
+makes a mouse kernel call 
+
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6

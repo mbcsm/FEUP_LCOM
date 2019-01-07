@@ -1,0 +1,178 @@
+\hypertarget{realtimeclock_8h}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/realtimeclock.h File Reference}
+\label{realtimeclock_8h}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/realtimeclock.h@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/realtimeclock.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(n)~(0x01$<$$<$(n))
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_ab3c151cbb3879c262ba8ffeea0ca27f2}{A\+D\+D\+R\+E\+S\+S\+\_\+\+R\+EG}}~0x70
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a71b8ba376f687142f60a82d18c2715e0}{D\+A\+T\+A\+\_\+\+R\+EG}}~0x71
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a4e22feb6ffbc1cda32fadff5c740dc51}{R\+T\+C\+\_\+\+I\+RQ}}~8
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_aa0e40d1cb9fea79e800aa79b8ca291f7}{R\+E\+G\+\_\+A}}~10
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_aef0dc27936b9016b9460e5e6fdb039a9}{R\+E\+G\+\_\+\+A\+\_\+\+S\+E\+C\+O\+ND}}~0
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a7fe4df020dfcb67b3161be8fc635913a}{R\+E\+G\+\_\+\+A\+\_\+\+M\+I\+N\+U\+TE}}~2
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_ae515222b49b14357b8729a1d56d93230}{R\+E\+G\+\_\+\+A\+\_\+\+H\+O\+UR}}~4
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a811008368a8e57a673c6e0bc6b450327}{R\+E\+G\+\_\+\+A\+\_\+\+D\+AY}}~7
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a30b1c132b0126f494b42b6c2ee21b0cb}{R\+E\+G\+\_\+\+A\+\_\+\+M\+O\+N\+TH}}~8
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_af9edcf95c4dd13d1daf224fd04363edd}{R\+E\+G\+\_\+\+A\+\_\+\+Y\+E\+AR}}~9
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_abf750280c8f263587fd8830fe0f85866}{R\+E\+G\+\_\+\+A\+\_\+\+U\+IP}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7) /$\ast$ This bit is enabled when an update is in progress, \mbox{\hyperlink{font_8c_a5d286c9bcb0e4c4f62d09f5ec39118e4}{data}} unsafe to read $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a28ed75c6727784e56c2bb8d828c876c9}{R\+E\+G\+\_\+B}}~11
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a88adb1a73b4ad4e47d96cfe6cec04250}{R\+E\+G\+\_\+\+B\+\_\+\+S\+ET}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7) /$\ast$ If set, inhibits updates of time/date registers $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a63ed47086acc2db9b91d2a489a9df0c4}{R\+E\+G\+\_\+\+B\+\_\+\+P\+IE}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(6) /$\ast$ For enabling periodic interrupts $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_af810ee6a33771674b2ff5d886145787f}{R\+E\+G\+\_\+\+B\+\_\+\+A\+IE}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5) /$\ast$ For enabling alarm interrupts $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_ae1b06b4eb9ba5b220d483dcbc60f36c1}{R\+E\+G\+\_\+\+B\+\_\+\+U\+IE}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4) /$\ast$ For enabling update interrupts $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_af7d811e392d1e890dfc62aad3bb7c881}{R\+E\+G\+\_\+\+B\+\_\+\+DM}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(2) /$\ast$ This bit is enabled when register \mbox{\hyperlink{font_8c_a5d286c9bcb0e4c4f62d09f5ec39118e4}{data}} is binary, disabled when is B\+CD $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a088e580de0961d5f30eb3366f97b324c}{R\+E\+G\+\_\+C}}~12
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a30bcb4364dc10ad2cfcf3dc489d97f8e}{R\+E\+G\+\_\+\+C\+\_\+\+UE}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4) /$\ast$ Update interrupt pending $\ast$/
+\item 
+\#define \mbox{\hyperlink{realtimeclock_8h_a8f2a2da8b96e20112d3f225636392424}{R\+E\+G\+\_\+D}}~13
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{realtimeclock_8h_ab3c151cbb3879c262ba8ffeea0ca27f2}\label{realtimeclock_8h_ab3c151cbb3879c262ba8ffeea0ca27f2}} 
+\index{realtimeclock.h@{realtimeclock.h}!ADDRESS\_REG@{ADDRESS\_REG}}
+\index{ADDRESS\_REG@{ADDRESS\_REG}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{ADDRESS\_REG}{ADDRESS\_REG}}
+{\footnotesize\ttfamily \#define A\+D\+D\+R\+E\+S\+S\+\_\+\+R\+EG~0x70}
+
+\mbox{\Hypertarget{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}\label{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}} 
+\index{realtimeclock.h@{realtimeclock.h}!BIT@{BIT}}
+\index{BIT@{BIT}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{BIT}{BIT}}
+{\footnotesize\ttfamily \#define B\+IT(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})~(0x01$<$$<$(n))}
+
+\mbox{\Hypertarget{realtimeclock_8h_a71b8ba376f687142f60a82d18c2715e0}\label{realtimeclock_8h_a71b8ba376f687142f60a82d18c2715e0}} 
+\index{realtimeclock.h@{realtimeclock.h}!DATA\_REG@{DATA\_REG}}
+\index{DATA\_REG@{DATA\_REG}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{DATA\_REG}{DATA\_REG}}
+{\footnotesize\ttfamily \#define D\+A\+T\+A\+\_\+\+R\+EG~0x71}
+
+\mbox{\Hypertarget{realtimeclock_8h_aa0e40d1cb9fea79e800aa79b8ca291f7}\label{realtimeclock_8h_aa0e40d1cb9fea79e800aa79b8ca291f7}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A@{REG\_A}}
+\index{REG\_A@{REG\_A}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A}{REG\_A}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+A~10}
+
+\mbox{\Hypertarget{realtimeclock_8h_a811008368a8e57a673c6e0bc6b450327}\label{realtimeclock_8h_a811008368a8e57a673c6e0bc6b450327}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_DAY@{REG\_A\_DAY}}
+\index{REG\_A\_DAY@{REG\_A\_DAY}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_DAY}{REG\_A\_DAY}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+D\+AY~7}
+
+\mbox{\Hypertarget{realtimeclock_8h_ae515222b49b14357b8729a1d56d93230}\label{realtimeclock_8h_ae515222b49b14357b8729a1d56d93230}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_HOUR@{REG\_A\_HOUR}}
+\index{REG\_A\_HOUR@{REG\_A\_HOUR}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_HOUR}{REG\_A\_HOUR}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+H\+O\+UR~4}
+
+\mbox{\Hypertarget{realtimeclock_8h_a7fe4df020dfcb67b3161be8fc635913a}\label{realtimeclock_8h_a7fe4df020dfcb67b3161be8fc635913a}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_MINUTE@{REG\_A\_MINUTE}}
+\index{REG\_A\_MINUTE@{REG\_A\_MINUTE}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_MINUTE}{REG\_A\_MINUTE}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+M\+I\+N\+U\+TE~2}
+
+\mbox{\Hypertarget{realtimeclock_8h_a30b1c132b0126f494b42b6c2ee21b0cb}\label{realtimeclock_8h_a30b1c132b0126f494b42b6c2ee21b0cb}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_MONTH@{REG\_A\_MONTH}}
+\index{REG\_A\_MONTH@{REG\_A\_MONTH}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_MONTH}{REG\_A\_MONTH}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+M\+O\+N\+TH~8}
+
+\mbox{\Hypertarget{realtimeclock_8h_aef0dc27936b9016b9460e5e6fdb039a9}\label{realtimeclock_8h_aef0dc27936b9016b9460e5e6fdb039a9}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_SECOND@{REG\_A\_SECOND}}
+\index{REG\_A\_SECOND@{REG\_A\_SECOND}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_SECOND}{REG\_A\_SECOND}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+S\+E\+C\+O\+ND~0}
+
+\mbox{\Hypertarget{realtimeclock_8h_abf750280c8f263587fd8830fe0f85866}\label{realtimeclock_8h_abf750280c8f263587fd8830fe0f85866}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_UIP@{REG\_A\_UIP}}
+\index{REG\_A\_UIP@{REG\_A\_UIP}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_UIP}{REG\_A\_UIP}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+U\+IP~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7) /$\ast$ This bit is enabled when an update is in progress, \mbox{\hyperlink{font_8c_a5d286c9bcb0e4c4f62d09f5ec39118e4}{data}} unsafe to read $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_af9edcf95c4dd13d1daf224fd04363edd}\label{realtimeclock_8h_af9edcf95c4dd13d1daf224fd04363edd}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_A\_YEAR@{REG\_A\_YEAR}}
+\index{REG\_A\_YEAR@{REG\_A\_YEAR}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_A\_YEAR}{REG\_A\_YEAR}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+A\+\_\+\+Y\+E\+AR~9}
+
+\mbox{\Hypertarget{realtimeclock_8h_a28ed75c6727784e56c2bb8d828c876c9}\label{realtimeclock_8h_a28ed75c6727784e56c2bb8d828c876c9}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_B@{REG\_B}}
+\index{REG\_B@{REG\_B}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_B}{REG\_B}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+B~11}
+
+\mbox{\Hypertarget{realtimeclock_8h_af810ee6a33771674b2ff5d886145787f}\label{realtimeclock_8h_af810ee6a33771674b2ff5d886145787f}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_B\_AIE@{REG\_B\_AIE}}
+\index{REG\_B\_AIE@{REG\_B\_AIE}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_B\_AIE}{REG\_B\_AIE}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+B\+\_\+\+A\+IE~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5) /$\ast$ For enabling alarm interrupts $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_af7d811e392d1e890dfc62aad3bb7c881}\label{realtimeclock_8h_af7d811e392d1e890dfc62aad3bb7c881}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_B\_DM@{REG\_B\_DM}}
+\index{REG\_B\_DM@{REG\_B\_DM}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_B\_DM}{REG\_B\_DM}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+B\+\_\+\+DM~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(2) /$\ast$ This bit is enabled when register \mbox{\hyperlink{font_8c_a5d286c9bcb0e4c4f62d09f5ec39118e4}{data}} is binary, disabled when is B\+CD $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_a63ed47086acc2db9b91d2a489a9df0c4}\label{realtimeclock_8h_a63ed47086acc2db9b91d2a489a9df0c4}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_B\_PIE@{REG\_B\_PIE}}
+\index{REG\_B\_PIE@{REG\_B\_PIE}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_B\_PIE}{REG\_B\_PIE}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+B\+\_\+\+P\+IE~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(6) /$\ast$ For enabling periodic interrupts $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_a88adb1a73b4ad4e47d96cfe6cec04250}\label{realtimeclock_8h_a88adb1a73b4ad4e47d96cfe6cec04250}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_B\_SET@{REG\_B\_SET}}
+\index{REG\_B\_SET@{REG\_B\_SET}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_B\_SET}{REG\_B\_SET}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+B\+\_\+\+S\+ET~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7) /$\ast$ If set, inhibits updates of time/date registers $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_ae1b06b4eb9ba5b220d483dcbc60f36c1}\label{realtimeclock_8h_ae1b06b4eb9ba5b220d483dcbc60f36c1}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_B\_UIE@{REG\_B\_UIE}}
+\index{REG\_B\_UIE@{REG\_B\_UIE}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_B\_UIE}{REG\_B\_UIE}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+B\+\_\+\+U\+IE~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4) /$\ast$ For enabling update interrupts $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_a088e580de0961d5f30eb3366f97b324c}\label{realtimeclock_8h_a088e580de0961d5f30eb3366f97b324c}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_C@{REG\_C}}
+\index{REG\_C@{REG\_C}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_C}{REG\_C}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+C~12}
+
+\mbox{\Hypertarget{realtimeclock_8h_a30bcb4364dc10ad2cfcf3dc489d97f8e}\label{realtimeclock_8h_a30bcb4364dc10ad2cfcf3dc489d97f8e}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_C\_UE@{REG\_C\_UE}}
+\index{REG\_C\_UE@{REG\_C\_UE}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_C\_UE}{REG\_C\_UE}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+\+C\+\_\+\+UE~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4) /$\ast$ Update interrupt pending $\ast$/}
+
+\mbox{\Hypertarget{realtimeclock_8h_a8f2a2da8b96e20112d3f225636392424}\label{realtimeclock_8h_a8f2a2da8b96e20112d3f225636392424}} 
+\index{realtimeclock.h@{realtimeclock.h}!REG\_D@{REG\_D}}
+\index{REG\_D@{REG\_D}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{REG\_D}{REG\_D}}
+{\footnotesize\ttfamily \#define R\+E\+G\+\_\+D~13}
+
+\mbox{\Hypertarget{realtimeclock_8h_a4e22feb6ffbc1cda32fadff5c740dc51}\label{realtimeclock_8h_a4e22feb6ffbc1cda32fadff5c740dc51}} 
+\index{realtimeclock.h@{realtimeclock.h}!RTC\_IRQ@{RTC\_IRQ}}
+\index{RTC\_IRQ@{RTC\_IRQ}!realtimeclock.h@{realtimeclock.h}}
+\subsubsection{\texorpdfstring{RTC\_IRQ}{RTC\_IRQ}}
+{\footnotesize\ttfamily \#define R\+T\+C\+\_\+\+I\+RQ~8}
+

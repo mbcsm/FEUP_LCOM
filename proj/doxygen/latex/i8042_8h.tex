@@ -1,0 +1,314 @@
+\hypertarget{i8042_8h}{}\section{C\+:/\+Users/manel/\+Desktop/\+F\+E\+U\+P/\+L\+C\+O\+M/\+F\+E\+U\+P\+\_\+\+L\+C\+O\+M/proj/code/i8042.h File Reference}
+\label{i8042_8h}\index{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/i8042.h@{C:/Users/manel/Desktop/FEUP/LCOM/FEUP\_LCOM/proj/code/i8042.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(n)~(0x01$<$$<$(n))
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a5c1072213ce8d8cd43628c4319ae0391}{K\+B\+D\+\_\+\+I\+RQ}}~1
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a85964cb90343bb1a029b1d1b4229f910}{M\+O\+U\+S\+E\+\_\+\+I\+RQ}}~12
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a89c4d098b53809674457b1660b1af780}{S\+T\+A\+T\+\_\+\+R\+EG}}~0x64
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a6d57c7927a10f638c83046b52c8caac9}{K\+B\+C\+\_\+\+C\+M\+D\+\_\+\+R\+EG}}~0x64
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a783be5698cf07b1daaf126ef89c19063}{I\+N\+\_\+\+B\+UF}}~0x60
+\item 
+\#define \mbox{\hyperlink{i8042_8h_acfb42dde389e8ca36ab267002fbf5c6a}{O\+U\+T\+\_\+\+B\+UF}}~0x60
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a595a5cad2d3c793963da50865b2c1b47}{K\+B\+C\+\_\+\+R\+E\+A\+D\+\_\+\+C\+MD}}~0x20
+\item 
+\#define \mbox{\hyperlink{i8042_8h_aaa62a6987753a109d2f7a609ce8b7334}{K\+B\+C\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+MD}}~0x60
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a45967c9e25447ba853cf6fb4ac545fe6}{O\+BF}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(0)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a3c48b10907056351582baf9f6478598e}{I\+BF}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(1)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a1b41fd2be63532d4ab910f8b256c3811}{A\+UX}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_ad16f61e2bf70f6c7685e826224ed177f}{T\+O\+\_\+\+E\+RR}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(6)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a307ab71673e26ec42b28a3bca05d4cb5}{P\+A\+R\+\_\+\+E\+RR}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_ae06932f67e4c43252a517ba344489854}{D\+I\+S2}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a6e5c46282d69d86c09a6e3669ed16ff5}{D\+IS}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_ab254a5a335276357f63779cda0b8e44f}{I\+N\+T2}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(1)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_afeeffe52c8fd59db7c61cf8b02042dbf}{I\+NT}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(0)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_aa554763d6a066605edecacdea834da9b}{W\+A\+I\+T\+\_\+\+K\+BC}}~20000
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a1cec78d40bc62e93813cc388997f654f}{B\+Y\+T\+E2}}~0xe0
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a4af1b6159e447ba72652bb7fcdfa726e}{E\+SC}}~0x81
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a8ce6c569566fb74aad808aaac6fdc1f0}{M\+O\+U\+S\+E\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+MD}}~0x\+D4
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a4f874ef854077a1a67792e90c57f49e1}{E\+N\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+P\+O\+RT}}~0x\+F4
+\item 
+\#define \mbox{\hyperlink{i8042_8h_ab448e87756a9b8d64323cb1b7956c118}{D\+I\+S\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+P\+O\+RT}}~0x\+F5
+\item 
+\#define \mbox{\hyperlink{i8042_8h_ab702106cf3b3e96750b6845ded4e0299}{R\+E\+S\+ET}}~0x\+FF
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a08006958f5bcad29209b983904b878ee}{S\+E\+T\+\_\+\+S\+T\+R\+E\+AM}}~0x\+EA
+\item 
+\#define \mbox{\hyperlink{i8042_8h_aba54f039c67867bcdc9e18024147c71a}{S\+E\+T\+\_\+\+R\+E\+M\+O\+TE}}~0x\+F0
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a8d406d5aff787991429e62cfd9bac721}{R\+E\+A\+D\+\_\+\+D\+A\+TA}}~0x\+EB
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a6f6489887e08bff4887d0bc5dcf214d8}{A\+CK}}~0x\+FA
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a958518a45b12053ae33606ee7cb68a55}{N\+A\+CK}}~0x\+FE
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a8fe83ac76edc595f6b98cd4a4127aed5}{E\+R\+R\+OR}}~0x\+FC
+\item 
+\#define \mbox{\hyperlink{i8042_8h_acc55daa58d88a3612f2ef74a6abbe97f}{LB}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(0)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a171160a766f85c8816b898ed24d28408}{RB}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(1)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_aa6b38d492364d98453284934ed7caee9}{MB}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(2)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a181f1c2860e4d7fd7788990378061137}{X\+\_\+\+S\+I\+GN}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a2a0064e2f0979eea21b81e4fe6b2ac32}{Y\+\_\+\+S\+I\+GN}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a858379c2252a71bc12dd9ff796477d90}{X\+\_\+\+O\+VF}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(6)
+\item 
+\#define \mbox{\hyperlink{i8042_8h_a8238446128710bc20d7c73b2fa785c72}{Y\+\_\+\+O\+VF}}~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{i8042_8h_a6f6489887e08bff4887d0bc5dcf214d8}\label{i8042_8h_a6f6489887e08bff4887d0bc5dcf214d8}} 
+\index{i8042.h@{i8042.h}!ACK@{ACK}}
+\index{ACK@{ACK}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{ACK}{ACK}}
+{\footnotesize\ttfamily \#define A\+CK~0x\+FA}
+
+\mbox{\Hypertarget{i8042_8h_a1b41fd2be63532d4ab910f8b256c3811}\label{i8042_8h_a1b41fd2be63532d4ab910f8b256c3811}} 
+\index{i8042.h@{i8042.h}!AUX@{AUX}}
+\index{AUX@{AUX}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{AUX}{AUX}}
+{\footnotesize\ttfamily \#define A\+UX~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5)}
+
+\mbox{\Hypertarget{i8042_8h_a3a8ea58898cb58fc96013383d39f482c}\label{i8042_8h_a3a8ea58898cb58fc96013383d39f482c}} 
+\index{i8042.h@{i8042.h}!BIT@{BIT}}
+\index{BIT@{BIT}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{BIT}{BIT}}
+{\footnotesize\ttfamily \#define B\+IT(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})~(0x01$<$$<$(n))}
+
+\mbox{\Hypertarget{i8042_8h_a1cec78d40bc62e93813cc388997f654f}\label{i8042_8h_a1cec78d40bc62e93813cc388997f654f}} 
+\index{i8042.h@{i8042.h}!BYTE2@{BYTE2}}
+\index{BYTE2@{BYTE2}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{BYTE2}{BYTE2}}
+{\footnotesize\ttfamily \#define B\+Y\+T\+E2~0xe0}
+
+\mbox{\Hypertarget{i8042_8h_a6e5c46282d69d86c09a6e3669ed16ff5}\label{i8042_8h_a6e5c46282d69d86c09a6e3669ed16ff5}} 
+\index{i8042.h@{i8042.h}!DIS@{DIS}}
+\index{DIS@{DIS}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{DIS}{DIS}}
+{\footnotesize\ttfamily \#define D\+IS~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4)}
+
+\mbox{\Hypertarget{i8042_8h_ae06932f67e4c43252a517ba344489854}\label{i8042_8h_ae06932f67e4c43252a517ba344489854}} 
+\index{i8042.h@{i8042.h}!DIS2@{DIS2}}
+\index{DIS2@{DIS2}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{DIS2}{DIS2}}
+{\footnotesize\ttfamily \#define D\+I\+S2~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5)}
+
+\mbox{\Hypertarget{i8042_8h_ab448e87756a9b8d64323cb1b7956c118}\label{i8042_8h_ab448e87756a9b8d64323cb1b7956c118}} 
+\index{i8042.h@{i8042.h}!DIS\_DATA\_REPORT@{DIS\_DATA\_REPORT}}
+\index{DIS\_DATA\_REPORT@{DIS\_DATA\_REPORT}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{DIS\_DATA\_REPORT}{DIS\_DATA\_REPORT}}
+{\footnotesize\ttfamily \#define D\+I\+S\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+P\+O\+RT~0x\+F5}
+
+\mbox{\Hypertarget{i8042_8h_a4f874ef854077a1a67792e90c57f49e1}\label{i8042_8h_a4f874ef854077a1a67792e90c57f49e1}} 
+\index{i8042.h@{i8042.h}!EN\_DATA\_REPORT@{EN\_DATA\_REPORT}}
+\index{EN\_DATA\_REPORT@{EN\_DATA\_REPORT}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{EN\_DATA\_REPORT}{EN\_DATA\_REPORT}}
+{\footnotesize\ttfamily \#define E\+N\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+P\+O\+RT~0x\+F4}
+
+\mbox{\Hypertarget{i8042_8h_a8fe83ac76edc595f6b98cd4a4127aed5}\label{i8042_8h_a8fe83ac76edc595f6b98cd4a4127aed5}} 
+\index{i8042.h@{i8042.h}!ERROR@{ERROR}}
+\index{ERROR@{ERROR}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{ERROR}{ERROR}}
+{\footnotesize\ttfamily \#define E\+R\+R\+OR~0x\+FC}
+
+\mbox{\Hypertarget{i8042_8h_a4af1b6159e447ba72652bb7fcdfa726e}\label{i8042_8h_a4af1b6159e447ba72652bb7fcdfa726e}} 
+\index{i8042.h@{i8042.h}!ESC@{ESC}}
+\index{ESC@{ESC}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{ESC}{ESC}}
+{\footnotesize\ttfamily \#define E\+SC~0x81}
+
+\mbox{\Hypertarget{i8042_8h_a3c48b10907056351582baf9f6478598e}\label{i8042_8h_a3c48b10907056351582baf9f6478598e}} 
+\index{i8042.h@{i8042.h}!IBF@{IBF}}
+\index{IBF@{IBF}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{IBF}{IBF}}
+{\footnotesize\ttfamily \#define I\+BF~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(1)}
+
+\mbox{\Hypertarget{i8042_8h_a783be5698cf07b1daaf126ef89c19063}\label{i8042_8h_a783be5698cf07b1daaf126ef89c19063}} 
+\index{i8042.h@{i8042.h}!IN\_BUF@{IN\_BUF}}
+\index{IN\_BUF@{IN\_BUF}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{IN\_BUF}{IN\_BUF}}
+{\footnotesize\ttfamily \#define I\+N\+\_\+\+B\+UF~0x60}
+
+\mbox{\Hypertarget{i8042_8h_afeeffe52c8fd59db7c61cf8b02042dbf}\label{i8042_8h_afeeffe52c8fd59db7c61cf8b02042dbf}} 
+\index{i8042.h@{i8042.h}!INT@{INT}}
+\index{INT@{INT}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{INT}{INT}}
+{\footnotesize\ttfamily \#define I\+NT~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(0)}
+
+\mbox{\Hypertarget{i8042_8h_ab254a5a335276357f63779cda0b8e44f}\label{i8042_8h_ab254a5a335276357f63779cda0b8e44f}} 
+\index{i8042.h@{i8042.h}!INT2@{INT2}}
+\index{INT2@{INT2}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{INT2}{INT2}}
+{\footnotesize\ttfamily \#define I\+N\+T2~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(1)}
+
+\mbox{\Hypertarget{i8042_8h_a6d57c7927a10f638c83046b52c8caac9}\label{i8042_8h_a6d57c7927a10f638c83046b52c8caac9}} 
+\index{i8042.h@{i8042.h}!KBC\_CMD\_REG@{KBC\_CMD\_REG}}
+\index{KBC\_CMD\_REG@{KBC\_CMD\_REG}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{KBC\_CMD\_REG}{KBC\_CMD\_REG}}
+{\footnotesize\ttfamily \#define K\+B\+C\+\_\+\+C\+M\+D\+\_\+\+R\+EG~0x64}
+
+\mbox{\Hypertarget{i8042_8h_a595a5cad2d3c793963da50865b2c1b47}\label{i8042_8h_a595a5cad2d3c793963da50865b2c1b47}} 
+\index{i8042.h@{i8042.h}!KBC\_READ\_CMD@{KBC\_READ\_CMD}}
+\index{KBC\_READ\_CMD@{KBC\_READ\_CMD}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{KBC\_READ\_CMD}{KBC\_READ\_CMD}}
+{\footnotesize\ttfamily \#define K\+B\+C\+\_\+\+R\+E\+A\+D\+\_\+\+C\+MD~0x20}
+
+\mbox{\Hypertarget{i8042_8h_aaa62a6987753a109d2f7a609ce8b7334}\label{i8042_8h_aaa62a6987753a109d2f7a609ce8b7334}} 
+\index{i8042.h@{i8042.h}!KBC\_WRITE\_CMD@{KBC\_WRITE\_CMD}}
+\index{KBC\_WRITE\_CMD@{KBC\_WRITE\_CMD}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{KBC\_WRITE\_CMD}{KBC\_WRITE\_CMD}}
+{\footnotesize\ttfamily \#define K\+B\+C\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+MD~0x60}
+
+\mbox{\Hypertarget{i8042_8h_a5c1072213ce8d8cd43628c4319ae0391}\label{i8042_8h_a5c1072213ce8d8cd43628c4319ae0391}} 
+\index{i8042.h@{i8042.h}!KBD\_IRQ@{KBD\_IRQ}}
+\index{KBD\_IRQ@{KBD\_IRQ}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{KBD\_IRQ}{KBD\_IRQ}}
+{\footnotesize\ttfamily \#define K\+B\+D\+\_\+\+I\+RQ~1}
+
+\mbox{\Hypertarget{i8042_8h_acc55daa58d88a3612f2ef74a6abbe97f}\label{i8042_8h_acc55daa58d88a3612f2ef74a6abbe97f}} 
+\index{i8042.h@{i8042.h}!LB@{LB}}
+\index{LB@{LB}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{LB}{LB}}
+{\footnotesize\ttfamily \#define LB~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(0)}
+
+\mbox{\Hypertarget{i8042_8h_aa6b38d492364d98453284934ed7caee9}\label{i8042_8h_aa6b38d492364d98453284934ed7caee9}} 
+\index{i8042.h@{i8042.h}!MB@{MB}}
+\index{MB@{MB}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{MB}{MB}}
+{\footnotesize\ttfamily \#define MB~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(2)}
+
+\mbox{\Hypertarget{i8042_8h_a85964cb90343bb1a029b1d1b4229f910}\label{i8042_8h_a85964cb90343bb1a029b1d1b4229f910}} 
+\index{i8042.h@{i8042.h}!MOUSE\_IRQ@{MOUSE\_IRQ}}
+\index{MOUSE\_IRQ@{MOUSE\_IRQ}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{MOUSE\_IRQ}{MOUSE\_IRQ}}
+{\footnotesize\ttfamily \#define M\+O\+U\+S\+E\+\_\+\+I\+RQ~12}
+
+\mbox{\Hypertarget{i8042_8h_a8ce6c569566fb74aad808aaac6fdc1f0}\label{i8042_8h_a8ce6c569566fb74aad808aaac6fdc1f0}} 
+\index{i8042.h@{i8042.h}!MOUSE\_WRITE\_CMD@{MOUSE\_WRITE\_CMD}}
+\index{MOUSE\_WRITE\_CMD@{MOUSE\_WRITE\_CMD}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{MOUSE\_WRITE\_CMD}{MOUSE\_WRITE\_CMD}}
+{\footnotesize\ttfamily \#define M\+O\+U\+S\+E\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+MD~0x\+D4}
+
+\mbox{\Hypertarget{i8042_8h_a958518a45b12053ae33606ee7cb68a55}\label{i8042_8h_a958518a45b12053ae33606ee7cb68a55}} 
+\index{i8042.h@{i8042.h}!NACK@{NACK}}
+\index{NACK@{NACK}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{NACK}{NACK}}
+{\footnotesize\ttfamily \#define N\+A\+CK~0x\+FE}
+
+\mbox{\Hypertarget{i8042_8h_a45967c9e25447ba853cf6fb4ac545fe6}\label{i8042_8h_a45967c9e25447ba853cf6fb4ac545fe6}} 
+\index{i8042.h@{i8042.h}!OBF@{OBF}}
+\index{OBF@{OBF}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{OBF}{OBF}}
+{\footnotesize\ttfamily \#define O\+BF~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(0)}
+
+\mbox{\Hypertarget{i8042_8h_acfb42dde389e8ca36ab267002fbf5c6a}\label{i8042_8h_acfb42dde389e8ca36ab267002fbf5c6a}} 
+\index{i8042.h@{i8042.h}!OUT\_BUF@{OUT\_BUF}}
+\index{OUT\_BUF@{OUT\_BUF}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{OUT\_BUF}{OUT\_BUF}}
+{\footnotesize\ttfamily \#define O\+U\+T\+\_\+\+B\+UF~0x60}
+
+\mbox{\Hypertarget{i8042_8h_a307ab71673e26ec42b28a3bca05d4cb5}\label{i8042_8h_a307ab71673e26ec42b28a3bca05d4cb5}} 
+\index{i8042.h@{i8042.h}!PAR\_ERR@{PAR\_ERR}}
+\index{PAR\_ERR@{PAR\_ERR}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{PAR\_ERR}{PAR\_ERR}}
+{\footnotesize\ttfamily \#define P\+A\+R\+\_\+\+E\+RR~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7)}
+
+\mbox{\Hypertarget{i8042_8h_a171160a766f85c8816b898ed24d28408}\label{i8042_8h_a171160a766f85c8816b898ed24d28408}} 
+\index{i8042.h@{i8042.h}!RB@{RB}}
+\index{RB@{RB}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{RB}{RB}}
+{\footnotesize\ttfamily \#define RB~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(1)}
+
+\mbox{\Hypertarget{i8042_8h_a8d406d5aff787991429e62cfd9bac721}\label{i8042_8h_a8d406d5aff787991429e62cfd9bac721}} 
+\index{i8042.h@{i8042.h}!READ\_DATA@{READ\_DATA}}
+\index{READ\_DATA@{READ\_DATA}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{READ\_DATA}{READ\_DATA}}
+{\footnotesize\ttfamily \#define R\+E\+A\+D\+\_\+\+D\+A\+TA~0x\+EB}
+
+\mbox{\Hypertarget{i8042_8h_ab702106cf3b3e96750b6845ded4e0299}\label{i8042_8h_ab702106cf3b3e96750b6845ded4e0299}} 
+\index{i8042.h@{i8042.h}!RESET@{RESET}}
+\index{RESET@{RESET}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{RESET}{RESET}}
+{\footnotesize\ttfamily \#define R\+E\+S\+ET~0x\+FF}
+
+\mbox{\Hypertarget{i8042_8h_aba54f039c67867bcdc9e18024147c71a}\label{i8042_8h_aba54f039c67867bcdc9e18024147c71a}} 
+\index{i8042.h@{i8042.h}!SET\_REMOTE@{SET\_REMOTE}}
+\index{SET\_REMOTE@{SET\_REMOTE}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{SET\_REMOTE}{SET\_REMOTE}}
+{\footnotesize\ttfamily \#define S\+E\+T\+\_\+\+R\+E\+M\+O\+TE~0x\+F0}
+
+\mbox{\Hypertarget{i8042_8h_a08006958f5bcad29209b983904b878ee}\label{i8042_8h_a08006958f5bcad29209b983904b878ee}} 
+\index{i8042.h@{i8042.h}!SET\_STREAM@{SET\_STREAM}}
+\index{SET\_STREAM@{SET\_STREAM}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{SET\_STREAM}{SET\_STREAM}}
+{\footnotesize\ttfamily \#define S\+E\+T\+\_\+\+S\+T\+R\+E\+AM~0x\+EA}
+
+\mbox{\Hypertarget{i8042_8h_a89c4d098b53809674457b1660b1af780}\label{i8042_8h_a89c4d098b53809674457b1660b1af780}} 
+\index{i8042.h@{i8042.h}!STAT\_REG@{STAT\_REG}}
+\index{STAT\_REG@{STAT\_REG}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{STAT\_REG}{STAT\_REG}}
+{\footnotesize\ttfamily \#define S\+T\+A\+T\+\_\+\+R\+EG~0x64}
+
+\mbox{\Hypertarget{i8042_8h_ad16f61e2bf70f6c7685e826224ed177f}\label{i8042_8h_ad16f61e2bf70f6c7685e826224ed177f}} 
+\index{i8042.h@{i8042.h}!TO\_ERR@{TO\_ERR}}
+\index{TO\_ERR@{TO\_ERR}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{TO\_ERR}{TO\_ERR}}
+{\footnotesize\ttfamily \#define T\+O\+\_\+\+E\+RR~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(6)}
+
+\mbox{\Hypertarget{i8042_8h_aa554763d6a066605edecacdea834da9b}\label{i8042_8h_aa554763d6a066605edecacdea834da9b}} 
+\index{i8042.h@{i8042.h}!WAIT\_KBC@{WAIT\_KBC}}
+\index{WAIT\_KBC@{WAIT\_KBC}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{WAIT\_KBC}{WAIT\_KBC}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+K\+BC~20000}
+
+\mbox{\Hypertarget{i8042_8h_a858379c2252a71bc12dd9ff796477d90}\label{i8042_8h_a858379c2252a71bc12dd9ff796477d90}} 
+\index{i8042.h@{i8042.h}!X\_OVF@{X\_OVF}}
+\index{X\_OVF@{X\_OVF}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{X\_OVF}{X\_OVF}}
+{\footnotesize\ttfamily \#define X\+\_\+\+O\+VF~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(6)}
+
+\mbox{\Hypertarget{i8042_8h_a181f1c2860e4d7fd7788990378061137}\label{i8042_8h_a181f1c2860e4d7fd7788990378061137}} 
+\index{i8042.h@{i8042.h}!X\_SIGN@{X\_SIGN}}
+\index{X\_SIGN@{X\_SIGN}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{X\_SIGN}{X\_SIGN}}
+{\footnotesize\ttfamily \#define X\+\_\+\+S\+I\+GN~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(4)}
+
+\mbox{\Hypertarget{i8042_8h_a8238446128710bc20d7c73b2fa785c72}\label{i8042_8h_a8238446128710bc20d7c73b2fa785c72}} 
+\index{i8042.h@{i8042.h}!Y\_OVF@{Y\_OVF}}
+\index{Y\_OVF@{Y\_OVF}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{Y\_OVF}{Y\_OVF}}
+{\footnotesize\ttfamily \#define Y\+\_\+\+O\+VF~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(7)}
+
+\mbox{\Hypertarget{i8042_8h_a2a0064e2f0979eea21b81e4fe6b2ac32}\label{i8042_8h_a2a0064e2f0979eea21b81e4fe6b2ac32}} 
+\index{i8042.h@{i8042.h}!Y\_SIGN@{Y\_SIGN}}
+\index{Y\_SIGN@{Y\_SIGN}!i8042.h@{i8042.h}}
+\subsubsection{\texorpdfstring{Y\_SIGN}{Y\_SIGN}}
+{\footnotesize\ttfamily \#define Y\+\_\+\+S\+I\+GN~\mbox{\hyperlink{realtimeclock_8h_a3a8ea58898cb58fc96013383d39f482c}{B\+IT}}(5)}
+
