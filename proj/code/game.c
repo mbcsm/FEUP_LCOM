@@ -654,7 +654,7 @@ void drawBullet(){
                 }
                 if(!directionChanged){
                     bullet -> speedX = -bullet -> speedX;
-                    bullet -> speedY = -bullet -> speedY;
+                    //bullet -> speedY = -bullet -> speedY;
                 }
                 return;
             }
