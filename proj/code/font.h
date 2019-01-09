@@ -1,11 +1,4 @@
 #pragma once
-
-/** @defgroup font font
- * @{
- *
- * utils for font
- */
-
 #ifndef FONT_H
 #define FONT_H
 
@@ -92,25 +85,10 @@
 #include "pixmap/fonts/white-size22/y.h"
 #include "pixmap/fonts/white-size22/z.h"
 
-/**
- * @brief Prints string onto a location on the screen
- * @param string set of chars to be printed
- * @param size the size of the string
- * @param font the font of the printed string
- * @param x the x location of the string
- * @param y the y location of the string
-*/
 void printstring(char * string, int size, char * font, int x , int y);
 
-/**
- * @brief Loads a char pixmap
- * @param textI char to be loaded
- * @param font the font of the printed char
-*/
 bool loadChar(char textI, char font);
 
 #endif
 
-
-/**@}*/
 

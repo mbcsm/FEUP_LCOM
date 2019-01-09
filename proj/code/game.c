@@ -9,18 +9,13 @@
 #include "rtc.h"
 #include "cursor.h"
 #include "xpm.h"
-//#include "pixmap/cursor_pixmap.h"
+
 #include "pixmap/play.h"
 #include "pixmap/bullet.h"
-#include "pixmap/dice1.h"
-#include "pixmap/dice2.h"
-#include "pixmap/dice3.h"
-#include "pixmap/dice4.h"
-#include "pixmap/dice5.h"
-#include "pixmap/dice6.h"
+
 #include "pixmap/square.h"
 
-//#include "pixmap/fonts/white-size22/z.h"
+#include "pixmap/board_pre.h"
 
 #include "pixmap/b.h"
 
@@ -85,26 +80,7 @@ uint16_t *board;
 xpm_image_t imgSquare;
 uint16_t *mSquare;
 
-////////////////////////  DICE  ///////////////////////////
-xpm_image_t imgDiceOne;
-uint16_t *diceOne;
 
-xpm_image_t imgDiceTwo;
-uint16_t *diceTwo;
-
-xpm_image_t imgDiceThree;
-uint16_t *diceThree;
-
-xpm_image_t imgDiceFour;
-uint16_t *diceFour;
-
-xpm_image_t imgDiceFive;
-uint16_t *diceFive;
-
-xpm_image_t imgDiceSix;
-uint16_t *diceSix;
-
-/////////////////////////////////////////////////////////////
 
 uint16_t dynamicUARROWArray[200*200];
 uint16_t dynamicUBOARDArray[1280*1024];
@@ -172,14 +148,9 @@ Game* Start() {
 
     vg_start(GAME_MODE);
 
-    board = (uint16_t*)xpm_load(board_pre_xpm, XPM_5_6_5, &imgBoard);
+    board = (uint16_t*)xpm_load(pboard_xpm, XPM_5_6_5, &imgBoard);
 
-    /*diceOne = (uint16_t*)xpm_load(dice1_xpm, XPM_5_6_5, &imgDiceOne);
-    diceTwo = (uint16_t*)xpm_load(dice2_xpm, XPM_5_6_5, &imgDiceTwo);
-    diceThree = (uint16_t*)xpm_load(dice3_xpm, XPM_5_6_5, &imgDiceThree);
-    diceFour = (uint16_t*)xpm_load(dice4_xpm, XPM_5_6_5, &imgDiceFour);
-    diceFive = (uint16_t*)xpm_load(dice5_xpm, XPM_5_6_5, &imgDiceFive);
-    diceSix = (uint16_t*)xpm_load(dice6_xpm, XPM_5_6_5, &imgDiceSix);*/
+    
     mBall = (uint16_t*)xpm_load(ball_xpm, XPM_5_6_5, &imgBall);
     mBullet = (uint16_t*)xpm_load(bullet_xpm, XPM_5_6_5, &imgBullet);
     mSquare = (uint16_t*)xpm_load(bullet_xpm, XPM_5_6_5, &imgSquare);
@@ -190,19 +161,6 @@ Game* Start() {
         printf("Started Cursor");
 
     loadScores();
-
-    /*xpm_image_t imgData;
-    uint16_t *data;
-
-    data = (uint16_t*)xpm_load(zw_xpm, XPM_5_6_5, &imgData);
-    draw_xpm(10, 10, data, imgData, getTransparency());*/
-
-    printstring("lcom", 4, "w", 2, 500);
-    
-    
-    /*draw_xpm(0,0, board, imgBoard, transp);
-    startBoard();*/
-
 
     //srand(time(NULL));
 
@@ -231,39 +189,6 @@ Game* Start() {
     return game;
 }
 
-void drawDice(int y, int x, int number){
-    switch (number)
-    {
-        case 1:
-            draw_xpm(y, x, diceOne, imgDiceOne, transp); 
-            break;
-        case 2:
-            draw_xpm(y, x, diceTwo, imgDiceTwo, transp);
-            break;
-        case 3:
-            draw_xpm(y, x, diceThree, imgDiceThree, transp);
-            break;
-        case 4:
-            draw_xpm(y, x, diceFour, imgDiceFour, transp);
-            break;
-        case 5:
-            draw_xpm(y, x, diceFive, imgDiceFive, transp);
-            break;
-        case 6:
-            draw_xpm(y, x, diceSix, imgDiceSix, transp);
-            break;
-        default:
-            break;
-    }
-}
-
-void randDice(){
-    int first = 1 + rand() % 6;
-    int second = 1 + rand() % 6;
-
-    drawDice(700, 980, first);
-    drawDice(700, 1100, second);
-}
 
 
 void Handler(Game* game){
@@ -365,6 +290,8 @@ void Handler(Game* game){
 			        }
                     if (msg.m_notify.interrupts & irq_set_rtc) {
                         rtc_ih();
+                        if (game->gState == MENU)
+                            printstring(get_current_date_and_time(true), 20, "w", 5, 980);
                     }
                     break;
                     

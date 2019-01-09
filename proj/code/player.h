@@ -1,8 +1,3 @@
-/** @defgroup player player
- * @{
- *
- * utils for player
- */
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -20,10 +15,6 @@ typedef struct {
 
 } Player;
 
-/**
- * @brief Initializes player
- */
 void startPlayer();
 
 #endif
-/**@}*/

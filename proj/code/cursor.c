@@ -30,12 +30,12 @@ void (updatePosition)(struct packet *pp, int *x, int *y){
     *x += (int)pp->delta_x;
     *y -= (int)pp->delta_y;
 
-    if (*x > get_h_res())
-        *x = get_h_res();
+    if (*x > get_h_res() - imgC.width)
+        *x = get_h_res() - imgC.width;
     else if (*x < 0)
         *x = 0;
 
-    if (*y > get_v_res())
+    if (*y > get_v_res() - imgC.height)
         *y = get_v_res();
     else if (*y < 15)
         *y = 15;
@@ -50,7 +50,11 @@ void clearMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
     void *video_mem = get_video_mem();
 
     for (int i = y_Cursor; i < y_Cursor + imgC.height; i++){
+	/*if (i > get_v_res())
+		break;*/
         for (int j = x_Cursor; j < x_Cursor + imgC.width; j++) {
+		/*if (j > get_h_res())
+			break;*/
             uint16_t *ptr_VM = (uint16_t*)video_mem;
             ptr_VM += (i * h_res + j);
 
@@ -65,7 +69,11 @@ void underMouse(/*int xcursor, int ycursor, int cursorwidth, int cursorheight*/)
     void *video_mem = get_video_mem();
 
     for (int i = y_Cursor; i < y_Cursor + imgC.height; i++){
+	/*if (i > get_v_res())
+		break;*/
         for (int j = x_Cursor; j < x_Cursor + imgC.width; j++) {
+		/*if (j > h_res)
+			break;*/
             uint16_t *ptr_VM = (uint16_t*)video_mem;
             ptr_VM += (i * h_res + j);
 

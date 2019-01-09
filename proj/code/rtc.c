@@ -195,9 +195,55 @@ int update_RTC_date() {
 	return 0;
 }
 
-char * get_current_date_and_time(){
+char * get_current_date_and_time(bool to_print){
 	char * date_and_time = malloc(20 * sizeof *date_and_time);	
 	sprintf(date_and_time, "D20%02d/%02d/%02dT%02d:%02d:%02d\n", dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second);
 	
+	if (to_print){
+		int month = dt.month;
+		switch (month)
+	{
+		case 1:
+			sprintf(date_and_time, "%02d JAN 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 2:
+			sprintf(date_and_time, "%02d FEB 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 3:
+			sprintf(date_and_time, "%02d MAR 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 4:
+			sprintf(date_and_time, "%02d APR 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 5:
+			sprintf(date_and_time, "%02d MAY 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 6:
+			sprintf(date_and_time, "%02d JUN 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 7:
+			sprintf(date_and_time, "%02d JUL 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 8:
+			sprintf(date_and_time, "%02d AUG 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 9:
+			sprintf(date_and_time, "%02d SEP 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 10:
+			sprintf(date_and_time, "%02d OCT 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 11:
+			sprintf(date_and_time, "%02d NOV 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+		case 12:
+			sprintf(date_and_time, "%02d DEZ 20%02d %02d:%02d:%02d\n", dt.day,  dt.year, dt.hour, dt.minute, dt.second);
+			break;
+	
+		default:
+			break;
+	}
+	}
 	return date_and_time;
 }
+

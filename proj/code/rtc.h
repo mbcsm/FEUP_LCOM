@@ -57,7 +57,7 @@ int update_RTC_date();
  * @brief Return a string with current the date and time
  * @return Returns
  */
-char * get_current_date_and_time();
+char * get_current_date_and_time(bool to_string);
 
 #endif
 

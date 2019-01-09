@@ -25,6 +25,8 @@ typedef struct
 
 } Scores;
 
+Scores s;
+
 /**
  * @brief Loads scores from file to a struct, recording the best 5 scores
  */

@@ -2,7 +2,7 @@
 
 #include "score.h"
 
-Scores s;
+
 
 void loadScores(){
     FILE *best_scores = fopen("/z.txt", "r");
@@ -11,7 +11,7 @@ void loadScores(){
     if(best_scores == NULL) {
         //perror("File opening failed");
         printf("File not open");
-        best_scores = fopen("z.txt", "w");
+        best_scores = fopen("/z.txt", "w");
         fclose(best_scores);
         return;
     }
@@ -139,7 +139,7 @@ void addNewScore(int score){
     if (score < s.scoreFive)
         return;
     
-    char * date = get_current_date_and_time();
+    char * date = get_current_date_and_time(false);
 
     printf("1");
 

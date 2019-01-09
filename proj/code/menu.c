@@ -4,6 +4,7 @@
 #include "xpm.h"
 #include "font.h"
 #include "cursor.h"
+#include "score.h"
 
 
 /* ------------- XPMs --------------- */
@@ -277,6 +278,18 @@ int displayMenu(){
 
 void displayScores(){
     draw_xpm(0, 0, highscoresscreen, imgHighscoresScreen, getTransparency());
+
+    if (s.scoreOne == 0 ){
+        printstring("............", 12, "w", 200, 360);
+        printstring("............", 12, "w", 200, 490);
+        printstring("............", 12, "w", 200, 620);
+        printstring("............", 12, "w", 200, 760);
+        printstring("............", 12, "w", 200, 900);
+        return;
+    }
+    
+    printstring("............", 12, "w", 200, 370);
+    printstring("............", 12, "w", 200, 500);
 
 
 }
